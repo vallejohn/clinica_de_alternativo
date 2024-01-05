@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "537109481474",
+    "project_id": "clinica-de-alternativo",
+    "storage_bucket": "clinica-de-alternativo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:537109481474:android:2550a9c41afb16cf443f1b",
+        "android_client_info": {
+          "package_name": "com.falcon.clinica_de_alternativo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOTXGZtpzZr3H_DqDby6ipmMkPFGhsOZM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
