@@ -56,14 +56,14 @@ class _SaleReportingPageState extends State<SaleReportingPage> {
                     children: [
                       FilledButton.tonal(
                         onPressed:() {
-
+                          AutoRouter.of(context).push(const SearchProductsRoute());
                         },
                         child: const Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text('Add products'),
-                            SizedBox(width: 15),
                             Icon(Icons.add, size: 17),
+                            SizedBox(width: 15),
+                            Text('Add products'),
                           ],
                         ),
                       ),
@@ -81,9 +81,9 @@ class _SaleReportingPageState extends State<SaleReportingPage> {
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text(loading? 'Sending report...' : 'Send report'),
-                            const SizedBox(width: 15),
                             if(!loading) const Icon(Icons.send, size: 17),
+                            const SizedBox(width: 15),
+                            Text(loading? 'Sending report...' : 'Send report'),
                             if(loading) SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2, color: Theme.of(context).disabledColor,)),
                           ],
                         ),
