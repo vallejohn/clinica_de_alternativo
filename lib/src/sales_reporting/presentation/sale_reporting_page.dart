@@ -51,25 +51,44 @@ class _SaleReportingPageState extends State<SaleReportingPage> {
                   const SizedBox(
                     height: 20,
                   ),
-                  FilledButton(
-                    onPressed: loading? null : () {
-                      final salesReport = SalesReport(
-                        transactionId: 'TXN0034',
-                        productName: _productNameController.text,
-                        quantitySold: int.parse(_quantityController.text),
-                        transactionDate: DateTime.now().toString(),
-                      );
-                      srContext.read<SalesReportingBloc>().add(SalesReportingEvent.onSendReport(salesReport));
-                    },
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(loading? 'Sending report...' : 'Send report'),
-                        const SizedBox(width: 15),
-                        if(!loading) const Icon(Icons.send, size: 17),
-                        if(loading) SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2, color: Theme.of(context).disabledColor,)),
-                      ],
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      FilledButton.tonal(
+                        onPressed:() {
+
+                        },
+                        child: const Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text('Add products'),
+                            SizedBox(width: 15),
+                            Icon(Icons.add, size: 17),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 5,),
+                      FilledButton(
+                        onPressed: loading? null : () {
+                          final salesReport = SalesReport(
+                            transactionId: 'TXN0034',
+                            productName: _productNameController.text,
+                            quantitySold: int.parse(_quantityController.text),
+                            transactionDate: DateTime.now().toString(),
+                          );
+                          srContext.read<SalesReportingBloc>().add(SalesReportingEvent.onSendReport(salesReport));
+                        },
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(loading? 'Sending report...' : 'Send report'),
+                            const SizedBox(width: 15),
+                            if(!loading) const Icon(Icons.send, size: 17),
+                            if(loading) SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2, color: Theme.of(context).disabledColor,)),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(
                     height: 20,
@@ -78,6 +97,7 @@ class _SaleReportingPageState extends State<SaleReportingPage> {
                   if(!loadingList) SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: DataTable(
+                      sortAscending: true,
                       columns: const <DataColumn>[
                         DataColumn(
                           label: Expanded(
