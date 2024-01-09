@@ -19,7 +19,7 @@ class _ClinicaDeAlternativoState extends State<ClinicaDeAlternativo> {
       title: 'Clinica De Alternativo',
       theme: ThemeData(
         fontFamily: 'Rubik',
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xff03AC54)),
         useMaterial3: true,
       ),
       routerDelegate: _appRouter.delegate(),
