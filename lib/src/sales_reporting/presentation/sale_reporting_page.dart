@@ -24,9 +24,11 @@ class _SaleReportingPageState extends State<SaleReportingPage> {
         padding: const EdgeInsets.all(20),
         physics: const BouncingScrollPhysics(),
         child: BlocProvider<SalesReportingBloc>(
-          create: (_) => SalesReportingBloc(),
+          create: (_) => SalesReportingBloc()..add(const SalesReportingEvent.onFetchReport()),
           child: BlocBuilder<SalesReportingBloc, SalesReportingState>(
             builder: (srContext, srState) {
+              bool loading = srState.status == SalesReportingStatus.loading;
+              bool loadingList = srState.status == SalesReportingStatus.loadingReportsList;
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
@@ -50,23 +52,70 @@ class _SaleReportingPageState extends State<SaleReportingPage> {
                     height: 20,
                   ),
                   FilledButton(
-                    onPressed: () {
+                    onPressed: loading? null : () {
                       final salesReport = SalesReport(
                         transactionId: 'TXN0034',
                         productName: _productNameController.text,
-                        quantitySold: double.parse(_quantityController.text),
+                        quantitySold: int.parse(_quantityController.text),
+                        transactionDate: DateTime.now().toString(),
                       );
                       srContext.read<SalesReportingBloc>().add(SalesReportingEvent.onSendReport(salesReport));
                     },
-                    child: const Row(
+                    child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text('Send report'),
-                        SizedBox(width: 15),
-                        Icon(Icons.send, size: 17),
+                        Text(loading? 'Sending report...' : 'Send report'),
+                        const SizedBox(width: 15),
+                        if(!loading) const Icon(Icons.send, size: 17),
+                        if(loading) SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2, color: Theme.of(context).disabledColor,)),
                       ],
                     ),
                   ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  if(loadingList) const LinearProgressIndicator(),
+                  if(!loadingList) SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: DataTable(
+                      columns: const <DataColumn>[
+                        DataColumn(
+                          label: Expanded(
+                            child: Text(
+                              'Date',
+                              style: TextStyle(fontStyle: FontStyle.italic),
+                            ),
+                          ),
+                        ),
+                        DataColumn(
+                          label: Expanded(
+                            child: Text(
+                              'Product',
+                              style: TextStyle(fontStyle: FontStyle.italic),
+                            ),
+                          ),
+                        ),
+                        DataColumn(
+                          label: Expanded(
+                            child: Text(
+                              'Quantity',
+                              style: TextStyle(fontStyle: FontStyle.italic),
+                            ),
+                          ),
+                        ),
+                      ],
+                      rows: <DataRow>[
+                        for(int i = 0; i < srState.salesReports.length; i++)
+                          DataRow(
+                            cells: <DataCell>[
+                              DataCell(Text(DateFormat.yMd().format(DateTime.parse(srState.salesReports[i].transactionDate))),),
+                              DataCell(Text(srState.salesReports[i].productName)),
+                              DataCell(Text(srState.salesReports[i].quantitySold.toString())),
+                            ],
+                          ),
+                      ],
+                    ),
+                  )
                 ],
               );
             }

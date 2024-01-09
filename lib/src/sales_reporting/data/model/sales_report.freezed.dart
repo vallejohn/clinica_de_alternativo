@@ -23,7 +23,8 @@ mixin _$SalesReport {
   String? get id => throw _privateConstructorUsedError;
   String? get transactionId => throw _privateConstructorUsedError;
   String get productName => throw _privateConstructorUsedError;
-  double get quantitySold => throw _privateConstructorUsedError;
+  String get transactionDate => throw _privateConstructorUsedError;
+  int get quantitySold => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,7 +42,8 @@ abstract class $SalesReportCopyWith<$Res> {
       {String? id,
       String? transactionId,
       String productName,
-      double quantitySold});
+      String transactionDate,
+      int quantitySold});
 }
 
 /// @nodoc
@@ -60,6 +62,7 @@ class _$SalesReportCopyWithImpl<$Res, $Val extends SalesReport>
     Object? id = freezed,
     Object? transactionId = freezed,
     Object? productName = null,
+    Object? transactionDate = null,
     Object? quantitySold = null,
   }) {
     return _then(_value.copyWith(
@@ -75,10 +78,14 @@ class _$SalesReportCopyWithImpl<$Res, $Val extends SalesReport>
           ? _value.productName
           : productName // ignore: cast_nullable_to_non_nullable
               as String,
+      transactionDate: null == transactionDate
+          ? _value.transactionDate
+          : transactionDate // ignore: cast_nullable_to_non_nullable
+              as String,
       quantitySold: null == quantitySold
           ? _value.quantitySold
           : quantitySold // ignore: cast_nullable_to_non_nullable
-              as double,
+              as int,
     ) as $Val);
   }
 }
@@ -95,7 +102,8 @@ abstract class _$$SalesReportImplCopyWith<$Res>
       {String? id,
       String? transactionId,
       String productName,
-      double quantitySold});
+      String transactionDate,
+      int quantitySold});
 }
 
 /// @nodoc
@@ -112,6 +120,7 @@ class __$$SalesReportImplCopyWithImpl<$Res>
     Object? id = freezed,
     Object? transactionId = freezed,
     Object? productName = null,
+    Object? transactionDate = null,
     Object? quantitySold = null,
   }) {
     return _then(_$SalesReportImpl(
@@ -127,10 +136,14 @@ class __$$SalesReportImplCopyWithImpl<$Res>
           ? _value.productName
           : productName // ignore: cast_nullable_to_non_nullable
               as String,
+      transactionDate: null == transactionDate
+          ? _value.transactionDate
+          : transactionDate // ignore: cast_nullable_to_non_nullable
+              as String,
       quantitySold: null == quantitySold
           ? _value.quantitySold
           : quantitySold // ignore: cast_nullable_to_non_nullable
-              as double,
+              as int,
     ));
   }
 }
@@ -142,6 +155,7 @@ class _$SalesReportImpl implements _SalesReport {
       {this.id,
       this.transactionId,
       this.productName = '',
+      this.transactionDate = '',
       this.quantitySold = 0});
 
   factory _$SalesReportImpl.fromJson(Map<String, dynamic> json) =>
@@ -156,11 +170,14 @@ class _$SalesReportImpl implements _SalesReport {
   final String productName;
   @override
   @JsonKey()
-  final double quantitySold;
+  final String transactionDate;
+  @override
+  @JsonKey()
+  final int quantitySold;
 
   @override
   String toString() {
-    return 'SalesReport(id: $id, transactionId: $transactionId, productName: $productName, quantitySold: $quantitySold)';
+    return 'SalesReport(id: $id, transactionId: $transactionId, productName: $productName, transactionDate: $transactionDate, quantitySold: $quantitySold)';
   }
 
   @override
@@ -173,14 +190,16 @@ class _$SalesReportImpl implements _SalesReport {
                 other.transactionId == transactionId) &&
             (identical(other.productName, productName) ||
                 other.productName == productName) &&
+            (identical(other.transactionDate, transactionDate) ||
+                other.transactionDate == transactionDate) &&
             (identical(other.quantitySold, quantitySold) ||
                 other.quantitySold == quantitySold));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, transactionId, productName, quantitySold);
+  int get hashCode => Object.hash(runtimeType, id, transactionId, productName,
+      transactionDate, quantitySold);
 
   @JsonKey(ignore: true)
   @override
@@ -201,7 +220,8 @@ abstract class _SalesReport implements SalesReport {
       {final String? id,
       final String? transactionId,
       final String productName,
-      final double quantitySold}) = _$SalesReportImpl;
+      final String transactionDate,
+      final int quantitySold}) = _$SalesReportImpl;
 
   factory _SalesReport.fromJson(Map<String, dynamic> json) =
       _$SalesReportImpl.fromJson;
@@ -213,7 +233,9 @@ abstract class _SalesReport implements SalesReport {
   @override
   String get productName;
   @override
-  double get quantitySold;
+  String get transactionDate;
+  @override
+  int get quantitySold;
   @override
   @JsonKey(ignore: true)
   _$$SalesReportImplCopyWith<_$SalesReportImpl> get copyWith =>

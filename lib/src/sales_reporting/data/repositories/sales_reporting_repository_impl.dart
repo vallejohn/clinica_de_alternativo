@@ -15,9 +15,19 @@ class SalesReportingRepositoryImpl extends SalesReportRepository {
         );
 
   @override
-  Future<Either<Failure, bool>> sendSalesReport(SalesReport report)async {
+  Future<Either<Failure, List<SalesReport>>> sendSalesReport(SalesReport report)async {
     try{
       final dataState = await salesReportingDatasource.sendSalesReport(report);
+      return Right(dataState);
+    }on FirebaseException catch(e){
+      return Left(Failure.firebase(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<SalesReport>>> onFetchReports()async {
+    try{
+      final dataState = await salesReportingDatasource.onFetchReports();
       return Right(dataState);
     }on FirebaseException catch(e){
       return Left(Failure.firebase(e));

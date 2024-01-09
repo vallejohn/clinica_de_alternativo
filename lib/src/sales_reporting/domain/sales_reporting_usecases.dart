@@ -7,3 +7,4 @@ import '../../../core/exceptions/failure.dart';
 import 'repositories/sales_report_repository.dart';
 
 part 'usecases/send_report_usecase.dart';
+part 'usecases/on_fetch_reports_usecase.dart';

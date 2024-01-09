@@ -9,7 +9,8 @@ class SalesReport with _$SalesReport{
     String? id,
     String? transactionId,
     @Default('') String productName,
-    @Default(0) double quantitySold,
+    @Default('') String transactionDate,
+    @Default(0) int quantitySold,
   }) = _SalesReport;
 
   factory SalesReport.fromJson(Map<String, dynamic> json) => _$SalesReportFromJson(json);

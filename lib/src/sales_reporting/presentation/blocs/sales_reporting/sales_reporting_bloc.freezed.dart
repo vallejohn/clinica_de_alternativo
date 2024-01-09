@@ -16,42 +16,43 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SalesReportingEvent {
-  SalesReport get salesReport => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() onFetchReport,
     required TResult Function(SalesReport salesReport) onSendReport,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? onFetchReport,
     TResult? Function(SalesReport salesReport)? onSendReport,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? onFetchReport,
     TResult Function(SalesReport salesReport)? onSendReport,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_OnFetchReport value) onFetchReport,
     required TResult Function(_OnSendReport value) onSendReport,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnFetchReport value)? onFetchReport,
     TResult? Function(_OnSendReport value)? onSendReport,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnFetchReport value)? onFetchReport,
     TResult Function(_OnSendReport value)? onSendReport,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $SalesReportingEventCopyWith<SalesReportingEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -60,10 +61,6 @@ abstract class $SalesReportingEventCopyWith<$Res> {
   factory $SalesReportingEventCopyWith(
           SalesReportingEvent value, $Res Function(SalesReportingEvent) then) =
       _$SalesReportingEventCopyWithImpl<$Res, SalesReportingEvent>;
-  @useResult
-  $Res call({SalesReport salesReport});
-
-  $SalesReportCopyWith<$Res> get salesReport;
 }
 
 /// @nodoc
@@ -75,40 +72,118 @@ class _$SalesReportingEventCopyWithImpl<$Res, $Val extends SalesReportingEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? salesReport = null,
-  }) {
-    return _then(_value.copyWith(
-      salesReport: null == salesReport
-          ? _value.salesReport
-          : salesReport // ignore: cast_nullable_to_non_nullable
-              as SalesReport,
-    ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SalesReportCopyWith<$Res> get salesReport {
-    return $SalesReportCopyWith<$Res>(_value.salesReport, (value) {
-      return _then(_value.copyWith(salesReport: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
-abstract class _$$OnSendReportImplCopyWith<$Res>
-    implements $SalesReportingEventCopyWith<$Res> {
+abstract class _$$OnFetchReportImplCopyWith<$Res> {
+  factory _$$OnFetchReportImplCopyWith(
+          _$OnFetchReportImpl value, $Res Function(_$OnFetchReportImpl) then) =
+      __$$OnFetchReportImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$OnFetchReportImplCopyWithImpl<$Res>
+    extends _$SalesReportingEventCopyWithImpl<$Res, _$OnFetchReportImpl>
+    implements _$$OnFetchReportImplCopyWith<$Res> {
+  __$$OnFetchReportImplCopyWithImpl(
+      _$OnFetchReportImpl _value, $Res Function(_$OnFetchReportImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$OnFetchReportImpl implements _OnFetchReport {
+  const _$OnFetchReportImpl();
+
+  @override
+  String toString() {
+    return 'SalesReportingEvent.onFetchReport()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$OnFetchReportImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() onFetchReport,
+    required TResult Function(SalesReport salesReport) onSendReport,
+  }) {
+    return onFetchReport();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? onFetchReport,
+    TResult? Function(SalesReport salesReport)? onSendReport,
+  }) {
+    return onFetchReport?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? onFetchReport,
+    TResult Function(SalesReport salesReport)? onSendReport,
+    required TResult orElse(),
+  }) {
+    if (onFetchReport != null) {
+      return onFetchReport();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_OnFetchReport value) onFetchReport,
+    required TResult Function(_OnSendReport value) onSendReport,
+  }) {
+    return onFetchReport(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnFetchReport value)? onFetchReport,
+    TResult? Function(_OnSendReport value)? onSendReport,
+  }) {
+    return onFetchReport?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnFetchReport value)? onFetchReport,
+    TResult Function(_OnSendReport value)? onSendReport,
+    required TResult orElse(),
+  }) {
+    if (onFetchReport != null) {
+      return onFetchReport(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _OnFetchReport implements SalesReportingEvent {
+  const factory _OnFetchReport() = _$OnFetchReportImpl;
+}
+
+/// @nodoc
+abstract class _$$OnSendReportImplCopyWith<$Res> {
   factory _$$OnSendReportImplCopyWith(
           _$OnSendReportImpl value, $Res Function(_$OnSendReportImpl) then) =
       __$$OnSendReportImplCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call({SalesReport salesReport});
 
-  @override
   $SalesReportCopyWith<$Res> get salesReport;
 }
 
@@ -131,6 +206,14 @@ class __$$OnSendReportImplCopyWithImpl<$Res>
           : salesReport // ignore: cast_nullable_to_non_nullable
               as SalesReport,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesReportCopyWith<$Res> get salesReport {
+    return $SalesReportCopyWith<$Res>(_value.salesReport, (value) {
+      return _then(_value.copyWith(salesReport: value));
+    });
   }
 }
 
@@ -168,6 +251,7 @@ class _$OnSendReportImpl implements _OnSendReport {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() onFetchReport,
     required TResult Function(SalesReport salesReport) onSendReport,
   }) {
     return onSendReport(salesReport);
@@ -176,6 +260,7 @@ class _$OnSendReportImpl implements _OnSendReport {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? onFetchReport,
     TResult? Function(SalesReport salesReport)? onSendReport,
   }) {
     return onSendReport?.call(salesReport);
@@ -184,6 +269,7 @@ class _$OnSendReportImpl implements _OnSendReport {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? onFetchReport,
     TResult Function(SalesReport salesReport)? onSendReport,
     required TResult orElse(),
   }) {
@@ -196,6 +282,7 @@ class _$OnSendReportImpl implements _OnSendReport {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_OnFetchReport value) onFetchReport,
     required TResult Function(_OnSendReport value) onSendReport,
   }) {
     return onSendReport(this);
@@ -204,6 +291,7 @@ class _$OnSendReportImpl implements _OnSendReport {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnFetchReport value)? onFetchReport,
     TResult? Function(_OnSendReport value)? onSendReport,
   }) {
     return onSendReport?.call(this);
@@ -212,6 +300,7 @@ class _$OnSendReportImpl implements _OnSendReport {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnFetchReport value)? onFetchReport,
     TResult Function(_OnSendReport value)? onSendReport,
     required TResult orElse(),
   }) {
@@ -226,9 +315,7 @@ abstract class _OnSendReport implements SalesReportingEvent {
   const factory _OnSendReport(final SalesReport salesReport) =
       _$OnSendReportImpl;
 
-  @override
   SalesReport get salesReport;
-  @override
   @JsonKey(ignore: true)
   _$$OnSendReportImplCopyWith<_$OnSendReportImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -238,6 +325,7 @@ abstract class _OnSendReport implements SalesReportingEvent {
 mixin _$SalesReportingState {
   SalesReportingStatus get status => throw _privateConstructorUsedError;
   String get message => throw _privateConstructorUsedError;
+  List<SalesReport> get salesReports => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SalesReportingStateCopyWith<SalesReportingState> get copyWith =>
@@ -250,7 +338,10 @@ abstract class $SalesReportingStateCopyWith<$Res> {
           SalesReportingState value, $Res Function(SalesReportingState) then) =
       _$SalesReportingStateCopyWithImpl<$Res, SalesReportingState>;
   @useResult
-  $Res call({SalesReportingStatus status, String message});
+  $Res call(
+      {SalesReportingStatus status,
+      String message,
+      List<SalesReport> salesReports});
 }
 
 /// @nodoc
@@ -268,6 +359,7 @@ class _$SalesReportingStateCopyWithImpl<$Res, $Val extends SalesReportingState>
   $Res call({
     Object? status = null,
     Object? message = null,
+    Object? salesReports = null,
   }) {
     return _then(_value.copyWith(
       status: null == status
@@ -278,6 +370,10 @@ class _$SalesReportingStateCopyWithImpl<$Res, $Val extends SalesReportingState>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      salesReports: null == salesReports
+          ? _value.salesReports
+          : salesReports // ignore: cast_nullable_to_non_nullable
+              as List<SalesReport>,
     ) as $Val);
   }
 }
@@ -290,7 +386,10 @@ abstract class _$$SalesReportingStateImplCopyWith<$Res>
       __$$SalesReportingStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({SalesReportingStatus status, String message});
+  $Res call(
+      {SalesReportingStatus status,
+      String message,
+      List<SalesReport> salesReports});
 }
 
 /// @nodoc
@@ -306,6 +405,7 @@ class __$$SalesReportingStateImplCopyWithImpl<$Res>
   $Res call({
     Object? status = null,
     Object? message = null,
+    Object? salesReports = null,
   }) {
     return _then(_$SalesReportingStateImpl(
       status: null == status
@@ -316,6 +416,10 @@ class __$$SalesReportingStateImplCopyWithImpl<$Res>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      salesReports: null == salesReports
+          ? _value._salesReports
+          : salesReports // ignore: cast_nullable_to_non_nullable
+              as List<SalesReport>,
     ));
   }
 }
@@ -324,7 +428,10 @@ class __$$SalesReportingStateImplCopyWithImpl<$Res>
 
 class _$SalesReportingStateImpl implements _SalesReportingState {
   _$SalesReportingStateImpl(
-      {this.status = SalesReportingStatus.initial, this.message = ''});
+      {this.status = SalesReportingStatus.initial,
+      this.message = '',
+      final List<SalesReport> salesReports = const []})
+      : _salesReports = salesReports;
 
   @override
   @JsonKey()
@@ -332,10 +439,18 @@ class _$SalesReportingStateImpl implements _SalesReportingState {
   @override
   @JsonKey()
   final String message;
+  final List<SalesReport> _salesReports;
+  @override
+  @JsonKey()
+  List<SalesReport> get salesReports {
+    if (_salesReports is EqualUnmodifiableListView) return _salesReports;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_salesReports);
+  }
 
   @override
   String toString() {
-    return 'SalesReportingState(status: $status, message: $message)';
+    return 'SalesReportingState(status: $status, message: $message, salesReports: $salesReports)';
   }
 
   @override
@@ -344,11 +459,14 @@ class _$SalesReportingStateImpl implements _SalesReportingState {
         (other.runtimeType == runtimeType &&
             other is _$SalesReportingStateImpl &&
             (identical(other.status, status) || other.status == status) &&
-            (identical(other.message, message) || other.message == message));
+            (identical(other.message, message) || other.message == message) &&
+            const DeepCollectionEquality()
+                .equals(other._salesReports, _salesReports));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status, message);
+  int get hashCode => Object.hash(runtimeType, status, message,
+      const DeepCollectionEquality().hash(_salesReports));
 
   @JsonKey(ignore: true)
   @override
@@ -361,12 +479,15 @@ class _$SalesReportingStateImpl implements _SalesReportingState {
 abstract class _SalesReportingState implements SalesReportingState {
   factory _SalesReportingState(
       {final SalesReportingStatus status,
-      final String message}) = _$SalesReportingStateImpl;
+      final String message,
+      final List<SalesReport> salesReports}) = _$SalesReportingStateImpl;
 
   @override
   SalesReportingStatus get status;
   @override
   String get message;
+  @override
+  List<SalesReport> get salesReports;
   @override
   @JsonKey(ignore: true)
   _$$SalesReportingStateImplCopyWith<_$SalesReportingStateImpl> get copyWith =>

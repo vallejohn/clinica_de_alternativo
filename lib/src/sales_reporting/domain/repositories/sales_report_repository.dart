@@ -8,5 +8,6 @@ abstract class SalesReportRepository{
   final SalesReportingDatasource salesReportingDatasource;
   SalesReportRepository({required this.salesReportingDatasource});
 
-  Future<Either<Failure, bool>> sendSalesReport(SalesReport report);
+  Future<Either<Failure, List<SalesReport>>> sendSalesReport(SalesReport report);
+  Future<Either<Failure, List<SalesReport>>> onFetchReports();
 }

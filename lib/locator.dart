@@ -14,4 +14,5 @@ Future<void> setupLocator()async {
   getIt.registerLazySingleton<SalesReportRepository>(() => SalesReportingRepositoryImpl(salesReportDataSource: getIt()));
 
   getIt.registerLazySingleton(() => SendReportUseCase(getIt()));
+  getIt.registerLazySingleton(() => OnFetchReportsUseCase(getIt()));
 }

@@ -12,9 +12,11 @@ part 'sales_reporting_bloc.freezed.dart';
 
 class SalesReportingBloc extends Bloc<SalesReportingEvent, SalesReportingState> {
   final _sendReportUseCase = GetIt.instance<SendReportUseCase>();
+  final _onFetchReportUseCase = GetIt.instance<OnFetchReportsUseCase>();
 
   SalesReportingBloc() : super(SalesReportingState()) {
 
+    on<_OnFetchReport>(_onFetchReport);
     on<_OnSendReport>(_sendReport);
   }
 
@@ -25,8 +27,20 @@ class SalesReportingBloc extends Bloc<SalesReportingEvent, SalesReportingState> 
     
     dataOrError.fold((l){
       emit(state.copyWith(status: SalesReportingStatus.failed, message: l.when(firebase: (error) => error.message!,)));
-    }, (_){
-      emit(state.copyWith(status: SalesReportingStatus.success, message: 'Sales report posted successfully'));
+    }, (salesReports){
+      emit(state.copyWith(status: SalesReportingStatus.success, message: 'Sales report posted successfully', salesReports: salesReports));
+    });
+  }
+
+  FutureOr<void> _onFetchReport(_OnFetchReport event, Emitter<SalesReportingState> emit)async {
+    emit(state.copyWith(status: SalesReportingStatus.loadingReportsList));
+
+    final dataOrError = await _onFetchReportUseCase();
+
+    dataOrError.fold((l){
+      emit(state.copyWith(status: SalesReportingStatus.failed, message: l.when(firebase: (error) => error.message!,)));
+    }, (salesReports){
+      emit(state.copyWith(status: SalesReportingStatus.success, message: 'Sales report fetched successfully', salesReports: salesReports));
     });
   }
 }
