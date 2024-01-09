@@ -1,0 +1,5 @@
+import 'package:clinica_de_alternativo/src/sales_reporting/data/model/sales_report.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+part 'sales_reporting_datasource_impl.dart';
+part 'sales_reporting_datasource.dart';
