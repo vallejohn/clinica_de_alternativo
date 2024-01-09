@@ -29,12 +29,4 @@ class SalesReportingBloc extends Bloc<SalesReportingEvent, SalesReportingState> 
       emit(state.copyWith(status: SalesReportingStatus.success, message: 'Sales report posted successfully'));
     });
   }
-
-  @override
-  void onChange(Change<SalesReportingState> change) {
-    // TODO: implement onChange
-    super.onChange(change);
-
-    print(change);
-  }
 }
