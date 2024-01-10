@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 
+import '../../src/inventory/presentation/pages.dart';
 import '../../src/sales_reporting/presentation/pages.dart';
 
 part 'app_router.gr.dart';

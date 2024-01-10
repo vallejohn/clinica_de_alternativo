@@ -8,4 +8,3 @@ import 'package:intl/intl.dart';
 
 part 'sale_reporting_page.dart';
 part 'search_products_page.dart';
-part 'add_products_page.dart';

@@ -1,0 +1,12 @@
+part of 'products_bloc.dart';
+
+enum ProductStatus{initial, loading, success, failed}
+
+@freezed
+class ProductsState with _$ProductsState {
+  factory ProductsState({
+    @Default(ProductStatus.initial) ProductStatus status,
+    @Default('') String message,
+    @Default([]) List<Product> products,
+  }) = _ProductsState;
+}
