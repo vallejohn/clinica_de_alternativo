@@ -8,7 +8,7 @@ class SaleReportingDatasourceImpl extends SalesReportingDatasource{
   Future<List<SalesReport>> sendSalesReport(SalesReport report)async {
 
     final productMap = report.product!.toJson();
-    Map<String, dynamic> reportMap = report.toJson();
+    Map<String, dynamic> reportMap = report.copyWith(transactionId: const Uuid().v1()).toJson();
 
     _log.d(reportMap);
     reportMap.remove('product');
