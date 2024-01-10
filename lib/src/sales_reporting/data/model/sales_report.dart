@@ -1,5 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../inventory/data/model/product.dart';
+
 part 'sales_report.freezed.dart';
 part 'sales_report.g.dart';
 
@@ -8,7 +10,7 @@ class SalesReport with _$SalesReport{
   const factory SalesReport({
     String? id,
     String? transactionId,
-    @Default('') String productName,
+    Product? product,
     @Default('') String transactionDate,
     @Default(0) int quantitySold,
   }) = _SalesReport;

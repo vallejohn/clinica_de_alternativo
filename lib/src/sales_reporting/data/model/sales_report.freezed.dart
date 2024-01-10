@@ -22,7 +22,7 @@ SalesReport _$SalesReportFromJson(Map<String, dynamic> json) {
 mixin _$SalesReport {
   String? get id => throw _privateConstructorUsedError;
   String? get transactionId => throw _privateConstructorUsedError;
-  String get productName => throw _privateConstructorUsedError;
+  Product? get product => throw _privateConstructorUsedError;
   String get transactionDate => throw _privateConstructorUsedError;
   int get quantitySold => throw _privateConstructorUsedError;
 
@@ -41,9 +41,11 @@ abstract class $SalesReportCopyWith<$Res> {
   $Res call(
       {String? id,
       String? transactionId,
-      String productName,
+      Product? product,
       String transactionDate,
       int quantitySold});
+
+  $ProductCopyWith<$Res>? get product;
 }
 
 /// @nodoc
@@ -61,7 +63,7 @@ class _$SalesReportCopyWithImpl<$Res, $Val extends SalesReport>
   $Res call({
     Object? id = freezed,
     Object? transactionId = freezed,
-    Object? productName = null,
+    Object? product = freezed,
     Object? transactionDate = null,
     Object? quantitySold = null,
   }) {
@@ -74,10 +76,10 @@ class _$SalesReportCopyWithImpl<$Res, $Val extends SalesReport>
           ? _value.transactionId
           : transactionId // ignore: cast_nullable_to_non_nullable
               as String?,
-      productName: null == productName
-          ? _value.productName
-          : productName // ignore: cast_nullable_to_non_nullable
-              as String,
+      product: freezed == product
+          ? _value.product
+          : product // ignore: cast_nullable_to_non_nullable
+              as Product?,
       transactionDate: null == transactionDate
           ? _value.transactionDate
           : transactionDate // ignore: cast_nullable_to_non_nullable
@@ -87,6 +89,18 @@ class _$SalesReportCopyWithImpl<$Res, $Val extends SalesReport>
           : quantitySold // ignore: cast_nullable_to_non_nullable
               as int,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ProductCopyWith<$Res>? get product {
+    if (_value.product == null) {
+      return null;
+    }
+
+    return $ProductCopyWith<$Res>(_value.product!, (value) {
+      return _then(_value.copyWith(product: value) as $Val);
+    });
   }
 }
 
@@ -101,9 +115,12 @@ abstract class _$$SalesReportImplCopyWith<$Res>
   $Res call(
       {String? id,
       String? transactionId,
-      String productName,
+      Product? product,
       String transactionDate,
       int quantitySold});
+
+  @override
+  $ProductCopyWith<$Res>? get product;
 }
 
 /// @nodoc
@@ -119,7 +136,7 @@ class __$$SalesReportImplCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? transactionId = freezed,
-    Object? productName = null,
+    Object? product = freezed,
     Object? transactionDate = null,
     Object? quantitySold = null,
   }) {
@@ -132,10 +149,10 @@ class __$$SalesReportImplCopyWithImpl<$Res>
           ? _value.transactionId
           : transactionId // ignore: cast_nullable_to_non_nullable
               as String?,
-      productName: null == productName
-          ? _value.productName
-          : productName // ignore: cast_nullable_to_non_nullable
-              as String,
+      product: freezed == product
+          ? _value.product
+          : product // ignore: cast_nullable_to_non_nullable
+              as Product?,
       transactionDate: null == transactionDate
           ? _value.transactionDate
           : transactionDate // ignore: cast_nullable_to_non_nullable
@@ -154,7 +171,7 @@ class _$SalesReportImpl implements _SalesReport {
   const _$SalesReportImpl(
       {this.id,
       this.transactionId,
-      this.productName = '',
+      this.product,
       this.transactionDate = '',
       this.quantitySold = 0});
 
@@ -166,8 +183,7 @@ class _$SalesReportImpl implements _SalesReport {
   @override
   final String? transactionId;
   @override
-  @JsonKey()
-  final String productName;
+  final Product? product;
   @override
   @JsonKey()
   final String transactionDate;
@@ -177,7 +193,7 @@ class _$SalesReportImpl implements _SalesReport {
 
   @override
   String toString() {
-    return 'SalesReport(id: $id, transactionId: $transactionId, productName: $productName, transactionDate: $transactionDate, quantitySold: $quantitySold)';
+    return 'SalesReport(id: $id, transactionId: $transactionId, product: $product, transactionDate: $transactionDate, quantitySold: $quantitySold)';
   }
 
   @override
@@ -188,8 +204,7 @@ class _$SalesReportImpl implements _SalesReport {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.transactionId, transactionId) ||
                 other.transactionId == transactionId) &&
-            (identical(other.productName, productName) ||
-                other.productName == productName) &&
+            (identical(other.product, product) || other.product == product) &&
             (identical(other.transactionDate, transactionDate) ||
                 other.transactionDate == transactionDate) &&
             (identical(other.quantitySold, quantitySold) ||
@@ -198,8 +213,8 @@ class _$SalesReportImpl implements _SalesReport {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, transactionId, productName,
-      transactionDate, quantitySold);
+  int get hashCode => Object.hash(
+      runtimeType, id, transactionId, product, transactionDate, quantitySold);
 
   @JsonKey(ignore: true)
   @override
@@ -219,7 +234,7 @@ abstract class _SalesReport implements SalesReport {
   const factory _SalesReport(
       {final String? id,
       final String? transactionId,
-      final String productName,
+      final Product? product,
       final String transactionDate,
       final int quantitySold}) = _$SalesReportImpl;
 
@@ -231,7 +246,7 @@ abstract class _SalesReport implements SalesReport {
   @override
   String? get transactionId;
   @override
-  String get productName;
+  Product? get product;
   @override
   String get transactionDate;
   @override
