@@ -56,7 +56,7 @@ class _SaleReportingPageState extends State<SaleReportingPage> {
                     children: [
                       FilledButton.tonal(
                         onPressed:() {
-                          AutoRouter.of(context).push(const SearchProductsRoute());
+                          AutoRouter.of(context).push(const AddProductsRoute());
                         },
                         child: const Row(
                           mainAxisSize: MainAxisSize.min,
