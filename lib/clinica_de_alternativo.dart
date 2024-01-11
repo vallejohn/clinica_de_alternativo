@@ -35,9 +35,9 @@ class _ClinicaDeAlternativoState extends State<ClinicaDeAlternativo> {
           BlocListener<AuthCheckerBloc, AuthCheckerState>(
             listener: (context, state) {
               state.when(authenticated: (_){
-                _appRouter.pushAndPopUntil(const SaleReportingRoute(), predicate: (Route<dynamic> route) => false);
+                _appRouter.replace(const SaleReportingRoute());
               }, unAuthenticated: (){
-                _appRouter.pushAndPopUntil(const LoginRoute(), predicate: (Route<dynamic> route) => false);
+                _appRouter.replace(const LoginRoute());
               });
             },
           ),
