@@ -1,3 +1,7 @@
+import 'package:clinica_de_alternativo/src/authentication/data/datasources/datasource.dart';
+import 'package:clinica_de_alternativo/src/authentication/data/repositories/authentication_repository_impl.dart';
+import 'package:clinica_de_alternativo/src/authentication/domain/authentication_usecases.dart';
+import 'package:clinica_de_alternativo/src/authentication/domain/repositories/authentication_repository.dart';
 import 'package:clinica_de_alternativo/src/inventory/data/datasources/datasource.dart';
 import 'package:clinica_de_alternativo/src/inventory/data/repositories/product_repository_impl.dart';
 import 'package:clinica_de_alternativo/src/inventory/domain/product_usecases.dart';
@@ -11,8 +15,19 @@ import 'package:get_it/get_it.dart';
 final getIt = GetIt.instance;
 
 Future<void> setupLocator()async {
+  _setupAuthentication();
   _setupProductsInventory();
   _setupSalesReporting();
+}
+
+///Authentication
+void _setupAuthentication(){
+  getIt.registerLazySingleton<AuthenticationDatasource>(() =>
+      AuthenticationDatasourceImpl());
+
+  getIt.registerLazySingleton<AuthenticationRepository>(() => AuthenticationRepositoryImpl(authenticationDatasource: getIt()));
+
+  getIt.registerLazySingleton(() => OnLoginUseCase(getIt()));
 }
 
 ///Sales reports
