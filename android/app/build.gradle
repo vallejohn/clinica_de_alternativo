@@ -33,6 +33,18 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    flavorDimensions "env"
+    productFlavors {
+        staging {
+            dimension "env"
+            applicationId "com.falcon.clinica_de_alternativo"
+        }
+        production {
+            dimension "env"
+            applicationId "com.falcon.clinica_de_alternativo"
+        }
+    }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }

@@ -3,7 +3,7 @@ import 'package:clinica_de_alternativo/core/app_bloc_observer.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'firebase_options.dart';
+import 'package:flutter_flavor/flutter_flavor.dart';
 
 import 'locator.dart';
 
@@ -13,7 +13,7 @@ void main()async {
   Bloc.observer = AppBlocObserver();
 
   await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
+    options: FlavorConfig.instance.variables['firebase_options'] as FirebaseOptions,
   );
 
   await setupLocator();
