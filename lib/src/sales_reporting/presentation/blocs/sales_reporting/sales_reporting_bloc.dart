@@ -28,7 +28,9 @@ class SalesReportingBloc extends Bloc<SalesReportingEvent, SalesReportingState> 
     dataOrError.fold((l){
       emit(state.copyWith(status: SalesReportingStatus.failed, message: l.when(firebase: (error) => error.message!,)));
     }, (salesReports){
-      emit(state.copyWith(status: SalesReportingStatus.success, message: 'Sales report posted successfully', salesReports: salesReports));
+      final reports = [...state.salesReports];
+      reports.add(salesReports);
+      emit(state.copyWith(status: SalesReportingStatus.success, message: 'Sales report posted successfully', salesReports: reports));
     });
   }
 
