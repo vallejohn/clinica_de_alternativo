@@ -42,7 +42,7 @@ class _ClinicaDeAlternativoState extends State<ClinicaDeAlternativo> {
                 },
                 success: (profile){
                   if(profile != null){
-                    _appRouter.replace(const SaleReportingRoute());
+                    _appRouter.replace(const HomeRoute());
                   }else{
                     _appRouter.replace(const ProfileCompletionRoute());
                   }
