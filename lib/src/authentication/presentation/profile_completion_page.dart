@@ -27,7 +27,7 @@ class _ProfileCompletionPageState extends State<ProfileCompletionPage> {
 
           return SafeArea(
             child: SingleChildScrollView(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               physics: const BouncingScrollPhysics(),
               child: Column(
                 children: [
