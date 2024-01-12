@@ -13,6 +13,7 @@ class AppRouter extends _$AppRouter{
   List<AutoRoute> get routes => [
     AutoRoute(page: StartupRoute.page, initial: true),
     AutoRoute(page: LoginRoute.page),
+    AutoRoute(page: ProfileCompletionRoute.page),
     AutoRoute(page: SaleReportingRoute.page),
     AutoRoute(page: SearchProductsRoute.page),
     AutoRoute(page: AddProductsRoute.page),

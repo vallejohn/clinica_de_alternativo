@@ -28,6 +28,8 @@ void _setupAuthentication(){
   getIt.registerLazySingleton<AuthenticationRepository>(() => AuthenticationRepositoryImpl(authenticationDatasource: getIt()));
 
   getIt.registerLazySingleton(() => OnLoginUseCase(getIt()));
+  getIt.registerLazySingleton(() => OnCheckProfileUseCase(getIt()));
+  getIt.registerLazySingleton(() => OnUpdateProfileUseCase(getIt()));
 }
 
 ///Sales reports

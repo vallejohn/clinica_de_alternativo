@@ -27,6 +27,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const LoginPage(),
       );
     },
+    ProfileCompletionRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ProfileCompletionPage(),
+      );
+    },
     SaleReportingRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -72,6 +78,20 @@ class LoginRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'LoginRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ProfileCompletionPage]
+class ProfileCompletionRoute extends PageRouteInfo<void> {
+  const ProfileCompletionRoute({List<PageRouteInfo>? children})
+      : super(
+          ProfileCompletionRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ProfileCompletionRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

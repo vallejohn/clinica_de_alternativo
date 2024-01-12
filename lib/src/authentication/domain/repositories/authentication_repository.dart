@@ -1,4 +1,5 @@
 import 'package:clinica_de_alternativo/src/authentication/core/params.dart';
+import 'package:clinica_de_alternativo/src/authentication/data/model/profile_information.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/exceptions/failure.dart';
@@ -9,4 +10,6 @@ abstract class AuthenticationRepository{
   AuthenticationRepository({required this.authenticationDatasource});
 
   Future<Either<Failure, bool>> doLogin(LoginParams params);
+  Future<Either<Failure, ProfileInformation?>> checkAccountInformation(String userId);
+  Future<Either<Failure, bool>> onUpdateProfile(ProfileInformation profile);
 }

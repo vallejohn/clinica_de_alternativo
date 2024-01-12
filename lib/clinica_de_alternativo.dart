@@ -24,6 +24,9 @@ class _ClinicaDeAlternativoState extends State<ClinicaDeAlternativo> {
         BlocProvider(
           create: (context) => SearchProductCubit(),
         ),
+        BlocProvider<ProfileCheckerBloc>(
+          create: (context) => ProfileCheckerBloc(),
+        ),
         BlocProvider<AuthCheckerBloc>(
           create: (context) =>
           AuthCheckerBloc()..add(const AuthCheckerEvent.onCheckAuthStatus()),
@@ -31,10 +34,29 @@ class _ClinicaDeAlternativoState extends State<ClinicaDeAlternativo> {
       ],
       child: MultiBlocListener(
         listeners: [
+          BlocListener<ProfileCheckerBloc, ProfileCheckerState>(
+            listener: (context, state) {
+              state.whenOrNull(
+                loading: (){
+
+                },
+                success: (profile){
+                  if(profile != null){
+                    _appRouter.replace(const SaleReportingRoute());
+                  }else{
+                    _appRouter.replace(const ProfileCompletionRoute());
+                  }
+                },
+                failed: (message){
+
+                },
+              );
+            },
+          ),
           BlocListener<AuthCheckerBloc, AuthCheckerState>(
             listener: (context, state) {
-              state.when(authenticated: (_){
-                _appRouter.replace(const SaleReportingRoute());
+              state.when(authenticated: (user){
+                BlocProvider.of<ProfileCheckerBloc>(context).add(ProfileCheckerEvent.onCheckCompletion(user.uid));
               }, unAuthenticated: (){
                 _appRouter.replace(const LoginRoute());
               });

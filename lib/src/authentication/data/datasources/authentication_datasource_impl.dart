@@ -9,17 +9,19 @@ class AuthenticationDatasourceImpl extends  AuthenticationDatasource{
 
     return credentials.user != null;
   }
-/*
+
   @override
-  Future<List<Product>> fetchProducts()async {
-    final result = await FirestoreCollection.products().get();
-    return result.docs.map((e) => Product.fromJson(e.data())).toList();
+  Future<ProfileInformation?> checkAccountInformation(String userId)async {
+     final result = await FirestoreCollection.profileInformation().where('id', isEqualTo: userId).get();
+
+     if(result.docs.isEmpty) return null;
+
+     return ProfileInformation.fromJson(result.docs.first.data());
   }
 
   @override
-  Future<bool> addProduct(Product param)async {
-    final product = param.copyWith(code: const Uuid().v1());
-    await FirestoreCollection.products().add(product.toJson());
+  Future<bool> onUpdateProfile(ProfileInformation profile)async {
+    await FirestoreCollection.profileInformation().add(profile.toJson());
     return true;
-  }*/
+  }
 }

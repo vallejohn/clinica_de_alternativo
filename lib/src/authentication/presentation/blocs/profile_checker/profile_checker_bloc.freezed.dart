@@ -18,33 +18,39 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ProfileCheckerEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() onCheckCompletion,
+    required TResult Function(String userId) onCheckCompletion,
+    required TResult Function(ProfileInformation information) onUpdateProfile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? onCheckCompletion,
+    TResult? Function(String userId)? onCheckCompletion,
+    TResult? Function(ProfileInformation information)? onUpdateProfile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? onCheckCompletion,
+    TResult Function(String userId)? onCheckCompletion,
+    TResult Function(ProfileInformation information)? onUpdateProfile,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_OnCheckCompletion value) onCheckCompletion,
+    required TResult Function(_OnUpdateProfile value) onUpdateProfile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_OnCheckCompletion value)? onCheckCompletion,
+    TResult? Function(_OnUpdateProfile value)? onUpdateProfile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_OnCheckCompletion value)? onCheckCompletion,
+    TResult Function(_OnUpdateProfile value)? onUpdateProfile,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -73,6 +79,8 @@ abstract class _$$OnCheckCompletionImplCopyWith<$Res> {
   factory _$$OnCheckCompletionImplCopyWith(_$OnCheckCompletionImpl value,
           $Res Function(_$OnCheckCompletionImpl) then) =
       __$$OnCheckCompletionImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String userId});
 }
 
 /// @nodoc
@@ -82,51 +90,79 @@ class __$$OnCheckCompletionImplCopyWithImpl<$Res>
   __$$OnCheckCompletionImplCopyWithImpl(_$OnCheckCompletionImpl _value,
       $Res Function(_$OnCheckCompletionImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? userId = null,
+  }) {
+    return _then(_$OnCheckCompletionImpl(
+      null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$OnCheckCompletionImpl implements _OnCheckCompletion {
-  const _$OnCheckCompletionImpl();
+  const _$OnCheckCompletionImpl(this.userId);
+
+  @override
+  final String userId;
 
   @override
   String toString() {
-    return 'ProfileCheckerEvent.onCheckCompletion()';
+    return 'ProfileCheckerEvent.onCheckCompletion(userId: $userId)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$OnCheckCompletionImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$OnCheckCompletionImpl &&
+            (identical(other.userId, userId) || other.userId == userId));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, userId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$OnCheckCompletionImplCopyWith<_$OnCheckCompletionImpl> get copyWith =>
+      __$$OnCheckCompletionImplCopyWithImpl<_$OnCheckCompletionImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() onCheckCompletion,
+    required TResult Function(String userId) onCheckCompletion,
+    required TResult Function(ProfileInformation information) onUpdateProfile,
   }) {
-    return onCheckCompletion();
+    return onCheckCompletion(userId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? onCheckCompletion,
+    TResult? Function(String userId)? onCheckCompletion,
+    TResult? Function(ProfileInformation information)? onUpdateProfile,
   }) {
-    return onCheckCompletion?.call();
+    return onCheckCompletion?.call(userId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? onCheckCompletion,
+    TResult Function(String userId)? onCheckCompletion,
+    TResult Function(ProfileInformation information)? onUpdateProfile,
     required TResult orElse(),
   }) {
     if (onCheckCompletion != null) {
-      return onCheckCompletion();
+      return onCheckCompletion(userId);
     }
     return orElse();
   }
@@ -135,6 +171,7 @@ class _$OnCheckCompletionImpl implements _OnCheckCompletion {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_OnCheckCompletion value) onCheckCompletion,
+    required TResult Function(_OnUpdateProfile value) onUpdateProfile,
   }) {
     return onCheckCompletion(this);
   }
@@ -143,6 +180,7 @@ class _$OnCheckCompletionImpl implements _OnCheckCompletion {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_OnCheckCompletion value)? onCheckCompletion,
+    TResult? Function(_OnUpdateProfile value)? onUpdateProfile,
   }) {
     return onCheckCompletion?.call(this);
   }
@@ -151,6 +189,7 @@ class _$OnCheckCompletionImpl implements _OnCheckCompletion {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_OnCheckCompletion value)? onCheckCompletion,
+    TResult Function(_OnUpdateProfile value)? onUpdateProfile,
     required TResult orElse(),
   }) {
     if (onCheckCompletion != null) {
@@ -161,7 +200,159 @@ class _$OnCheckCompletionImpl implements _OnCheckCompletion {
 }
 
 abstract class _OnCheckCompletion implements ProfileCheckerEvent {
-  const factory _OnCheckCompletion() = _$OnCheckCompletionImpl;
+  const factory _OnCheckCompletion(final String userId) =
+      _$OnCheckCompletionImpl;
+
+  String get userId;
+  @JsonKey(ignore: true)
+  _$$OnCheckCompletionImplCopyWith<_$OnCheckCompletionImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$OnUpdateProfileImplCopyWith<$Res> {
+  factory _$$OnUpdateProfileImplCopyWith(_$OnUpdateProfileImpl value,
+          $Res Function(_$OnUpdateProfileImpl) then) =
+      __$$OnUpdateProfileImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({ProfileInformation information});
+
+  $ProfileInformationCopyWith<$Res> get information;
+}
+
+/// @nodoc
+class __$$OnUpdateProfileImplCopyWithImpl<$Res>
+    extends _$ProfileCheckerEventCopyWithImpl<$Res, _$OnUpdateProfileImpl>
+    implements _$$OnUpdateProfileImplCopyWith<$Res> {
+  __$$OnUpdateProfileImplCopyWithImpl(
+      _$OnUpdateProfileImpl _value, $Res Function(_$OnUpdateProfileImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? information = null,
+  }) {
+    return _then(_$OnUpdateProfileImpl(
+      null == information
+          ? _value.information
+          : information // ignore: cast_nullable_to_non_nullable
+              as ProfileInformation,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ProfileInformationCopyWith<$Res> get information {
+    return $ProfileInformationCopyWith<$Res>(_value.information, (value) {
+      return _then(_value.copyWith(information: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$OnUpdateProfileImpl implements _OnUpdateProfile {
+  const _$OnUpdateProfileImpl(this.information);
+
+  @override
+  final ProfileInformation information;
+
+  @override
+  String toString() {
+    return 'ProfileCheckerEvent.onUpdateProfile(information: $information)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$OnUpdateProfileImpl &&
+            (identical(other.information, information) ||
+                other.information == information));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, information);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$OnUpdateProfileImplCopyWith<_$OnUpdateProfileImpl> get copyWith =>
+      __$$OnUpdateProfileImplCopyWithImpl<_$OnUpdateProfileImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String userId) onCheckCompletion,
+    required TResult Function(ProfileInformation information) onUpdateProfile,
+  }) {
+    return onUpdateProfile(information);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId)? onCheckCompletion,
+    TResult? Function(ProfileInformation information)? onUpdateProfile,
+  }) {
+    return onUpdateProfile?.call(information);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId)? onCheckCompletion,
+    TResult Function(ProfileInformation information)? onUpdateProfile,
+    required TResult orElse(),
+  }) {
+    if (onUpdateProfile != null) {
+      return onUpdateProfile(information);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_OnCheckCompletion value) onCheckCompletion,
+    required TResult Function(_OnUpdateProfile value) onUpdateProfile,
+  }) {
+    return onUpdateProfile(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnCheckCompletion value)? onCheckCompletion,
+    TResult? Function(_OnUpdateProfile value)? onUpdateProfile,
+  }) {
+    return onUpdateProfile?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnCheckCompletion value)? onCheckCompletion,
+    TResult Function(_OnUpdateProfile value)? onUpdateProfile,
+    required TResult orElse(),
+  }) {
+    if (onUpdateProfile != null) {
+      return onUpdateProfile(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _OnUpdateProfile implements ProfileCheckerEvent {
+  const factory _OnUpdateProfile(final ProfileInformation information) =
+      _$OnUpdateProfileImpl;
+
+  ProfileInformation get information;
+  @JsonKey(ignore: true)
+  _$$OnUpdateProfileImplCopyWith<_$OnUpdateProfileImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -170,24 +361,24 @@ mixin _$ProfileCheckerState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(ProfileInformation profile) success,
-    required TResult Function() failed,
+    required TResult Function(ProfileInformation? profile) success,
+    required TResult Function(String message) failed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(ProfileInformation profile)? success,
-    TResult? Function()? failed,
+    TResult? Function(ProfileInformation? profile)? success,
+    TResult? Function(String message)? failed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(ProfileInformation profile)? success,
-    TResult Function()? failed,
+    TResult Function(ProfileInformation? profile)? success,
+    TResult Function(String message)? failed,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -276,8 +467,8 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(ProfileInformation profile) success,
-    required TResult Function() failed,
+    required TResult Function(ProfileInformation? profile) success,
+    required TResult Function(String message) failed,
   }) {
     return initial();
   }
@@ -287,8 +478,8 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(ProfileInformation profile)? success,
-    TResult? Function()? failed,
+    TResult? Function(ProfileInformation? profile)? success,
+    TResult? Function(String message)? failed,
   }) {
     return initial?.call();
   }
@@ -298,8 +489,8 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(ProfileInformation profile)? success,
-    TResult Function()? failed,
+    TResult Function(ProfileInformation? profile)? success,
+    TResult Function(String message)? failed,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -390,8 +581,8 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(ProfileInformation profile) success,
-    required TResult Function() failed,
+    required TResult Function(ProfileInformation? profile) success,
+    required TResult Function(String message) failed,
   }) {
     return loading();
   }
@@ -401,8 +592,8 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(ProfileInformation profile)? success,
-    TResult? Function()? failed,
+    TResult? Function(ProfileInformation? profile)? success,
+    TResult? Function(String message)? failed,
   }) {
     return loading?.call();
   }
@@ -412,8 +603,8 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(ProfileInformation profile)? success,
-    TResult Function()? failed,
+    TResult Function(ProfileInformation? profile)? success,
+    TResult Function(String message)? failed,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -470,9 +661,9 @@ abstract class _$$SucessImplCopyWith<$Res> {
           _$SucessImpl value, $Res Function(_$SucessImpl) then) =
       __$$SucessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({ProfileInformation profile});
+  $Res call({ProfileInformation? profile});
 
-  $ProfileInformationCopyWith<$Res> get profile;
+  $ProfileInformationCopyWith<$Res>? get profile;
 }
 
 /// @nodoc
@@ -486,20 +677,24 @@ class __$$SucessImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? profile = null,
+    Object? profile = freezed,
   }) {
     return _then(_$SucessImpl(
-      null == profile
+      freezed == profile
           ? _value.profile
           : profile // ignore: cast_nullable_to_non_nullable
-              as ProfileInformation,
+              as ProfileInformation?,
     ));
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $ProfileInformationCopyWith<$Res> get profile {
-    return $ProfileInformationCopyWith<$Res>(_value.profile, (value) {
+  $ProfileInformationCopyWith<$Res>? get profile {
+    if (_value.profile == null) {
+      return null;
+    }
+
+    return $ProfileInformationCopyWith<$Res>(_value.profile!, (value) {
       return _then(_value.copyWith(profile: value));
     });
   }
@@ -511,7 +706,7 @@ class _$SucessImpl implements _Sucess {
   const _$SucessImpl(this.profile);
 
   @override
-  final ProfileInformation profile;
+  final ProfileInformation? profile;
 
   @override
   String toString() {
@@ -540,8 +735,8 @@ class _$SucessImpl implements _Sucess {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(ProfileInformation profile) success,
-    required TResult Function() failed,
+    required TResult Function(ProfileInformation? profile) success,
+    required TResult Function(String message) failed,
   }) {
     return success(profile);
   }
@@ -551,8 +746,8 @@ class _$SucessImpl implements _Sucess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(ProfileInformation profile)? success,
-    TResult? Function()? failed,
+    TResult? Function(ProfileInformation? profile)? success,
+    TResult? Function(String message)? failed,
   }) {
     return success?.call(profile);
   }
@@ -562,8 +757,8 @@ class _$SucessImpl implements _Sucess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(ProfileInformation profile)? success,
-    TResult Function()? failed,
+    TResult Function(ProfileInformation? profile)? success,
+    TResult Function(String message)? failed,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -611,9 +806,9 @@ class _$SucessImpl implements _Sucess {
 }
 
 abstract class _Sucess implements ProfileCheckerState {
-  const factory _Sucess(final ProfileInformation profile) = _$SucessImpl;
+  const factory _Sucess(final ProfileInformation? profile) = _$SucessImpl;
 
-  ProfileInformation get profile;
+  ProfileInformation? get profile;
   @JsonKey(ignore: true)
   _$$SucessImplCopyWith<_$SucessImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -624,6 +819,8 @@ abstract class _$$FailedImplCopyWith<$Res> {
   factory _$$FailedImplCopyWith(
           _$FailedImpl value, $Res Function(_$FailedImpl) then) =
       __$$FailedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String message});
 }
 
 /// @nodoc
@@ -633,36 +830,60 @@ class __$$FailedImplCopyWithImpl<$Res>
   __$$FailedImplCopyWithImpl(
       _$FailedImpl _value, $Res Function(_$FailedImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$FailedImpl(
+      null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$FailedImpl implements _Failed {
-  const _$FailedImpl();
+  const _$FailedImpl(this.message);
+
+  @override
+  final String message;
 
   @override
   String toString() {
-    return 'ProfileCheckerState.failed()';
+    return 'ProfileCheckerState.failed(message: $message)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$FailedImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$FailedImpl &&
+            (identical(other.message, message) || other.message == message));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, message);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FailedImplCopyWith<_$FailedImpl> get copyWith =>
+      __$$FailedImplCopyWithImpl<_$FailedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(ProfileInformation profile) success,
-    required TResult Function() failed,
+    required TResult Function(ProfileInformation? profile) success,
+    required TResult Function(String message) failed,
   }) {
-    return failed();
+    return failed(message);
   }
 
   @override
@@ -670,10 +891,10 @@ class _$FailedImpl implements _Failed {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(ProfileInformation profile)? success,
-    TResult? Function()? failed,
+    TResult? Function(ProfileInformation? profile)? success,
+    TResult? Function(String message)? failed,
   }) {
-    return failed?.call();
+    return failed?.call(message);
   }
 
   @override
@@ -681,12 +902,12 @@ class _$FailedImpl implements _Failed {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(ProfileInformation profile)? success,
-    TResult Function()? failed,
+    TResult Function(ProfileInformation? profile)? success,
+    TResult Function(String message)? failed,
     required TResult orElse(),
   }) {
     if (failed != null) {
-      return failed();
+      return failed(message);
     }
     return orElse();
   }
@@ -730,5 +951,10 @@ class _$FailedImpl implements _Failed {
 }
 
 abstract class _Failed implements ProfileCheckerState {
-  const factory _Failed() = _$FailedImpl;
+  const factory _Failed(final String message) = _$FailedImpl;
+
+  String get message;
+  @JsonKey(ignore: true)
+  _$$FailedImplCopyWith<_$FailedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
