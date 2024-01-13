@@ -1,34 +1,33 @@
 part of 'pages.dart';
 
 @RoutePage()
-class AddProductsPage extends StatefulWidget {
-  const AddProductsPage({super.key});
+class ProductsPage extends StatefulWidget {
+  const ProductsPage({super.key});
 
   @override
-  State<AddProductsPage> createState() => _AddProductsPageState();
+  State<ProductsPage> createState() => _ProductsPageState();
 }
 
-class _AddProductsPageState extends State<AddProductsPage> {
+class _ProductsPageState extends State<ProductsPage> {
   final TextEditingController _productNameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Add Products'),
+        title: const Text('Products'),
       ),
       body: BlocProvider<ProductsBloc>(
         create: (_) => ProductsBloc()..add(const ProductsEvent.onFetchList()),
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20),
           physics: const BouncingScrollPhysics(),
           child: BlocBuilder<ProductsBloc, ProductsState>(
             builder: (prodContext, prodState) {
+              final products = prodState.products;
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  TextField(
+                  /*TextField(
                     controller: _productNameController,
                     decoration: const InputDecoration(
                       labelText: 'Local Products',
@@ -52,19 +51,29 @@ class _AddProductsPageState extends State<AddProductsPage> {
                         Text('Add products'),
                       ],
                     ),
-                  ),
+                  ),*/
                   const SizedBox(
                     height: 20,
                   ),
-                  for( int i = 0; i < prodState.products.length; i++)
-                    ListTile(
-                      title: Text(prodState.products[i].name),
+                  for( int i = 0; i < products.length; i++)
+                    ListTileItem(
+                      leadingIcon: CircleAvatar(child: Text(products[i].name[0], style: TextStyle(color: Theme.of(context).colorScheme.primary),),),
+                      title: products[i].name,
+                      subtitle: products[i].description.isEmpty? null : products[i].description,
+                      onPressed: (){
+
+                      },
                     )
                 ],
               );
             }
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {  },
+        label: const Text('Add product'),
+        icon: const Icon(Ionicons.add),
       ),
     );
   }

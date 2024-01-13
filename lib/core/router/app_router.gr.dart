@@ -15,12 +15,6 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
-    AddProductsRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const AddProductsPage(),
-      );
-    },
     HomeRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -31,6 +25,12 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const LoginPage(),
+      );
+    },
+    ProductsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ProductsPage(),
       );
     },
     ProfileCompletionRoute.name: (routeData) {
@@ -67,20 +67,6 @@ abstract class _$AppRouter extends RootStackRouter {
 }
 
 /// generated route for
-/// [AddProductsPage]
-class AddProductsRoute extends PageRouteInfo<void> {
-  const AddProductsRoute({List<PageRouteInfo>? children})
-      : super(
-          AddProductsRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'AddProductsRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
 /// [HomePage]
 class HomeRoute extends PageRouteInfo<void> {
   const HomeRoute({List<PageRouteInfo>? children})
@@ -104,6 +90,20 @@ class LoginRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'LoginRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ProductsPage]
+class ProductsRoute extends PageRouteInfo<void> {
+  const ProductsRoute({List<PageRouteInfo>? children})
+      : super(
+          ProductsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ProductsRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

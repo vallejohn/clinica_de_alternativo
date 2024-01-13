@@ -20,6 +20,6 @@ class AppRouter extends _$AppRouter{
     AutoRoute(page: ProfileCompletionRoute.page),
     AutoRoute(page: SaleReportingRoute.page),
     AutoRoute(page: SearchProductsRoute.page),
-    AutoRoute(page: AddProductsRoute.page),
+    AutoRoute(page: ProductsRoute.page),
   ];
 }

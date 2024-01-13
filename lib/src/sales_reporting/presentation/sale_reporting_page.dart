@@ -67,7 +67,7 @@ class _SaleReportingPageState extends State<SaleReportingPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Expanded(
+                      /*Expanded(
                         child: FilledButton.tonal(
                           onPressed: () {
                             AutoRouter.of(context).push(const AddProductsRoute());
@@ -81,7 +81,7 @@ class _SaleReportingPageState extends State<SaleReportingPage> {
                             ],
                           ),
                         ),
-                      ),
+                      ),*/
                       const SizedBox(
                         width: 5,
                       ),

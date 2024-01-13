@@ -1,11 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:clinica_de_alternativo/core/blocs/home_navigator_cubit.dart';
-import 'package:clinica_de_alternativo/core/core.dart';
 import 'package:clinica_de_alternativo/core/global_widgets/pages/settings_page.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
+
+import 'inventory/presentation/pages.dart';
 
 
 class ExampleDestination {
@@ -49,11 +49,11 @@ class _HomePageState extends State<HomePage> {
             body: PageView(
               controller: _pageController,
               onPageChanged: (int index) => navContext.read<HomeNavigatorCubit>().onPageChanged(index),
-              children: <Widget>[
-                const Center(child: Text('Page Index 1')),
-                const Center(child: Text('Page Index 2')),
-                const Center(child: Text('Page Index 3')),
-                const SettingsPage(),
+              children: const <Widget>[
+                Center(child: Text('Page Index 1')),
+                Center(child: Text('Page Index 2')),
+                ProductsPage(),
+                SettingsPage(),
               ],
             ),
             bottomNavigationBar: NavigationBar(
