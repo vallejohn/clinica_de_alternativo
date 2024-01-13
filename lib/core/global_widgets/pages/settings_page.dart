@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:clinica_de_alternativo/src/authentication/presentation/blocs/profile_checker/profile_checker_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ionicons/ionicons.dart';
 
 
 @RoutePage()
@@ -26,31 +27,31 @@ class _SettingsPageState extends State<SettingsPage> {
           children: [
             _listItem('Branches',
               subtitle: 'View or edit all branches of Clinica',
-              leadingIcon: Icon(Icons.account_balance_rounded, color: Theme.of(context).colorScheme.primary,),
+              leadingIcon: Icon(Ionicons.storefront_outline, color: Theme.of(context).colorScheme.primary,),
               onPressed: (){
 
               }
             ),
             _listItem('Roles',
                 subtitle: 'Add or edit user roles',
-                leadingIcon: Icon(Icons.shield, color: Theme.of(context).colorScheme.primary,),
+                leadingIcon: Icon(Ionicons.shield_outline, color: Theme.of(context).colorScheme.primary,),
                 onPressed: (){
 
                 }
             ),
             _listItem('Employees',
                 subtitle: 'Add or manage your employees information',
-                leadingIcon: Icon(Icons.supervised_user_circle_rounded, color: Theme.of(context).colorScheme.primary,),
+                leadingIcon: Icon(Ionicons.people_outline, color: Theme.of(context).colorScheme.primary,),
                 onPressed: (){
 
                 }
             ),
-            Divider(
+            const Divider(
               height: 0,
             ),
             _listItem('Logout',
                 subtitle: context.read<ProfileCheckerBloc>().state.whenOrNull(success: (information) => 'Logout as ${information?.name}'),
-                leadingIcon: Icon(Icons.logout, color: Theme.of(context).colorScheme.primary,),
+                leadingIcon: Icon(Ionicons.log_out_outline, color: Theme.of(context).colorScheme.primary,),
                 onPressed: (){
                 }
             ),
@@ -69,7 +70,7 @@ class _SettingsPageState extends State<SettingsPage> {
         child: ListTile(
           trailing: trailingIcon?? const Icon(Icons.arrow_right),
           leading: leadingIcon,
-          title: Text(title),
+          title: Text(title, ),
           subtitle: subtitle == null? null : Text(subtitle),
         ),
       ),

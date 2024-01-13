@@ -5,6 +5,7 @@ import 'package:clinica_de_alternativo/core/global_widgets/pages/settings_page.d
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ionicons/ionicons.dart';
 
 
 class ExampleDestination {
@@ -17,11 +18,13 @@ class ExampleDestination {
 
 const List<ExampleDestination> destinations = <ExampleDestination>[
   ExampleDestination(
-      'Home', Icon(Icons.home_outlined), Icon(Icons.home)),
+      'Home', Icon(Ionicons.home_outline), Icon(Ionicons.home)),
   ExampleDestination(
-      'Products', Icon(Icons.production_quantity_limits), Icon(Icons.production_quantity_limits)),
+      'Sales', Icon(Ionicons.bar_chart_outline), Icon(Ionicons.bar_chart)),
   ExampleDestination(
-      'Settings', Icon(Icons.settings_outlined), Icon(Icons.settings)),
+      'Products', Icon(Ionicons.leaf_outline), Icon(Ionicons.leaf)),
+  ExampleDestination(
+      'Settings', Icon(Ionicons.settings_outline), Icon(Ionicons.settings)),
 ];
 
 @RoutePage()
@@ -49,6 +52,7 @@ class _HomePageState extends State<HomePage> {
               children: <Widget>[
                 const Center(child: Text('Page Index 1')),
                 const Center(child: Text('Page Index 2')),
+                const Center(child: Text('Page Index 3')),
                 const SettingsPage(),
               ],
             ),
