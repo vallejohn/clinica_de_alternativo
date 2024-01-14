@@ -16,8 +16,7 @@ class _SaleReportingPageState extends State<SaleReportingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Sales Reporting'),
+        title: Text('Sales Reporting', style: Theme.of(context).textTheme.headlineLarge,),
       ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(

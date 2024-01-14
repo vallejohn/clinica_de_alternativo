@@ -7,6 +7,7 @@ import 'package:clinica_de_alternativo/src/sales_reporting/presentation/blocs/se
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:ionicons/ionicons.dart';
 
 part 'sale_reporting_page.dart';
 part 'search_products_page.dart';
