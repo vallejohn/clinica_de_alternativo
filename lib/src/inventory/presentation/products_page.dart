@@ -71,7 +71,7 @@ class _ProductsPageState extends State<ProductsPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {  },
+        onPressed: () => AutoRouter.of(context).push(const AddProductRoute()),
         label: const Text('Add product'),
         icon: const Icon(Ionicons.add),
       ),

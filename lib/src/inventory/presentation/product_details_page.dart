@@ -79,8 +79,10 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                 ? null
                 : FloatingActionButton(
                     elevation: 0,
-                    child: Icon(editing ? Ionicons.checkmark : Ionicons.add),
-                    onPressed: () {},
+                    child: const Icon(Ionicons.add),
+                    onPressed: () {
+                      AutoRouter.of(context).push(const AddProductRoute());
+                    },
                   ),
             floatingActionButtonLocation: FloatingActionButtonLocation.endContained,
             bottomNavigationBar: AnimatedContainer(

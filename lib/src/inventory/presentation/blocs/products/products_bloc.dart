@@ -46,9 +46,9 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
 
     dataOrError.fold((l){
       emit(state.copyWith(status: ProductStatus.failed, message: l.when(firebase: (error) => error.message!,)));
-    }, (_){
+    }, (product){
       final products = [...state.products];
-      products.add(event.product);
+      products.add(product);
 
       emit(state.copyWith(status: ProductStatus.success, message: 'Added successfully', products: products));
     });
@@ -95,11 +95,22 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
     }, (_){
       final products = [...state.products];
 
-      //Remove and replace old product on list with updated
-      products.removeWhere((element) => element.id == state.selectedProduct!.id!);
-      //-----------------------------------------
+      final deletedProdIndex =  products.indexWhere((element) => element.id == state.selectedProduct!.id!);
 
-      emit(state.copyWith(status: ProductStatus.success, editing: false, message: 'Product updated', products: products, selectedProduct: null));
+      //Remove and replace old product on list with updated
+      products.removeAt(deletedProdIndex);
+      //-----------------------------------------
+      Product? nextAutoSelectedProduct;
+      if(products.isNotEmpty && deletedProdIndex <= products.length - 1){
+        nextAutoSelectedProduct = products[deletedProdIndex];
+      }else if(products.isEmpty){
+        nextAutoSelectedProduct = null;
+      }else{
+        nextAutoSelectedProduct = products[products.length - 1];
+      }
+
+
+      emit(state.copyWith(status: ProductStatus.success, editing: false, message: 'Product updated', products: products, selectedProduct: nextAutoSelectedProduct));
     });
   }
 }

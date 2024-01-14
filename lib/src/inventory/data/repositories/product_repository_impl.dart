@@ -13,7 +13,7 @@ class ProductRepositoryImpl extends ProductRepository {
   }) : super(productDatasource: productDatasource,);
 
   @override
-  Future<Either<Failure, bool>> addProduct(Product param)async {
+  Future<Either<Failure, Product>> addProduct(Product param)async {
     try{
       final dataState = await productDatasource.addProduct(param);
       return Right(dataState);

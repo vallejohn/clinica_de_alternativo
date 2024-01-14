@@ -1,11 +1,11 @@
 part of '../product_usecases.dart';
 
-class OnAddProductUseCase extends UseCaseWithParams<bool, Product>{
+class OnAddProductUseCase extends UseCaseWithParams<Product, Product>{
   final ProductRepository _productRepository;
 
   OnAddProductUseCase(this._productRepository);
   @override
-  Future<Either<Failure, bool>> call(Product params) {
+  Future<Either<Failure, Product>> call(Product params) {
     return _productRepository.addProduct(params);
   }
 }

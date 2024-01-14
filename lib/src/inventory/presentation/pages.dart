@@ -10,3 +10,4 @@ import '../../../core/global_widgets/list_tile_item.dart';
 
 part 'products_page.dart';
 part 'product_details_page.dart';
+part 'add_product_page.dart';

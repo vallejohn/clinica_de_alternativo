@@ -9,10 +9,11 @@ class ProductDatasourceImpl extends ProductDatasource{
   }
 
   @override
-  Future<bool> addProduct(Product param)async {
+  Future<Product> addProduct(Product param)async {
     final product = param.copyWith(code: const Uuid().v1());
-    await FirestoreCollection.products().add(product.toJson());
-    return true;
+    final result = await FirestoreCollection.products().add(product.toJson());
+
+    return product.copyWith(id: result.id);
   }
 
   @override

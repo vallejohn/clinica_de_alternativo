@@ -9,7 +9,7 @@ abstract class ProductRepository{
   ProductRepository({required this.productDatasource});
 
   Future<Either<Failure, List<Product>>> fetchProducts();
-  Future<Either<Failure, bool>> addProduct(Product param);
+  Future<Either<Failure, Product>> addProduct(Product param);
   Future<Either<Failure, bool>> updateProduct(Product param);
   Future<Either<Failure, bool>> deleteProduct(String id);
 }
