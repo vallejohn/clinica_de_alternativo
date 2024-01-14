@@ -31,4 +31,24 @@ class ProductRepositoryImpl extends ProductRepository {
       return Left(Failure.firebase(e));
     }
   }
+
+  @override
+  Future<Either<Failure, bool>> updateProduct(Product param)async {
+    try{
+      final dataState = await productDatasource.updateProduct(param);
+      return Right(dataState);
+    }on FirebaseException catch(e){
+      return Left(Failure.firebase(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> deleteProduct(String id)async {
+    try{
+      final dataState = await productDatasource.deleteProduct(id);
+      return Right(dataState);
+    }on FirebaseException catch(e){
+      return Left(Failure.firebase(e));
+    }
+  }
 }

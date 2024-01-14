@@ -8,3 +8,5 @@ import '../../../core/exceptions/failure.dart';
 
 part 'usecases/on_fetch_products_usecase.dart';
 part 'usecases/on_add_product_usecase.dart';
+part 'usecases/on_update_product_usecase.dart';
+part 'usecases/on_delete_product_usecase.dart';

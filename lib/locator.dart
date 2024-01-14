@@ -51,5 +51,7 @@ void _setupProductsInventory(){
   getIt.registerLazySingleton<ProductRepository>(() => ProductRepositoryImpl(productDatasource: getIt()));
 
   getIt.registerLazySingleton(() => OnAddProductUseCase(getIt()));
+  getIt.registerLazySingleton(() => OnUpdateProductUseCase(getIt()));
   getIt.registerLazySingleton(() => OnFetchProductsUseCase(getIt()));
+  getIt.registerLazySingleton(() => OnDeleteProductUseCase(getIt()));
 }

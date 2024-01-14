@@ -17,8 +17,8 @@ class _ProductsPageState extends State<ProductsPage> {
       appBar: AppBar(
         title: const Text('Products'),
       ),
-      body: BlocProvider<ProductsBloc>(
-        create: (_) => ProductsBloc()..add(const ProductsEvent.onFetchList()),
+      body: BlocProvider<ProductsBloc>.value(
+        value: BlocProvider.of<ProductsBloc>(context)..add(const ProductsEvent.onFetchList()),
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: BlocBuilder<ProductsBloc, ProductsState>(
@@ -61,7 +61,7 @@ class _ProductsPageState extends State<ProductsPage> {
                       title: products[i].name,
                       subtitle: products[i].description.isEmpty? null : products[i].description,
                       onPressed: (){
-
+                        AutoRouter.of(context).push(ProductDetailsRoute(product: products[i]));
                       },
                     )
                 ],

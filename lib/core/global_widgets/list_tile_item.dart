@@ -20,7 +20,7 @@ class ListTileItem extends StatelessWidget {
           trailing: trailingIcon,
           leading: leadingIcon,
           title: Text(title, ),
-          subtitle: subtitle == null? null : Text(subtitle!),
+          subtitle: subtitle == null? null : Text(subtitle!, overflow: TextOverflow.ellipsis,),
         ),
       ),
     );

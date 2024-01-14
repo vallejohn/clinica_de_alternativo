@@ -1,5 +1,6 @@
 import 'package:clinica_de_alternativo/src/authentication/presentation/blocs/auth_checker/auth_checker_bloc.dart';
 import 'package:clinica_de_alternativo/src/authentication/presentation/blocs/profile_checker/profile_checker_bloc.dart';
+import 'package:clinica_de_alternativo/src/inventory/presentation/blocs/products/products_bloc.dart';
 import 'package:clinica_de_alternativo/src/sales_reporting/presentation/blocs/search_product/search_product_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,6 +27,9 @@ class _ClinicaDeAlternativoState extends State<ClinicaDeAlternativo> {
         ),
         BlocProvider<ProfileCheckerBloc>(
           create: (context) => ProfileCheckerBloc(),
+        ),
+        BlocProvider<ProductsBloc>(
+          create: (context) => ProductsBloc(),
         ),
         BlocProvider<AuthCheckerBloc>(
           create: (context) =>
