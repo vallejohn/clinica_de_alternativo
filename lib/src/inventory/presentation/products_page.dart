@@ -15,7 +15,7 @@ class _ProductsPageState extends State<ProductsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Products'),
+        title: Text('Products', style: Theme.of(context).textTheme.headlineLarge,),
       ),
       body: BlocProvider<ProductsBloc>.value(
         value: BlocProvider.of<ProductsBloc>(context)..add(const ProductsEvent.onFetchList()),

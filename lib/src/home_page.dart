@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:clinica_de_alternativo/core/blocs/home_navigator_cubit.dart';
 import 'package:clinica_de_alternativo/core/global_widgets/pages/settings_page.dart';
+import 'package:clinica_de_alternativo/src/modules_page.dart';
+import 'package:clinica_de_alternativo/src/sales_reporting/presentation/pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
@@ -18,7 +20,7 @@ class ExampleDestination {
 
 const List<ExampleDestination> destinations = <ExampleDestination>[
   ExampleDestination(
-      'Home', Icon(Ionicons.home_outline), Icon(Ionicons.home)),
+      'Reporting', Icon(Ionicons.reader_outline), Icon(Ionicons.reader)),
   ExampleDestination(
       'Sales', Icon(Ionicons.bar_chart_outline), Icon(Ionicons.bar_chart)),
   ExampleDestination(
@@ -50,7 +52,7 @@ class _HomePageState extends State<HomePage> {
               controller: _pageController,
               onPageChanged: (int index) => navContext.read<HomeNavigatorCubit>().onPageChanged(index),
               children: const <Widget>[
-                Center(child: Text('Page Index 1')),
+                SaleReportingPage(),
                 Center(child: Text('Page Index 2')),
                 ProductsPage(),
                 SettingsPage(),

@@ -5,6 +5,7 @@ import '../../src/authentication/presentation/pages.dart';
 import '../../src/home_page.dart';
 import '../../src/inventory/data/model/product.dart';
 import '../../src/inventory/presentation/pages.dart';
+import '../../src/modules_page.dart';
 import '../../src/sales_reporting/presentation/pages.dart';
 import '../global_widgets/pages/settings_page.dart';
 
@@ -25,5 +26,6 @@ class AppRouter extends _$AppRouter{
     AutoRoute(page: ProductsRoute.page),
     AutoRoute(page: ProductDetailsRoute.page),
     AutoRoute(page: AddProductRoute.page),
+    AutoRoute(page: ModulesRoute.page),
   ];
 }

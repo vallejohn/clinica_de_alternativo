@@ -18,7 +18,7 @@ class _AddProductPageState extends State<AddProductPage> {
       value: BlocProvider.of<ProductsBloc>(context),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Add product'),
+          title: Text('Add product', style: Theme.of(context).textTheme.headlineLarge,),
         ),
         body: BlocBuilder<ProductsBloc, ProductsState>(
           builder: (prodContext, prodState) {

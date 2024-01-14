@@ -89,7 +89,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
               duration: const Duration(milliseconds: 200),
               height: 80,
               child: BottomAppBar(
-                color: Theme.of(context).colorScheme.primaryContainer.withOpacity(0.4),
+                color: Theme.of(context).colorScheme.surfaceVariant,
                 elevation: 0,
                 child: Row(
                   children: <Widget>[

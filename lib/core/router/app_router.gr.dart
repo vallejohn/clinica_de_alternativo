@@ -33,6 +33,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const LoginPage(),
       );
     },
+    ModulesRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ModulesPage(),
+      );
+    },
     ProductDetailsRoute.name: (routeData) {
       final args = routeData.argsAs<ProductDetailsRouteArgs>();
       return AutoRoutePage<dynamic>(
@@ -120,6 +126,20 @@ class LoginRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'LoginRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ModulesPage]
+class ModulesRoute extends PageRouteInfo<void> {
+  const ModulesRoute({List<PageRouteInfo>? children})
+      : super(
+          ModulesRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ModulesRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
