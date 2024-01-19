@@ -21,6 +21,18 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const AddProductPage(),
       );
     },
+    BranchesRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const BranchesPage(),
+      );
+    },
+    EmployeesRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const EmployeesPage(),
+      );
+    },
     HomeRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -61,6 +73,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const ProfileCompletionPage(),
       );
     },
+    RolesRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const RolesPage(),
+      );
+    },
     SaleReportingRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -98,6 +116,34 @@ class AddProductRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'AddProductRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [BranchesPage]
+class BranchesRoute extends PageRouteInfo<void> {
+  const BranchesRoute({List<PageRouteInfo>? children})
+      : super(
+          BranchesRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'BranchesRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [EmployeesPage]
+class EmployeesRoute extends PageRouteInfo<void> {
+  const EmployeesRoute({List<PageRouteInfo>? children})
+      : super(
+          EmployeesRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'EmployeesRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -206,6 +252,20 @@ class ProfileCompletionRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'ProfileCompletionRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [RolesPage]
+class RolesRoute extends PageRouteInfo<void> {
+  const RolesRoute({List<PageRouteInfo>? children})
+      : super(
+          RolesRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'RolesRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

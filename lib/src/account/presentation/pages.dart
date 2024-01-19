@@ -1,0 +1,14 @@
+
+
+import 'package:auto_route/annotations.dart';
+import 'package:clinica_de_alternativo/core/global_widgets/list_tile_item.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ionicons/ionicons.dart';
+
+import '../data/models/branch.dart';
+import 'blocs/branches/branch_bloc.dart';
+
+part 'branches_page.dart';
+part 'roles_page.dart';
+part 'employees_page.dart';

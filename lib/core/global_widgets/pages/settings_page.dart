@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:clinica_de_alternativo/core/global_widgets/list_tile_item.dart';
+import 'package:clinica_de_alternativo/core/router/app_router.dart';
 import 'package:clinica_de_alternativo/src/authentication/presentation/blocs/profile_checker/profile_checker_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,7 +33,7 @@ class _SettingsPageState extends State<SettingsPage> {
               trailingIcon: const Icon(Icons.arrow_right),
               leadingIcon: Icon(Ionicons.storefront_outline, color: Theme.of(context).colorScheme.primary,),
               onPressed: (){
-
+                AutoRouter.of(context).push(const BranchesRoute());
               },
             ),
             ListTileItem(
@@ -41,16 +42,17 @@ class _SettingsPageState extends State<SettingsPage> {
               trailingIcon: const Icon(Icons.arrow_right),
               leadingIcon: Icon(Ionicons.shield_outline, color: Theme.of(context).colorScheme.primary,),
               onPressed: (){
-
-              }
+                AutoRouter.of(context).push(const RolesRoute());
+              },
             ),
             ListTileItem(
               title: 'Employees',
               subtitle: 'Add or manage your employees information',
+              trailingIcon: const Icon(Icons.arrow_right),
               leadingIcon: Icon(Ionicons.people_outline, color: Theme.of(context).colorScheme.primary,),
               onPressed: (){
-
-              }
+                AutoRouter.of(context).push(const EmployeesRoute());
+              },
             ),
             const Divider(
               height: 0,
@@ -60,7 +62,7 @@ class _SettingsPageState extends State<SettingsPage> {
               subtitle: context.read<ProfileCheckerBloc>().state.whenOrNull(success: (information) => 'Logout as ${information?.name}'),
               leadingIcon: Icon(Ionicons.log_out_outline, color: Theme.of(context).colorScheme.primary,),
               onPressed: (){
-              }
+              },
             ),
           ],
         ),

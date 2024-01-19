@@ -1,3 +1,7 @@
+import 'package:clinica_de_alternativo/src/account/data/datasources/datasource.dart';
+import 'package:clinica_de_alternativo/src/account/data/repositories/account_repository_impl.dart';
+import 'package:clinica_de_alternativo/src/account/domain/account_usecases.dart';
+import 'package:clinica_de_alternativo/src/account/domain/repositories/account_repository.dart';
 import 'package:clinica_de_alternativo/src/authentication/data/datasources/datasource.dart';
 import 'package:clinica_de_alternativo/src/authentication/data/repositories/authentication_repository_impl.dart';
 import 'package:clinica_de_alternativo/src/authentication/domain/authentication_usecases.dart';
@@ -18,6 +22,7 @@ Future<void> setupLocator()async {
   _setupAuthentication();
   _setupProductsInventory();
   _setupSalesReporting();
+  _setupAccount();
 }
 
 ///Authentication
@@ -54,4 +59,15 @@ void _setupProductsInventory(){
   getIt.registerLazySingleton(() => OnUpdateProductUseCase(getIt()));
   getIt.registerLazySingleton(() => OnFetchProductsUseCase(getIt()));
   getIt.registerLazySingleton(() => OnDeleteProductUseCase(getIt()));
+}
+
+///Account
+void _setupAccount(){
+  getIt.registerLazySingleton<AccountDatasource>(() =>
+      AccountDatasourceImpl());
+
+  getIt.registerLazySingleton<AccountRepository>(() => AccountRepositoryImpl(accountDatasource: getIt()));
+
+  getIt.registerLazySingleton(() => OnGetBranchesUseCase(getIt()));
+  getIt.registerLazySingleton(() => OnAddBranchUseCase(getIt()));
 }

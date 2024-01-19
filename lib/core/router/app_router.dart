@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
+import '../../src/account/presentation/pages.dart';
 import '../../src/authentication/presentation/pages.dart';
 import '../../src/home_page.dart';
 import '../../src/inventory/data/model/product.dart';
@@ -27,5 +28,8 @@ class AppRouter extends _$AppRouter{
     AutoRoute(page: ProductDetailsRoute.page),
     AutoRoute(page: AddProductRoute.page),
     AutoRoute(page: ModulesRoute.page),
+    AutoRoute(page: RolesRoute.page),
+    AutoRoute(page: EmployeesRoute.page),
+    AutoRoute(page: BranchesRoute.page),
   ];
 }
