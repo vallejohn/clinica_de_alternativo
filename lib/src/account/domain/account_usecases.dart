@@ -4,6 +4,9 @@ import 'package:dartz/dartz.dart';
 import '../../../core/core.dart';
 import '../../../core/exceptions/failure.dart';
 import '../data/models/branch.dart';
+import '../data/models/role.dart';
 
 part 'usecases/on_get_branches_usecase.dart';
 part 'usecases/on_add_branch_usecase.dart';
+part 'usecases/on_get_roles_usecase.dart';
+part 'usecases/on_add_role_usecase.dart';

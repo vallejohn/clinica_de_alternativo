@@ -1,3 +1,4 @@
+import 'package:clinica_de_alternativo/src/account/data/models/role.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:dartz/dartz.dart';
@@ -26,6 +27,26 @@ class AccountRepositoryImpl extends AccountRepository {
   Future<Either<Failure, Branch>> addBranch(Branch branch)async {
     try{
       final dataState = await accountDatasource.addBranch(branch);
+      return Right(dataState);
+    }on FirebaseException catch(e){
+      return Left(Failure.firebase(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Role>> addRole(Role role)async {
+    try{
+      final dataState = await accountDatasource.addRole(role);
+      return Right(dataState);
+    }on FirebaseException catch(e){
+      return Left(Failure.firebase(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Role>>> getRoleList()async {
+    try{
+      final dataState = await accountDatasource.getRoleList();
       return Right(dataState);
     }on FirebaseException catch(e){
       return Left(Failure.firebase(e));
