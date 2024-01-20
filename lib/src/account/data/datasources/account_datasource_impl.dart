@@ -26,4 +26,25 @@ class AccountDatasourceImpl extends  AccountDatasource{
     final result = await FirestoreCollection.roles().get();
     return result.docs.map((e) => Role.fromJson(e.data()).copyWith(id: e.id)).toList();
   }
+
+  @override
+  Future<ProfileInformation?> getAccountDetails(String id)async {
+    final result = await FirestoreCollection.profileInformation().where('id', isEqualTo: id).get();
+    appLogger.wtf(result.docs.first.data());
+
+    return ProfileInformation.fromJson(result.docs.first.data());
+  }
+
+  @override
+  Future<bool> updateAccountDetails(ProfileInformation profile)async {
+    final newMapProfile = profile.toJson();
+
+    newMapProfile.remove('branch');
+    newMapProfile.remove('role');
+    newMapProfile.addAll({'branch' : profile.branch?.toJson()});
+    newMapProfile.addAll({'role' : profile.role?.toJson()});
+
+    await FirestoreCollection.profileInformation().doc(profile.id).update(newMapProfile);
+    return true;
+  }
 }

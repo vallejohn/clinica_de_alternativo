@@ -22,9 +22,9 @@ ProfileInformation _$ProfileInformationFromJson(Map<String, dynamic> json) {
 mixin _$ProfileInformation {
   String? get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  String get branch => throw _privateConstructorUsedError;
+  Branch? get branch => throw _privateConstructorUsedError;
   String get profileUrl => throw _privateConstructorUsedError;
-  String get role => throw _privateConstructorUsedError;
+  Role? get role => throw _privateConstructorUsedError;
   bool get firstTimePasswordReset => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -42,10 +42,13 @@ abstract class $ProfileInformationCopyWith<$Res> {
   $Res call(
       {String? id,
       String name,
-      String branch,
+      Branch? branch,
       String profileUrl,
-      String role,
+      Role? role,
       bool firstTimePasswordReset});
+
+  $BranchCopyWith<$Res>? get branch;
+  $RoleCopyWith<$Res>? get role;
 }
 
 /// @nodoc
@@ -63,9 +66,9 @@ class _$ProfileInformationCopyWithImpl<$Res, $Val extends ProfileInformation>
   $Res call({
     Object? id = freezed,
     Object? name = null,
-    Object? branch = null,
+    Object? branch = freezed,
     Object? profileUrl = null,
-    Object? role = null,
+    Object? role = freezed,
     Object? firstTimePasswordReset = null,
   }) {
     return _then(_value.copyWith(
@@ -77,23 +80,47 @@ class _$ProfileInformationCopyWithImpl<$Res, $Val extends ProfileInformation>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      branch: null == branch
+      branch: freezed == branch
           ? _value.branch
           : branch // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Branch?,
       profileUrl: null == profileUrl
           ? _value.profileUrl
           : profileUrl // ignore: cast_nullable_to_non_nullable
               as String,
-      role: null == role
+      role: freezed == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Role?,
       firstTimePasswordReset: null == firstTimePasswordReset
           ? _value.firstTimePasswordReset
           : firstTimePasswordReset // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $BranchCopyWith<$Res>? get branch {
+    if (_value.branch == null) {
+      return null;
+    }
+
+    return $BranchCopyWith<$Res>(_value.branch!, (value) {
+      return _then(_value.copyWith(branch: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $RoleCopyWith<$Res>? get role {
+    if (_value.role == null) {
+      return null;
+    }
+
+    return $RoleCopyWith<$Res>(_value.role!, (value) {
+      return _then(_value.copyWith(role: value) as $Val);
+    });
   }
 }
 
@@ -108,10 +135,15 @@ abstract class _$$ProfileInformationImplCopyWith<$Res>
   $Res call(
       {String? id,
       String name,
-      String branch,
+      Branch? branch,
       String profileUrl,
-      String role,
+      Role? role,
       bool firstTimePasswordReset});
+
+  @override
+  $BranchCopyWith<$Res>? get branch;
+  @override
+  $RoleCopyWith<$Res>? get role;
 }
 
 /// @nodoc
@@ -127,9 +159,9 @@ class __$$ProfileInformationImplCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? name = null,
-    Object? branch = null,
+    Object? branch = freezed,
     Object? profileUrl = null,
-    Object? role = null,
+    Object? role = freezed,
     Object? firstTimePasswordReset = null,
   }) {
     return _then(_$ProfileInformationImpl(
@@ -141,18 +173,18 @@ class __$$ProfileInformationImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      branch: null == branch
+      branch: freezed == branch
           ? _value.branch
           : branch // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Branch?,
       profileUrl: null == profileUrl
           ? _value.profileUrl
           : profileUrl // ignore: cast_nullable_to_non_nullable
               as String,
-      role: null == role
+      role: freezed == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Role?,
       firstTimePasswordReset: null == firstTimePasswordReset
           ? _value.firstTimePasswordReset
           : firstTimePasswordReset // ignore: cast_nullable_to_non_nullable
@@ -167,9 +199,9 @@ class _$ProfileInformationImpl implements _ProfileInformation {
   const _$ProfileInformationImpl(
       {this.id,
       this.name = '',
-      this.branch = '',
+      this.branch,
       this.profileUrl = '',
-      this.role = '',
+      this.role,
       this.firstTimePasswordReset = false});
 
   factory _$ProfileInformationImpl.fromJson(Map<String, dynamic> json) =>
@@ -181,14 +213,12 @@ class _$ProfileInformationImpl implements _ProfileInformation {
   @JsonKey()
   final String name;
   @override
-  @JsonKey()
-  final String branch;
+  final Branch? branch;
   @override
   @JsonKey()
   final String profileUrl;
   @override
-  @JsonKey()
-  final String role;
+  final Role? role;
   @override
   @JsonKey()
   final bool firstTimePasswordReset;
@@ -237,9 +267,9 @@ abstract class _ProfileInformation implements ProfileInformation {
   const factory _ProfileInformation(
       {final String? id,
       final String name,
-      final String branch,
+      final Branch? branch,
       final String profileUrl,
-      final String role,
+      final Role? role,
       final bool firstTimePasswordReset}) = _$ProfileInformationImpl;
 
   factory _ProfileInformation.fromJson(Map<String, dynamic> json) =
@@ -250,11 +280,11 @@ abstract class _ProfileInformation implements ProfileInformation {
   @override
   String get name;
   @override
-  String get branch;
+  Branch? get branch;
   @override
   String get profileUrl;
   @override
-  String get role;
+  Role? get role;
   @override
   bool get firstTimePasswordReset;
   @override

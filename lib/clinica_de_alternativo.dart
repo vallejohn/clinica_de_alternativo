@@ -1,3 +1,4 @@
+import 'package:clinica_de_alternativo/src/account/presentation/blocs/account/account_bloc.dart';
 import 'package:clinica_de_alternativo/src/account/presentation/blocs/branches/branch_bloc.dart';
 import 'package:clinica_de_alternativo/src/account/presentation/blocs/roles/role_bloc.dart';
 import 'package:clinica_de_alternativo/src/authentication/presentation/blocs/auth_checker/auth_checker_bloc.dart';
@@ -32,6 +33,9 @@ class _ClinicaDeAlternativoState extends State<ClinicaDeAlternativo> {
         ),
         BlocProvider<ProductsBloc>(
           create: (context) => ProductsBloc(),
+        ),
+        BlocProvider<AccountBloc>(
+          create: (context) => AccountBloc(),
         ),
         BlocProvider<BranchBloc>(
           create: (context) => BranchBloc()..add(const BranchEvent.onFetch()),

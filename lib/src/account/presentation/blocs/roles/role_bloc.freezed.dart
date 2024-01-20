@@ -206,6 +206,8 @@ abstract class _$$OnAddImplCopyWith<$Res> {
       __$$OnAddImplCopyWithImpl<$Res>;
   @useResult
   $Res call({Role role});
+
+  $RoleCopyWith<$Res> get role;
 }
 
 /// @nodoc
@@ -219,14 +221,22 @@ class __$$OnAddImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? role = freezed,
+    Object? role = null,
   }) {
     return _then(_$OnAddImpl(
-      freezed == role
+      null == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as Role,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $RoleCopyWith<$Res> get role {
+    return $RoleCopyWith<$Res>(_value.role, (value) {
+      return _then(_value.copyWith(role: value));
+    });
   }
 }
 
@@ -248,12 +258,11 @@ class _$OnAddImpl implements _OnAdd {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$OnAddImpl &&
-            const DeepCollectionEquality().equals(other.role, role));
+            (identical(other.role, role) || other.role == role));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(role));
+  int get hashCode => Object.hash(runtimeType, role);
 
   @JsonKey(ignore: true)
   @override
@@ -352,6 +361,8 @@ abstract class _$$OnEditImplCopyWith<$Res> {
       __$$OnEditImplCopyWithImpl<$Res>;
   @useResult
   $Res call({Role role});
+
+  $RoleCopyWith<$Res> get role;
 }
 
 /// @nodoc
@@ -365,14 +376,22 @@ class __$$OnEditImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? role = freezed,
+    Object? role = null,
   }) {
     return _then(_$OnEditImpl(
-      freezed == role
+      null == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as Role,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $RoleCopyWith<$Res> get role {
+    return $RoleCopyWith<$Res>(_value.role, (value) {
+      return _then(_value.copyWith(role: value));
+    });
   }
 }
 
@@ -394,12 +413,11 @@ class _$OnEditImpl implements _OnEdit {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$OnEditImpl &&
-            const DeepCollectionEquality().equals(other.role, role));
+            (identical(other.role, role) || other.role == role));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(role));
+  int get hashCode => Object.hash(runtimeType, role);
 
   @JsonKey(ignore: true)
   @override
@@ -498,6 +516,8 @@ abstract class _$$OnDeleteImplCopyWith<$Res> {
       __$$OnDeleteImplCopyWithImpl<$Res>;
   @useResult
   $Res call({Role role});
+
+  $RoleCopyWith<$Res> get role;
 }
 
 /// @nodoc
@@ -511,14 +531,22 @@ class __$$OnDeleteImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? role = freezed,
+    Object? role = null,
   }) {
     return _then(_$OnDeleteImpl(
-      freezed == role
+      null == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as Role,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $RoleCopyWith<$Res> get role {
+    return $RoleCopyWith<$Res>(_value.role, (value) {
+      return _then(_value.copyWith(role: value));
+    });
   }
 }
 
@@ -540,12 +568,11 @@ class _$OnDeleteImpl implements _OnDelete {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$OnDeleteImpl &&
-            const DeepCollectionEquality().equals(other.role, role));
+            (identical(other.role, role) || other.role == role));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(role));
+  int get hashCode => Object.hash(runtimeType, role);
 
   @JsonKey(ignore: true)
   @override

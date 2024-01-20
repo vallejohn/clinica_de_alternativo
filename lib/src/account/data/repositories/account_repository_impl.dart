@@ -1,4 +1,5 @@
 import 'package:clinica_de_alternativo/src/account/data/models/role.dart';
+import 'package:clinica_de_alternativo/src/authentication/data/model/profile_information.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:dartz/dartz.dart';
@@ -47,6 +48,26 @@ class AccountRepositoryImpl extends AccountRepository {
   Future<Either<Failure, List<Role>>> getRoleList()async {
     try{
       final dataState = await accountDatasource.getRoleList();
+      return Right(dataState);
+    }on FirebaseException catch(e){
+      return Left(Failure.firebase(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, ProfileInformation?>> getAccountDetails(String id)async {
+    try{
+      final dataState = await accountDatasource.getAccountDetails(id);
+      return Right(dataState);
+    }on FirebaseException catch(e){
+      return Left(Failure.firebase(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> updateAccountDetails(ProfileInformation profile)async {
+    try{
+      final dataState = await accountDatasource.updateAccountDetails(profile);
       return Right(dataState);
     }on FirebaseException catch(e){
       return Left(Failure.firebase(e));

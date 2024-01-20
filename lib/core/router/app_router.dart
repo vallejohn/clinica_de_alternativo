@@ -31,5 +31,6 @@ class AppRouter extends _$AppRouter{
     AutoRoute(page: RolesRoute.page),
     AutoRoute(page: EmployeesRoute.page),
     AutoRoute(page: BranchesRoute.page),
+    AutoRoute(page: AccountRoute.page),
   ];
 }

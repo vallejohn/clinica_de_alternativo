@@ -58,7 +58,9 @@ class _ProfileCompletionPageState extends State<ProfileCompletionPage> {
                       onPressed: loading ? null : () {
                         context.read<ProfileCheckerBloc>().add(ProfileCheckerEvent.onUpdateProfile(ProfileInformation(
                           name: _nameController.text,
-                          branch: _branchController.text,
+                          branch: Branch(
+                            name: _branchController.text
+                          ),
                         )));
                       },
                       child: Row(

@@ -1,5 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../account/data/models/branch.dart';
+import '../../../account/data/models/role.dart';
+
 part 'profile_information.freezed.dart';
 part 'profile_information.g.dart';
 
@@ -8,9 +11,9 @@ class ProfileInformation with _$ProfileInformation{
   const factory ProfileInformation({
     String? id,
     @Default('') String name,
-    @Default('') String branch,
+    Branch? branch,
     @Default('') String profileUrl,
-    @Default('') String role,
+    Role? role,
     @Default(false) bool firstTimePasswordReset,
   }) = _ProfileInformation;
 

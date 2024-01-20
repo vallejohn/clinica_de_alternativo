@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:clinica_de_alternativo/core/router/app_router.dart';
+import 'package:clinica_de_alternativo/src/account/data/models/branch.dart';
 import 'package:clinica_de_alternativo/src/authentication/core/params.dart';
 import 'package:clinica_de_alternativo/src/authentication/data/model/profile_information.dart';
 import 'package:clinica_de_alternativo/src/authentication/presentation/blocs/auth_checker/auth_checker_bloc.dart';

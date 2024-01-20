@@ -1,3 +1,4 @@
+import 'package:clinica_de_alternativo/src/authentication/data/model/profile_information.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/exceptions/failure.dart';
@@ -14,4 +15,7 @@ abstract class AccountRepository{
 
   Future<Either<Failure, List<Role>>> getRoleList();
   Future<Either<Failure, Role>> addRole(Role role);
+
+  Future<Either<Failure, ProfileInformation?>> getAccountDetails(String id);
+  Future<Either<Failure, bool>> updateAccountDetails(ProfileInformation profile);
 }

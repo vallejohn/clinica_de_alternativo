@@ -11,9 +11,13 @@ _$ProfileInformationImpl _$$ProfileInformationImplFromJson(
     _$ProfileInformationImpl(
       id: json['id'] as String?,
       name: json['name'] as String? ?? '',
-      branch: json['branch'] as String? ?? '',
+      branch: json['branch'] == null
+          ? null
+          : Branch.fromJson(json['branch'] as Map<String, dynamic>),
       profileUrl: json['profileUrl'] as String? ?? '',
-      role: json['role'] as String? ?? '',
+      role: json['role'] == null
+          ? null
+          : Role.fromJson(json['role'] as Map<String, dynamic>),
       firstTimePasswordReset: json['firstTimePasswordReset'] as bool? ?? false,
     );
 

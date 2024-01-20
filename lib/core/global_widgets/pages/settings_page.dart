@@ -28,6 +28,15 @@ class _SettingsPageState extends State<SettingsPage> {
         child: Column(
           children: [
             ListTileItem(
+              title: 'Account',
+              subtitle: 'View and manage your account',
+              trailingIcon: const Icon(Icons.arrow_right),
+                leadingIcon: Icon(Ionicons.person_outline, color: Theme.of(context).colorScheme.primary,),
+              onPressed: (){
+                AutoRouter.of(context).push(const AccountRoute());
+              },
+            ),
+            ListTileItem(
               title: 'Branches',
               subtitle: 'View or edit all branches of Clinica',
               trailingIcon: const Icon(Icons.arrow_right),
