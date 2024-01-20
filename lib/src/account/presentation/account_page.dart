@@ -27,7 +27,7 @@ class _AccountPageState extends State<AccountPage> {
                 child: LinearProgressIndicator(),
               );
             }
-            
+
             final profile = state.profile!;
             return SingleChildScrollView(
               padding: const EdgeInsets.symmetric(vertical: 20),

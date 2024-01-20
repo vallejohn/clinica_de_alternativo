@@ -1,3 +1,4 @@
+import 'package:clinica_de_alternativo/src/account/core/params.dart';
 import 'package:clinica_de_alternativo/src/account/domain/repositories/account_repository.dart';
 import 'package:clinica_de_alternativo/src/authentication/data/model/profile_information.dart';
 import 'package:dartz/dartz.dart';
@@ -13,3 +14,5 @@ part 'usecases/on_get_roles_usecase.dart';
 part 'usecases/on_add_role_usecase.dart';
 part 'usecases/on_get_account_details_usecase.dart';
 part 'usecases/on_update_account_details_usecase.dart';
+part 'usecases/on_get_accounts_usecase.dart';
+part 'usecases/on_add_account_usecase.dart';

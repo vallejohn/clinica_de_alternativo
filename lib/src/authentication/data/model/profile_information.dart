@@ -10,6 +10,7 @@ part 'profile_information.g.dart';
 class ProfileInformation with _$ProfileInformation{
   const factory ProfileInformation({
     String? id,
+    String? uid,
     @Default('') String name,
     Branch? branch,
     @Default('') String profileUrl,

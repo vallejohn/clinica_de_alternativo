@@ -74,4 +74,6 @@ void _setupAccount(){
   getIt.registerLazySingleton(() => OnAddRoleUseCase(getIt()));
   getIt.registerLazySingleton(() => OnUpdateAccountDetailsUseCase(getIt()));
   getIt.registerLazySingleton(() => OnGetAccountDetailsUseCase(getIt()));
+  getIt.registerLazySingleton(() => OnGetAccountsUseCase(getIt()));
+  getIt.registerLazySingleton(() => OnAddAccountUseCase(getIt()));
 }

@@ -2,6 +2,7 @@ import 'package:clinica_de_alternativo/src/authentication/data/model/profile_inf
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/exceptions/failure.dart';
+import '../../core/params.dart';
 import '../../data/datasources/datasource.dart';
 import '../../data/models/branch.dart';
 import '../../data/models/role.dart';
@@ -18,4 +19,7 @@ abstract class AccountRepository{
 
   Future<Either<Failure, ProfileInformation?>> getAccountDetails(String id);
   Future<Either<Failure, bool>> updateAccountDetails(ProfileInformation profile);
+
+  Future<Either<Failure, ProfileInformation>> addAccount(AddAccountParams params);
+  Future<Either<Failure, List<ProfileInformation>>> geAccountList();
 }

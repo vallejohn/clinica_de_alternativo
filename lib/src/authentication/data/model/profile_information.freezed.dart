@@ -21,6 +21,7 @@ ProfileInformation _$ProfileInformationFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ProfileInformation {
   String? get id => throw _privateConstructorUsedError;
+  String? get uid => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   Branch? get branch => throw _privateConstructorUsedError;
   String get profileUrl => throw _privateConstructorUsedError;
@@ -41,6 +42,7 @@ abstract class $ProfileInformationCopyWith<$Res> {
   @useResult
   $Res call(
       {String? id,
+      String? uid,
       String name,
       Branch? branch,
       String profileUrl,
@@ -65,6 +67,7 @@ class _$ProfileInformationCopyWithImpl<$Res, $Val extends ProfileInformation>
   @override
   $Res call({
     Object? id = freezed,
+    Object? uid = freezed,
     Object? name = null,
     Object? branch = freezed,
     Object? profileUrl = null,
@@ -75,6 +78,10 @@ class _$ProfileInformationCopyWithImpl<$Res, $Val extends ProfileInformation>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      uid: freezed == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
               as String?,
       name: null == name
           ? _value.name
@@ -134,6 +141,7 @@ abstract class _$$ProfileInformationImplCopyWith<$Res>
   @useResult
   $Res call(
       {String? id,
+      String? uid,
       String name,
       Branch? branch,
       String profileUrl,
@@ -158,6 +166,7 @@ class __$$ProfileInformationImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
+    Object? uid = freezed,
     Object? name = null,
     Object? branch = freezed,
     Object? profileUrl = null,
@@ -168,6 +177,10 @@ class __$$ProfileInformationImplCopyWithImpl<$Res>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      uid: freezed == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
               as String?,
       name: null == name
           ? _value.name
@@ -198,6 +211,7 @@ class __$$ProfileInformationImplCopyWithImpl<$Res>
 class _$ProfileInformationImpl implements _ProfileInformation {
   const _$ProfileInformationImpl(
       {this.id,
+      this.uid,
       this.name = '',
       this.branch,
       this.profileUrl = '',
@@ -209,6 +223,8 @@ class _$ProfileInformationImpl implements _ProfileInformation {
 
   @override
   final String? id;
+  @override
+  final String? uid;
   @override
   @JsonKey()
   final String name;
@@ -225,7 +241,7 @@ class _$ProfileInformationImpl implements _ProfileInformation {
 
   @override
   String toString() {
-    return 'ProfileInformation(id: $id, name: $name, branch: $branch, profileUrl: $profileUrl, role: $role, firstTimePasswordReset: $firstTimePasswordReset)';
+    return 'ProfileInformation(id: $id, uid: $uid, name: $name, branch: $branch, profileUrl: $profileUrl, role: $role, firstTimePasswordReset: $firstTimePasswordReset)';
   }
 
   @override
@@ -234,6 +250,7 @@ class _$ProfileInformationImpl implements _ProfileInformation {
         (other.runtimeType == runtimeType &&
             other is _$ProfileInformationImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.uid, uid) || other.uid == uid) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.branch, branch) || other.branch == branch) &&
             (identical(other.profileUrl, profileUrl) ||
@@ -245,8 +262,8 @@ class _$ProfileInformationImpl implements _ProfileInformation {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, name, branch, profileUrl, role, firstTimePasswordReset);
+  int get hashCode => Object.hash(runtimeType, id, uid, name, branch,
+      profileUrl, role, firstTimePasswordReset);
 
   @JsonKey(ignore: true)
   @override
@@ -266,6 +283,7 @@ class _$ProfileInformationImpl implements _ProfileInformation {
 abstract class _ProfileInformation implements ProfileInformation {
   const factory _ProfileInformation(
       {final String? id,
+      final String? uid,
       final String name,
       final Branch? branch,
       final String profileUrl,
@@ -277,6 +295,8 @@ abstract class _ProfileInformation implements ProfileInformation {
 
   @override
   String? get id;
+  @override
+  String? get uid;
   @override
   String get name;
   @override

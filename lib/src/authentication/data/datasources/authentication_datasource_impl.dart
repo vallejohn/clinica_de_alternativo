@@ -12,7 +12,7 @@ class AuthenticationDatasourceImpl extends  AuthenticationDatasource{
 
   @override
   Future<ProfileInformation?> checkAccountInformation(String userId)async {
-     final result = await FirestoreCollection.profileInformation().where('id', isEqualTo: userId).get();
+     final result = await FirestoreCollection.profileInformation().where('uid', isEqualTo: userId).get();
 
      if(result.docs.isEmpty) return null;
 

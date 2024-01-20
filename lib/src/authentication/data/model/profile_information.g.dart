@@ -10,6 +10,7 @@ _$ProfileInformationImpl _$$ProfileInformationImplFromJson(
         Map<String, dynamic> json) =>
     _$ProfileInformationImpl(
       id: json['id'] as String?,
+      uid: json['uid'] as String?,
       name: json['name'] as String? ?? '',
       branch: json['branch'] == null
           ? null
@@ -25,6 +26,7 @@ Map<String, dynamic> _$$ProfileInformationImplToJson(
         _$ProfileInformationImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'uid': instance.uid,
       'name': instance.name,
       'branch': instance.branch,
       'profileUrl': instance.profileUrl,

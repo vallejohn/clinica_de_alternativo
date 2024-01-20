@@ -12,6 +12,7 @@ import '../data/models/branch.dart';
 import '../data/models/role.dart';
 import 'blocs/account/account_bloc.dart';
 import 'blocs/branches/branch_bloc.dart';
+import 'blocs/employees/employees_bloc.dart';
 
 part 'branches_page.dart';
 part 'roles_page.dart';
