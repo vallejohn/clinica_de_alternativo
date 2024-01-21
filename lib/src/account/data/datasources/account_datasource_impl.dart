@@ -49,7 +49,7 @@ class AccountDatasourceImpl extends  AccountDatasource{
 
   @override
   Future<ProfileInformation> addAccount(AddAccountParams params)async {
-    final credentials = await FirebaseAuth.instance.signInWithEmailAndPassword(email: params.email, password: params.password);
+    final credentials = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: params.email, password: params.password);
 
     final newProfile = params.profile.copyWith(uid: credentials.user?.uid);
     final newMapProfile = newProfile.toJson();
