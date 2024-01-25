@@ -53,7 +53,7 @@ class _HomePageState extends State<HomePage> {
               onPageChanged: (int index) => navContext.read<HomeNavigatorCubit>().onPageChanged(index),
               children: const <Widget>[
                 SaleReportingPage(),
-                Center(child: Text('Page Index 2')),
+                SalesSummaryPage(),
                 ProductsPage(),
                 SettingsPage(),
               ],

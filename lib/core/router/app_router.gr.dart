@@ -91,6 +91,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const SaleReportingPage(),
       );
     },
+    SalesSummaryRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const SalesSummaryPage(),
+      );
+    },
     SearchProductsRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -300,6 +306,20 @@ class SaleReportingRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'SaleReportingRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [SalesSummaryPage]
+class SalesSummaryRoute extends PageRouteInfo<void> {
+  const SalesSummaryRoute({List<PageRouteInfo>? children})
+      : super(
+          SalesSummaryRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SalesSummaryRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
