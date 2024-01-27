@@ -40,7 +40,7 @@ class _BranchesPageState extends State<BranchesPage> {
                   ),
                 ),
                 const Divider(),
-                ...state.branches.map((e) => ListTileItem(title: e.name)).toList()
+                ...state.branches.map((e) => ListTileItem(title: Text(e.name))).toList()
               ],
             ),
           );

@@ -4,6 +4,7 @@ import 'package:clinica_de_alternativo/src/account/presentation/blocs/employees/
 import 'package:clinica_de_alternativo/src/account/presentation/blocs/roles/role_bloc.dart';
 import 'package:clinica_de_alternativo/src/authentication/presentation/blocs/auth_checker/auth_checker_bloc.dart';
 import 'package:clinica_de_alternativo/src/authentication/presentation/blocs/profile_checker/profile_checker_bloc.dart';
+import 'package:clinica_de_alternativo/src/inventory/presentation/blocs/poduct_type/product_type_bloc.dart';
 import 'package:clinica_de_alternativo/src/inventory/presentation/blocs/products/products_bloc.dart';
 import 'package:clinica_de_alternativo/src/sales_reporting/presentation/blocs/search_product/search_product_cubit.dart';
 import 'package:flutter/material.dart';
@@ -41,6 +42,9 @@ class _ClinicaDeAlternativoState extends State<ClinicaDeAlternativo> {
         BlocProvider<EmployeesBloc>(
           create: (context) => EmployeesBloc(),
         ),
+        BlocProvider<ProductTypeBloc>(
+          create: (context) => ProductTypeBloc(),
+        ),
         BlocProvider<BranchBloc>(
           create: (context) => BranchBloc()..add(const BranchEvent.onFetch()),
         ),
@@ -62,6 +66,7 @@ class _ClinicaDeAlternativoState extends State<ClinicaDeAlternativo> {
                 },
                 success: (profile){
                   if(profile != null){
+                    context.read<ProductTypeBloc>().add(const ProductTypeEvent.onFetch());
                     _appRouter.replace(const HomeRoute());
                   }else{
                     _appRouter.replace(const ProfileCompletionRoute());

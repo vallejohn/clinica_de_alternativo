@@ -30,18 +30,18 @@ class _EmployeesPageState extends State<EmployeesPage> {
               physics: const BouncingScrollPhysics(),
               child: Column(
                 children: [
-                  BlocProvider<WidgetVisibilityCubit<AddEmployeeState>>(
-                    create: (context) => WidgetVisibilityCubit<AddEmployeeState>(const AddEmployeeState()),
-                    child: BlocBuilder<WidgetVisibilityCubit<AddEmployeeState>, AddEmployeeState>(
+                  BlocProvider<WidgetHelperCubit<AddEmployeeState>>(
+                    create: (context) => WidgetHelperCubit<AddEmployeeState>(const AddEmployeeState()),
+                    child: BlocBuilder<WidgetHelperCubit<AddEmployeeState>, AddEmployeeState>(
                       builder: (visContext, visState) {
-                        final cubit = visContext.read<WidgetVisibilityCubit<AddEmployeeState>>();
+                        final cubit = visContext.read<WidgetHelperCubit<AddEmployeeState>>();
                         final branches = context.read<BranchBloc>().state.branches;
                         final roles = context.read<RoleBloc>().state.roles;
                         return Column(
                           children: [
                             ListTileItem(
                               leadingIcon: const CircleAvatar(backgroundColor: Colors.transparent,child: Icon(Ionicons.add,),),
-                              title: 'Add',
+                              title: const Text('Add'),
                               onPressed: (){
                                 cubit.onUpdateState(visState.copyWith(addingEmployee: !visState.addingEmployee));
                               },
@@ -126,7 +126,7 @@ class _EmployeesPageState extends State<EmployeesPage> {
                   ),
                   ...state.employees.map((e) => ListTileItem(
                     leadingIcon: CircleAvatar(child: Text(e.name[0], style: TextStyle(color: Theme.of(context).colorScheme.primary),),),
-                    title: e.name,
+                    title: Text(e.name),
                     subtitle: '${e.role == null? 'No role assigned' : e.role!.name} / ${e.branch == null? 'No branch assigned' : e.branch!.name}',
                     onPressed: (){
 

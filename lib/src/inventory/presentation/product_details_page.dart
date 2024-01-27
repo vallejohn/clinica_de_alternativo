@@ -14,6 +14,8 @@ class ProductDetailsPage extends StatefulWidget {
 
 class _ProductDetailsPageState extends State<ProductDetailsPage> {
   final _productNameController = TextEditingController();
+  final _productTypeController = TextEditingController();
+  final _addProductTypeController = TextEditingController();
   final _descriptionController = TextEditingController();
 
   @override
@@ -26,6 +28,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             listenWhen: (prev, cur) => prev.selectedProduct != cur.selectedProduct,
             listener: (context, state) {
               _productNameController.text = state.selectedProduct!.name;
+              _productTypeController.text = state.selectedProduct!.type == null? '' : state.selectedProduct!.type!.name;
               _descriptionController.text = state.selectedProduct!.description;
             },
           ),
@@ -55,6 +58,37 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                        prodState.selectedProduct!.name,
                         style: Theme.of(context).textTheme.displayMedium,
                       ),
+
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    if (editing)
+                      TextField(
+                        controller: _productTypeController,
+                        focusNode: FocusNode(),
+                        enableInteractiveSelection: false,
+                        onTap: ()async {
+                          final prodType = await showDialog<ProductType>(
+                              context: context,
+                              builder: (BuildContext context) => const ProductTypeSelectionDialog()
+                          );
+                          // ignore: use_build_context_synchronously
+                          prodContext.read<ProductsBloc>()
+                              .add(ProductsEvent.onSetSelectedProduct(
+                              selectedProduct!.copyWith(
+                                type: prodType,
+                              )));
+                        },
+                        decoration: const InputDecoration(
+                          labelText: 'Type',
+                        ),
+                      ),
+                    if (!editing && selectedProduct != null)
+                      if(selectedProduct.type != null)
+                        Text(
+                          selectedProduct.type!.name,
+                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Colors.grey),
+                        ),
                     const SizedBox(
                       height: 20,
                     ),

@@ -41,25 +41,37 @@ class _SaleReportingPageState extends State<SaleReportingPage> {
               return Form(
                 key: _formKey,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TextFormField(
-                      focusNode: FocusNode(),
-                      enableInteractiveSelection: false,
-                      onTap: () {
-                        AutoRouter.of(context).push(const SearchProductsRoute());
-                      },
-                      controller: _productNameController,
-                      decoration: const InputDecoration(
-                        labelText: 'Local Product',
-                      ),
-                      validator: (value){
-                        if(value != null){
-                          if(value.isEmpty) return 'Enter product name';
-                          return null;
-                        }else{
-                          return 'Enter product name';
+                    BlocBuilder<SearchProductCubit, SearchProductState>(
+                      builder: (context, state) {
+                        String productLabelType = '';
+
+                        if(state.selectedProduct != null){
+                          if(state.selectedProduct!.type != null){
+                            productLabelType = state.selectedProduct!.type!.name;
+                          }
                         }
+
+                        return TextFormField(
+                          focusNode: FocusNode(),
+                          enableInteractiveSelection: false,
+                          onTap: () {
+                            AutoRouter.of(context).push(const SearchProductsRoute());
+                          },
+                          controller: _productNameController,
+                          decoration: InputDecoration(
+                            labelText: '$productLabelType Product',
+                          ),
+                          validator: (value){
+                            if(value != null){
+                              if(value.isEmpty) return 'Enter product name';
+                              return null;
+                            }else{
+                              return 'Enter product name';
+                            }
+                          },
+                        );
                       },
                     ),
                     const SizedBox(

@@ -10,13 +10,29 @@ class AddProductPage extends StatefulWidget {
 
 class _AddProductPageState extends State<AddProductPage> {
   final _productNameController = TextEditingController();
+  final _productTypeController = TextEditingController();
+  final _addProductTypeController = TextEditingController();
   final _descriptionController = TextEditingController();
+
+  final selectedProductCubit = WidgetHelperCubit<ProductType?>(const ProductType());
+
+  final _productTypeFieldKey = GlobalKey<FormFieldState>();
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<ProductsBloc>.value(
-      value: BlocProvider.of<ProductsBloc>(context),
-      child: Scaffold(
+
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<ProductsBloc>.value(
+          value: BlocProvider.of<ProductsBloc>(context),
+        )
+      ],
+      child: BlocListener<WidgetHelperCubit<ProductType?>, ProductType?>(
+        bloc: selectedProductCubit,
+        listenWhen: (prev, cur) => prev != cur,
+        listener: (context, state) {
+          _productTypeController.text = state == null? '' : state.name;
+        }, child: Scaffold(
         appBar: AppBar(
           title: Text('Add product', style: Theme.of(context).textTheme.headlineLarge,),
         ),
@@ -31,6 +47,22 @@ class _AddProductPageState extends State<AddProductPage> {
                     controller: _productNameController,
                     decoration: const InputDecoration(
                       labelText: 'Local Products',
+                    ),
+                  ),
+                  const SizedBox(height: 10,),
+                  TextField(
+                    controller: _productTypeController,
+                    focusNode: FocusNode(),
+                    enableInteractiveSelection: false,
+                    onTap: ()async {
+                      final prodType = await showDialog<ProductType>(
+                        context: context,
+                        builder: (BuildContext context) => const ProductTypeSelectionDialog()
+                      );
+                      selectedProductCubit.onUpdateState(prodType);
+                    },
+                    decoration: const InputDecoration(
+                      labelText: 'Type',
                     ),
                   ),
                   const SizedBox(height: 10,),
@@ -68,6 +100,7 @@ class _AddProductPageState extends State<AddProductPage> {
                             final product = Product(
                               name: _productNameController.text,
                               description: _descriptionController.text,
+                              type: selectedProductCubit.state
                             );
                             prodContext.read<ProductsBloc>().add(ProductsEvent.onAdd(product));
                           },
@@ -89,6 +122,7 @@ class _AddProductPageState extends State<AddProductPage> {
           },
         ),
       ),
+),
     );
   }
 }

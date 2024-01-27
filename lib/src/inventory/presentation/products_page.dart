@@ -58,8 +58,8 @@ class _ProductsPageState extends State<ProductsPage> {
                   for( int i = 0; i < products.length; i++)
                     ListTileItem(
                       leadingIcon: CircleAvatar(child: Text(products[i].name[0], style: TextStyle(color: Theme.of(context).colorScheme.primary),),),
-                      title: products[i].name,
-                      subtitle: products[i].description.isEmpty? null : products[i].description,
+                      title: Text(products[i].name),
+                      subtitle: products[i].type == null? null : products[i].type!.name,
                       onPressed: (){
                         AutoRouter.of(context).push(ProductDetailsRoute(product: products[i]));
                       },

@@ -15,4 +15,4 @@ For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
-BUILD_COMMAND: fvm flutter build --flavor staging apk lib/flavors/main_staging.dart 
+BUILD_COMMAND:  fvm flutter build apk --flavor staging -t lib/flavors/main_staging.dart
