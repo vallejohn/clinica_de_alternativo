@@ -37,15 +37,15 @@ class _AccountPageState extends State<AccountPage> {
                 children: [
                   ListTileItem(
                     leadingIcon: Icon(Ionicons.person_outline, color: Theme.of(context).colorScheme.primary,),
-                    title: 'Account name', subtitle: profile.name, onPressed: (){
+                    title: const Text('Account name'), subtitle: profile.name, onPressed: (){
                   },),
                   ListTileItem(
                     leadingIcon: Icon(Ionicons.shield_outline, color: Theme.of(context).colorScheme.primary,),
-                    title: 'Role', subtitle: profile.role == null? 'No assigned role' : profile.role?.name, onPressed: (){
+                    title: const Text('Role'), subtitle: profile.role == null? 'No assigned role' : profile.role?.name, onPressed: (){
                   },),
                   ListTileItem(
                     leadingIcon: Icon(Ionicons.pin_outline, color: Theme.of(context).colorScheme.primary,),
-                    title: 'Branch', subtitle: profile.branch == null? 'No assigned branch' : profile.branch?.name, onPressed: (){
+                    title: const Text('Branch'), subtitle: profile.branch == null? 'No assigned branch' : profile.branch?.name, onPressed: (){
                   },),
                 ],
               ),

@@ -39,14 +39,15 @@ class _SearchProductsPageState extends State<SearchProductsPage> {
               physics: const BouncingScrollPhysics(),
               itemCount: searchState.products.length,
               itemBuilder: (context, index) {
-                return InkWell(
-                  onTap: () {
+                final productType = searchState.products[index].type;
+                return ListTileItem(
+                  leadingIcon: CircleAvatar(child: Text(searchState.products[index].name[0], style: TextStyle(color: Theme.of(context).colorScheme.primary),),),
+                  title: Text(searchState.products[index].name),
+                  subtitle: productType?.name,
+                  onPressed: (){
                     searchContext.read<SearchProductCubit>().onSelectProduct(searchState.products[index]);
                     Navigator.pop(context);
                   },
-                  child: ListTile(
-                    title: Text(searchState.products[index].name),
-                  ),
                 );
               },
             ),

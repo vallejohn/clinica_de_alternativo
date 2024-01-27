@@ -1,3 +1,4 @@
+import 'package:clinica_de_alternativo/src/account/data/models/product_type.dart';
 import 'package:clinica_de_alternativo/src/inventory/data/model/product.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -46,6 +47,46 @@ class ProductRepositoryImpl extends ProductRepository {
   Future<Either<Failure, bool>> deleteProduct(String id)async {
     try{
       final dataState = await productDatasource.deleteProduct(id);
+      return Right(dataState);
+    }on FirebaseException catch(e){
+      return Left(Failure.firebase(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, ProductType>> addProductType(ProductType param)async {
+    try{
+      final dataState = await productDatasource.addProductType(param);
+      return Right(dataState);
+    }on FirebaseException catch(e){
+      return Left(Failure.firebase(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<ProductType>>> fetchProductType()async {
+    try{
+      final dataState = await productDatasource.fetchProductTypes();
+      return Right(dataState);
+    }on FirebaseException catch(e){
+      return Left(Failure.firebase(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> deleteProductType(String id)async {
+    try{
+      final dataState = await productDatasource.deleteProductType(id);
+      return Right(dataState);
+    }on FirebaseException catch(e){
+      return Left(Failure.firebase(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> editProductType(ProductType param)async {
+    try{
+      final dataState = await productDatasource.editProductType(param);
       return Right(dataState);
     }on FirebaseException catch(e){
       return Left(Failure.firebase(e));

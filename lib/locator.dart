@@ -59,6 +59,8 @@ void _setupProductsInventory(){
   getIt.registerLazySingleton(() => OnUpdateProductUseCase(getIt()));
   getIt.registerLazySingleton(() => OnFetchProductsUseCase(getIt()));
   getIt.registerLazySingleton(() => OnDeleteProductUseCase(getIt()));
+  getIt.registerLazySingleton(() => OnFetchProductTypesUseCase(getIt()));
+  getIt.registerLazySingleton(() => OnAddProductTypeUseCase(getIt()));
 }
 
 ///Account
@@ -76,4 +78,6 @@ void _setupAccount(){
   getIt.registerLazySingleton(() => OnGetAccountDetailsUseCase(getIt()));
   getIt.registerLazySingleton(() => OnGetAccountsUseCase(getIt()));
   getIt.registerLazySingleton(() => OnAddAccountUseCase(getIt()));
+  getIt.registerLazySingleton(() => OnEditProductTypeUseCase(getIt()));
+  getIt.registerLazySingleton(() => OnDeleteProductTypeUseCase(getIt()));
 }

@@ -1,3 +1,4 @@
+import 'package:clinica_de_alternativo/src/account/data/models/product_type.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'product.freezed.dart';
@@ -9,6 +10,7 @@ class Product with _$Product{
     String? id,
     @Default('') String code,
     @Default('') String name,
+    ProductType? type,
     @Default('') String description,
   }) = _Product;
 

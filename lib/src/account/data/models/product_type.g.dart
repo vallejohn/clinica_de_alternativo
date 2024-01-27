@@ -1,27 +1,21 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'product.dart';
+part of 'product_type.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ProductImpl _$$ProductImplFromJson(Map<String, dynamic> json) =>
-    _$ProductImpl(
+_$ProductTypeImpl _$$ProductTypeImplFromJson(Map<String, dynamic> json) =>
+    _$ProductTypeImpl(
       id: json['id'] as String?,
       code: json['code'] as String? ?? '',
       name: json['name'] as String? ?? '',
-      type: json['type'] == null
-          ? null
-          : ProductType.fromJson(json['type'] as Map<String, dynamic>),
-      description: json['description'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$ProductImplToJson(_$ProductImpl instance) =>
+Map<String, dynamic> _$$ProductTypeImplToJson(_$ProductTypeImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'code': instance.code,
       'name': instance.name,
-      'type': instance.type,
-      'description': instance.description,
     };

@@ -40,7 +40,7 @@ class _RolesPageState extends State<RolesPage> {
                   ),
                 ),
                 const Divider(),
-                ...state.roles.map((e) => ListTileItem(title: e.name)).toList()
+                ...state.roles.map((e) => ListTileItem(title: Text(e.name))).toList()
               ],
             ),
           );
