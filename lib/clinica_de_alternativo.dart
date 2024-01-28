@@ -6,6 +6,7 @@ import 'package:clinica_de_alternativo/src/authentication/presentation/blocs/aut
 import 'package:clinica_de_alternativo/src/authentication/presentation/blocs/profile_checker/profile_checker_bloc.dart';
 import 'package:clinica_de_alternativo/src/inventory/presentation/blocs/poduct_type/product_type_bloc.dart';
 import 'package:clinica_de_alternativo/src/inventory/presentation/blocs/products/products_bloc.dart';
+import 'package:clinica_de_alternativo/src/sales_reporting/presentation/blocs/sales_reporting/sales_reporting_bloc.dart';
 import 'package:clinica_de_alternativo/src/sales_reporting/presentation/blocs/search_product/search_product_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,6 +33,9 @@ class _ClinicaDeAlternativoState extends State<ClinicaDeAlternativo> {
         ),
         BlocProvider<ProfileCheckerBloc>(
           create: (context) => ProfileCheckerBloc(),
+        ),
+        BlocProvider<SalesReportingBloc>(
+          create: (context) => SalesReportingBloc(),
         ),
         BlocProvider<ProductsBloc>(
           create: (context) => ProductsBloc(),
@@ -92,8 +96,34 @@ class _ClinicaDeAlternativoState extends State<ClinicaDeAlternativo> {
           title: 'Clinica De Alternativo',
           theme: ThemeData(
             fontFamily: 'Rubik',
-            colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xff3d550c)),
+              colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xff3d550c)),
             useMaterial3: true,
+            inputDecorationTheme: InputDecorationTheme(
+              suffixIconColor: const Color(0xff5e762e),
+              fillColor: Colors.white,
+              filled: true,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8)
+              ),
+              enabledBorder: OutlineInputBorder(
+                //borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide(
+                  width: 1.3,
+                    color: const Color(0xff3d550c).withOpacity(0.15),
+                ),
+              ),
+            ),
+            cardTheme: CardTheme(
+              elevation: 0,
+              color: Colors.white,
+              shape: RoundedRectangleBorder(
+                side: BorderSide(
+                  width: 1.3,
+                  color: const Color(0xff3d550c).withOpacity(0.15),
+                ),
+                borderRadius: const BorderRadius.all(Radius.circular(12)),
+              ),
+            )
           ),
           routerDelegate: _appRouter.delegate(),
           routeInformationParser: _appRouter.defaultRouteParser(),

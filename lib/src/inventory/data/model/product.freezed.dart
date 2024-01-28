@@ -24,6 +24,7 @@ mixin _$Product {
   String get code => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   ProductType? get type => throw _privateConstructorUsedError;
+  double get price => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -41,6 +42,7 @@ abstract class $ProductCopyWith<$Res> {
       String code,
       String name,
       ProductType? type,
+      double price,
       String description});
 
   $ProductTypeCopyWith<$Res>? get type;
@@ -63,6 +65,7 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
     Object? code = null,
     Object? name = null,
     Object? type = freezed,
+    Object? price = null,
     Object? description = null,
   }) {
     return _then(_value.copyWith(
@@ -82,6 +85,10 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as ProductType?,
+      price: null == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as double,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -114,6 +121,7 @@ abstract class _$$ProductImplCopyWith<$Res> implements $ProductCopyWith<$Res> {
       String code,
       String name,
       ProductType? type,
+      double price,
       String description});
 
   @override
@@ -135,6 +143,7 @@ class __$$ProductImplCopyWithImpl<$Res>
     Object? code = null,
     Object? name = null,
     Object? type = freezed,
+    Object? price = null,
     Object? description = null,
   }) {
     return _then(_$ProductImpl(
@@ -154,6 +163,10 @@ class __$$ProductImplCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as ProductType?,
+      price: null == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as double,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -170,6 +183,7 @@ class _$ProductImpl implements _Product {
       this.code = '',
       this.name = '',
       this.type,
+      this.price = 0,
       this.description = ''});
 
   factory _$ProductImpl.fromJson(Map<String, dynamic> json) =>
@@ -187,11 +201,14 @@ class _$ProductImpl implements _Product {
   final ProductType? type;
   @override
   @JsonKey()
+  final double price;
+  @override
+  @JsonKey()
   final String description;
 
   @override
   String toString() {
-    return 'Product(id: $id, code: $code, name: $name, type: $type, description: $description)';
+    return 'Product(id: $id, code: $code, name: $name, type: $type, price: $price, description: $description)';
   }
 
   @override
@@ -203,6 +220,7 @@ class _$ProductImpl implements _Product {
             (identical(other.code, code) || other.code == code) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.type, type) || other.type == type) &&
+            (identical(other.price, price) || other.price == price) &&
             (identical(other.description, description) ||
                 other.description == description));
   }
@@ -210,7 +228,7 @@ class _$ProductImpl implements _Product {
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, code, name, type, description);
+      Object.hash(runtimeType, id, code, name, type, price, description);
 
   @JsonKey(ignore: true)
   @override
@@ -232,6 +250,7 @@ abstract class _Product implements Product {
       final String code,
       final String name,
       final ProductType? type,
+      final double price,
       final String description}) = _$ProductImpl;
 
   factory _Product.fromJson(Map<String, dynamic> json) = _$ProductImpl.fromJson;
@@ -244,6 +263,8 @@ abstract class _Product implements Product {
   String get name;
   @override
   ProductType? get type;
+  @override
+  double get price;
   @override
   String get description;
   @override

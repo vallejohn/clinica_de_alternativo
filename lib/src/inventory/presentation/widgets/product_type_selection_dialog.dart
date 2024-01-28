@@ -66,7 +66,7 @@ class ProductTypeSelectionDialog extends StatelessWidget {
                   ),
                   if(!typeSelState.editing)  ListTileItem(
                     leadingIcon: const CircleAvatar(backgroundColor: Colors.transparent,child: Icon(Ionicons.add,),),
-                    title: Text('Add'),
+                    title: const Text('Add'),
                     onPressed: (){
                       prodTypeSelectionCubit.onUpdateState(typeSelState.copyWith(editing: true));
                     },

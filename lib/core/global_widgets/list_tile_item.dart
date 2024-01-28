@@ -22,7 +22,7 @@ class ListTileItem extends StatelessWidget {
           trailing: trailingIcon,
           leading: leadingIcon,
           title: title,
-          subtitle: subtitle == null? null : Text(subtitle!, overflow: TextOverflow.ellipsis, style: const TextStyle(color: Colors.black54),),
+          subtitle: subtitle == null? null : Text(subtitle!, overflow: TextOverflow.ellipsis,),
         ),
       ),
     );

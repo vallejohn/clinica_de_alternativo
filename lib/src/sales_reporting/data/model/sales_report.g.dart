@@ -13,7 +13,8 @@ _$SalesReportImpl _$$SalesReportImplFromJson(Map<String, dynamic> json) =>
       product: json['product'] == null
           ? null
           : Product.fromJson(json['product'] as Map<String, dynamic>),
-      transactionDate: json['transactionDate'] as String? ?? '',
+      transactionDate: json['transactionDate'],
+      creationDate: json['creationDate'],
       quantitySold: json['quantitySold'] as int? ?? 0,
     );
 
@@ -23,5 +24,6 @@ Map<String, dynamic> _$$SalesReportImplToJson(_$SalesReportImpl instance) =>
       'transactionId': instance.transactionId,
       'product': instance.product,
       'transactionDate': instance.transactionDate,
+      'creationDate': instance.creationDate,
       'quantitySold': instance.quantitySold,
     };
