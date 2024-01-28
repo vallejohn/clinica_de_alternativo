@@ -11,7 +11,8 @@ class SalesReport with _$SalesReport{
     String? id,
     String? transactionId,
     Product? product,
-    @Default('') String transactionDate,
+    dynamic transactionDate,
+    dynamic creationDate,
     @Default(0) int quantitySold,
   }) = _SalesReport;
 

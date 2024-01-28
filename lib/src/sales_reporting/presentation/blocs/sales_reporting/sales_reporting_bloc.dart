@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:clinica_de_alternativo/core/core.dart';
 import 'package:clinica_de_alternativo/src/sales_reporting/domain/sales_reporting_usecases.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:clinica_de_alternativo/src/sales_reporting/data/model/sales_report.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -28,8 +30,22 @@ class SalesReportingBloc extends Bloc<SalesReportingEvent, SalesReportingState> 
     dataOrError.fold((l){
       emit(state.copyWith(status: SalesReportingStatus.failed, message: l.when(firebase: (error) => error.message!,)));
     }, (salesReports){
+      final dateNow = DateTime.now();
+
+      /// From date today 12:00 AM
+      final from = DateTime(dateNow.year, dateNow.month, dateNow.day, 0, 0, 0);
+      /// To date today 11:59 PM
+      final to = DateTime(dateNow.year, dateNow.month, dateNow.day, 23, 59, 59);
+
+      final salesTransactionDate = (salesReports.transactionDate as Timestamp).toDate();
+
       final reports = [...state.salesReports];
-      reports.add(salesReports);
+      if((salesTransactionDate.millisecondsSinceEpoch >= from.millisecondsSinceEpoch &&
+          salesTransactionDate.millisecondsSinceEpoch <= to.millisecondsSinceEpoch)){
+        /// Add the transaction to the list if it matches the current date
+        reports.add(salesReports);
+      }
+
       emit(state.copyWith(status: SalesReportingStatus.success, message: 'Sales report posted successfully', salesReports: reports));
     });
   }

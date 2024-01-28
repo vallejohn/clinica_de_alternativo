@@ -11,6 +11,7 @@ class Product with _$Product{
     @Default('') String code,
     @Default('') String name,
     ProductType? type,
+    @Default(0) double price,
     @Default('') String description,
   }) = _Product;
 

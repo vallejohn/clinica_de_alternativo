@@ -23,7 +23,8 @@ mixin _$SalesReport {
   String? get id => throw _privateConstructorUsedError;
   String? get transactionId => throw _privateConstructorUsedError;
   Product? get product => throw _privateConstructorUsedError;
-  String get transactionDate => throw _privateConstructorUsedError;
+  dynamic get transactionDate => throw _privateConstructorUsedError;
+  dynamic get creationDate => throw _privateConstructorUsedError;
   int get quantitySold => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -42,7 +43,8 @@ abstract class $SalesReportCopyWith<$Res> {
       {String? id,
       String? transactionId,
       Product? product,
-      String transactionDate,
+      dynamic transactionDate,
+      dynamic creationDate,
       int quantitySold});
 
   $ProductCopyWith<$Res>? get product;
@@ -64,7 +66,8 @@ class _$SalesReportCopyWithImpl<$Res, $Val extends SalesReport>
     Object? id = freezed,
     Object? transactionId = freezed,
     Object? product = freezed,
-    Object? transactionDate = null,
+    Object? transactionDate = freezed,
+    Object? creationDate = freezed,
     Object? quantitySold = null,
   }) {
     return _then(_value.copyWith(
@@ -80,10 +83,14 @@ class _$SalesReportCopyWithImpl<$Res, $Val extends SalesReport>
           ? _value.product
           : product // ignore: cast_nullable_to_non_nullable
               as Product?,
-      transactionDate: null == transactionDate
+      transactionDate: freezed == transactionDate
           ? _value.transactionDate
           : transactionDate // ignore: cast_nullable_to_non_nullable
-              as String,
+              as dynamic,
+      creationDate: freezed == creationDate
+          ? _value.creationDate
+          : creationDate // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       quantitySold: null == quantitySold
           ? _value.quantitySold
           : quantitySold // ignore: cast_nullable_to_non_nullable
@@ -116,7 +123,8 @@ abstract class _$$SalesReportImplCopyWith<$Res>
       {String? id,
       String? transactionId,
       Product? product,
-      String transactionDate,
+      dynamic transactionDate,
+      dynamic creationDate,
       int quantitySold});
 
   @override
@@ -137,7 +145,8 @@ class __$$SalesReportImplCopyWithImpl<$Res>
     Object? id = freezed,
     Object? transactionId = freezed,
     Object? product = freezed,
-    Object? transactionDate = null,
+    Object? transactionDate = freezed,
+    Object? creationDate = freezed,
     Object? quantitySold = null,
   }) {
     return _then(_$SalesReportImpl(
@@ -153,10 +162,14 @@ class __$$SalesReportImplCopyWithImpl<$Res>
           ? _value.product
           : product // ignore: cast_nullable_to_non_nullable
               as Product?,
-      transactionDate: null == transactionDate
+      transactionDate: freezed == transactionDate
           ? _value.transactionDate
           : transactionDate // ignore: cast_nullable_to_non_nullable
-              as String,
+              as dynamic,
+      creationDate: freezed == creationDate
+          ? _value.creationDate
+          : creationDate // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       quantitySold: null == quantitySold
           ? _value.quantitySold
           : quantitySold // ignore: cast_nullable_to_non_nullable
@@ -172,7 +185,8 @@ class _$SalesReportImpl implements _SalesReport {
       {this.id,
       this.transactionId,
       this.product,
-      this.transactionDate = '',
+      this.transactionDate,
+      this.creationDate,
       this.quantitySold = 0});
 
   factory _$SalesReportImpl.fromJson(Map<String, dynamic> json) =>
@@ -185,15 +199,16 @@ class _$SalesReportImpl implements _SalesReport {
   @override
   final Product? product;
   @override
-  @JsonKey()
-  final String transactionDate;
+  final dynamic transactionDate;
+  @override
+  final dynamic creationDate;
   @override
   @JsonKey()
   final int quantitySold;
 
   @override
   String toString() {
-    return 'SalesReport(id: $id, transactionId: $transactionId, product: $product, transactionDate: $transactionDate, quantitySold: $quantitySold)';
+    return 'SalesReport(id: $id, transactionId: $transactionId, product: $product, transactionDate: $transactionDate, creationDate: $creationDate, quantitySold: $quantitySold)';
   }
 
   @override
@@ -205,8 +220,10 @@ class _$SalesReportImpl implements _SalesReport {
             (identical(other.transactionId, transactionId) ||
                 other.transactionId == transactionId) &&
             (identical(other.product, product) || other.product == product) &&
-            (identical(other.transactionDate, transactionDate) ||
-                other.transactionDate == transactionDate) &&
+            const DeepCollectionEquality()
+                .equals(other.transactionDate, transactionDate) &&
+            const DeepCollectionEquality()
+                .equals(other.creationDate, creationDate) &&
             (identical(other.quantitySold, quantitySold) ||
                 other.quantitySold == quantitySold));
   }
@@ -214,7 +231,13 @@ class _$SalesReportImpl implements _SalesReport {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, transactionId, product, transactionDate, quantitySold);
+      runtimeType,
+      id,
+      transactionId,
+      product,
+      const DeepCollectionEquality().hash(transactionDate),
+      const DeepCollectionEquality().hash(creationDate),
+      quantitySold);
 
   @JsonKey(ignore: true)
   @override
@@ -235,7 +258,8 @@ abstract class _SalesReport implements SalesReport {
       {final String? id,
       final String? transactionId,
       final Product? product,
-      final String transactionDate,
+      final dynamic transactionDate,
+      final dynamic creationDate,
       final int quantitySold}) = _$SalesReportImpl;
 
   factory _SalesReport.fromJson(Map<String, dynamic> json) =
@@ -248,7 +272,9 @@ abstract class _SalesReport implements SalesReport {
   @override
   Product? get product;
   @override
-  String get transactionDate;
+  dynamic get transactionDate;
+  @override
+  dynamic get creationDate;
   @override
   int get quantitySold;
   @override

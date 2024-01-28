@@ -72,12 +72,13 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                               context: context,
                               builder: (BuildContext context) => const ProductTypeSelectionDialog()
                           );
-                          // ignore: use_build_context_synchronously
-                          prodContext.read<ProductsBloc>()
+                         if(prodContext.mounted) {
+                           prodContext.read<ProductsBloc>()
                               .add(ProductsEvent.onSetSelectedProduct(
                               selectedProduct!.copyWith(
                                 type: prodType,
                               )));
+                         }
                         },
                         decoration: const InputDecoration(
                           labelText: 'Type',
