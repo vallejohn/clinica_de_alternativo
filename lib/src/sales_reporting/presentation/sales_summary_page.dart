@@ -286,7 +286,7 @@ class _SalesSummaryPageState extends State<SalesSummaryPage> {
                           DataColumn(
                             label: Expanded(
                               child: Text(
-                                'Total Price',
+                                'Total',
                                 style: TextStyle(fontStyle: FontStyle.italic),
                               ),
                             ),
