@@ -379,6 +379,7 @@ mixin _$SalesReportingState {
   String get message => throw _privateConstructorUsedError;
   SalesReportDocuments? get salesReportDocs =>
       throw _privateConstructorUsedError;
+  bool get loadingMoreItems => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SalesReportingStateCopyWith<SalesReportingState> get copyWith =>
@@ -394,7 +395,8 @@ abstract class $SalesReportingStateCopyWith<$Res> {
   $Res call(
       {SalesReportingStatus status,
       String message,
-      SalesReportDocuments? salesReportDocs});
+      SalesReportDocuments? salesReportDocs,
+      bool loadingMoreItems});
 
   $SalesReportDocumentsCopyWith<$Res>? get salesReportDocs;
 }
@@ -415,6 +417,7 @@ class _$SalesReportingStateCopyWithImpl<$Res, $Val extends SalesReportingState>
     Object? status = null,
     Object? message = null,
     Object? salesReportDocs = freezed,
+    Object? loadingMoreItems = null,
   }) {
     return _then(_value.copyWith(
       status: null == status
@@ -429,6 +432,10 @@ class _$SalesReportingStateCopyWithImpl<$Res, $Val extends SalesReportingState>
           ? _value.salesReportDocs
           : salesReportDocs // ignore: cast_nullable_to_non_nullable
               as SalesReportDocuments?,
+      loadingMoreItems: null == loadingMoreItems
+          ? _value.loadingMoreItems
+          : loadingMoreItems // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -457,7 +464,8 @@ abstract class _$$SalesReportingStateImplCopyWith<$Res>
   $Res call(
       {SalesReportingStatus status,
       String message,
-      SalesReportDocuments? salesReportDocs});
+      SalesReportDocuments? salesReportDocs,
+      bool loadingMoreItems});
 
   @override
   $SalesReportDocumentsCopyWith<$Res>? get salesReportDocs;
@@ -477,6 +485,7 @@ class __$$SalesReportingStateImplCopyWithImpl<$Res>
     Object? status = null,
     Object? message = null,
     Object? salesReportDocs = freezed,
+    Object? loadingMoreItems = null,
   }) {
     return _then(_$SalesReportingStateImpl(
       status: null == status
@@ -491,6 +500,10 @@ class __$$SalesReportingStateImplCopyWithImpl<$Res>
           ? _value.salesReportDocs
           : salesReportDocs // ignore: cast_nullable_to_non_nullable
               as SalesReportDocuments?,
+      loadingMoreItems: null == loadingMoreItems
+          ? _value.loadingMoreItems
+          : loadingMoreItems // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -501,7 +514,8 @@ class _$SalesReportingStateImpl implements _SalesReportingState {
   _$SalesReportingStateImpl(
       {this.status = SalesReportingStatus.initial,
       this.message = '',
-      this.salesReportDocs});
+      this.salesReportDocs,
+      this.loadingMoreItems = false});
 
   @override
   @JsonKey()
@@ -511,10 +525,13 @@ class _$SalesReportingStateImpl implements _SalesReportingState {
   final String message;
   @override
   final SalesReportDocuments? salesReportDocs;
+  @override
+  @JsonKey()
+  final bool loadingMoreItems;
 
   @override
   String toString() {
-    return 'SalesReportingState(status: $status, message: $message, salesReportDocs: $salesReportDocs)';
+    return 'SalesReportingState(status: $status, message: $message, salesReportDocs: $salesReportDocs, loadingMoreItems: $loadingMoreItems)';
   }
 
   @override
@@ -525,12 +542,14 @@ class _$SalesReportingStateImpl implements _SalesReportingState {
             (identical(other.status, status) || other.status == status) &&
             (identical(other.message, message) || other.message == message) &&
             (identical(other.salesReportDocs, salesReportDocs) ||
-                other.salesReportDocs == salesReportDocs));
+                other.salesReportDocs == salesReportDocs) &&
+            (identical(other.loadingMoreItems, loadingMoreItems) ||
+                other.loadingMoreItems == loadingMoreItems));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, status, message, salesReportDocs);
+  int get hashCode => Object.hash(
+      runtimeType, status, message, salesReportDocs, loadingMoreItems);
 
   @JsonKey(ignore: true)
   @override
@@ -544,7 +563,8 @@ abstract class _SalesReportingState implements SalesReportingState {
   factory _SalesReportingState(
       {final SalesReportingStatus status,
       final String message,
-      final SalesReportDocuments? salesReportDocs}) = _$SalesReportingStateImpl;
+      final SalesReportDocuments? salesReportDocs,
+      final bool loadingMoreItems}) = _$SalesReportingStateImpl;
 
   @override
   SalesReportingStatus get status;
@@ -552,6 +572,8 @@ abstract class _SalesReportingState implements SalesReportingState {
   String get message;
   @override
   SalesReportDocuments? get salesReportDocs;
+  @override
+  bool get loadingMoreItems;
   @override
   @JsonKey(ignore: true)
   _$$SalesReportingStateImplCopyWith<_$SalesReportingStateImpl> get copyWith =>

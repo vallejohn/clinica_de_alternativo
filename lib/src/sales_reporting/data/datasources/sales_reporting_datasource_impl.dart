@@ -74,7 +74,6 @@ class SaleReportingDatasourceImpl extends SalesReportingDatasource{
           .limit(param.paginate.limit)
           .get();
       appLogger.wtf(result.docs.length);
-
     }else{
       appLogger.d('Last document is null');
       result = await FirestoreCollection.salesReports()
@@ -103,7 +102,7 @@ class SaleReportingDatasourceImpl extends SalesReportingDatasource{
     appLogger.d(result.docs.isNotEmpty? 'last document ${result.docs.last.data()}' : 'No last document');
     return SalesReportDocuments(
       salesReports: salesReport,
-      paginate: Paginate(lastVisibleDocument: result.docs.isEmpty? null : result.docs[result.size - 1])
+      paginate: Paginate(lastVisibleDocument: result.docs.isEmpty? param.paginate.lastVisibleDocument! : result.docs[result.size - 1])
     );
   }
 }

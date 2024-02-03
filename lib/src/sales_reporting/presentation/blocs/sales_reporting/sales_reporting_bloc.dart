@@ -58,14 +58,28 @@ class SalesReportingBloc extends Bloc<SalesReportingEvent, SalesReportingState> 
   }
 
   FutureOr<void> _onFetchReport(_OnFetchReport event, Emitter<SalesReportingState> emit)async {
-    emit(state.copyWith(status: SalesReportingStatus.loadingReportsList));
+    emit(state.copyWith(
+      status: event.paginateFromLastDoc == null? SalesReportingStatus.loadingReportsList : state.status,
+      loadingMoreItems: event.paginateFromLastDoc != null,
+    ));
 
     final dataOrError = await _onFetchReportUseCase(FetchSalesReportsParam(paginate: state.salesReportDocs!.paginate!.copyWith(lastVisibleDocument: event.paginateFromLastDoc)));
 
     dataOrError.fold((l){
-      emit(state.copyWith(status: SalesReportingStatus.failed, message: l.when(firebase: (error) => error.message!,)));
+      emit(state.copyWith(status: SalesReportingStatus.failed, message: l.when(firebase: (error) => error.message!,), loadingMoreItems: false));
     }, (docs){
-      emit(state.copyWith(status: SalesReportingStatus.success, message: 'Sales report fetched successfully', salesReportDocs: docs));
+      final salesList = [...state.salesReportDocs!.salesReports];
+      salesList.addAll(docs.salesReports);
+
+      emit(state.copyWith(
+        status: SalesReportingStatus.success,
+        message: 'Sales report fetched successfully',
+        loadingMoreItems: false,
+        salesReportDocs: state.salesReportDocs!.copyWith(
+          salesReports: salesList,
+          paginate: docs.paginate,
+        ),
+      ));
     });
   }
 }

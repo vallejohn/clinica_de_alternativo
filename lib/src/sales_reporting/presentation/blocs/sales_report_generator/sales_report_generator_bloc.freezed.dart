@@ -229,6 +229,7 @@ mixin _$SalesReportGeneratorState {
   SalesReportDocuments? get salesReportDocs =>
       throw _privateConstructorUsedError;
   String get message => throw _privateConstructorUsedError;
+  bool get loadingMoreItems => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SalesReportGeneratorStateCopyWith<SalesReportGeneratorState> get copyWith =>
@@ -244,7 +245,8 @@ abstract class $SalesReportGeneratorStateCopyWith<$Res> {
   $Res call(
       {SalesGeneratorStatus status,
       SalesReportDocuments? salesReportDocs,
-      String message});
+      String message,
+      bool loadingMoreItems});
 
   $SalesReportDocumentsCopyWith<$Res>? get salesReportDocs;
 }
@@ -266,6 +268,7 @@ class _$SalesReportGeneratorStateCopyWithImpl<$Res,
     Object? status = null,
     Object? salesReportDocs = freezed,
     Object? message = null,
+    Object? loadingMoreItems = null,
   }) {
     return _then(_value.copyWith(
       status: null == status
@@ -280,6 +283,10 @@ class _$SalesReportGeneratorStateCopyWithImpl<$Res,
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      loadingMoreItems: null == loadingMoreItems
+          ? _value.loadingMoreItems
+          : loadingMoreItems // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -309,7 +316,8 @@ abstract class _$$SalesReportGeneratorStateImplCopyWith<$Res>
   $Res call(
       {SalesGeneratorStatus status,
       SalesReportDocuments? salesReportDocs,
-      String message});
+      String message,
+      bool loadingMoreItems});
 
   @override
   $SalesReportDocumentsCopyWith<$Res>? get salesReportDocs;
@@ -331,6 +339,7 @@ class __$$SalesReportGeneratorStateImplCopyWithImpl<$Res>
     Object? status = null,
     Object? salesReportDocs = freezed,
     Object? message = null,
+    Object? loadingMoreItems = null,
   }) {
     return _then(_$SalesReportGeneratorStateImpl(
       status: null == status
@@ -345,6 +354,10 @@ class __$$SalesReportGeneratorStateImplCopyWithImpl<$Res>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      loadingMoreItems: null == loadingMoreItems
+          ? _value.loadingMoreItems
+          : loadingMoreItems // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -355,7 +368,8 @@ class _$SalesReportGeneratorStateImpl implements _SalesReportGeneratorState {
   _$SalesReportGeneratorStateImpl(
       {this.status = SalesGeneratorStatus.initial,
       this.salesReportDocs,
-      this.message = ''});
+      this.message = '',
+      this.loadingMoreItems = false});
 
   @override
   @JsonKey()
@@ -365,10 +379,13 @@ class _$SalesReportGeneratorStateImpl implements _SalesReportGeneratorState {
   @override
   @JsonKey()
   final String message;
+  @override
+  @JsonKey()
+  final bool loadingMoreItems;
 
   @override
   String toString() {
-    return 'SalesReportGeneratorState(status: $status, salesReportDocs: $salesReportDocs, message: $message)';
+    return 'SalesReportGeneratorState(status: $status, salesReportDocs: $salesReportDocs, message: $message, loadingMoreItems: $loadingMoreItems)';
   }
 
   @override
@@ -379,12 +396,14 @@ class _$SalesReportGeneratorStateImpl implements _SalesReportGeneratorState {
             (identical(other.status, status) || other.status == status) &&
             (identical(other.salesReportDocs, salesReportDocs) ||
                 other.salesReportDocs == salesReportDocs) &&
-            (identical(other.message, message) || other.message == message));
+            (identical(other.message, message) || other.message == message) &&
+            (identical(other.loadingMoreItems, loadingMoreItems) ||
+                other.loadingMoreItems == loadingMoreItems));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, status, salesReportDocs, message);
+  int get hashCode => Object.hash(
+      runtimeType, status, salesReportDocs, message, loadingMoreItems);
 
   @JsonKey(ignore: true)
   @override
@@ -398,7 +417,8 @@ abstract class _SalesReportGeneratorState implements SalesReportGeneratorState {
   factory _SalesReportGeneratorState(
       {final SalesGeneratorStatus status,
       final SalesReportDocuments? salesReportDocs,
-      final String message}) = _$SalesReportGeneratorStateImpl;
+      final String message,
+      final bool loadingMoreItems}) = _$SalesReportGeneratorStateImpl;
 
   @override
   SalesGeneratorStatus get status;
@@ -406,6 +426,8 @@ abstract class _SalesReportGeneratorState implements SalesReportGeneratorState {
   SalesReportDocuments? get salesReportDocs;
   @override
   String get message;
+  @override
+  bool get loadingMoreItems;
   @override
   @JsonKey(ignore: true)
   _$$SalesReportGeneratorStateImplCopyWith<_$SalesReportGeneratorStateImpl>

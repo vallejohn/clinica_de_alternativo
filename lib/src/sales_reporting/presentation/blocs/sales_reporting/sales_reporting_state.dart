@@ -8,5 +8,6 @@ class SalesReportingState with _$SalesReportingState {
     @Default(SalesReportingStatus.initial) SalesReportingStatus status,
     @Default('') String message,
     SalesReportDocuments? salesReportDocs,
+    @Default(false) bool loadingMoreItems,
   }) = _SalesReportingState;
 }

@@ -36,8 +36,9 @@ class _SaleReportingPageState extends State<SaleReportingPage> {
           bool loadingList = srState.status == SalesReportingStatus.loadingReportsList;
           return Form(
             key: _formKey,
-            child: RefreshIndicator(
-              onRefresh: ()async{
+            child: lazy_scroll.LazyLoadScrollView(
+              isLoading: srState.loadingMoreItems,
+              onEndOfPage: () {
                 context.read<SalesReportingBloc>().add(SalesReportingEvent.onFetchReport(paginateFromLastDoc: srState.salesReportDocs!.paginate!.lastVisibleDocument));
               },
               child: ListView(
@@ -192,8 +193,6 @@ class _SaleReportingPageState extends State<SaleReportingPage> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           if (!loading) const Icon(Icons.send, size: 17),
-                          const SizedBox(width: 15),
-                          Text(loading ? 'Sending report...' : 'Send report'),
                           if (loading)
                             SizedBox(
                                 width: 20,
@@ -202,6 +201,8 @@ class _SaleReportingPageState extends State<SaleReportingPage> {
                                   strokeWidth: 2,
                                   color: Theme.of(context).disabledColor,
                                 )),
+                          const SizedBox(width: 15),
+                          Text(loading ? 'Sending report...' : 'Send report'),
                         ],
                       ),
                     ),
@@ -274,7 +275,19 @@ class _SaleReportingPageState extends State<SaleReportingPage> {
                               ),
                         ],
                       ),
-                    )
+                    ),
+                  if(srState.loadingMoreItems)
+                    const Center(child: Padding(
+                      padding: EdgeInsets.only(top: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('Loading more items...'),
+                          SizedBox(width: 10,),
+                          SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2,)),
+                        ],
+                      ),
+                    ))
                 ],
               ),
             ),

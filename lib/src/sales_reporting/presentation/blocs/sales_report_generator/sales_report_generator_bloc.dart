@@ -18,14 +18,35 @@ class SalesReportGeneratorBloc extends Bloc<SalesReportGeneratorEvent, SalesRepo
 
   SalesReportGeneratorBloc() : super(SalesReportGeneratorState(salesReportDocs: const SalesReportDocuments(paginate: Paginate()))) {
     on<_OnGenerateReport>((event, emit)async {
-      emit(state.copyWith(status: SalesGeneratorStatus.loading));
+      emit(state.copyWith(
+        status: event.param.paginate.lastVisibleDocument == null? SalesGeneratorStatus.loading : state.status,
+        loadingMoreItems: event.param.paginate.lastVisibleDocument != null,
+      ));
 
       final dataOrError = await _onFetchReportUseCase(event.param);
 
       dataOrError.fold((l){
-        emit(state.copyWith(status: SalesGeneratorStatus.failed, message: l.when(firebase: (error) => error.message!,)));
+        emit(state.copyWith(
+          status: SalesGeneratorStatus.failed,
+          message: l.when(firebase: (error) => error.message!,),
+          loadingMoreItems: false,
+        ));
       }, (doc){
-        emit(state.copyWith(status: SalesGeneratorStatus.success, message: 'Sales report fetched successfully', salesReportDocs: doc));
+        List<SalesReport> salesList = [];
+        if(event.param.paginate.lastVisibleDocument != null){
+          salesList = [...state.salesReportDocs!.salesReports];
+        }
+        salesList.addAll(doc.salesReports);
+
+        emit(state.copyWith(
+          status: SalesGeneratorStatus.success,
+          message: 'Sales report fetched successfully',
+          loadingMoreItems: false,
+          salesReportDocs: state.salesReportDocs?.copyWith(
+            salesReports: salesList,
+            paginate: doc.paginate
+          ),
+        ));
       });
     });
   }

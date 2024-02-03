@@ -6,6 +6,7 @@ import 'package:clinica_de_alternativo/src/authentication/presentation/blocs/aut
 import 'package:clinica_de_alternativo/src/authentication/presentation/blocs/profile_checker/profile_checker_bloc.dart';
 import 'package:clinica_de_alternativo/src/inventory/presentation/blocs/poduct_type/product_type_bloc.dart';
 import 'package:clinica_de_alternativo/src/inventory/presentation/blocs/products/products_bloc.dart';
+import 'package:clinica_de_alternativo/src/sales_reporting/presentation/blocs/sales_report_generator/sales_report_generator_bloc.dart';
 import 'package:clinica_de_alternativo/src/sales_reporting/presentation/blocs/sales_reporting/sales_reporting_bloc.dart';
 import 'package:clinica_de_alternativo/src/sales_reporting/presentation/blocs/search_product/search_product_cubit.dart';
 import 'package:flutter/material.dart';
@@ -58,6 +59,9 @@ class _ClinicaDeAlternativoState extends State<ClinicaDeAlternativo> {
         BlocProvider<AuthCheckerBloc>(
           create: (context) =>
           AuthCheckerBloc()..add(const AuthCheckerEvent.onCheckAuthStatus()),
+        ),
+        BlocProvider<SalesReportGeneratorBloc>(
+          create: (context) => SalesReportGeneratorBloc(),
         )
       ],
       child: MultiBlocListener(

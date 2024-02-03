@@ -19,6 +19,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:lazy_load_scrollview/lazy_load_scrollview.dart' as lazy_scroll;
 
 import '../../../core/global_widgets/list_tile_item.dart';
 
