@@ -71,6 +71,7 @@ class _ClinicaDeAlternativoState extends State<ClinicaDeAlternativo> {
                 success: (profile){
                   if(profile != null){
                     context.read<ProductTypeBloc>().add(const ProductTypeEvent.onFetch());
+                    context.read<SalesReportingBloc>().add(const SalesReportingEvent.onFetchReport());
                     _appRouter.replace(const HomeRoute());
                   }else{
                     _appRouter.replace(const ProfileCompletionRoute());

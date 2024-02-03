@@ -18,19 +18,25 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$SalesReportingEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() onFetchReport,
+    required TResult Function(
+            QueryDocumentSnapshot<Map<String, dynamic>>? paginateFromLastDoc)
+        onFetchReport,
     required TResult Function(SalesReport salesReport) onSendReport,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? onFetchReport,
+    TResult? Function(
+            QueryDocumentSnapshot<Map<String, dynamic>>? paginateFromLastDoc)?
+        onFetchReport,
     TResult? Function(SalesReport salesReport)? onSendReport,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? onFetchReport,
+    TResult Function(
+            QueryDocumentSnapshot<Map<String, dynamic>>? paginateFromLastDoc)?
+        onFetchReport,
     TResult Function(SalesReport salesReport)? onSendReport,
     required TResult orElse(),
   }) =>
@@ -79,6 +85,8 @@ abstract class _$$OnFetchReportImplCopyWith<$Res> {
   factory _$$OnFetchReportImplCopyWith(
           _$OnFetchReportImpl value, $Res Function(_$OnFetchReportImpl) then) =
       __$$OnFetchReportImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({QueryDocumentSnapshot<Map<String, dynamic>>? paginateFromLastDoc});
 }
 
 /// @nodoc
@@ -88,54 +96,85 @@ class __$$OnFetchReportImplCopyWithImpl<$Res>
   __$$OnFetchReportImplCopyWithImpl(
       _$OnFetchReportImpl _value, $Res Function(_$OnFetchReportImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? paginateFromLastDoc = freezed,
+  }) {
+    return _then(_$OnFetchReportImpl(
+      paginateFromLastDoc: freezed == paginateFromLastDoc
+          ? _value.paginateFromLastDoc
+          : paginateFromLastDoc // ignore: cast_nullable_to_non_nullable
+              as QueryDocumentSnapshot<Map<String, dynamic>>?,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$OnFetchReportImpl implements _OnFetchReport {
-  const _$OnFetchReportImpl();
+  const _$OnFetchReportImpl({this.paginateFromLastDoc});
+
+  @override
+  final QueryDocumentSnapshot<Map<String, dynamic>>? paginateFromLastDoc;
 
   @override
   String toString() {
-    return 'SalesReportingEvent.onFetchReport()';
+    return 'SalesReportingEvent.onFetchReport(paginateFromLastDoc: $paginateFromLastDoc)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$OnFetchReportImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$OnFetchReportImpl &&
+            (identical(other.paginateFromLastDoc, paginateFromLastDoc) ||
+                other.paginateFromLastDoc == paginateFromLastDoc));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, paginateFromLastDoc);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$OnFetchReportImplCopyWith<_$OnFetchReportImpl> get copyWith =>
+      __$$OnFetchReportImplCopyWithImpl<_$OnFetchReportImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() onFetchReport,
+    required TResult Function(
+            QueryDocumentSnapshot<Map<String, dynamic>>? paginateFromLastDoc)
+        onFetchReport,
     required TResult Function(SalesReport salesReport) onSendReport,
   }) {
-    return onFetchReport();
+    return onFetchReport(paginateFromLastDoc);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? onFetchReport,
+    TResult? Function(
+            QueryDocumentSnapshot<Map<String, dynamic>>? paginateFromLastDoc)?
+        onFetchReport,
     TResult? Function(SalesReport salesReport)? onSendReport,
   }) {
-    return onFetchReport?.call();
+    return onFetchReport?.call(paginateFromLastDoc);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? onFetchReport,
+    TResult Function(
+            QueryDocumentSnapshot<Map<String, dynamic>>? paginateFromLastDoc)?
+        onFetchReport,
     TResult Function(SalesReport salesReport)? onSendReport,
     required TResult orElse(),
   }) {
     if (onFetchReport != null) {
-      return onFetchReport();
+      return onFetchReport(paginateFromLastDoc);
     }
     return orElse();
   }
@@ -173,7 +212,14 @@ class _$OnFetchReportImpl implements _OnFetchReport {
 }
 
 abstract class _OnFetchReport implements SalesReportingEvent {
-  const factory _OnFetchReport() = _$OnFetchReportImpl;
+  const factory _OnFetchReport(
+      {final QueryDocumentSnapshot<Map<String, dynamic>>?
+          paginateFromLastDoc}) = _$OnFetchReportImpl;
+
+  QueryDocumentSnapshot<Map<String, dynamic>>? get paginateFromLastDoc;
+  @JsonKey(ignore: true)
+  _$$OnFetchReportImplCopyWith<_$OnFetchReportImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -251,7 +297,9 @@ class _$OnSendReportImpl implements _OnSendReport {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() onFetchReport,
+    required TResult Function(
+            QueryDocumentSnapshot<Map<String, dynamic>>? paginateFromLastDoc)
+        onFetchReport,
     required TResult Function(SalesReport salesReport) onSendReport,
   }) {
     return onSendReport(salesReport);
@@ -260,7 +308,9 @@ class _$OnSendReportImpl implements _OnSendReport {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? onFetchReport,
+    TResult? Function(
+            QueryDocumentSnapshot<Map<String, dynamic>>? paginateFromLastDoc)?
+        onFetchReport,
     TResult? Function(SalesReport salesReport)? onSendReport,
   }) {
     return onSendReport?.call(salesReport);
@@ -269,7 +319,9 @@ class _$OnSendReportImpl implements _OnSendReport {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? onFetchReport,
+    TResult Function(
+            QueryDocumentSnapshot<Map<String, dynamic>>? paginateFromLastDoc)?
+        onFetchReport,
     TResult Function(SalesReport salesReport)? onSendReport,
     required TResult orElse(),
   }) {
@@ -325,7 +377,8 @@ abstract class _OnSendReport implements SalesReportingEvent {
 mixin _$SalesReportingState {
   SalesReportingStatus get status => throw _privateConstructorUsedError;
   String get message => throw _privateConstructorUsedError;
-  List<SalesReport> get salesReports => throw _privateConstructorUsedError;
+  SalesReportDocuments? get salesReportDocs =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SalesReportingStateCopyWith<SalesReportingState> get copyWith =>
@@ -341,7 +394,9 @@ abstract class $SalesReportingStateCopyWith<$Res> {
   $Res call(
       {SalesReportingStatus status,
       String message,
-      List<SalesReport> salesReports});
+      SalesReportDocuments? salesReportDocs});
+
+  $SalesReportDocumentsCopyWith<$Res>? get salesReportDocs;
 }
 
 /// @nodoc
@@ -359,7 +414,7 @@ class _$SalesReportingStateCopyWithImpl<$Res, $Val extends SalesReportingState>
   $Res call({
     Object? status = null,
     Object? message = null,
-    Object? salesReports = null,
+    Object? salesReportDocs = freezed,
   }) {
     return _then(_value.copyWith(
       status: null == status
@@ -370,11 +425,24 @@ class _$SalesReportingStateCopyWithImpl<$Res, $Val extends SalesReportingState>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
-      salesReports: null == salesReports
-          ? _value.salesReports
-          : salesReports // ignore: cast_nullable_to_non_nullable
-              as List<SalesReport>,
+      salesReportDocs: freezed == salesReportDocs
+          ? _value.salesReportDocs
+          : salesReportDocs // ignore: cast_nullable_to_non_nullable
+              as SalesReportDocuments?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesReportDocumentsCopyWith<$Res>? get salesReportDocs {
+    if (_value.salesReportDocs == null) {
+      return null;
+    }
+
+    return $SalesReportDocumentsCopyWith<$Res>(_value.salesReportDocs!,
+        (value) {
+      return _then(_value.copyWith(salesReportDocs: value) as $Val);
+    });
   }
 }
 
@@ -389,7 +457,10 @@ abstract class _$$SalesReportingStateImplCopyWith<$Res>
   $Res call(
       {SalesReportingStatus status,
       String message,
-      List<SalesReport> salesReports});
+      SalesReportDocuments? salesReportDocs});
+
+  @override
+  $SalesReportDocumentsCopyWith<$Res>? get salesReportDocs;
 }
 
 /// @nodoc
@@ -405,7 +476,7 @@ class __$$SalesReportingStateImplCopyWithImpl<$Res>
   $Res call({
     Object? status = null,
     Object? message = null,
-    Object? salesReports = null,
+    Object? salesReportDocs = freezed,
   }) {
     return _then(_$SalesReportingStateImpl(
       status: null == status
@@ -416,10 +487,10 @@ class __$$SalesReportingStateImplCopyWithImpl<$Res>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
-      salesReports: null == salesReports
-          ? _value._salesReports
-          : salesReports // ignore: cast_nullable_to_non_nullable
-              as List<SalesReport>,
+      salesReportDocs: freezed == salesReportDocs
+          ? _value.salesReportDocs
+          : salesReportDocs // ignore: cast_nullable_to_non_nullable
+              as SalesReportDocuments?,
     ));
   }
 }
@@ -430,8 +501,7 @@ class _$SalesReportingStateImpl implements _SalesReportingState {
   _$SalesReportingStateImpl(
       {this.status = SalesReportingStatus.initial,
       this.message = '',
-      final List<SalesReport> salesReports = const []})
-      : _salesReports = salesReports;
+      this.salesReportDocs});
 
   @override
   @JsonKey()
@@ -439,18 +509,12 @@ class _$SalesReportingStateImpl implements _SalesReportingState {
   @override
   @JsonKey()
   final String message;
-  final List<SalesReport> _salesReports;
   @override
-  @JsonKey()
-  List<SalesReport> get salesReports {
-    if (_salesReports is EqualUnmodifiableListView) return _salesReports;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_salesReports);
-  }
+  final SalesReportDocuments? salesReportDocs;
 
   @override
   String toString() {
-    return 'SalesReportingState(status: $status, message: $message, salesReports: $salesReports)';
+    return 'SalesReportingState(status: $status, message: $message, salesReportDocs: $salesReportDocs)';
   }
 
   @override
@@ -460,13 +524,13 @@ class _$SalesReportingStateImpl implements _SalesReportingState {
             other is _$SalesReportingStateImpl &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.message, message) || other.message == message) &&
-            const DeepCollectionEquality()
-                .equals(other._salesReports, _salesReports));
+            (identical(other.salesReportDocs, salesReportDocs) ||
+                other.salesReportDocs == salesReportDocs));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status, message,
-      const DeepCollectionEquality().hash(_salesReports));
+  int get hashCode =>
+      Object.hash(runtimeType, status, message, salesReportDocs);
 
   @JsonKey(ignore: true)
   @override
@@ -480,14 +544,14 @@ abstract class _SalesReportingState implements SalesReportingState {
   factory _SalesReportingState(
       {final SalesReportingStatus status,
       final String message,
-      final List<SalesReport> salesReports}) = _$SalesReportingStateImpl;
+      final SalesReportDocuments? salesReportDocs}) = _$SalesReportingStateImpl;
 
   @override
   SalesReportingStatus get status;
   @override
   String get message;
   @override
-  List<SalesReport> get salesReports;
+  SalesReportDocuments? get salesReportDocs;
   @override
   @JsonKey(ignore: true)
   _$$SalesReportingStateImplCopyWith<_$SalesReportingStateImpl> get copyWith =>

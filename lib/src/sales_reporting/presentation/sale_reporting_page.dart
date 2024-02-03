@@ -38,7 +38,7 @@ class _SaleReportingPageState extends State<SaleReportingPage> {
             key: _formKey,
             child: RefreshIndicator(
               onRefresh: ()async{
-                context.read<SalesReportingBloc>().add(const SalesReportingEvent.onFetchReport());
+                context.read<SalesReportingBloc>().add(SalesReportingEvent.onFetchReport(paginateFromLastDoc: srState.salesReportDocs!.paginate!.lastVisibleDocument));
               },
               child: ListView(
                 physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
@@ -209,21 +209,22 @@ class _SaleReportingPageState extends State<SaleReportingPage> {
                   const SizedBox(
                     height: 20,
                   ),
-                  Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(24),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Total sales', style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Theme.of(context).dividerColor, fontWeight: FontWeight.w600),),
-                          const SizedBox(height: 8,),
-                          Text('P ${(srState.salesReports.fold<double>(0, (value, element) => value + (element.product!.price * element.quantitySold))).toPeso()}', style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w500, color: Theme.of(context).colorScheme.primary),),
-                          const SizedBox(height: 8,),
-                          Text(DateFormat.yMMMMd().format(DateTime.now()), style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Theme.of(context).dividerColor),),
-                        ],
+                  if(srState.salesReportDocs != null)
+                    Card(
+                      child: Padding(
+                        padding: const EdgeInsets.all(24),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Total sales', style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Theme.of(context).dividerColor, fontWeight: FontWeight.w600),),
+                            const SizedBox(height: 8,),
+                            Text('P ${(srState.salesReportDocs!.salesReports.fold<double>(0, (value, element) => value + (element.product!.price * element.quantitySold))).toPeso()}', style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w500, color: Theme.of(context).colorScheme.primary),),
+                            const SizedBox(height: 8,),
+                            Text(DateFormat.yMMMMd().format(DateTime.now()), style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Theme.of(context).dividerColor),),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
                   const SizedBox(
                     height: 20,
                   ),
@@ -260,16 +261,17 @@ class _SaleReportingPageState extends State<SaleReportingPage> {
                           ),
                         ],
                         rows: <DataRow>[
-                          for (int i = 0; i < srState.salesReports.length; i++)
-                            DataRow(
-                              cells: <DataCell>[
-                                DataCell(Text(srState.salesReports[i].product!.name)),
-                                DataCell(Text(srState.salesReports[i].quantitySold.toString())),
-                                DataCell(
-                                  Text((srState.salesReports[i].product!.price * srState.salesReports[i].quantitySold).toPeso()),
-                                ),
-                              ],
-                            ),
+                          if(srState.salesReportDocs != null)
+                            for (int i = 0; i < srState.salesReportDocs!.salesReports.length; i++)
+                              DataRow(
+                                cells: <DataCell>[
+                                  DataCell(Text(srState.salesReportDocs!.salesReports[i].product!.name)),
+                                  DataCell(Text(srState.salesReportDocs!.salesReports[i].quantitySold.toString())),
+                                  DataCell(
+                                    Text((srState.salesReportDocs!.salesReports[i].product!.price * srState.salesReportDocs!.salesReports[i].quantitySold).toPeso()),
+                                  ),
+                                ],
+                              ),
                         ],
                       ),
                     )

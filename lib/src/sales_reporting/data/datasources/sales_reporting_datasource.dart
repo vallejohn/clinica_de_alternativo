@@ -4,5 +4,5 @@ abstract class SalesReportingDatasource{
   SalesReportingDatasource();
 
   Future<SalesReport> sendSalesReport(SalesReport report);
-  Future<List<SalesReport>> onFetchReports();
+  Future<SalesReportDocuments> onFetchReports(FetchSalesReportsParam param);
 }

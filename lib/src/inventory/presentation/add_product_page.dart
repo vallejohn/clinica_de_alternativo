@@ -11,7 +11,6 @@ class AddProductPage extends StatefulWidget {
 class _AddProductPageState extends State<AddProductPage> {
   final _productNameController = TextEditingController();
   final _productTypeController = TextEditingController();
-  final _addProductTypeController = TextEditingController();
   final _descriptionController = TextEditingController();
 
   final selectedProductCubit = WidgetHelperCubit<ProductType?>(const ProductType());
@@ -46,7 +45,7 @@ class _AddProductPageState extends State<AddProductPage> {
                   TextField(
                     controller: _productNameController,
                     decoration: const InputDecoration(
-                      labelText: 'Local Products',
+                      labelText: 'Product name',
                     ),
                   ),
                   const SizedBox(height: 10,),
