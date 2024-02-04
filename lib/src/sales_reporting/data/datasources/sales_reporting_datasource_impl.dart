@@ -22,6 +22,9 @@ class SaleReportingDatasourceImpl extends SalesReportingDatasource{
   Future<SalesReportDocuments> onFetchReports(FetchSalesReportsParam param)async {
     final dateNow = DateTime.now();
 
+    /*final sample = await FirestoreCollection.salesReports().where('product.id', isEqualTo: '7RMnximuaAgWHTOCwNoa').aggregate(sum('quantitySold'), ).get();
+    appLogger.wtf(sample.getSum('quantitySold'));*/
+
     DateTime? dateStartFromParam;
     DateTime? dateEndFromParam;
     List<String?> productIds = param.salesReportingFilterParam == null? [] : param.salesReportingFilterParam!.products.map((e) => e.id).toList();
