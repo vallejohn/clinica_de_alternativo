@@ -3,9 +3,15 @@ import 'package:clinica_de_alternativo/core/blocs/widget_helper_cubit.dart';
 import 'package:clinica_de_alternativo/core/core.dart';
 import 'package:clinica_de_alternativo/core/extensions.dart';
 import 'package:clinica_de_alternativo/core/router/app_router.dart';
+import 'package:clinica_de_alternativo/src/account/data/models/product_type.dart';
 import 'package:clinica_de_alternativo/src/account/presentation/blocs/account/account_bloc.dart';
 import 'package:clinica_de_alternativo/src/inventory/data/model/product.dart';
+import 'package:clinica_de_alternativo/src/inventory/presentation/blocs/poduct_type/product_type_bloc.dart';
+import 'package:clinica_de_alternativo/src/inventory/presentation/blocs/products/products_bloc.dart';
+import 'package:clinica_de_alternativo/src/sales_reporting/core/params.dart';
+import 'package:clinica_de_alternativo/src/sales_reporting/data/model/sales_filter_model.dart';
 import 'package:clinica_de_alternativo/src/sales_reporting/data/model/sales_report.dart';
+import 'package:clinica_de_alternativo/src/sales_reporting/presentation/blocs/sales_report_generator/sales_report_generator_bloc.dart';
 import 'package:clinica_de_alternativo/src/sales_reporting/presentation/blocs/sales_reporting/sales_reporting_bloc.dart';
 import 'package:clinica_de_alternativo/src/sales_reporting/presentation/blocs/search_product/search_product_cubit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -13,6 +19,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:lazy_load_scrollview/lazy_load_scrollview.dart' as lazy_scroll;
 
 import '../../../core/global_widgets/list_tile_item.dart';
 

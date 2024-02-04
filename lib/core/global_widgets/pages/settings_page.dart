@@ -81,7 +81,6 @@ class _SettingsPageState extends State<SettingsPage> {
                         child: !hidden? Container() : Padding(
                           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                           child: Card(
-                            elevation: 5,
                             child: Column(
                               children: [
                                 ...context.watch<ProductTypeBloc>().state.productTypes.map((e){

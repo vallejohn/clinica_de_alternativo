@@ -27,31 +27,6 @@ class _ProductsPageState extends State<ProductsPage> {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  /*TextField(
-                    controller: _productNameController,
-                    decoration: const InputDecoration(
-                      labelText: 'Local Products',
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  FilledButton.tonal(
-                    onPressed:() {
-                      final product = Product(
-                        name: _productNameController.text
-                      );
-                      prodContext.read<ProductsBloc>().add(ProductsEvent.onAdd(product));
-                    },
-                    child: const Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(Icons.add, size: 17),
-                        SizedBox(width: 15),
-                        Text('Add products'),
-                      ],
-                    ),
-                  ),*/
                   const SizedBox(
                     height: 20,
                   ),

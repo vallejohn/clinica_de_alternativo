@@ -1,11 +1,11 @@
 part of '../sales_reporting_usecases.dart';
 
-class OnFetchReportsUseCase extends UseCaseWithNoParams<List<SalesReport>>{
+class OnFetchReportsUseCase extends UseCaseWithParams<SalesReportDocuments, FetchSalesReportsParam>{
   final SalesReportRepository _salesReportRepository;
 
   OnFetchReportsUseCase(this._salesReportRepository);
   @override
-  Future<Either<Failure, List<SalesReport>>> call() {
-    return _salesReportRepository.onFetchReports();
+  Future<Either<Failure, SalesReportDocuments>> call(FetchSalesReportsParam params) {
+    return _salesReportRepository.onFetchReports(params);
   }
 }
