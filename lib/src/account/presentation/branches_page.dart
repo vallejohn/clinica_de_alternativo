@@ -24,24 +24,59 @@ class _BranchesPageState extends State<BranchesPage> {
         builder: (context, state) {
           return SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: TextField(
-                    controller: _branchNameController,
-                    decoration: InputDecoration(
-                      labelText: 'Branch name',
-                      suffixIcon: IconButton(onPressed: (){
-                        context.read<BranchBloc>().add(BranchEvent.onAdd(Branch(name: _branchNameController.text)));
-                        _branchNameController.clear();
-                      }, icon: const Icon(Ionicons.add)),
-                    ),
-                  ),
-                ),
-                const Divider(),
-                ...state.branches.map((e) => ListTileItem(title: Text(e.name))).toList()
-              ],
+            child: BlocProvider<WidgetHelperCubit<BranchType?>>(
+              create: (context) => WidgetHelperCubit<BranchType?>(null),
+              child: BlocBuilder<WidgetHelperCubit<BranchType?>, BranchType?>(
+                  builder: (bTypeContext, bTypeState) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: TextField(
+                          controller: _branchNameController,
+                          decoration: InputDecoration(
+                            labelText: 'Branch name',
+                            suffixIcon: IconButton(onPressed: () {
+                              context.read<BranchBloc>().add(BranchEvent.onAdd(Branch(name: _branchNameController.text, type: bTypeState)));
+                              _branchNameController.clear();
+                            }, icon: const Icon(Ionicons.add)),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Wrap(
+                          children: [
+                            ...BranchType.values.map((e) => Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Radio(
+                                  value: e,
+                                  groupValue: bTypeState,
+                                  onChanged: (value){
+                                    bTypeContext.read<WidgetHelperCubit<BranchType?>>().onUpdateState(value);
+                                  },),
+                                Text(e.name.toUpperCase())
+                              ],
+                            ),
+                            ).toList()
+                          ],
+                        ),
+                      ),
+                      const Divider(),
+                      ...state.branches.map((e) => ListTileItem(
+                        leadingIcon: Icon(e.type == BranchType.warehouse? Ionicons.cube_outline : Ionicons.storefront_outline, color: Theme.of(context).colorScheme.primary,),
+                        title: Text(e.name),
+                        subtitle: e.type?.name.toUpperCase(),
+                        onLongPress: (){
+
+                        },
+                      )).toList()
+                    ],
+                  );
+                }
+              ),
             ),
           );
         },

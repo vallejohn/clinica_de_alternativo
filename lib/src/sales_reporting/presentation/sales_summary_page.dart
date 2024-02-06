@@ -13,6 +13,7 @@ class _SalesSummaryPageState extends State<SalesSummaryPage> {
 
   final _productListCubit = WidgetHelperCubit<List<Product>>([]);
   final _productTypeListCubit = WidgetHelperCubit<List<ProductType>>([]);
+  final _branchListCubit = WidgetHelperCubit<List<Branch>>([]);
   final _dateTimeRangeCubit = WidgetHelperCubit<DateTimeRange?>(DateTimeRange(start: DateTime.now(), end: DateTime.now()));
 
   @override
@@ -104,12 +105,12 @@ class _SalesSummaryPageState extends State<SalesSummaryPage> {
                                         Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
-                                            Text('Select products', style: Theme.of(context).textTheme.titleMedium,),
+                                            Text('Select products', style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).colorScheme.primary),),
                                             Text('Expand to see products list', style: Theme.of(context).textTheme.bodyMedium,),
                                           ],
                                         ),
                                         const Spacer(),
-                                        Icon(visible? Ionicons.chevron_down_outline : Ionicons.chevron_forward_outline)
+                                        Icon(!visible? Ionicons.caret_down_outline : Ionicons.caret_up_outline)
                                       ],
                                     ),
                                   ),
@@ -179,12 +180,12 @@ class _SalesSummaryPageState extends State<SalesSummaryPage> {
                                           Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
-                                              Text('Select product type', style: Theme.of(context).textTheme.titleMedium,),
+                                              Text('Select product type', style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).colorScheme.primary),),
                                               Text('Expand to see products types', style: Theme.of(context).textTheme.bodyMedium,),
                                             ],
                                           ),
                                           const Spacer(),
-                                          Icon(visible? Ionicons.chevron_down_outline : Ionicons.chevron_forward_outline)
+                                          Icon(!visible? Ionicons.caret_down_outline : Ionicons.caret_up_outline)
                                         ],
                                       ),
                                     ),
@@ -234,6 +235,87 @@ class _SalesSummaryPageState extends State<SalesSummaryPage> {
                       ),
                     ),
                     const SizedBox(height: 10,),
+                    BlocProvider<WidgetHelperCubit<bool>>(
+                      create: (_) => WidgetHelperCubit<bool>(false),
+                      child: BlocBuilder<WidgetHelperCubit<bool>, bool>(
+                          builder: (locContext, visible) {
+                            return Card(
+                              margin: EdgeInsets.zero,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    TextButton(
+                                      onPressed: (){
+                                        locContext.read<WidgetHelperCubit<bool>>().onUpdateState(!visible);
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text('Select clinic area', style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).colorScheme.primary),),
+                                              Text('Expand to see clinic areas', style: Theme.of(context).textTheme.bodyMedium,),
+                                            ],
+                                          ),
+                                          const Spacer(),
+                                          Icon(!visible? Ionicons.caret_down_outline : Ionicons.caret_up_outline)
+                                        ],
+                                      ),
+                                    ),
+                                    AnimatedSize(
+                                      duration: const Duration(milliseconds: 200),
+                                      child: BlocProvider<WidgetHelperCubit<List<Branch>>>(
+                                        create: (_) => _branchListCubit,
+                                        child: BlocBuilder<WidgetHelperCubit<List<Branch>>, List<Branch>>(
+                                            bloc: _branchListCubit,
+                                            builder: (_, branchList) {
+                                              return Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  if(visible) const SizedBox(height: 16,),
+                                                  if(visible)
+                                                    ...context.read<BranchBloc>().state.branches.map((e) {
+                                                      return Row(
+                                                        children: [
+                                                          Checkbox(
+                                                            value: branchList.where((element) => element.id == e.id).isNotEmpty,
+                                                            onChanged: (bool? value) {
+                                                              final newList = [...branchList];
+                                                              if(newList.contains(e)){
+                                                                newList.remove(e);
+                                                              }else{
+                                                                newList.add(e);
+                                                              }
+                                                              appLogger.w(newList.length);
+                                                              _branchListCubit.onUpdateState(newList);
+                                                            },
+                                                          ),
+                                                          Column(
+                                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                                            children: [
+                                                              Text(e.name, style: Theme.of(context).textTheme.bodyMedium,),
+                                                              Text(e.type == null? 'NA' : e.type!.name.toUpperCase(), style: Theme.of(context).textTheme.bodySmall,),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      );
+                                                    }).toList()
+                                                ],
+                                              );
+                                            }
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          }
+                      ),
+                    ),
+                    const SizedBox(height: 10,),
                     SizedBox(
                       width: double.infinity,
                       child: FilledButton(onPressed: loading? null : (){
@@ -241,7 +323,8 @@ class _SalesSummaryPageState extends State<SalesSummaryPage> {
                             salesReportingFilterParam: SalesReportingFilterParam(
                                 dateTimeRange: _dateTimeRangeCubit.state!,
                                 products: _productListCubit.state,
-                                productTypes: _productTypeListCubit.state
+                                productTypes: _productTypeListCubit.state,
+                                branches: _branchListCubit.state,
                             ),
                         )));
                       }, child: Row(

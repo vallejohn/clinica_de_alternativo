@@ -25,6 +25,7 @@ mixin _$SalesReport {
   Product? get product => throw _privateConstructorUsedError;
   dynamic get transactionDate => throw _privateConstructorUsedError;
   dynamic get creationDate => throw _privateConstructorUsedError;
+  ProfileInformation? get reportedBy => throw _privateConstructorUsedError;
   int get quantitySold => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -45,9 +46,11 @@ abstract class $SalesReportCopyWith<$Res> {
       Product? product,
       dynamic transactionDate,
       dynamic creationDate,
+      ProfileInformation? reportedBy,
       int quantitySold});
 
   $ProductCopyWith<$Res>? get product;
+  $ProfileInformationCopyWith<$Res>? get reportedBy;
 }
 
 /// @nodoc
@@ -68,6 +71,7 @@ class _$SalesReportCopyWithImpl<$Res, $Val extends SalesReport>
     Object? product = freezed,
     Object? transactionDate = freezed,
     Object? creationDate = freezed,
+    Object? reportedBy = freezed,
     Object? quantitySold = null,
   }) {
     return _then(_value.copyWith(
@@ -91,6 +95,10 @@ class _$SalesReportCopyWithImpl<$Res, $Val extends SalesReport>
           ? _value.creationDate
           : creationDate // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      reportedBy: freezed == reportedBy
+          ? _value.reportedBy
+          : reportedBy // ignore: cast_nullable_to_non_nullable
+              as ProfileInformation?,
       quantitySold: null == quantitySold
           ? _value.quantitySold
           : quantitySold // ignore: cast_nullable_to_non_nullable
@@ -109,6 +117,18 @@ class _$SalesReportCopyWithImpl<$Res, $Val extends SalesReport>
       return _then(_value.copyWith(product: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ProfileInformationCopyWith<$Res>? get reportedBy {
+    if (_value.reportedBy == null) {
+      return null;
+    }
+
+    return $ProfileInformationCopyWith<$Res>(_value.reportedBy!, (value) {
+      return _then(_value.copyWith(reportedBy: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -125,10 +145,13 @@ abstract class _$$SalesReportImplCopyWith<$Res>
       Product? product,
       dynamic transactionDate,
       dynamic creationDate,
+      ProfileInformation? reportedBy,
       int quantitySold});
 
   @override
   $ProductCopyWith<$Res>? get product;
+  @override
+  $ProfileInformationCopyWith<$Res>? get reportedBy;
 }
 
 /// @nodoc
@@ -147,6 +170,7 @@ class __$$SalesReportImplCopyWithImpl<$Res>
     Object? product = freezed,
     Object? transactionDate = freezed,
     Object? creationDate = freezed,
+    Object? reportedBy = freezed,
     Object? quantitySold = null,
   }) {
     return _then(_$SalesReportImpl(
@@ -170,6 +194,10 @@ class __$$SalesReportImplCopyWithImpl<$Res>
           ? _value.creationDate
           : creationDate // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      reportedBy: freezed == reportedBy
+          ? _value.reportedBy
+          : reportedBy // ignore: cast_nullable_to_non_nullable
+              as ProfileInformation?,
       quantitySold: null == quantitySold
           ? _value.quantitySold
           : quantitySold // ignore: cast_nullable_to_non_nullable
@@ -187,6 +215,7 @@ class _$SalesReportImpl implements _SalesReport {
       this.product,
       this.transactionDate,
       this.creationDate,
+      this.reportedBy,
       this.quantitySold = 0});
 
   factory _$SalesReportImpl.fromJson(Map<String, dynamic> json) =>
@@ -203,12 +232,14 @@ class _$SalesReportImpl implements _SalesReport {
   @override
   final dynamic creationDate;
   @override
+  final ProfileInformation? reportedBy;
+  @override
   @JsonKey()
   final int quantitySold;
 
   @override
   String toString() {
-    return 'SalesReport(id: $id, transactionId: $transactionId, product: $product, transactionDate: $transactionDate, creationDate: $creationDate, quantitySold: $quantitySold)';
+    return 'SalesReport(id: $id, transactionId: $transactionId, product: $product, transactionDate: $transactionDate, creationDate: $creationDate, reportedBy: $reportedBy, quantitySold: $quantitySold)';
   }
 
   @override
@@ -224,6 +255,8 @@ class _$SalesReportImpl implements _SalesReport {
                 .equals(other.transactionDate, transactionDate) &&
             const DeepCollectionEquality()
                 .equals(other.creationDate, creationDate) &&
+            (identical(other.reportedBy, reportedBy) ||
+                other.reportedBy == reportedBy) &&
             (identical(other.quantitySold, quantitySold) ||
                 other.quantitySold == quantitySold));
   }
@@ -237,6 +270,7 @@ class _$SalesReportImpl implements _SalesReport {
       product,
       const DeepCollectionEquality().hash(transactionDate),
       const DeepCollectionEquality().hash(creationDate),
+      reportedBy,
       quantitySold);
 
   @JsonKey(ignore: true)
@@ -260,6 +294,7 @@ abstract class _SalesReport implements SalesReport {
       final Product? product,
       final dynamic transactionDate,
       final dynamic creationDate,
+      final ProfileInformation? reportedBy,
       final int quantitySold}) = _$SalesReportImpl;
 
   factory _SalesReport.fromJson(Map<String, dynamic> json) =
@@ -275,6 +310,8 @@ abstract class _SalesReport implements SalesReport {
   dynamic get transactionDate;
   @override
   dynamic get creationDate;
+  @override
+  ProfileInformation? get reportedBy;
   @override
   int get quantitySold;
   @override

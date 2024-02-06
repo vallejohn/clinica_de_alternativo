@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$SalesReportingEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
+    required TResult Function(Branch? branch,
             QueryDocumentSnapshot<Map<String, dynamic>>? paginateFromLastDoc)
         onFetchReport,
     required TResult Function(SalesReport salesReport) onSendReport,
@@ -26,7 +26,7 @@ mixin _$SalesReportingEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
+    TResult? Function(Branch? branch,
             QueryDocumentSnapshot<Map<String, dynamic>>? paginateFromLastDoc)?
         onFetchReport,
     TResult? Function(SalesReport salesReport)? onSendReport,
@@ -34,7 +34,7 @@ mixin _$SalesReportingEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
+    TResult Function(Branch? branch,
             QueryDocumentSnapshot<Map<String, dynamic>>? paginateFromLastDoc)?
         onFetchReport,
     TResult Function(SalesReport salesReport)? onSendReport,
@@ -86,7 +86,11 @@ abstract class _$$OnFetchReportImplCopyWith<$Res> {
           _$OnFetchReportImpl value, $Res Function(_$OnFetchReportImpl) then) =
       __$$OnFetchReportImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({QueryDocumentSnapshot<Map<String, dynamic>>? paginateFromLastDoc});
+  $Res call(
+      {Branch? branch,
+      QueryDocumentSnapshot<Map<String, dynamic>>? paginateFromLastDoc});
+
+  $BranchCopyWith<$Res>? get branch;
 }
 
 /// @nodoc
@@ -100,28 +104,47 @@ class __$$OnFetchReportImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? branch = freezed,
     Object? paginateFromLastDoc = freezed,
   }) {
     return _then(_$OnFetchReportImpl(
+      branch: freezed == branch
+          ? _value.branch
+          : branch // ignore: cast_nullable_to_non_nullable
+              as Branch?,
       paginateFromLastDoc: freezed == paginateFromLastDoc
           ? _value.paginateFromLastDoc
           : paginateFromLastDoc // ignore: cast_nullable_to_non_nullable
               as QueryDocumentSnapshot<Map<String, dynamic>>?,
     ));
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $BranchCopyWith<$Res>? get branch {
+    if (_value.branch == null) {
+      return null;
+    }
+
+    return $BranchCopyWith<$Res>(_value.branch!, (value) {
+      return _then(_value.copyWith(branch: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$OnFetchReportImpl implements _OnFetchReport {
-  const _$OnFetchReportImpl({this.paginateFromLastDoc});
+  const _$OnFetchReportImpl({this.branch, this.paginateFromLastDoc});
 
+  @override
+  final Branch? branch;
   @override
   final QueryDocumentSnapshot<Map<String, dynamic>>? paginateFromLastDoc;
 
   @override
   String toString() {
-    return 'SalesReportingEvent.onFetchReport(paginateFromLastDoc: $paginateFromLastDoc)';
+    return 'SalesReportingEvent.onFetchReport(branch: $branch, paginateFromLastDoc: $paginateFromLastDoc)';
   }
 
   @override
@@ -129,12 +152,13 @@ class _$OnFetchReportImpl implements _OnFetchReport {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$OnFetchReportImpl &&
+            (identical(other.branch, branch) || other.branch == branch) &&
             (identical(other.paginateFromLastDoc, paginateFromLastDoc) ||
                 other.paginateFromLastDoc == paginateFromLastDoc));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, paginateFromLastDoc);
+  int get hashCode => Object.hash(runtimeType, branch, paginateFromLastDoc);
 
   @JsonKey(ignore: true)
   @override
@@ -145,36 +169,36 @@ class _$OnFetchReportImpl implements _OnFetchReport {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
+    required TResult Function(Branch? branch,
             QueryDocumentSnapshot<Map<String, dynamic>>? paginateFromLastDoc)
         onFetchReport,
     required TResult Function(SalesReport salesReport) onSendReport,
   }) {
-    return onFetchReport(paginateFromLastDoc);
+    return onFetchReport(branch, paginateFromLastDoc);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
+    TResult? Function(Branch? branch,
             QueryDocumentSnapshot<Map<String, dynamic>>? paginateFromLastDoc)?
         onFetchReport,
     TResult? Function(SalesReport salesReport)? onSendReport,
   }) {
-    return onFetchReport?.call(paginateFromLastDoc);
+    return onFetchReport?.call(branch, paginateFromLastDoc);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
+    TResult Function(Branch? branch,
             QueryDocumentSnapshot<Map<String, dynamic>>? paginateFromLastDoc)?
         onFetchReport,
     TResult Function(SalesReport salesReport)? onSendReport,
     required TResult orElse(),
   }) {
     if (onFetchReport != null) {
-      return onFetchReport(paginateFromLastDoc);
+      return onFetchReport(branch, paginateFromLastDoc);
     }
     return orElse();
   }
@@ -213,9 +237,11 @@ class _$OnFetchReportImpl implements _OnFetchReport {
 
 abstract class _OnFetchReport implements SalesReportingEvent {
   const factory _OnFetchReport(
-      {final QueryDocumentSnapshot<Map<String, dynamic>>?
+      {final Branch? branch,
+      final QueryDocumentSnapshot<Map<String, dynamic>>?
           paginateFromLastDoc}) = _$OnFetchReportImpl;
 
+  Branch? get branch;
   QueryDocumentSnapshot<Map<String, dynamic>>? get paginateFromLastDoc;
   @JsonKey(ignore: true)
   _$$OnFetchReportImplCopyWith<_$OnFetchReportImpl> get copyWith =>
@@ -297,7 +323,7 @@ class _$OnSendReportImpl implements _OnSendReport {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
+    required TResult Function(Branch? branch,
             QueryDocumentSnapshot<Map<String, dynamic>>? paginateFromLastDoc)
         onFetchReport,
     required TResult Function(SalesReport salesReport) onSendReport,
@@ -308,7 +334,7 @@ class _$OnSendReportImpl implements _OnSendReport {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
+    TResult? Function(Branch? branch,
             QueryDocumentSnapshot<Map<String, dynamic>>? paginateFromLastDoc)?
         onFetchReport,
     TResult? Function(SalesReport salesReport)? onSendReport,
@@ -319,7 +345,7 @@ class _$OnSendReportImpl implements _OnSendReport {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
+    TResult Function(Branch? branch,
             QueryDocumentSnapshot<Map<String, dynamic>>? paginateFromLastDoc)?
         onFetchReport,
     TResult Function(SalesReport salesReport)? onSendReport,

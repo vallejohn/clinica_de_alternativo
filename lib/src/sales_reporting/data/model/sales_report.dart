@@ -1,3 +1,4 @@
+import 'package:clinica_de_alternativo/src/authentication/data/model/profile_information.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../inventory/data/model/product.dart';
@@ -13,6 +14,7 @@ class SalesReport with _$SalesReport{
     Product? product,
     dynamic transactionDate,
     dynamic creationDate,
+    ProfileInformation? reportedBy,
     @Default(0) int quantitySold,
   }) = _SalesReport;
 

@@ -27,6 +27,9 @@ class _ClinicaDeAlternativoState extends State<ClinicaDeAlternativo> {
 
   @override
   Widget build(BuildContext context) {
+
+    final colorScheme = ColorScheme.fromSeed(seedColor: const Color(0xff03AC54), secondary: const Color(0xffF9F603));
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -51,7 +54,7 @@ class _ClinicaDeAlternativoState extends State<ClinicaDeAlternativo> {
           create: (context) => ProductTypeBloc(),
         ),
         BlocProvider<BranchBloc>(
-          create: (context) => BranchBloc()..add(const BranchEvent.onFetch()),
+          create: (context) => BranchBloc(),
         ),
         BlocProvider<RoleBloc>(
           create: (context) => RoleBloc()..add(const RoleEvent.onFetch()),
@@ -62,7 +65,7 @@ class _ClinicaDeAlternativoState extends State<ClinicaDeAlternativo> {
         ),
         BlocProvider<SalesReportGeneratorBloc>(
           create: (context) => SalesReportGeneratorBloc(),
-        )
+        ),
       ],
       child: MultiBlocListener(
         listeners: [
@@ -76,7 +79,9 @@ class _ClinicaDeAlternativoState extends State<ClinicaDeAlternativo> {
                   if(profile != null){
                     context.read<ProductTypeBloc>().add(const ProductTypeEvent.onFetch());
                     context.read<ProductsBloc>().add(const ProductsEvent.onFetchList());
-                    context.read<SalesReportingBloc>().add(const SalesReportingEvent.onFetchReport());
+                    context.read<BranchBloc>().add(const BranchEvent.onFetch());
+                    context.read<SalesReportingBloc>().add(SalesReportingEvent.onFetchReport(branch: profile.branch));
+                    context.read<AccountBloc>().add(AccountEvent.onGetDetails(profile.uid!));
                     _appRouter.replace(const HomeRoute());
                   }else{
                     _appRouter.replace(const ProfileCompletionRoute());
@@ -102,34 +107,35 @@ class _ClinicaDeAlternativoState extends State<ClinicaDeAlternativo> {
           title: 'Clinica De Alternativo',
           theme: ThemeData(
             fontFamily: 'Rubik',
-              colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xff3d550c)),
+              colorScheme: colorScheme,
             useMaterial3: true,
             inputDecorationTheme: InputDecorationTheme(
-              suffixIconColor: const Color(0xff5e762e),
+              suffixIconColor: colorScheme.primary,
               fillColor: Colors.white,
               filled: true,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8)
+              border: const OutlineInputBorder(
               ),
               enabledBorder: OutlineInputBorder(
-                //borderRadius: BorderRadius.circular(8),
                 borderSide: BorderSide(
-                  width: 1.3,
-                    color: const Color(0xff3d550c).withOpacity(0.15),
+                  //width: 1.3,
+                    color: colorScheme.surfaceVariant,
                 ),
               ),
             ),
             cardTheme: CardTheme(
-              elevation: 0,
+              elevation: 10,
+              shadowColor: Colors.grey.withOpacity(0.24),
+              //color: colorScheme.surfaceVariant,
               color: Colors.white,
-              shape: RoundedRectangleBorder(
-                side: BorderSide(
-                  width: 1.3,
-                  color: const Color(0xff3d550c).withOpacity(0.15),
-                ),
-                borderRadius: const BorderRadius.all(Radius.circular(12)),
-              ),
-            )
+              surfaceTintColor: Colors.white
+            ),
+              filledButtonTheme: FilledButtonThemeData(
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8)
+                  ))
+                )
+            ),
           ),
           routerDelegate: _appRouter.delegate(),
           routeInformationParser: _appRouter.defaultRouteParser(),

@@ -18,9 +18,32 @@ class _SaleReportingPageState extends State<SaleReportingPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    final branchState = context.watch<AccountBloc>().state;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sales Reporting', style: Theme.of(context).textTheme.headlineLarge,),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text('Sales Reporting'),
+             Text('${branchState.profile?.branch?.name} - ${branchState.profile?.branch?.type!.name.toUpperCase()}',
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+              onPressed: (){
+
+          }, child: Row(
+            children: [
+              if(branchState.status == AccountStatus.success) Text(branchState.profile!.name, style: Theme.of(context).textTheme.bodySmall,),
+              const SizedBox(width: 10,),
+              const Icon(Ionicons.person_outline),
+            ],
+          ))
+        ],
       ),
       body: MultiBlocListener(
         listeners: [
@@ -39,7 +62,7 @@ class _SaleReportingPageState extends State<SaleReportingPage> {
             child: lazy_scroll.LazyLoadScrollView(
               isLoading: srState.loadingMoreItems,
               onEndOfPage: () {
-                context.read<SalesReportingBloc>().add(SalesReportingEvent.onFetchReport(paginateFromLastDoc: srState.salesReportDocs!.paginate!.lastVisibleDocument));
+                context.read<SalesReportingBloc>().add(SalesReportingEvent.onFetchReport(paginateFromLastDoc: srState.salesReportDocs!.paginate!.lastVisibleDocument, branch: branchState.profile?.branch));
               },
               child: Scrollbar(
                 radius: const Radius.circular(8),
@@ -187,6 +210,7 @@ class _SaleReportingPageState extends State<SaleReportingPage> {
                               product: context.read<SearchProductCubit>().state.selectedProduct?.copyWith(price: double.parse(_priceController.text)),
                               quantitySold: int.parse(_quantityController.text),
                               transactionDate: DateFormat('M/d/yyyy').parse(_dateController.text),
+                              reportedBy: context.read<AccountBloc>().state.profile
                             );
                             srContext.read<SalesReportingBloc>().add(SalesReportingEvent.onSendReport(salesReport));
                           }

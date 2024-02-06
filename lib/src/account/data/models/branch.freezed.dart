@@ -22,6 +22,7 @@ Branch _$BranchFromJson(Map<String, dynamic> json) {
 mixin _$Branch {
   String? get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  BranchType? get type => throw _privateConstructorUsedError;
   String get address => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -34,7 +35,7 @@ abstract class $BranchCopyWith<$Res> {
   factory $BranchCopyWith(Branch value, $Res Function(Branch) then) =
       _$BranchCopyWithImpl<$Res, Branch>;
   @useResult
-  $Res call({String? id, String name, String address});
+  $Res call({String? id, String name, BranchType? type, String address});
 }
 
 /// @nodoc
@@ -52,6 +53,7 @@ class _$BranchCopyWithImpl<$Res, $Val extends Branch>
   $Res call({
     Object? id = freezed,
     Object? name = null,
+    Object? type = freezed,
     Object? address = null,
   }) {
     return _then(_value.copyWith(
@@ -63,6 +65,10 @@ class _$BranchCopyWithImpl<$Res, $Val extends Branch>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as BranchType?,
       address: null == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
@@ -78,7 +84,7 @@ abstract class _$$BranchImplCopyWith<$Res> implements $BranchCopyWith<$Res> {
       __$$BranchImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? id, String name, String address});
+  $Res call({String? id, String name, BranchType? type, String address});
 }
 
 /// @nodoc
@@ -94,6 +100,7 @@ class __$$BranchImplCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? name = null,
+    Object? type = freezed,
     Object? address = null,
   }) {
     return _then(_$BranchImpl(
@@ -105,6 +112,10 @@ class __$$BranchImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as BranchType?,
       address: null == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
@@ -116,7 +127,7 @@ class __$$BranchImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$BranchImpl implements _Branch {
-  const _$BranchImpl({this.id, this.name = '', this.address = ''});
+  const _$BranchImpl({this.id, this.name = '', this.type, this.address = ''});
 
   factory _$BranchImpl.fromJson(Map<String, dynamic> json) =>
       _$$BranchImplFromJson(json);
@@ -127,12 +138,14 @@ class _$BranchImpl implements _Branch {
   @JsonKey()
   final String name;
   @override
+  final BranchType? type;
+  @override
   @JsonKey()
   final String address;
 
   @override
   String toString() {
-    return 'Branch(id: $id, name: $name, address: $address)';
+    return 'Branch(id: $id, name: $name, type: $type, address: $address)';
   }
 
   @override
@@ -142,12 +155,13 @@ class _$BranchImpl implements _Branch {
             other is _$BranchImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.type, type) || other.type == type) &&
             (identical(other.address, address) || other.address == address));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, address);
+  int get hashCode => Object.hash(runtimeType, id, name, type, address);
 
   @JsonKey(ignore: true)
   @override
@@ -167,6 +181,7 @@ abstract class _Branch implements Branch {
   const factory _Branch(
       {final String? id,
       final String name,
+      final BranchType? type,
       final String address}) = _$BranchImpl;
 
   factory _Branch.fromJson(Map<String, dynamic> json) = _$BranchImpl.fromJson;
@@ -175,6 +190,8 @@ abstract class _Branch implements Branch {
   String? get id;
   @override
   String get name;
+  @override
+  BranchType? get type;
   @override
   String get address;
   @override

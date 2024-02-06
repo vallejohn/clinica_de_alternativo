@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:clinica_de_alternativo/core/core.dart';
 import 'package:clinica_de_alternativo/core/models/paginate.dart';
+import 'package:clinica_de_alternativo/src/account/data/models/branch.dart';
 import 'package:clinica_de_alternativo/src/sales_reporting/core/params.dart';
 import 'package:clinica_de_alternativo/src/sales_reporting/data/model/sales_report_documents.dart';
 import 'package:clinica_de_alternativo/src/sales_reporting/domain/sales_reporting_usecases.dart';
@@ -63,7 +64,10 @@ class SalesReportingBloc extends Bloc<SalesReportingEvent, SalesReportingState> 
       loadingMoreItems: event.paginateFromLastDoc != null,
     ));
 
-    final dataOrError = await _onFetchReportUseCase(FetchSalesReportsParam(paginate: state.salesReportDocs!.paginate!.copyWith(lastVisibleDocument: event.paginateFromLastDoc)));
+    final dataOrError = await _onFetchReportUseCase(FetchSalesReportsParam(
+      salesReportingFilterParam: SalesReportingFilterParam(branch: event.branch),
+      paginate: state.salesReportDocs!.paginate!.copyWith(lastVisibleDocument: event.paginateFromLastDoc),
+    ));
 
     dataOrError.fold((l){
       emit(state.copyWith(status: SalesReportingStatus.failed, message: l.when(firebase: (error) => error.message!,), loadingMoreItems: false));

@@ -18,8 +18,8 @@ class _AccountPageState extends State<AccountPage> {
             .textTheme
             .headlineLarge,),
       ),
-      body: BlocProvider<AccountBloc>(
-        create: (context) => AccountBloc()..add(AccountEvent.onGetDetails(FirebaseAuth.instance.currentUser!.uid)),
+      body: BlocProvider<AccountBloc>.value(
+        value: BlocProvider.of<AccountBloc>(context),
         child: BlocBuilder<AccountBloc, AccountState>(
           builder: (context, state) {
             if(state.status == AccountStatus.loading || state.status == AccountStatus.initial){
