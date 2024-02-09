@@ -24,7 +24,14 @@ class _EmployeesPageState extends State<EmployeesPage> {
       ),
       body: BlocProvider<EmployeesBloc>(
         create: (context) => EmployeesBloc()..add(const EmployeesEvent.onGetList()),
-        child: BlocBuilder<EmployeesBloc, EmployeesState>(
+        child: BlocConsumer<EmployeesBloc, EmployeesState>(
+          listener: (context, state){
+            if(state.status == EmployeeStatus.failed){
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text(state.message),
+              ));
+            }
+          },
           builder: (context, state) {
             final loading = state.status == EmployeeStatus.loading;
             return SingleChildScrollView(

@@ -56,8 +56,14 @@ class AccountDatasourceImpl extends  AccountDatasource{
     newMapProfile.addAll({'branch' : params.profile.branch?.toJson()});
     newMapProfile.addAll({'role' : params.profile.role?.toJson()});
 
-    HttpsCallable  callable = FirebaseFunctions.instance.httpsCallable('createUser');
+    HttpsCallable  callable = FirebaseFunctions.instanceFor(region: 'asia-southeast1').httpsCallable('createUser');
     final result = await callable.call({'email': params.email, 'password': params.password, 'profile': newMapProfile});
+
+
+    if(result.data['status'] == 'error') {
+      appLogger.e(result.data);
+      throw FirebaseFunctionsException(message: result.data['message'],code: '');
+    }
 
     appLogger.wtf('Created employee::: ${result.data}');
 
