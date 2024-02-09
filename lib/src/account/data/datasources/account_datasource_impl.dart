@@ -49,19 +49,19 @@ class AccountDatasourceImpl extends  AccountDatasource{
 
   @override
   Future<ProfileInformation> addAccount(AddAccountParams params)async {
-    final credentials = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: params.email, password: params.password);
-
-    final newProfile = params.profile.copyWith(uid: credentials.user?.uid);
-    final newMapProfile = newProfile.toJson();
+    final newMapProfile = params.profile.toJson();
 
     newMapProfile.remove('branch');
     newMapProfile.remove('role');
     newMapProfile.addAll({'branch' : params.profile.branch?.toJson()});
     newMapProfile.addAll({'role' : params.profile.role?.toJson()});
 
-    await FirestoreCollection.profileInformation().add(newMapProfile);
+    HttpsCallable  callable = FirebaseFunctions.instance.httpsCallable('createUser');
+    final result = await callable.call({'email': params.email, 'password': params.password, 'profile': newMapProfile});
 
-    return newProfile;
+    appLogger.wtf('Created employee::: ${result.data}');
+
+    return params.profile.copyWith(uid: result.data['uid']);
   }
 
   @override

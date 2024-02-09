@@ -26,6 +26,7 @@ class _EmployeesPageState extends State<EmployeesPage> {
         create: (context) => EmployeesBloc()..add(const EmployeesEvent.onGetList()),
         child: BlocBuilder<EmployeesBloc, EmployeesState>(
           builder: (context, state) {
+            final loading = state.status == EmployeeStatus.loading;
             return SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
               child: Column(
@@ -96,7 +97,7 @@ class _EmployeesPageState extends State<EmployeesPage> {
                                     const SizedBox(height: 10,),
                                     Row(
                                       children: [
-                                        Expanded(child: FilledButton(onPressed: (){
+                                        Expanded(child: FilledButton(onPressed: loading? null : (){
                                           context.read<EmployeesBloc>().add(EmployeesEvent.onAdd(AddAccountParams(
                                               email: _emailController.text, password: _passwordController.text,
                                               profile: ProfileInformation(
@@ -105,10 +106,25 @@ class _EmployeesPageState extends State<EmployeesPage> {
                                                 role: visState.selectedRole,
                                           )
                                           )));
-                                        }, child: const Text('Add'))),
+                                        }, child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            if (!loading) const Icon(Ionicons.add, size: 17),
+                                            if (loading)
+                                              SizedBox(
+                                                  width: 20,
+                                                  height: 20,
+                                                  child: CircularProgressIndicator(
+                                                    strokeWidth: 2,
+                                                    color: Theme.of(context).disabledColor,
+                                                  )),
+                                            const SizedBox(width: 15),
+                                            Text(loading ? 'Adding...' : 'Add'),
+                                          ],
+                                        ),)),
                                         const SizedBox(width: 10,),
                                         Expanded(child: FilledButton.tonal(
-                                          onPressed: (){
+                                          onPressed: loading? null : (){
                                             cubit.onUpdateState(visState.copyWith(addingEmployee: !visState.addingEmployee));
                                           },
                                           child: const Text('Cancel'),

@@ -12,8 +12,10 @@ void main()async {
 
   Bloc.observer = AppBlocObserver();
 
+  final options = FlavorConfig.instance.variables['firebase_options'] as FirebaseOptions;
+
   await Firebase.initializeApp(
-    options: FlavorConfig.instance.variables['firebase_options'] as FirebaseOptions,
+    options: options,
   );
 
   await setupLocator();

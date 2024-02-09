@@ -99,7 +99,13 @@ class _SaleReportingPageState extends State<SaleReportingPage> {
                                 if(value != null){
                                   if(value.isEmpty) return 'Enter date';
                                   if(value.isNotEmpty){
-                                    final parsedDate = DateFormat('M/d/yyyy').tryParse(value);
+                                    DateTime? parsedDate;
+                                    try{
+                                      parsedDate = DateFormat('M/d/yyyy').parse(value);
+                                    }catch(e){
+                                      parsedDate = null;
+                                    }
+
                                     if(parsedDate == null){
                                       return 'Invalid format';
                                     }else{
