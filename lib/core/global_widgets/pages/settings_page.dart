@@ -53,8 +53,8 @@ class _SettingsPageState extends State<SettingsPage> {
               },
             ),
             ListTileItem(
-              title: const Text('Roles'),
-              subtitle: 'Add or edit user roles',
+              title: const Text('Roles and Modules'),
+              subtitle: 'Add or edit user roles and modules',
               trailingIcon: const Icon(Ionicons.chevron_forward_outline),
               leadingIcon: Icon(Ionicons.shield_outline, color: Theme.of(context).colorScheme.primary,),
               onPressed: (){

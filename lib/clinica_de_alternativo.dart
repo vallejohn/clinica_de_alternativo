@@ -1,6 +1,7 @@
 import 'package:clinica_de_alternativo/src/account/presentation/blocs/account/account_bloc.dart';
 import 'package:clinica_de_alternativo/src/account/presentation/blocs/branches/branch_bloc.dart';
 import 'package:clinica_de_alternativo/src/account/presentation/blocs/employees/employees_bloc.dart';
+import 'package:clinica_de_alternativo/src/account/presentation/blocs/modules/module_bloc.dart';
 import 'package:clinica_de_alternativo/src/account/presentation/blocs/roles/role_bloc.dart';
 import 'package:clinica_de_alternativo/src/authentication/presentation/blocs/auth_checker/auth_checker_bloc.dart';
 import 'package:clinica_de_alternativo/src/authentication/presentation/blocs/profile_checker/profile_checker_bloc.dart';
@@ -57,7 +58,10 @@ class _ClinicaDeAlternativoState extends State<ClinicaDeAlternativo> {
           create: (context) => BranchBloc(),
         ),
         BlocProvider<RoleBloc>(
-          create: (context) => RoleBloc()..add(const RoleEvent.onFetch()),
+          create: (context) => RoleBloc(),
+        ),
+        BlocProvider<ModuleBloc>(
+          create: (context) => ModuleBloc(),
         ),
         BlocProvider<AuthCheckerBloc>(
           create: (context) =>
@@ -79,6 +83,8 @@ class _ClinicaDeAlternativoState extends State<ClinicaDeAlternativo> {
                   if(profile != null){
                     context.read<ProductTypeBloc>().add(const ProductTypeEvent.onFetch());
                     context.read<ProductsBloc>().add(const ProductsEvent.onFetchList());
+                    context.read<RoleBloc>().add(const RoleEvent.onFetch());
+                    context.read<ModuleBloc>().add(const ModuleEvent.onFetch());
                     context.read<BranchBloc>().add(const BranchEvent.onFetch());
                     context.read<SalesReportingBloc>().add(SalesReportingEvent.onFetchReport(branch: profile.branch));
                     context.read<AccountBloc>().add(AccountEvent.onGetDetails(profile.uid!));
@@ -129,13 +135,19 @@ class _ClinicaDeAlternativoState extends State<ClinicaDeAlternativo> {
               color: Colors.white,
               surfaceTintColor: Colors.white
             ),
-              filledButtonTheme: FilledButtonThemeData(
-                style: ButtonStyle(
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8)
-                  ))
-                )
+            filledButtonTheme: FilledButtonThemeData(
+              style: ButtonStyle(
+                shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8)
+                ))
+              )
             ),
+            checkboxTheme: CheckboxThemeData(
+              side: BorderSide(color: colorScheme.primary, width: 1.5),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(4),
+              )
+            )
           ),
           routerDelegate: _appRouter.delegate(),
           routeInformationParser: _appRouter.defaultRouteParser(),

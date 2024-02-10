@@ -1,4 +1,5 @@
 import 'package:clinica_de_alternativo/src/account/core/params.dart';
+import 'package:clinica_de_alternativo/src/account/data/models/module.dart';
 import 'package:clinica_de_alternativo/src/account/data/models/role.dart';
 import 'package:clinica_de_alternativo/src/authentication/data/model/profile_information.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -89,6 +90,26 @@ class AccountRepositoryImpl extends AccountRepository {
   Future<Either<Failure, List<ProfileInformation>>> geAccountList()async {
     try{
       final dataState = await accountDatasource.geAccountList();
+      return Right(dataState);
+    }on FirebaseException catch(e){
+      return Left(Failure.firebase(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Module>> addModule(Module module)async {
+    try{
+      final dataState = await accountDatasource.addModule(module);
+      return Right(dataState);
+    }on FirebaseException catch(e){
+      return Left(Failure.firebase(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Module>>> getModuleList()async {
+    try{
+      final dataState = await accountDatasource.getModuleList();
       return Right(dataState);
     }on FirebaseException catch(e){
       return Left(Failure.firebase(e));

@@ -1,6 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:clinica_de_alternativo/core/blocs/home_navigator_cubit.dart';
 import 'package:clinica_de_alternativo/core/global_widgets/pages/settings_page.dart';
+import 'package:clinica_de_alternativo/src/account/presentation/blocs/roles/role_bloc.dart';
+import 'package:clinica_de_alternativo/src/authentication/data/model/profile_information.dart';
+import 'package:clinica_de_alternativo/src/authentication/presentation/blocs/profile_checker/profile_checker_bloc.dart';
 import 'package:clinica_de_alternativo/src/modules_page.dart';
 import 'package:clinica_de_alternativo/src/sales_reporting/presentation/pages.dart';
 import 'package:flutter/material.dart';
@@ -18,17 +21,6 @@ class ExampleDestination {
   final Widget selectedIcon;
 }
 
-const List<ExampleDestination> destinations = <ExampleDestination>[
-  ExampleDestination(
-      'Reporting', Icon(Ionicons.reader_outline), Icon(Ionicons.reader)),
-  ExampleDestination(
-      'Sales', Icon(Ionicons.bar_chart_outline), Icon(Ionicons.bar_chart)),
-  ExampleDestination(
-      'Products', Icon(Ionicons.leaf_outline), Icon(Ionicons.leaf)),
-  ExampleDestination(
-      'Settings', Icon(Ionicons.settings_outline), Icon(Ionicons.settings)),
-];
-
 @RoutePage()
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -43,6 +35,18 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+
+    const List<ExampleDestination> destinations = <ExampleDestination>[
+      ExampleDestination(
+          'Reporting', Icon(Ionicons.reader_outline), Icon(Ionicons.reader)),
+      ExampleDestination(
+          'Sales', Icon(Ionicons.bar_chart_outline), Icon(Ionicons.bar_chart)),
+      ExampleDestination(
+          'Products', Icon(Ionicons.leaf_outline), Icon(Ionicons.leaf)),
+      ExampleDestination(
+          'Settings', Icon(Ionicons.settings_outline), Icon(Ionicons.settings)),
+    ];
+
     return BlocProvider<HomeNavigatorCubit>(
       create: (context) => HomeNavigatorCubit(),
       child: BlocBuilder<HomeNavigatorCubit, int>(

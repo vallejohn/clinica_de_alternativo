@@ -27,6 +27,16 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const AddProductPage(),
       );
     },
+    AttachRulesRoute.name: (routeData) {
+      final args = routeData.argsAs<AttachRulesRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: AttachRulesPage(
+          key: args.key,
+          role: args.role,
+        ),
+      );
+    },
     BranchesRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -144,6 +154,44 @@ class AddProductRoute extends PageRouteInfo<void> {
   static const String name = 'AddProductRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [AttachRulesPage]
+class AttachRulesRoute extends PageRouteInfo<AttachRulesRouteArgs> {
+  AttachRulesRoute({
+    Key? key,
+    required Role role,
+    List<PageRouteInfo>? children,
+  }) : super(
+          AttachRulesRoute.name,
+          args: AttachRulesRouteArgs(
+            key: key,
+            role: role,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'AttachRulesRoute';
+
+  static const PageInfo<AttachRulesRouteArgs> page =
+      PageInfo<AttachRulesRouteArgs>(name);
+}
+
+class AttachRulesRouteArgs {
+  const AttachRulesRouteArgs({
+    this.key,
+    required this.role,
+  });
+
+  final Key? key;
+
+  final Role role;
+
+  @override
+  String toString() {
+    return 'AttachRulesRouteArgs{key: $key, role: $role}';
+  }
 }
 
 /// generated route for

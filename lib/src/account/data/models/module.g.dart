@@ -1,25 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'role.dart';
+part of 'module.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$RoleImpl _$$RoleImplFromJson(Map<String, dynamic> json) => _$RoleImpl(
+_$ModuleImpl _$$ModuleImplFromJson(Map<String, dynamic> json) => _$ModuleImpl(
       id: json['id'] as String?,
       code: json['code'] as String? ?? '',
       name: json['name'] as String? ?? '',
-      modulesAttached: (json['modulesAttached'] as List<dynamic>?)
-              ?.map((e) => Module.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          const [],
+      description: json['description'] as String? ?? '',
+      canView: json['canView'] as bool? ?? false,
+      canEdit: json['canEdit'] as bool? ?? false,
     );
 
-Map<String, dynamic> _$$RoleImplToJson(_$RoleImpl instance) =>
+Map<String, dynamic> _$$ModuleImplToJson(_$ModuleImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'code': instance.code,
       'name': instance.name,
-      'modulesAttached': instance.modulesAttached,
+      'description': instance.description,
+      'canView': instance.canView,
+      'canEdit': instance.canEdit,
     };

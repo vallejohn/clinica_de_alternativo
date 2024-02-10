@@ -18,6 +18,7 @@ class RoleBloc extends Bloc<RoleEvent, RoleState> {
   RoleBloc() : super(const RoleState()) {
     on<_OnFetch>(_onFetch);
     on<_OnAdd>(_onAdd);
+    on<_OnEdit>(_onEdit);
   }
   FutureOr<void> _onFetch(_OnFetch event, Emitter<RoleState> emit)async {
     emit(state.copyWith(status: RoleStatus.loading));
@@ -43,5 +44,12 @@ class RoleBloc extends Bloc<RoleEvent, RoleState> {
       roles.add(role);
       emit(state.copyWith(status: RoleStatus.success, message: 'Fetched successfully', roles: roles));
     });
+  }
+
+  FutureOr<void> _onEdit(_OnEdit event, Emitter<RoleState> emit) {
+    final roles = [...state.roles];
+    final index = roles.indexWhere((element) => element.code == event.role.code);
+    roles.replaceRange(index, index + 1, [event.role]);
+    emit(state.copyWith(roles: roles));
   }
 }

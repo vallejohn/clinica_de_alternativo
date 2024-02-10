@@ -76,4 +76,17 @@ class AccountDatasourceImpl extends  AccountDatasource{
 
     return result.docs.map((e) => ProfileInformation.fromJson(e.data()).copyWith(id: e.id)).toList();
   }
+
+  @override
+  Future<Module> addModule(Module module)async {
+    final modifiedModule = module.copyWith(code: module.name.replaceAll(' ', '_').toLowerCase());
+    final result = await FirestoreCollection.modules().add(modifiedModule.toJson());
+    return modifiedModule.copyWith(id: result.id);
+  }
+
+  @override
+  Future<List<Module>> getModuleList()async {
+    final result = await FirestoreCollection.modules().get();
+    return result.docs.map((e) => Module.fromJson(e.data()).copyWith(id: e.id)).toList();
+  }
 }
