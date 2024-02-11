@@ -4,6 +4,7 @@ class ProductDatasourceImpl extends ProductDatasource{
 
   @override
   Future<List<Product>> fetchProducts()async {
+    appLogger.wtf('fetching productsssss');
     final result = await FirestoreCollection.products().get();
     return result.docs.map((e) => Product.fromJson(e.data()).copyWith(id: e.id)).toList();
   }

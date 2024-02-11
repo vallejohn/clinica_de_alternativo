@@ -21,6 +21,7 @@ mixin _$RoleEvent {
     required TResult Function() onFetch,
     required TResult Function(Role role) onAdd,
     required TResult Function(Role role) onEdit,
+    required TResult Function(Role role) onUpdate,
     required TResult Function(Role role) onDelete,
   }) =>
       throw _privateConstructorUsedError;
@@ -29,6 +30,7 @@ mixin _$RoleEvent {
     TResult? Function()? onFetch,
     TResult? Function(Role role)? onAdd,
     TResult? Function(Role role)? onEdit,
+    TResult? Function(Role role)? onUpdate,
     TResult? Function(Role role)? onDelete,
   }) =>
       throw _privateConstructorUsedError;
@@ -37,6 +39,7 @@ mixin _$RoleEvent {
     TResult Function()? onFetch,
     TResult Function(Role role)? onAdd,
     TResult Function(Role role)? onEdit,
+    TResult Function(Role role)? onUpdate,
     TResult Function(Role role)? onDelete,
     required TResult orElse(),
   }) =>
@@ -46,6 +49,7 @@ mixin _$RoleEvent {
     required TResult Function(_OnFetch value) onFetch,
     required TResult Function(_OnAdd value) onAdd,
     required TResult Function(_OnEdit value) onEdit,
+    required TResult Function(_OnUpdate value) onUpdate,
     required TResult Function(_OnDelete value) onDelete,
   }) =>
       throw _privateConstructorUsedError;
@@ -54,6 +58,7 @@ mixin _$RoleEvent {
     TResult? Function(_OnFetch value)? onFetch,
     TResult? Function(_OnAdd value)? onAdd,
     TResult? Function(_OnEdit value)? onEdit,
+    TResult? Function(_OnUpdate value)? onUpdate,
     TResult? Function(_OnDelete value)? onDelete,
   }) =>
       throw _privateConstructorUsedError;
@@ -62,6 +67,7 @@ mixin _$RoleEvent {
     TResult Function(_OnFetch value)? onFetch,
     TResult Function(_OnAdd value)? onAdd,
     TResult Function(_OnEdit value)? onEdit,
+    TResult Function(_OnUpdate value)? onUpdate,
     TResult Function(_OnDelete value)? onDelete,
     required TResult orElse(),
   }) =>
@@ -126,6 +132,7 @@ class _$OnFetchImpl implements _OnFetch {
     required TResult Function() onFetch,
     required TResult Function(Role role) onAdd,
     required TResult Function(Role role) onEdit,
+    required TResult Function(Role role) onUpdate,
     required TResult Function(Role role) onDelete,
   }) {
     return onFetch();
@@ -137,6 +144,7 @@ class _$OnFetchImpl implements _OnFetch {
     TResult? Function()? onFetch,
     TResult? Function(Role role)? onAdd,
     TResult? Function(Role role)? onEdit,
+    TResult? Function(Role role)? onUpdate,
     TResult? Function(Role role)? onDelete,
   }) {
     return onFetch?.call();
@@ -148,6 +156,7 @@ class _$OnFetchImpl implements _OnFetch {
     TResult Function()? onFetch,
     TResult Function(Role role)? onAdd,
     TResult Function(Role role)? onEdit,
+    TResult Function(Role role)? onUpdate,
     TResult Function(Role role)? onDelete,
     required TResult orElse(),
   }) {
@@ -163,6 +172,7 @@ class _$OnFetchImpl implements _OnFetch {
     required TResult Function(_OnFetch value) onFetch,
     required TResult Function(_OnAdd value) onAdd,
     required TResult Function(_OnEdit value) onEdit,
+    required TResult Function(_OnUpdate value) onUpdate,
     required TResult Function(_OnDelete value) onDelete,
   }) {
     return onFetch(this);
@@ -174,6 +184,7 @@ class _$OnFetchImpl implements _OnFetch {
     TResult? Function(_OnFetch value)? onFetch,
     TResult? Function(_OnAdd value)? onAdd,
     TResult? Function(_OnEdit value)? onEdit,
+    TResult? Function(_OnUpdate value)? onUpdate,
     TResult? Function(_OnDelete value)? onDelete,
   }) {
     return onFetch?.call(this);
@@ -185,6 +196,7 @@ class _$OnFetchImpl implements _OnFetch {
     TResult Function(_OnFetch value)? onFetch,
     TResult Function(_OnAdd value)? onAdd,
     TResult Function(_OnEdit value)? onEdit,
+    TResult Function(_OnUpdate value)? onUpdate,
     TResult Function(_OnDelete value)? onDelete,
     required TResult orElse(),
   }) {
@@ -276,6 +288,7 @@ class _$OnAddImpl implements _OnAdd {
     required TResult Function() onFetch,
     required TResult Function(Role role) onAdd,
     required TResult Function(Role role) onEdit,
+    required TResult Function(Role role) onUpdate,
     required TResult Function(Role role) onDelete,
   }) {
     return onAdd(role);
@@ -287,6 +300,7 @@ class _$OnAddImpl implements _OnAdd {
     TResult? Function()? onFetch,
     TResult? Function(Role role)? onAdd,
     TResult? Function(Role role)? onEdit,
+    TResult? Function(Role role)? onUpdate,
     TResult? Function(Role role)? onDelete,
   }) {
     return onAdd?.call(role);
@@ -298,6 +312,7 @@ class _$OnAddImpl implements _OnAdd {
     TResult Function()? onFetch,
     TResult Function(Role role)? onAdd,
     TResult Function(Role role)? onEdit,
+    TResult Function(Role role)? onUpdate,
     TResult Function(Role role)? onDelete,
     required TResult orElse(),
   }) {
@@ -313,6 +328,7 @@ class _$OnAddImpl implements _OnAdd {
     required TResult Function(_OnFetch value) onFetch,
     required TResult Function(_OnAdd value) onAdd,
     required TResult Function(_OnEdit value) onEdit,
+    required TResult Function(_OnUpdate value) onUpdate,
     required TResult Function(_OnDelete value) onDelete,
   }) {
     return onAdd(this);
@@ -324,6 +340,7 @@ class _$OnAddImpl implements _OnAdd {
     TResult? Function(_OnFetch value)? onFetch,
     TResult? Function(_OnAdd value)? onAdd,
     TResult? Function(_OnEdit value)? onEdit,
+    TResult? Function(_OnUpdate value)? onUpdate,
     TResult? Function(_OnDelete value)? onDelete,
   }) {
     return onAdd?.call(this);
@@ -335,6 +352,7 @@ class _$OnAddImpl implements _OnAdd {
     TResult Function(_OnFetch value)? onFetch,
     TResult Function(_OnAdd value)? onAdd,
     TResult Function(_OnEdit value)? onEdit,
+    TResult Function(_OnUpdate value)? onUpdate,
     TResult Function(_OnDelete value)? onDelete,
     required TResult orElse(),
   }) {
@@ -431,6 +449,7 @@ class _$OnEditImpl implements _OnEdit {
     required TResult Function() onFetch,
     required TResult Function(Role role) onAdd,
     required TResult Function(Role role) onEdit,
+    required TResult Function(Role role) onUpdate,
     required TResult Function(Role role) onDelete,
   }) {
     return onEdit(role);
@@ -442,6 +461,7 @@ class _$OnEditImpl implements _OnEdit {
     TResult? Function()? onFetch,
     TResult? Function(Role role)? onAdd,
     TResult? Function(Role role)? onEdit,
+    TResult? Function(Role role)? onUpdate,
     TResult? Function(Role role)? onDelete,
   }) {
     return onEdit?.call(role);
@@ -453,6 +473,7 @@ class _$OnEditImpl implements _OnEdit {
     TResult Function()? onFetch,
     TResult Function(Role role)? onAdd,
     TResult Function(Role role)? onEdit,
+    TResult Function(Role role)? onUpdate,
     TResult Function(Role role)? onDelete,
     required TResult orElse(),
   }) {
@@ -468,6 +489,7 @@ class _$OnEditImpl implements _OnEdit {
     required TResult Function(_OnFetch value) onFetch,
     required TResult Function(_OnAdd value) onAdd,
     required TResult Function(_OnEdit value) onEdit,
+    required TResult Function(_OnUpdate value) onUpdate,
     required TResult Function(_OnDelete value) onDelete,
   }) {
     return onEdit(this);
@@ -479,6 +501,7 @@ class _$OnEditImpl implements _OnEdit {
     TResult? Function(_OnFetch value)? onFetch,
     TResult? Function(_OnAdd value)? onAdd,
     TResult? Function(_OnEdit value)? onEdit,
+    TResult? Function(_OnUpdate value)? onUpdate,
     TResult? Function(_OnDelete value)? onDelete,
   }) {
     return onEdit?.call(this);
@@ -490,6 +513,7 @@ class _$OnEditImpl implements _OnEdit {
     TResult Function(_OnFetch value)? onFetch,
     TResult Function(_OnAdd value)? onAdd,
     TResult Function(_OnEdit value)? onEdit,
+    TResult Function(_OnUpdate value)? onUpdate,
     TResult Function(_OnDelete value)? onDelete,
     required TResult orElse(),
   }) {
@@ -506,6 +530,167 @@ abstract class _OnEdit implements RoleEvent {
   Role get role;
   @JsonKey(ignore: true)
   _$$OnEditImplCopyWith<_$OnEditImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$OnUpdateImplCopyWith<$Res> {
+  factory _$$OnUpdateImplCopyWith(
+          _$OnUpdateImpl value, $Res Function(_$OnUpdateImpl) then) =
+      __$$OnUpdateImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Role role});
+
+  $RoleCopyWith<$Res> get role;
+}
+
+/// @nodoc
+class __$$OnUpdateImplCopyWithImpl<$Res>
+    extends _$RoleEventCopyWithImpl<$Res, _$OnUpdateImpl>
+    implements _$$OnUpdateImplCopyWith<$Res> {
+  __$$OnUpdateImplCopyWithImpl(
+      _$OnUpdateImpl _value, $Res Function(_$OnUpdateImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? role = null,
+  }) {
+    return _then(_$OnUpdateImpl(
+      null == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as Role,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $RoleCopyWith<$Res> get role {
+    return $RoleCopyWith<$Res>(_value.role, (value) {
+      return _then(_value.copyWith(role: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$OnUpdateImpl implements _OnUpdate {
+  const _$OnUpdateImpl(this.role);
+
+  @override
+  final Role role;
+
+  @override
+  String toString() {
+    return 'RoleEvent.onUpdate(role: $role)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$OnUpdateImpl &&
+            (identical(other.role, role) || other.role == role));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, role);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$OnUpdateImplCopyWith<_$OnUpdateImpl> get copyWith =>
+      __$$OnUpdateImplCopyWithImpl<_$OnUpdateImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() onFetch,
+    required TResult Function(Role role) onAdd,
+    required TResult Function(Role role) onEdit,
+    required TResult Function(Role role) onUpdate,
+    required TResult Function(Role role) onDelete,
+  }) {
+    return onUpdate(role);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? onFetch,
+    TResult? Function(Role role)? onAdd,
+    TResult? Function(Role role)? onEdit,
+    TResult? Function(Role role)? onUpdate,
+    TResult? Function(Role role)? onDelete,
+  }) {
+    return onUpdate?.call(role);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? onFetch,
+    TResult Function(Role role)? onAdd,
+    TResult Function(Role role)? onEdit,
+    TResult Function(Role role)? onUpdate,
+    TResult Function(Role role)? onDelete,
+    required TResult orElse(),
+  }) {
+    if (onUpdate != null) {
+      return onUpdate(role);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_OnFetch value) onFetch,
+    required TResult Function(_OnAdd value) onAdd,
+    required TResult Function(_OnEdit value) onEdit,
+    required TResult Function(_OnUpdate value) onUpdate,
+    required TResult Function(_OnDelete value) onDelete,
+  }) {
+    return onUpdate(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnFetch value)? onFetch,
+    TResult? Function(_OnAdd value)? onAdd,
+    TResult? Function(_OnEdit value)? onEdit,
+    TResult? Function(_OnUpdate value)? onUpdate,
+    TResult? Function(_OnDelete value)? onDelete,
+  }) {
+    return onUpdate?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnFetch value)? onFetch,
+    TResult Function(_OnAdd value)? onAdd,
+    TResult Function(_OnEdit value)? onEdit,
+    TResult Function(_OnUpdate value)? onUpdate,
+    TResult Function(_OnDelete value)? onDelete,
+    required TResult orElse(),
+  }) {
+    if (onUpdate != null) {
+      return onUpdate(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _OnUpdate implements RoleEvent {
+  const factory _OnUpdate(final Role role) = _$OnUpdateImpl;
+
+  Role get role;
+  @JsonKey(ignore: true)
+  _$$OnUpdateImplCopyWith<_$OnUpdateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -586,6 +771,7 @@ class _$OnDeleteImpl implements _OnDelete {
     required TResult Function() onFetch,
     required TResult Function(Role role) onAdd,
     required TResult Function(Role role) onEdit,
+    required TResult Function(Role role) onUpdate,
     required TResult Function(Role role) onDelete,
   }) {
     return onDelete(role);
@@ -597,6 +783,7 @@ class _$OnDeleteImpl implements _OnDelete {
     TResult? Function()? onFetch,
     TResult? Function(Role role)? onAdd,
     TResult? Function(Role role)? onEdit,
+    TResult? Function(Role role)? onUpdate,
     TResult? Function(Role role)? onDelete,
   }) {
     return onDelete?.call(role);
@@ -608,6 +795,7 @@ class _$OnDeleteImpl implements _OnDelete {
     TResult Function()? onFetch,
     TResult Function(Role role)? onAdd,
     TResult Function(Role role)? onEdit,
+    TResult Function(Role role)? onUpdate,
     TResult Function(Role role)? onDelete,
     required TResult orElse(),
   }) {
@@ -623,6 +811,7 @@ class _$OnDeleteImpl implements _OnDelete {
     required TResult Function(_OnFetch value) onFetch,
     required TResult Function(_OnAdd value) onAdd,
     required TResult Function(_OnEdit value) onEdit,
+    required TResult Function(_OnUpdate value) onUpdate,
     required TResult Function(_OnDelete value) onDelete,
   }) {
     return onDelete(this);
@@ -634,6 +823,7 @@ class _$OnDeleteImpl implements _OnDelete {
     TResult? Function(_OnFetch value)? onFetch,
     TResult? Function(_OnAdd value)? onAdd,
     TResult? Function(_OnEdit value)? onEdit,
+    TResult? Function(_OnUpdate value)? onUpdate,
     TResult? Function(_OnDelete value)? onDelete,
   }) {
     return onDelete?.call(this);
@@ -645,6 +835,7 @@ class _$OnDeleteImpl implements _OnDelete {
     TResult Function(_OnFetch value)? onFetch,
     TResult Function(_OnAdd value)? onAdd,
     TResult Function(_OnEdit value)? onEdit,
+    TResult Function(_OnUpdate value)? onUpdate,
     TResult Function(_OnDelete value)? onDelete,
     required TResult orElse(),
   }) {

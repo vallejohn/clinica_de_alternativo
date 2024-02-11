@@ -14,11 +14,13 @@ part 'role_bloc.freezed.dart';
 class RoleBloc extends Bloc<RoleEvent, RoleState> {
   final _onGetRolesUseCase = GetIt.instance<OnGetRolesUseCase>();
   final _onAddUseCase = GetIt.instance<OnAddRoleUseCase>();
+  final _onUpdateUseCase = GetIt.instance<OnUpdateRoleUseCase>();
 
   RoleBloc() : super(const RoleState()) {
     on<_OnFetch>(_onFetch);
     on<_OnAdd>(_onAdd);
     on<_OnEdit>(_onEdit);
+    on<_OnUpdate>(_onUpdate);
   }
   FutureOr<void> _onFetch(_OnFetch event, Emitter<RoleState> emit)async {
     emit(state.copyWith(status: RoleStatus.loading));
@@ -51,5 +53,18 @@ class RoleBloc extends Bloc<RoleEvent, RoleState> {
     final index = roles.indexWhere((element) => element.code == event.role.code);
     roles.replaceRange(index, index + 1, [event.role]);
     emit(state.copyWith(roles: roles));
+  }
+
+  FutureOr<void> _onUpdate(_OnUpdate event, Emitter<RoleState> emit)async {
+    emit(state.copyWith(status: RoleStatus.loading));
+
+    final dataOrError = await _onUpdateUseCase(event.role);
+
+    dataOrError.fold((l){
+      emit(state.copyWith(status: RoleStatus.failed, message: l.when(firebase: (error) => error.message!,)));
+    }, (_){
+
+      emit(state.copyWith(status: RoleStatus.success, message: 'Fetched successfully'));
+    });
   }
 }

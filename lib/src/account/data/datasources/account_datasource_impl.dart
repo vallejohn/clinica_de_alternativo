@@ -89,4 +89,18 @@ class AccountDatasourceImpl extends  AccountDatasource{
     final result = await FirestoreCollection.modules().get();
     return result.docs.map((e) => Module.fromJson(e.data()).copyWith(id: e.id)).toList();
   }
+
+  @override
+  Future<bool> updateRole(Role role)async {
+    Map<String, dynamic> newRole = role.toJson();
+
+      List<Map<String, dynamic>> modulesAttached = [];
+      for(final modules in role.modulesAttached){
+        modulesAttached.add(modules.toJson());
+      }
+      newRole['modulesAttached'] = modulesAttached;
+
+     await FirestoreCollection.roles().doc(role.id).update(newRole);
+     return true;
+  }
 }

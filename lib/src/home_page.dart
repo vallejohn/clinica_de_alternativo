@@ -47,6 +47,13 @@ class _HomePageState extends State<HomePage> {
           'Settings', Icon(Ionicons.settings_outline), Icon(Ionicons.settings)),
     ];
 
+    List<Widget> navigation = [
+      SaleReportingPage(),
+      SalesSummaryPage(),
+      ProductsPage(),
+      SettingsPage(),
+    ];
+
     return BlocProvider<HomeNavigatorCubit>(
       create: (context) => HomeNavigatorCubit(),
       child: BlocBuilder<HomeNavigatorCubit, int>(
@@ -55,12 +62,7 @@ class _HomePageState extends State<HomePage> {
             body: PageView(
               controller: _pageController,
               onPageChanged: (int index) => navContext.read<HomeNavigatorCubit>().onPageChanged(index),
-              children: const <Widget>[
-                SaleReportingPage(),
-                SalesSummaryPage(),
-                ProductsPage(),
-                SettingsPage(),
-              ],
+              children: navigation,
             ),
             bottomNavigationBar: NavigationBar(
               selectedIndex: navState,

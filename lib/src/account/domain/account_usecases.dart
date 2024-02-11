@@ -20,3 +20,4 @@ part 'usecases/on_get_accounts_usecase.dart';
 part 'usecases/on_add_account_usecase.dart';
 part 'usecases/on_get_modules_usecase.dart';
 part 'usecases/on_add_module_usecase.dart';
+part 'usecases/on_update_role_usecase.dart';

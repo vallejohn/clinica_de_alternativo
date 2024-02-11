@@ -19,6 +19,11 @@ class _AttachRulesPageState extends State<AttachRulesPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.role.name),
+        actions: [
+          IconButton(onPressed: (){
+            context.read<RoleBloc>().add(RoleEvent.onUpdate(selectedRole));
+          }, icon: const Text('SAVE'))
+        ],
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
