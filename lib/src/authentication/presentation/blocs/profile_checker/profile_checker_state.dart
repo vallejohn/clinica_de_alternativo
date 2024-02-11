@@ -1,9 +1,12 @@
 part of 'profile_checker_bloc.dart';
 
+enum ProfileCheckStatus{initial, loading, success, failed}
+
 @freezed
 class ProfileCheckerState with _$ProfileCheckerState {
-  const factory ProfileCheckerState.initial() = _Initial;
-  const factory ProfileCheckerState.loading() = _Loading;
-  const factory ProfileCheckerState.success(ProfileInformation? profile) = _Sucess;
-  const factory ProfileCheckerState.failed(String message) = _Failed;
+  const factory ProfileCheckerState({
+    @Default(ProfileCheckStatus.initial) ProfileCheckStatus status,
+    ProfileInformation? profile,
+    @Default('') String message,
+  }) = _ProfileCheckerState;
 }

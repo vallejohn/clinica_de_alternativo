@@ -27,7 +27,7 @@ class _SaleReportingPageState extends State<SaleReportingPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text('Sales Reporting'),
-             Text('${branchState.profile?.branch?.name} - ${branchState.profile?.branch?.type!.name.toUpperCase()}',
+             Text(branchState.status == AccountStatus.loading || branchState.status == AccountStatus.initial? '...' : '${branchState.profile?.branch?.name} - ${branchState.profile?.branch?.type!.name.toUpperCase()}',
               style: Theme.of(context).textTheme.bodySmall,
             ),
           ],

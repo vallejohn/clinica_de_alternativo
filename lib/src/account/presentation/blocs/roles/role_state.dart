@@ -8,5 +8,6 @@ class RoleState with _$RoleState {
     @Default(RoleStatus.initial) RoleStatus status,
     @Default('') String message,
     @Default([]) List<Role> roles,
+    @Default(false) bool accessible,
   }) = _RoleState;
 }

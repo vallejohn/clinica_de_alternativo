@@ -1,3 +1,4 @@
+import 'package:clinica_de_alternativo/core/core.dart';
 import 'package:clinica_de_alternativo/src/account/presentation/blocs/account/account_bloc.dart';
 import 'package:clinica_de_alternativo/src/account/presentation/blocs/branches/branch_bloc.dart';
 import 'package:clinica_de_alternativo/src/account/presentation/blocs/employees/employees_bloc.dart';
@@ -75,28 +76,13 @@ class _ClinicaDeAlternativoState extends State<ClinicaDeAlternativo> {
         listeners: [
           BlocListener<ProfileCheckerBloc, ProfileCheckerState>(
             listener: (context, state) {
-              state.whenOrNull(
-                loading: (){
-
-                },
-                success: (profile){
-                  if(profile != null){
-                    context.read<ProductTypeBloc>().add(const ProductTypeEvent.onFetch());
-                    context.read<ProductsBloc>().add(const ProductsEvent.onFetchList());
-                    context.read<RoleBloc>().add(const RoleEvent.onFetch());
-                    context.read<ModuleBloc>().add(const ModuleEvent.onFetch());
-                    context.read<BranchBloc>().add(const BranchEvent.onFetch());
-                    context.read<SalesReportingBloc>().add(SalesReportingEvent.onFetchReport(branch: profile.branch));
-                    context.read<AccountBloc>().add(AccountEvent.onGetDetails(profile.uid!));
-                    _appRouter.replace(const HomeRoute());
-                  }else{
-                    _appRouter.replace(const ProfileCompletionRoute());
-                  }
-                },
-                failed: (message){
-
-                },
-              );
+              if(state.status == ProfileCheckStatus.success){
+                if(state.profile != null){
+                  _appRouter.replace(const HomeRoute());
+                }else{
+                  _appRouter.replace(const ProfileCompletionRoute());
+                }
+              }
             },
           ),
           BlocListener<AuthCheckerBloc, AuthCheckerState>(

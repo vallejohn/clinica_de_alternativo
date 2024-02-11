@@ -860,6 +860,7 @@ mixin _$RoleState {
   RoleStatus get status => throw _privateConstructorUsedError;
   String get message => throw _privateConstructorUsedError;
   List<Role> get roles => throw _privateConstructorUsedError;
+  bool get accessible => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $RoleStateCopyWith<RoleState> get copyWith =>
@@ -871,7 +872,8 @@ abstract class $RoleStateCopyWith<$Res> {
   factory $RoleStateCopyWith(RoleState value, $Res Function(RoleState) then) =
       _$RoleStateCopyWithImpl<$Res, RoleState>;
   @useResult
-  $Res call({RoleStatus status, String message, List<Role> roles});
+  $Res call(
+      {RoleStatus status, String message, List<Role> roles, bool accessible});
 }
 
 /// @nodoc
@@ -890,6 +892,7 @@ class _$RoleStateCopyWithImpl<$Res, $Val extends RoleState>
     Object? status = null,
     Object? message = null,
     Object? roles = null,
+    Object? accessible = null,
   }) {
     return _then(_value.copyWith(
       status: null == status
@@ -904,6 +907,10 @@ class _$RoleStateCopyWithImpl<$Res, $Val extends RoleState>
           ? _value.roles
           : roles // ignore: cast_nullable_to_non_nullable
               as List<Role>,
+      accessible: null == accessible
+          ? _value.accessible
+          : accessible // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -916,7 +923,8 @@ abstract class _$$RoleStateImplCopyWith<$Res>
       __$$RoleStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({RoleStatus status, String message, List<Role> roles});
+  $Res call(
+      {RoleStatus status, String message, List<Role> roles, bool accessible});
 }
 
 /// @nodoc
@@ -933,6 +941,7 @@ class __$$RoleStateImplCopyWithImpl<$Res>
     Object? status = null,
     Object? message = null,
     Object? roles = null,
+    Object? accessible = null,
   }) {
     return _then(_$RoleStateImpl(
       status: null == status
@@ -947,6 +956,10 @@ class __$$RoleStateImplCopyWithImpl<$Res>
           ? _value._roles
           : roles // ignore: cast_nullable_to_non_nullable
               as List<Role>,
+      accessible: null == accessible
+          ? _value.accessible
+          : accessible // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -957,7 +970,8 @@ class _$RoleStateImpl implements _RoleState {
   const _$RoleStateImpl(
       {this.status = RoleStatus.initial,
       this.message = '',
-      final List<Role> roles = const []})
+      final List<Role> roles = const [],
+      this.accessible = false})
       : _roles = roles;
 
   @override
@@ -976,8 +990,12 @@ class _$RoleStateImpl implements _RoleState {
   }
 
   @override
+  @JsonKey()
+  final bool accessible;
+
+  @override
   String toString() {
-    return 'RoleState(status: $status, message: $message, roles: $roles)';
+    return 'RoleState(status: $status, message: $message, roles: $roles, accessible: $accessible)';
   }
 
   @override
@@ -987,12 +1005,14 @@ class _$RoleStateImpl implements _RoleState {
             other is _$RoleStateImpl &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.message, message) || other.message == message) &&
-            const DeepCollectionEquality().equals(other._roles, _roles));
+            const DeepCollectionEquality().equals(other._roles, _roles) &&
+            (identical(other.accessible, accessible) ||
+                other.accessible == accessible));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, status, message,
-      const DeepCollectionEquality().hash(_roles));
+      const DeepCollectionEquality().hash(_roles), accessible);
 
   @JsonKey(ignore: true)
   @override
@@ -1005,7 +1025,8 @@ abstract class _RoleState implements RoleState {
   const factory _RoleState(
       {final RoleStatus status,
       final String message,
-      final List<Role> roles}) = _$RoleStateImpl;
+      final List<Role> roles,
+      final bool accessible}) = _$RoleStateImpl;
 
   @override
   RoleStatus get status;
@@ -1013,6 +1034,8 @@ abstract class _RoleState implements RoleState {
   String get message;
   @override
   List<Role> get roles;
+  @override
+  bool get accessible;
   @override
   @JsonKey(ignore: true)
   _$$RoleStateImplCopyWith<_$RoleStateImpl> get copyWith =>

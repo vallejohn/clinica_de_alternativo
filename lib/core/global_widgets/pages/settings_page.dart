@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:clinica_de_alternativo/core/blocs/widget_helper_cubit.dart';
 import 'package:clinica_de_alternativo/core/global_widgets/list_tile_item.dart';
+import 'package:clinica_de_alternativo/core/global_widgets/security_role_handler.dart';
 import 'package:clinica_de_alternativo/core/router/app_router.dart';
 import 'package:clinica_de_alternativo/src/authentication/presentation/blocs/profile_checker/profile_checker_bloc.dart';
 import 'package:clinica_de_alternativo/src/inventory/presentation/blocs/poduct_type/product_type_bloc.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
 
 import '../../../src/account/data/models/product_type.dart';
+import '../../../src/account/presentation/blocs/account/account_bloc.dart';
 
 
 @RoutePage()
@@ -43,14 +45,17 @@ class _SettingsPageState extends State<SettingsPage> {
                 AutoRouter.of(context).push(const AccountRoute());
               },
             ),
-            ListTileItem(
-              title: const Text('Branches'),
-              subtitle: 'View or edit all branches of Clinica',
-              trailingIcon: const Icon(Ionicons.chevron_forward_outline),
-              leadingIcon: Icon(Ionicons.storefront_outline, color: Theme.of(context).colorScheme.primary,),
-              onPressed: (){
-                AutoRouter.of(context).push(const BranchesRoute());
-              },
+            SecurityRoleHandler(
+              module: Module.branches,
+              child: ListTileItem(
+                title: const Text('Branches'),
+                subtitle: 'View or edit all branches of Clinica',
+                trailingIcon: const Icon(Ionicons.chevron_forward_outline),
+                leadingIcon: Icon(Ionicons.storefront_outline, color: Theme.of(context).colorScheme.primary,),
+                onPressed: (){
+                  AutoRouter.of(context).push(const BranchesRoute());
+                },
+              ),
             ),
             ListTileItem(
               title: const Text('Roles and Modules'),
@@ -229,7 +234,7 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
             ListTileItem(
               title: const Text('Logout'),
-              subtitle: context.read<ProfileCheckerBloc>().state.whenOrNull(success: (information) => 'Logout as ${information?.name}'),
+              subtitle: 'Logout as ${context.read<AccountBloc>().state.profile?.name}',
               leadingIcon: Icon(Ionicons.log_out_outline, color: Theme.of(context).colorScheme.primary,),
               onPressed: (){
               },

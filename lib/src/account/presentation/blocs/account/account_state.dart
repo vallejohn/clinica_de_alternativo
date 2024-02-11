@@ -8,5 +8,6 @@ class AccountState with _$AccountState {
     @Default(AccountStatus.initial) AccountStatus status,
     @Default('') String message,
     ProfileInformation? profile,
+    Role? role,
   }) = _AccountState;
 }
