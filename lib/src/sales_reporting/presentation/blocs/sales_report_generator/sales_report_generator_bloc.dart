@@ -1,4 +1,5 @@
 import 'package:clinica_de_alternativo/core/core.dart';
+import 'package:clinica_de_alternativo/core/extensions.dart';
 import 'package:clinica_de_alternativo/core/models/paginate.dart';
 import 'package:clinica_de_alternativo/src/sales_reporting/data/model/sales_report_documents.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,7 +29,7 @@ class SalesReportGeneratorBloc extends Bloc<SalesReportGeneratorEvent, SalesRepo
       dataOrError.fold((l){
         emit(state.copyWith(
           status: SalesGeneratorStatus.failed,
-          message: l.when(firebase: (error) => error.message!,),
+          message: l.getMessage(),
           loadingMoreItems: false,
         ));
       }, (doc){

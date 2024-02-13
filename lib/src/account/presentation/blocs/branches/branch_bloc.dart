@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:clinica_de_alternativo/core/extensions.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:clinica_de_alternativo/src/account/domain/account_usecases.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -16,6 +17,7 @@ class BranchBloc extends Bloc<BranchEvent, BranchState> {
   final _onAddUseCase = GetIt.instance<OnAddBranchUseCase>();
 
   BranchBloc() : super(const BranchState()) {
+    on<_OnStarted>((event, emit) => emit(state.copyWith(branches: event.branch)));
     on<_OnFetch>(_onFetch);
     on<_OnAdd>(_onAdd);
   }
@@ -26,7 +28,7 @@ class BranchBloc extends Bloc<BranchEvent, BranchState> {
     final dataOrError = await _onGetBranchUseCase();
 
     dataOrError.fold((l){
-      emit(state.copyWith(status: BranchStatus.failed, message: l.when(firebase: (error) => error.message!,)));
+      emit(state.copyWith(status: BranchStatus.failed, message: l.getMessage()));
     }, (branches){
       emit(state.copyWith(status: BranchStatus.success, message: 'Fetched successfully', branches: branches));
     });
@@ -38,7 +40,7 @@ class BranchBloc extends Bloc<BranchEvent, BranchState> {
     final dataOrError = await _onAddUseCase(event.branch);
 
     dataOrError.fold((l){
-      emit(state.copyWith(status: BranchStatus.failed, message: l.when(firebase: (error) => error.message!,)));
+      emit(state.copyWith(status: BranchStatus.failed, message: l.getMessage()));
     }, (branch){
       final branches = [...state.branches];
       branches.add(branch);

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:clinica_de_alternativo/core/extensions.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:get_it/get_it.dart';
@@ -16,6 +17,7 @@ class ModuleBloc extends Bloc<ModuleEvent, ModuleState> {
   final _onAddUseCase = GetIt.instance<OnAddModuleUseCase>();
 
   ModuleBloc() : super(const ModuleState()) {
+    on<_OnStarted>((event, emit) => emit(state.copyWith(modules: event.modules)));
     on<_OnFetch>(_onFetch);
     on<_OnAdd>(_onAdd);
   }
@@ -25,7 +27,7 @@ class ModuleBloc extends Bloc<ModuleEvent, ModuleState> {
     final dataOrError = await _onGetModulesUseCase();
 
     dataOrError.fold((l){
-      emit(state.copyWith(status: ModuleStatus.failed, message: l.when(firebase: (error) => error.message!,)));
+      emit(state.copyWith(status: ModuleStatus.failed, message: l.getMessage()));
     }, (modules){
       emit(state.copyWith(status: ModuleStatus.success, message: 'Fetched successfully', modules: modules));
     });
@@ -37,7 +39,7 @@ class ModuleBloc extends Bloc<ModuleEvent, ModuleState> {
     final dataOrError = await _onAddUseCase(event.module);
 
     dataOrError.fold((l){
-      emit(state.copyWith(status: ModuleStatus.failed, message: l.when(firebase: (error) => error.message!,)));
+      emit(state.copyWith(status: ModuleStatus.failed, message: l.getMessage()));
     }, (module){
       final modules = [...state.modules];
       modules.add(module);

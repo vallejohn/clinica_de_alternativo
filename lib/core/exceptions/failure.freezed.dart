@@ -16,50 +16,50 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Failure {
-  FirebaseException get firebaseException => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(FirebaseException firebaseException) firebase,
+    required TResult Function(DocumentException docException) documentException,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(FirebaseException firebaseException)? firebase,
+    TResult? Function(DocumentException docException)? documentException,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(FirebaseException firebaseException)? firebase,
+    TResult Function(DocumentException docException)? documentException,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Firebase value) firebase,
+    required TResult Function(_DocumentException value) documentException,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Firebase value)? firebase,
+    TResult? Function(_DocumentException value)? documentException,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Firebase value)? firebase,
+    TResult Function(_DocumentException value)? documentException,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $FailureCopyWith<Failure> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $FailureCopyWith<$Res> {
   factory $FailureCopyWith(Failure value, $Res Function(Failure) then) =
       _$FailureCopyWithImpl<$Res, Failure>;
-  @useResult
-  $Res call({FirebaseException firebaseException});
 }
 
 /// @nodoc
@@ -71,27 +71,13 @@ class _$FailureCopyWithImpl<$Res, $Val extends Failure>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? firebaseException = null,
-  }) {
-    return _then(_value.copyWith(
-      firebaseException: null == firebaseException
-          ? _value.firebaseException
-          : firebaseException // ignore: cast_nullable_to_non_nullable
-              as FirebaseException,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$FirebaseImplCopyWith<$Res> implements $FailureCopyWith<$Res> {
+abstract class _$$FirebaseImplCopyWith<$Res> {
   factory _$$FirebaseImplCopyWith(
           _$FirebaseImpl value, $Res Function(_$FirebaseImpl) then) =
       __$$FirebaseImplCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call({FirebaseException firebaseException});
 }
@@ -153,6 +139,7 @@ class _$FirebaseImpl implements _Firebase {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(FirebaseException firebaseException) firebase,
+    required TResult Function(DocumentException docException) documentException,
   }) {
     return firebase(firebaseException);
   }
@@ -161,6 +148,7 @@ class _$FirebaseImpl implements _Firebase {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(FirebaseException firebaseException)? firebase,
+    TResult? Function(DocumentException docException)? documentException,
   }) {
     return firebase?.call(firebaseException);
   }
@@ -169,6 +157,7 @@ class _$FirebaseImpl implements _Firebase {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(FirebaseException firebaseException)? firebase,
+    TResult Function(DocumentException docException)? documentException,
     required TResult orElse(),
   }) {
     if (firebase != null) {
@@ -181,6 +170,7 @@ class _$FirebaseImpl implements _Firebase {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Firebase value) firebase,
+    required TResult Function(_DocumentException value) documentException,
   }) {
     return firebase(this);
   }
@@ -189,6 +179,7 @@ class _$FirebaseImpl implements _Firebase {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Firebase value)? firebase,
+    TResult? Function(_DocumentException value)? documentException,
   }) {
     return firebase?.call(this);
   }
@@ -197,6 +188,7 @@ class _$FirebaseImpl implements _Firebase {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Firebase value)? firebase,
+    TResult Function(_DocumentException value)? documentException,
     required TResult orElse(),
   }) {
     if (firebase != null) {
@@ -210,10 +202,144 @@ abstract class _Firebase implements Failure {
   const factory _Firebase(final FirebaseException firebaseException) =
       _$FirebaseImpl;
 
-  @override
   FirebaseException get firebaseException;
-  @override
   @JsonKey(ignore: true)
   _$$FirebaseImplCopyWith<_$FirebaseImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$DocumentExceptionImplCopyWith<$Res> {
+  factory _$$DocumentExceptionImplCopyWith(_$DocumentExceptionImpl value,
+          $Res Function(_$DocumentExceptionImpl) then) =
+      __$$DocumentExceptionImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({DocumentException docException});
+}
+
+/// @nodoc
+class __$$DocumentExceptionImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$DocumentExceptionImpl>
+    implements _$$DocumentExceptionImplCopyWith<$Res> {
+  __$$DocumentExceptionImplCopyWithImpl(_$DocumentExceptionImpl _value,
+      $Res Function(_$DocumentExceptionImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? docException = null,
+  }) {
+    return _then(_$DocumentExceptionImpl(
+      null == docException
+          ? _value.docException
+          : docException // ignore: cast_nullable_to_non_nullable
+              as DocumentException,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$DocumentExceptionImpl implements _DocumentException {
+  const _$DocumentExceptionImpl(this.docException);
+
+  @override
+  final DocumentException docException;
+
+  @override
+  String toString() {
+    return 'Failure.documentException(docException: $docException)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DocumentExceptionImpl &&
+            (identical(other.docException, docException) ||
+                other.docException == docException));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, docException);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DocumentExceptionImplCopyWith<_$DocumentExceptionImpl> get copyWith =>
+      __$$DocumentExceptionImplCopyWithImpl<_$DocumentExceptionImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(FirebaseException firebaseException) firebase,
+    required TResult Function(DocumentException docException) documentException,
+  }) {
+    return documentException(docException);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(FirebaseException firebaseException)? firebase,
+    TResult? Function(DocumentException docException)? documentException,
+  }) {
+    return documentException?.call(docException);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(FirebaseException firebaseException)? firebase,
+    TResult Function(DocumentException docException)? documentException,
+    required TResult orElse(),
+  }) {
+    if (documentException != null) {
+      return documentException(docException);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Firebase value) firebase,
+    required TResult Function(_DocumentException value) documentException,
+  }) {
+    return documentException(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Firebase value)? firebase,
+    TResult? Function(_DocumentException value)? documentException,
+  }) {
+    return documentException?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Firebase value)? firebase,
+    TResult Function(_DocumentException value)? documentException,
+    required TResult orElse(),
+  }) {
+    if (documentException != null) {
+      return documentException(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DocumentException implements Failure {
+  const factory _DocumentException(final DocumentException docException) =
+      _$DocumentExceptionImpl;
+
+  DocumentException get docException;
+  @JsonKey(ignore: true)
+  _$$DocumentExceptionImplCopyWith<_$DocumentExceptionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

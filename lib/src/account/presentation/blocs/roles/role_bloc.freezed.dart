@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$RoleEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(List<Role> modules) onStarted,
     required TResult Function() onFetch,
     required TResult Function(Role role) onAdd,
     required TResult Function(Role role) onEdit,
@@ -27,6 +28,7 @@ mixin _$RoleEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(List<Role> modules)? onStarted,
     TResult? Function()? onFetch,
     TResult? Function(Role role)? onAdd,
     TResult? Function(Role role)? onEdit,
@@ -36,6 +38,7 @@ mixin _$RoleEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(List<Role> modules)? onStarted,
     TResult Function()? onFetch,
     TResult Function(Role role)? onAdd,
     TResult Function(Role role)? onEdit,
@@ -46,6 +49,7 @@ mixin _$RoleEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_OnStarted value) onStarted,
     required TResult Function(_OnFetch value) onFetch,
     required TResult Function(_OnAdd value) onAdd,
     required TResult Function(_OnEdit value) onEdit,
@@ -55,6 +59,7 @@ mixin _$RoleEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnStarted value)? onStarted,
     TResult? Function(_OnFetch value)? onFetch,
     TResult? Function(_OnAdd value)? onAdd,
     TResult? Function(_OnEdit value)? onEdit,
@@ -64,6 +69,7 @@ mixin _$RoleEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnStarted value)? onStarted,
     TResult Function(_OnFetch value)? onFetch,
     TResult Function(_OnAdd value)? onAdd,
     TResult Function(_OnEdit value)? onEdit,
@@ -89,6 +95,169 @@ class _$RoleEventCopyWithImpl<$Res, $Val extends RoleEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+}
+
+/// @nodoc
+abstract class _$$OnStartedImplCopyWith<$Res> {
+  factory _$$OnStartedImplCopyWith(
+          _$OnStartedImpl value, $Res Function(_$OnStartedImpl) then) =
+      __$$OnStartedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<Role> modules});
+}
+
+/// @nodoc
+class __$$OnStartedImplCopyWithImpl<$Res>
+    extends _$RoleEventCopyWithImpl<$Res, _$OnStartedImpl>
+    implements _$$OnStartedImplCopyWith<$Res> {
+  __$$OnStartedImplCopyWithImpl(
+      _$OnStartedImpl _value, $Res Function(_$OnStartedImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? modules = null,
+  }) {
+    return _then(_$OnStartedImpl(
+      null == modules
+          ? _value._modules
+          : modules // ignore: cast_nullable_to_non_nullable
+              as List<Role>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$OnStartedImpl implements _OnStarted {
+  const _$OnStartedImpl(final List<Role> modules) : _modules = modules;
+
+  final List<Role> _modules;
+  @override
+  List<Role> get modules {
+    if (_modules is EqualUnmodifiableListView) return _modules;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_modules);
+  }
+
+  @override
+  String toString() {
+    return 'RoleEvent.onStarted(modules: $modules)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$OnStartedImpl &&
+            const DeepCollectionEquality().equals(other._modules, _modules));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_modules));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$OnStartedImplCopyWith<_$OnStartedImpl> get copyWith =>
+      __$$OnStartedImplCopyWithImpl<_$OnStartedImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(List<Role> modules) onStarted,
+    required TResult Function() onFetch,
+    required TResult Function(Role role) onAdd,
+    required TResult Function(Role role) onEdit,
+    required TResult Function(Role role) onUpdate,
+    required TResult Function(Role role) onDelete,
+  }) {
+    return onStarted(modules);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(List<Role> modules)? onStarted,
+    TResult? Function()? onFetch,
+    TResult? Function(Role role)? onAdd,
+    TResult? Function(Role role)? onEdit,
+    TResult? Function(Role role)? onUpdate,
+    TResult? Function(Role role)? onDelete,
+  }) {
+    return onStarted?.call(modules);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(List<Role> modules)? onStarted,
+    TResult Function()? onFetch,
+    TResult Function(Role role)? onAdd,
+    TResult Function(Role role)? onEdit,
+    TResult Function(Role role)? onUpdate,
+    TResult Function(Role role)? onDelete,
+    required TResult orElse(),
+  }) {
+    if (onStarted != null) {
+      return onStarted(modules);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_OnStarted value) onStarted,
+    required TResult Function(_OnFetch value) onFetch,
+    required TResult Function(_OnAdd value) onAdd,
+    required TResult Function(_OnEdit value) onEdit,
+    required TResult Function(_OnUpdate value) onUpdate,
+    required TResult Function(_OnDelete value) onDelete,
+  }) {
+    return onStarted(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnStarted value)? onStarted,
+    TResult? Function(_OnFetch value)? onFetch,
+    TResult? Function(_OnAdd value)? onAdd,
+    TResult? Function(_OnEdit value)? onEdit,
+    TResult? Function(_OnUpdate value)? onUpdate,
+    TResult? Function(_OnDelete value)? onDelete,
+  }) {
+    return onStarted?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnStarted value)? onStarted,
+    TResult Function(_OnFetch value)? onFetch,
+    TResult Function(_OnAdd value)? onAdd,
+    TResult Function(_OnEdit value)? onEdit,
+    TResult Function(_OnUpdate value)? onUpdate,
+    TResult Function(_OnDelete value)? onDelete,
+    required TResult orElse(),
+  }) {
+    if (onStarted != null) {
+      return onStarted(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _OnStarted implements RoleEvent {
+  const factory _OnStarted(final List<Role> modules) = _$OnStartedImpl;
+
+  List<Role> get modules;
+  @JsonKey(ignore: true)
+  _$$OnStartedImplCopyWith<_$OnStartedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -129,6 +298,7 @@ class _$OnFetchImpl implements _OnFetch {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(List<Role> modules) onStarted,
     required TResult Function() onFetch,
     required TResult Function(Role role) onAdd,
     required TResult Function(Role role) onEdit,
@@ -141,6 +311,7 @@ class _$OnFetchImpl implements _OnFetch {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(List<Role> modules)? onStarted,
     TResult? Function()? onFetch,
     TResult? Function(Role role)? onAdd,
     TResult? Function(Role role)? onEdit,
@@ -153,6 +324,7 @@ class _$OnFetchImpl implements _OnFetch {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(List<Role> modules)? onStarted,
     TResult Function()? onFetch,
     TResult Function(Role role)? onAdd,
     TResult Function(Role role)? onEdit,
@@ -169,6 +341,7 @@ class _$OnFetchImpl implements _OnFetch {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_OnStarted value) onStarted,
     required TResult Function(_OnFetch value) onFetch,
     required TResult Function(_OnAdd value) onAdd,
     required TResult Function(_OnEdit value) onEdit,
@@ -181,6 +354,7 @@ class _$OnFetchImpl implements _OnFetch {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnStarted value)? onStarted,
     TResult? Function(_OnFetch value)? onFetch,
     TResult? Function(_OnAdd value)? onAdd,
     TResult? Function(_OnEdit value)? onEdit,
@@ -193,6 +367,7 @@ class _$OnFetchImpl implements _OnFetch {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnStarted value)? onStarted,
     TResult Function(_OnFetch value)? onFetch,
     TResult Function(_OnAdd value)? onAdd,
     TResult Function(_OnEdit value)? onEdit,
@@ -285,6 +460,7 @@ class _$OnAddImpl implements _OnAdd {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(List<Role> modules) onStarted,
     required TResult Function() onFetch,
     required TResult Function(Role role) onAdd,
     required TResult Function(Role role) onEdit,
@@ -297,6 +473,7 @@ class _$OnAddImpl implements _OnAdd {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(List<Role> modules)? onStarted,
     TResult? Function()? onFetch,
     TResult? Function(Role role)? onAdd,
     TResult? Function(Role role)? onEdit,
@@ -309,6 +486,7 @@ class _$OnAddImpl implements _OnAdd {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(List<Role> modules)? onStarted,
     TResult Function()? onFetch,
     TResult Function(Role role)? onAdd,
     TResult Function(Role role)? onEdit,
@@ -325,6 +503,7 @@ class _$OnAddImpl implements _OnAdd {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_OnStarted value) onStarted,
     required TResult Function(_OnFetch value) onFetch,
     required TResult Function(_OnAdd value) onAdd,
     required TResult Function(_OnEdit value) onEdit,
@@ -337,6 +516,7 @@ class _$OnAddImpl implements _OnAdd {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnStarted value)? onStarted,
     TResult? Function(_OnFetch value)? onFetch,
     TResult? Function(_OnAdd value)? onAdd,
     TResult? Function(_OnEdit value)? onEdit,
@@ -349,6 +529,7 @@ class _$OnAddImpl implements _OnAdd {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnStarted value)? onStarted,
     TResult Function(_OnFetch value)? onFetch,
     TResult Function(_OnAdd value)? onAdd,
     TResult Function(_OnEdit value)? onEdit,
@@ -446,6 +627,7 @@ class _$OnEditImpl implements _OnEdit {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(List<Role> modules) onStarted,
     required TResult Function() onFetch,
     required TResult Function(Role role) onAdd,
     required TResult Function(Role role) onEdit,
@@ -458,6 +640,7 @@ class _$OnEditImpl implements _OnEdit {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(List<Role> modules)? onStarted,
     TResult? Function()? onFetch,
     TResult? Function(Role role)? onAdd,
     TResult? Function(Role role)? onEdit,
@@ -470,6 +653,7 @@ class _$OnEditImpl implements _OnEdit {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(List<Role> modules)? onStarted,
     TResult Function()? onFetch,
     TResult Function(Role role)? onAdd,
     TResult Function(Role role)? onEdit,
@@ -486,6 +670,7 @@ class _$OnEditImpl implements _OnEdit {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_OnStarted value) onStarted,
     required TResult Function(_OnFetch value) onFetch,
     required TResult Function(_OnAdd value) onAdd,
     required TResult Function(_OnEdit value) onEdit,
@@ -498,6 +683,7 @@ class _$OnEditImpl implements _OnEdit {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnStarted value)? onStarted,
     TResult? Function(_OnFetch value)? onFetch,
     TResult? Function(_OnAdd value)? onAdd,
     TResult? Function(_OnEdit value)? onEdit,
@@ -510,6 +696,7 @@ class _$OnEditImpl implements _OnEdit {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnStarted value)? onStarted,
     TResult Function(_OnFetch value)? onFetch,
     TResult Function(_OnAdd value)? onAdd,
     TResult Function(_OnEdit value)? onEdit,
@@ -607,6 +794,7 @@ class _$OnUpdateImpl implements _OnUpdate {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(List<Role> modules) onStarted,
     required TResult Function() onFetch,
     required TResult Function(Role role) onAdd,
     required TResult Function(Role role) onEdit,
@@ -619,6 +807,7 @@ class _$OnUpdateImpl implements _OnUpdate {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(List<Role> modules)? onStarted,
     TResult? Function()? onFetch,
     TResult? Function(Role role)? onAdd,
     TResult? Function(Role role)? onEdit,
@@ -631,6 +820,7 @@ class _$OnUpdateImpl implements _OnUpdate {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(List<Role> modules)? onStarted,
     TResult Function()? onFetch,
     TResult Function(Role role)? onAdd,
     TResult Function(Role role)? onEdit,
@@ -647,6 +837,7 @@ class _$OnUpdateImpl implements _OnUpdate {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_OnStarted value) onStarted,
     required TResult Function(_OnFetch value) onFetch,
     required TResult Function(_OnAdd value) onAdd,
     required TResult Function(_OnEdit value) onEdit,
@@ -659,6 +850,7 @@ class _$OnUpdateImpl implements _OnUpdate {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnStarted value)? onStarted,
     TResult? Function(_OnFetch value)? onFetch,
     TResult? Function(_OnAdd value)? onAdd,
     TResult? Function(_OnEdit value)? onEdit,
@@ -671,6 +863,7 @@ class _$OnUpdateImpl implements _OnUpdate {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnStarted value)? onStarted,
     TResult Function(_OnFetch value)? onFetch,
     TResult Function(_OnAdd value)? onAdd,
     TResult Function(_OnEdit value)? onEdit,
@@ -768,6 +961,7 @@ class _$OnDeleteImpl implements _OnDelete {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(List<Role> modules) onStarted,
     required TResult Function() onFetch,
     required TResult Function(Role role) onAdd,
     required TResult Function(Role role) onEdit,
@@ -780,6 +974,7 @@ class _$OnDeleteImpl implements _OnDelete {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(List<Role> modules)? onStarted,
     TResult? Function()? onFetch,
     TResult? Function(Role role)? onAdd,
     TResult? Function(Role role)? onEdit,
@@ -792,6 +987,7 @@ class _$OnDeleteImpl implements _OnDelete {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(List<Role> modules)? onStarted,
     TResult Function()? onFetch,
     TResult Function(Role role)? onAdd,
     TResult Function(Role role)? onEdit,
@@ -808,6 +1004,7 @@ class _$OnDeleteImpl implements _OnDelete {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_OnStarted value) onStarted,
     required TResult Function(_OnFetch value) onFetch,
     required TResult Function(_OnAdd value) onAdd,
     required TResult Function(_OnEdit value) onEdit,
@@ -820,6 +1017,7 @@ class _$OnDeleteImpl implements _OnDelete {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnStarted value)? onStarted,
     TResult? Function(_OnFetch value)? onFetch,
     TResult? Function(_OnAdd value)? onAdd,
     TResult? Function(_OnEdit value)? onEdit,
@@ -832,6 +1030,7 @@ class _$OnDeleteImpl implements _OnDelete {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnStarted value)? onStarted,
     TResult Function(_OnFetch value)? onFetch,
     TResult Function(_OnAdd value)? onAdd,
     TResult Function(_OnEdit value)? onEdit,

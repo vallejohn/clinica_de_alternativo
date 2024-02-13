@@ -3,6 +3,7 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:clinica_de_alternativo/core/global_widgets/list_tile_item.dart';
+import 'package:clinica_de_alternativo/core/global_widgets/security_role_handler.dart';
 import 'package:clinica_de_alternativo/core/router/app_router.dart';
 import 'package:clinica_de_alternativo/src/account/presentation/blocs/modules/module_bloc.dart';
 import 'package:clinica_de_alternativo/src/account/presentation/blocs/roles/role_bloc.dart';

@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ProductTypeEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(List<ProductType> types) onStarted,
     required TResult Function() onFetch,
     required TResult Function(ProductType type) onAdd,
     required TResult Function(ProductType type) onEdit,
@@ -26,6 +27,7 @@ mixin _$ProductTypeEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(List<ProductType> types)? onStarted,
     TResult? Function()? onFetch,
     TResult? Function(ProductType type)? onAdd,
     TResult? Function(ProductType type)? onEdit,
@@ -34,6 +36,7 @@ mixin _$ProductTypeEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(List<ProductType> types)? onStarted,
     TResult Function()? onFetch,
     TResult Function(ProductType type)? onAdd,
     TResult Function(ProductType type)? onEdit,
@@ -43,6 +46,7 @@ mixin _$ProductTypeEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_OnStarted value) onStarted,
     required TResult Function(_OnFetch value) onFetch,
     required TResult Function(_OnAdd value) onAdd,
     required TResult Function(_OnEdit value) onEdit,
@@ -51,6 +55,7 @@ mixin _$ProductTypeEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnStarted value)? onStarted,
     TResult? Function(_OnFetch value)? onFetch,
     TResult? Function(_OnAdd value)? onAdd,
     TResult? Function(_OnEdit value)? onEdit,
@@ -59,6 +64,7 @@ mixin _$ProductTypeEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnStarted value)? onStarted,
     TResult Function(_OnFetch value)? onFetch,
     TResult Function(_OnAdd value)? onAdd,
     TResult Function(_OnEdit value)? onEdit,
@@ -84,6 +90,163 @@ class _$ProductTypeEventCopyWithImpl<$Res, $Val extends ProductTypeEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+}
+
+/// @nodoc
+abstract class _$$OnStartedImplCopyWith<$Res> {
+  factory _$$OnStartedImplCopyWith(
+          _$OnStartedImpl value, $Res Function(_$OnStartedImpl) then) =
+      __$$OnStartedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<ProductType> types});
+}
+
+/// @nodoc
+class __$$OnStartedImplCopyWithImpl<$Res>
+    extends _$ProductTypeEventCopyWithImpl<$Res, _$OnStartedImpl>
+    implements _$$OnStartedImplCopyWith<$Res> {
+  __$$OnStartedImplCopyWithImpl(
+      _$OnStartedImpl _value, $Res Function(_$OnStartedImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? types = null,
+  }) {
+    return _then(_$OnStartedImpl(
+      null == types
+          ? _value._types
+          : types // ignore: cast_nullable_to_non_nullable
+              as List<ProductType>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$OnStartedImpl implements _OnStarted {
+  const _$OnStartedImpl(final List<ProductType> types) : _types = types;
+
+  final List<ProductType> _types;
+  @override
+  List<ProductType> get types {
+    if (_types is EqualUnmodifiableListView) return _types;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_types);
+  }
+
+  @override
+  String toString() {
+    return 'ProductTypeEvent.onStarted(types: $types)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$OnStartedImpl &&
+            const DeepCollectionEquality().equals(other._types, _types));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_types));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$OnStartedImplCopyWith<_$OnStartedImpl> get copyWith =>
+      __$$OnStartedImplCopyWithImpl<_$OnStartedImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(List<ProductType> types) onStarted,
+    required TResult Function() onFetch,
+    required TResult Function(ProductType type) onAdd,
+    required TResult Function(ProductType type) onEdit,
+    required TResult Function(String id) onDelete,
+  }) {
+    return onStarted(types);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(List<ProductType> types)? onStarted,
+    TResult? Function()? onFetch,
+    TResult? Function(ProductType type)? onAdd,
+    TResult? Function(ProductType type)? onEdit,
+    TResult? Function(String id)? onDelete,
+  }) {
+    return onStarted?.call(types);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(List<ProductType> types)? onStarted,
+    TResult Function()? onFetch,
+    TResult Function(ProductType type)? onAdd,
+    TResult Function(ProductType type)? onEdit,
+    TResult Function(String id)? onDelete,
+    required TResult orElse(),
+  }) {
+    if (onStarted != null) {
+      return onStarted(types);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_OnStarted value) onStarted,
+    required TResult Function(_OnFetch value) onFetch,
+    required TResult Function(_OnAdd value) onAdd,
+    required TResult Function(_OnEdit value) onEdit,
+    required TResult Function(_OnDelete value) onDelete,
+  }) {
+    return onStarted(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnStarted value)? onStarted,
+    TResult? Function(_OnFetch value)? onFetch,
+    TResult? Function(_OnAdd value)? onAdd,
+    TResult? Function(_OnEdit value)? onEdit,
+    TResult? Function(_OnDelete value)? onDelete,
+  }) {
+    return onStarted?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnStarted value)? onStarted,
+    TResult Function(_OnFetch value)? onFetch,
+    TResult Function(_OnAdd value)? onAdd,
+    TResult Function(_OnEdit value)? onEdit,
+    TResult Function(_OnDelete value)? onDelete,
+    required TResult orElse(),
+  }) {
+    if (onStarted != null) {
+      return onStarted(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _OnStarted implements ProductTypeEvent {
+  const factory _OnStarted(final List<ProductType> types) = _$OnStartedImpl;
+
+  List<ProductType> get types;
+  @JsonKey(ignore: true)
+  _$$OnStartedImplCopyWith<_$OnStartedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -124,6 +287,7 @@ class _$OnFetchImpl implements _OnFetch {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(List<ProductType> types) onStarted,
     required TResult Function() onFetch,
     required TResult Function(ProductType type) onAdd,
     required TResult Function(ProductType type) onEdit,
@@ -135,6 +299,7 @@ class _$OnFetchImpl implements _OnFetch {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(List<ProductType> types)? onStarted,
     TResult? Function()? onFetch,
     TResult? Function(ProductType type)? onAdd,
     TResult? Function(ProductType type)? onEdit,
@@ -146,6 +311,7 @@ class _$OnFetchImpl implements _OnFetch {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(List<ProductType> types)? onStarted,
     TResult Function()? onFetch,
     TResult Function(ProductType type)? onAdd,
     TResult Function(ProductType type)? onEdit,
@@ -161,6 +327,7 @@ class _$OnFetchImpl implements _OnFetch {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_OnStarted value) onStarted,
     required TResult Function(_OnFetch value) onFetch,
     required TResult Function(_OnAdd value) onAdd,
     required TResult Function(_OnEdit value) onEdit,
@@ -172,6 +339,7 @@ class _$OnFetchImpl implements _OnFetch {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnStarted value)? onStarted,
     TResult? Function(_OnFetch value)? onFetch,
     TResult? Function(_OnAdd value)? onAdd,
     TResult? Function(_OnEdit value)? onEdit,
@@ -183,6 +351,7 @@ class _$OnFetchImpl implements _OnFetch {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnStarted value)? onStarted,
     TResult Function(_OnFetch value)? onFetch,
     TResult Function(_OnAdd value)? onAdd,
     TResult Function(_OnEdit value)? onEdit,
@@ -274,6 +443,7 @@ class _$OnAddImpl implements _OnAdd {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(List<ProductType> types) onStarted,
     required TResult Function() onFetch,
     required TResult Function(ProductType type) onAdd,
     required TResult Function(ProductType type) onEdit,
@@ -285,6 +455,7 @@ class _$OnAddImpl implements _OnAdd {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(List<ProductType> types)? onStarted,
     TResult? Function()? onFetch,
     TResult? Function(ProductType type)? onAdd,
     TResult? Function(ProductType type)? onEdit,
@@ -296,6 +467,7 @@ class _$OnAddImpl implements _OnAdd {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(List<ProductType> types)? onStarted,
     TResult Function()? onFetch,
     TResult Function(ProductType type)? onAdd,
     TResult Function(ProductType type)? onEdit,
@@ -311,6 +483,7 @@ class _$OnAddImpl implements _OnAdd {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_OnStarted value) onStarted,
     required TResult Function(_OnFetch value) onFetch,
     required TResult Function(_OnAdd value) onAdd,
     required TResult Function(_OnEdit value) onEdit,
@@ -322,6 +495,7 @@ class _$OnAddImpl implements _OnAdd {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnStarted value)? onStarted,
     TResult? Function(_OnFetch value)? onFetch,
     TResult? Function(_OnAdd value)? onAdd,
     TResult? Function(_OnEdit value)? onEdit,
@@ -333,6 +507,7 @@ class _$OnAddImpl implements _OnAdd {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnStarted value)? onStarted,
     TResult Function(_OnFetch value)? onFetch,
     TResult Function(_OnAdd value)? onAdd,
     TResult Function(_OnEdit value)? onEdit,
@@ -429,6 +604,7 @@ class _$OnEditImpl implements _OnEdit {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(List<ProductType> types) onStarted,
     required TResult Function() onFetch,
     required TResult Function(ProductType type) onAdd,
     required TResult Function(ProductType type) onEdit,
@@ -440,6 +616,7 @@ class _$OnEditImpl implements _OnEdit {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(List<ProductType> types)? onStarted,
     TResult? Function()? onFetch,
     TResult? Function(ProductType type)? onAdd,
     TResult? Function(ProductType type)? onEdit,
@@ -451,6 +628,7 @@ class _$OnEditImpl implements _OnEdit {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(List<ProductType> types)? onStarted,
     TResult Function()? onFetch,
     TResult Function(ProductType type)? onAdd,
     TResult Function(ProductType type)? onEdit,
@@ -466,6 +644,7 @@ class _$OnEditImpl implements _OnEdit {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_OnStarted value) onStarted,
     required TResult Function(_OnFetch value) onFetch,
     required TResult Function(_OnAdd value) onAdd,
     required TResult Function(_OnEdit value) onEdit,
@@ -477,6 +656,7 @@ class _$OnEditImpl implements _OnEdit {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnStarted value)? onStarted,
     TResult? Function(_OnFetch value)? onFetch,
     TResult? Function(_OnAdd value)? onAdd,
     TResult? Function(_OnEdit value)? onEdit,
@@ -488,6 +668,7 @@ class _$OnEditImpl implements _OnEdit {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnStarted value)? onStarted,
     TResult Function(_OnFetch value)? onFetch,
     TResult Function(_OnAdd value)? onAdd,
     TResult Function(_OnEdit value)? onEdit,
@@ -574,6 +755,7 @@ class _$OnDeleteImpl implements _OnDelete {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(List<ProductType> types) onStarted,
     required TResult Function() onFetch,
     required TResult Function(ProductType type) onAdd,
     required TResult Function(ProductType type) onEdit,
@@ -585,6 +767,7 @@ class _$OnDeleteImpl implements _OnDelete {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(List<ProductType> types)? onStarted,
     TResult? Function()? onFetch,
     TResult? Function(ProductType type)? onAdd,
     TResult? Function(ProductType type)? onEdit,
@@ -596,6 +779,7 @@ class _$OnDeleteImpl implements _OnDelete {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(List<ProductType> types)? onStarted,
     TResult Function()? onFetch,
     TResult Function(ProductType type)? onAdd,
     TResult Function(ProductType type)? onEdit,
@@ -611,6 +795,7 @@ class _$OnDeleteImpl implements _OnDelete {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_OnStarted value) onStarted,
     required TResult Function(_OnFetch value) onFetch,
     required TResult Function(_OnAdd value) onAdd,
     required TResult Function(_OnEdit value) onEdit,
@@ -622,6 +807,7 @@ class _$OnDeleteImpl implements _OnDelete {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnStarted value)? onStarted,
     TResult? Function(_OnFetch value)? onFetch,
     TResult? Function(_OnAdd value)? onAdd,
     TResult? Function(_OnEdit value)? onEdit,
@@ -633,6 +819,7 @@ class _$OnDeleteImpl implements _OnDelete {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnStarted value)? onStarted,
     TResult Function(_OnFetch value)? onFetch,
     TResult Function(_OnAdd value)? onAdd,
     TResult Function(_OnEdit value)? onEdit,

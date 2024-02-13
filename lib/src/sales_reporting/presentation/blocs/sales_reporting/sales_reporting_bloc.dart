@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:clinica_de_alternativo/core/core.dart';
+import 'package:clinica_de_alternativo/core/extensions.dart';
 import 'package:clinica_de_alternativo/core/models/paginate.dart';
 import 'package:clinica_de_alternativo/src/account/data/models/branch.dart';
 import 'package:clinica_de_alternativo/src/sales_reporting/core/params.dart';
@@ -32,7 +33,7 @@ class SalesReportingBloc extends Bloc<SalesReportingEvent, SalesReportingState> 
     final dataOrError = await _sendReportUseCase(event.salesReport);
     
     dataOrError.fold((l){
-      emit(state.copyWith(status: SalesReportingStatus.failed, message: l.when(firebase: (error) => error.message!,)));
+      emit(state.copyWith(status: SalesReportingStatus.failed, message: l.getMessage()));
     }, (salesReports){
       final dateNow = DateTime.now();
 
@@ -70,7 +71,7 @@ class SalesReportingBloc extends Bloc<SalesReportingEvent, SalesReportingState> 
     ));
 
     dataOrError.fold((l){
-      emit(state.copyWith(status: SalesReportingStatus.failed, message: l.when(firebase: (error) => error.message!,), loadingMoreItems: false));
+      emit(state.copyWith(status: SalesReportingStatus.failed, message: l.getMessage(), loadingMoreItems: false));
     }, (docs){
       final salesList = [...state.salesReportDocs!.salesReports];
       salesList.addAll(docs.salesReports);

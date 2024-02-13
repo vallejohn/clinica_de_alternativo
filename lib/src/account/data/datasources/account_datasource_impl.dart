@@ -17,6 +17,12 @@ class AccountDatasourceImpl extends  AccountDatasource{
   @override
   Future<Role> addRole(Role role)async {
     final modifiedRole = role.copyWith(code: role.name.replaceAll(' ', '_').toLowerCase());
+    
+    final roleSnapshot = await FirestoreCollection.roles().where('code', isEqualTo: modifiedRole.code).get();
+    if(roleSnapshot.docs.isNotEmpty){
+      throw DuplicateRecordException();
+    }
+    
     final result = await FirestoreCollection.roles().add(modifiedRole.toJson());
     return modifiedRole.copyWith(id: result.id);
   }

@@ -1,3 +1,4 @@
+import 'package:clinica_de_alternativo/core/extensions.dart';
 import 'package:clinica_de_alternativo/src/authentication/domain/authentication_usecases.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:clinica_de_alternativo/src/authentication/data/model/profile_information.dart';
@@ -22,7 +23,7 @@ class ProfileCheckerBloc extends Bloc<ProfileCheckerEvent, ProfileCheckerState> 
       final dataOrError = await _onCheckProfileInfoUseCase(event.userId);
 
       dataOrError.fold((l){
-        emit(state.copyWith(message: l.when(firebase: (error) => error.message!,), status: ProfileCheckStatus.failed));
+        emit(state.copyWith(message: l.getMessage(), status: ProfileCheckStatus.failed));
       }, (profileInfo){
         emit(state.copyWith(profile: profileInfo, status: ProfileCheckStatus.success));
       });
@@ -35,7 +36,7 @@ class ProfileCheckerBloc extends Bloc<ProfileCheckerEvent, ProfileCheckerState> 
       final dataOrError = await _onUpdateProfileInfoUseCase(profile);
 
       dataOrError.fold((l){
-        emit(state.copyWith(message: l.when(firebase: (error) => error.message!,), status: ProfileCheckStatus.failed));
+        emit(state.copyWith(message: l.getMessage(), status: ProfileCheckStatus.failed));
       }, (_){
         emit(state.copyWith(profile: profile, status: ProfileCheckStatus.success));
       });

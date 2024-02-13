@@ -18,21 +18,27 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AccountEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(ProfileInformation profileInformation) onStarted,
     required TResult Function(String id, Role? role) onGetDetails,
+    required TResult Function() onListenToChanges,
     required TResult Function(ProfileInformation profile) onUpdateRoleDetails,
     required TResult Function(ProfileInformation profile) onSaveDetails,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(ProfileInformation profileInformation)? onStarted,
     TResult? Function(String id, Role? role)? onGetDetails,
+    TResult? Function()? onListenToChanges,
     TResult? Function(ProfileInformation profile)? onUpdateRoleDetails,
     TResult? Function(ProfileInformation profile)? onSaveDetails,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(ProfileInformation profileInformation)? onStarted,
     TResult Function(String id, Role? role)? onGetDetails,
+    TResult Function()? onListenToChanges,
     TResult Function(ProfileInformation profile)? onUpdateRoleDetails,
     TResult Function(ProfileInformation profile)? onSaveDetails,
     required TResult orElse(),
@@ -40,21 +46,27 @@ mixin _$AccountEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_OnStarted value) onStarted,
     required TResult Function(_OnGetDetails value) onGetDetails,
+    required TResult Function(_OnListenToChanges value) onListenToChanges,
     required TResult Function(_OnUpdateDetails value) onUpdateRoleDetails,
     required TResult Function(_OnSaveDetails value) onSaveDetails,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnStarted value)? onStarted,
     TResult? Function(_OnGetDetails value)? onGetDetails,
+    TResult? Function(_OnListenToChanges value)? onListenToChanges,
     TResult? Function(_OnUpdateDetails value)? onUpdateRoleDetails,
     TResult? Function(_OnSaveDetails value)? onSaveDetails,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnStarted value)? onStarted,
     TResult Function(_OnGetDetails value)? onGetDetails,
+    TResult Function(_OnListenToChanges value)? onListenToChanges,
     TResult Function(_OnUpdateDetails value)? onUpdateRoleDetails,
     TResult Function(_OnSaveDetails value)? onSaveDetails,
     required TResult orElse(),
@@ -78,6 +90,170 @@ class _$AccountEventCopyWithImpl<$Res, $Val extends AccountEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+}
+
+/// @nodoc
+abstract class _$$OnStartedImplCopyWith<$Res> {
+  factory _$$OnStartedImplCopyWith(
+          _$OnStartedImpl value, $Res Function(_$OnStartedImpl) then) =
+      __$$OnStartedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({ProfileInformation profileInformation});
+
+  $ProfileInformationCopyWith<$Res> get profileInformation;
+}
+
+/// @nodoc
+class __$$OnStartedImplCopyWithImpl<$Res>
+    extends _$AccountEventCopyWithImpl<$Res, _$OnStartedImpl>
+    implements _$$OnStartedImplCopyWith<$Res> {
+  __$$OnStartedImplCopyWithImpl(
+      _$OnStartedImpl _value, $Res Function(_$OnStartedImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? profileInformation = null,
+  }) {
+    return _then(_$OnStartedImpl(
+      null == profileInformation
+          ? _value.profileInformation
+          : profileInformation // ignore: cast_nullable_to_non_nullable
+              as ProfileInformation,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ProfileInformationCopyWith<$Res> get profileInformation {
+    return $ProfileInformationCopyWith<$Res>(_value.profileInformation,
+        (value) {
+      return _then(_value.copyWith(profileInformation: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$OnStartedImpl implements _OnStarted {
+  const _$OnStartedImpl(this.profileInformation);
+
+  @override
+  final ProfileInformation profileInformation;
+
+  @override
+  String toString() {
+    return 'AccountEvent.onStarted(profileInformation: $profileInformation)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$OnStartedImpl &&
+            (identical(other.profileInformation, profileInformation) ||
+                other.profileInformation == profileInformation));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, profileInformation);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$OnStartedImplCopyWith<_$OnStartedImpl> get copyWith =>
+      __$$OnStartedImplCopyWithImpl<_$OnStartedImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(ProfileInformation profileInformation) onStarted,
+    required TResult Function(String id, Role? role) onGetDetails,
+    required TResult Function() onListenToChanges,
+    required TResult Function(ProfileInformation profile) onUpdateRoleDetails,
+    required TResult Function(ProfileInformation profile) onSaveDetails,
+  }) {
+    return onStarted(profileInformation);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(ProfileInformation profileInformation)? onStarted,
+    TResult? Function(String id, Role? role)? onGetDetails,
+    TResult? Function()? onListenToChanges,
+    TResult? Function(ProfileInformation profile)? onUpdateRoleDetails,
+    TResult? Function(ProfileInformation profile)? onSaveDetails,
+  }) {
+    return onStarted?.call(profileInformation);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(ProfileInformation profileInformation)? onStarted,
+    TResult Function(String id, Role? role)? onGetDetails,
+    TResult Function()? onListenToChanges,
+    TResult Function(ProfileInformation profile)? onUpdateRoleDetails,
+    TResult Function(ProfileInformation profile)? onSaveDetails,
+    required TResult orElse(),
+  }) {
+    if (onStarted != null) {
+      return onStarted(profileInformation);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_OnStarted value) onStarted,
+    required TResult Function(_OnGetDetails value) onGetDetails,
+    required TResult Function(_OnListenToChanges value) onListenToChanges,
+    required TResult Function(_OnUpdateDetails value) onUpdateRoleDetails,
+    required TResult Function(_OnSaveDetails value) onSaveDetails,
+  }) {
+    return onStarted(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnStarted value)? onStarted,
+    TResult? Function(_OnGetDetails value)? onGetDetails,
+    TResult? Function(_OnListenToChanges value)? onListenToChanges,
+    TResult? Function(_OnUpdateDetails value)? onUpdateRoleDetails,
+    TResult? Function(_OnSaveDetails value)? onSaveDetails,
+  }) {
+    return onStarted?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnStarted value)? onStarted,
+    TResult Function(_OnGetDetails value)? onGetDetails,
+    TResult Function(_OnListenToChanges value)? onListenToChanges,
+    TResult Function(_OnUpdateDetails value)? onUpdateRoleDetails,
+    TResult Function(_OnSaveDetails value)? onSaveDetails,
+    required TResult orElse(),
+  }) {
+    if (onStarted != null) {
+      return onStarted(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _OnStarted implements AccountEvent {
+  const factory _OnStarted(final ProfileInformation profileInformation) =
+      _$OnStartedImpl;
+
+  ProfileInformation get profileInformation;
+  @JsonKey(ignore: true)
+  _$$OnStartedImplCopyWith<_$OnStartedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -166,7 +342,9 @@ class _$OnGetDetailsImpl implements _OnGetDetails {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(ProfileInformation profileInformation) onStarted,
     required TResult Function(String id, Role? role) onGetDetails,
+    required TResult Function() onListenToChanges,
     required TResult Function(ProfileInformation profile) onUpdateRoleDetails,
     required TResult Function(ProfileInformation profile) onSaveDetails,
   }) {
@@ -176,7 +354,9 @@ class _$OnGetDetailsImpl implements _OnGetDetails {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(ProfileInformation profileInformation)? onStarted,
     TResult? Function(String id, Role? role)? onGetDetails,
+    TResult? Function()? onListenToChanges,
     TResult? Function(ProfileInformation profile)? onUpdateRoleDetails,
     TResult? Function(ProfileInformation profile)? onSaveDetails,
   }) {
@@ -186,7 +366,9 @@ class _$OnGetDetailsImpl implements _OnGetDetails {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(ProfileInformation profileInformation)? onStarted,
     TResult Function(String id, Role? role)? onGetDetails,
+    TResult Function()? onListenToChanges,
     TResult Function(ProfileInformation profile)? onUpdateRoleDetails,
     TResult Function(ProfileInformation profile)? onSaveDetails,
     required TResult orElse(),
@@ -200,7 +382,9 @@ class _$OnGetDetailsImpl implements _OnGetDetails {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_OnStarted value) onStarted,
     required TResult Function(_OnGetDetails value) onGetDetails,
+    required TResult Function(_OnListenToChanges value) onListenToChanges,
     required TResult Function(_OnUpdateDetails value) onUpdateRoleDetails,
     required TResult Function(_OnSaveDetails value) onSaveDetails,
   }) {
@@ -210,7 +394,9 @@ class _$OnGetDetailsImpl implements _OnGetDetails {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnStarted value)? onStarted,
     TResult? Function(_OnGetDetails value)? onGetDetails,
+    TResult? Function(_OnListenToChanges value)? onListenToChanges,
     TResult? Function(_OnUpdateDetails value)? onUpdateRoleDetails,
     TResult? Function(_OnSaveDetails value)? onSaveDetails,
   }) {
@@ -220,7 +406,9 @@ class _$OnGetDetailsImpl implements _OnGetDetails {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnStarted value)? onStarted,
     TResult Function(_OnGetDetails value)? onGetDetails,
+    TResult Function(_OnListenToChanges value)? onListenToChanges,
     TResult Function(_OnUpdateDetails value)? onUpdateRoleDetails,
     TResult Function(_OnSaveDetails value)? onSaveDetails,
     required TResult orElse(),
@@ -241,6 +429,126 @@ abstract class _OnGetDetails implements AccountEvent {
   @JsonKey(ignore: true)
   _$$OnGetDetailsImplCopyWith<_$OnGetDetailsImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$OnListenToChangesImplCopyWith<$Res> {
+  factory _$$OnListenToChangesImplCopyWith(_$OnListenToChangesImpl value,
+          $Res Function(_$OnListenToChangesImpl) then) =
+      __$$OnListenToChangesImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$OnListenToChangesImplCopyWithImpl<$Res>
+    extends _$AccountEventCopyWithImpl<$Res, _$OnListenToChangesImpl>
+    implements _$$OnListenToChangesImplCopyWith<$Res> {
+  __$$OnListenToChangesImplCopyWithImpl(_$OnListenToChangesImpl _value,
+      $Res Function(_$OnListenToChangesImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$OnListenToChangesImpl implements _OnListenToChanges {
+  const _$OnListenToChangesImpl();
+
+  @override
+  String toString() {
+    return 'AccountEvent.onListenToChanges()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$OnListenToChangesImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(ProfileInformation profileInformation) onStarted,
+    required TResult Function(String id, Role? role) onGetDetails,
+    required TResult Function() onListenToChanges,
+    required TResult Function(ProfileInformation profile) onUpdateRoleDetails,
+    required TResult Function(ProfileInformation profile) onSaveDetails,
+  }) {
+    return onListenToChanges();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(ProfileInformation profileInformation)? onStarted,
+    TResult? Function(String id, Role? role)? onGetDetails,
+    TResult? Function()? onListenToChanges,
+    TResult? Function(ProfileInformation profile)? onUpdateRoleDetails,
+    TResult? Function(ProfileInformation profile)? onSaveDetails,
+  }) {
+    return onListenToChanges?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(ProfileInformation profileInformation)? onStarted,
+    TResult Function(String id, Role? role)? onGetDetails,
+    TResult Function()? onListenToChanges,
+    TResult Function(ProfileInformation profile)? onUpdateRoleDetails,
+    TResult Function(ProfileInformation profile)? onSaveDetails,
+    required TResult orElse(),
+  }) {
+    if (onListenToChanges != null) {
+      return onListenToChanges();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_OnStarted value) onStarted,
+    required TResult Function(_OnGetDetails value) onGetDetails,
+    required TResult Function(_OnListenToChanges value) onListenToChanges,
+    required TResult Function(_OnUpdateDetails value) onUpdateRoleDetails,
+    required TResult Function(_OnSaveDetails value) onSaveDetails,
+  }) {
+    return onListenToChanges(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnStarted value)? onStarted,
+    TResult? Function(_OnGetDetails value)? onGetDetails,
+    TResult? Function(_OnListenToChanges value)? onListenToChanges,
+    TResult? Function(_OnUpdateDetails value)? onUpdateRoleDetails,
+    TResult? Function(_OnSaveDetails value)? onSaveDetails,
+  }) {
+    return onListenToChanges?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnStarted value)? onStarted,
+    TResult Function(_OnGetDetails value)? onGetDetails,
+    TResult Function(_OnListenToChanges value)? onListenToChanges,
+    TResult Function(_OnUpdateDetails value)? onUpdateRoleDetails,
+    TResult Function(_OnSaveDetails value)? onSaveDetails,
+    required TResult orElse(),
+  }) {
+    if (onListenToChanges != null) {
+      return onListenToChanges(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _OnListenToChanges implements AccountEvent {
+  const factory _OnListenToChanges() = _$OnListenToChangesImpl;
 }
 
 /// @nodoc
@@ -318,7 +626,9 @@ class _$OnUpdateDetailsImpl implements _OnUpdateDetails {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(ProfileInformation profileInformation) onStarted,
     required TResult Function(String id, Role? role) onGetDetails,
+    required TResult Function() onListenToChanges,
     required TResult Function(ProfileInformation profile) onUpdateRoleDetails,
     required TResult Function(ProfileInformation profile) onSaveDetails,
   }) {
@@ -328,7 +638,9 @@ class _$OnUpdateDetailsImpl implements _OnUpdateDetails {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(ProfileInformation profileInformation)? onStarted,
     TResult? Function(String id, Role? role)? onGetDetails,
+    TResult? Function()? onListenToChanges,
     TResult? Function(ProfileInformation profile)? onUpdateRoleDetails,
     TResult? Function(ProfileInformation profile)? onSaveDetails,
   }) {
@@ -338,7 +650,9 @@ class _$OnUpdateDetailsImpl implements _OnUpdateDetails {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(ProfileInformation profileInformation)? onStarted,
     TResult Function(String id, Role? role)? onGetDetails,
+    TResult Function()? onListenToChanges,
     TResult Function(ProfileInformation profile)? onUpdateRoleDetails,
     TResult Function(ProfileInformation profile)? onSaveDetails,
     required TResult orElse(),
@@ -352,7 +666,9 @@ class _$OnUpdateDetailsImpl implements _OnUpdateDetails {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_OnStarted value) onStarted,
     required TResult Function(_OnGetDetails value) onGetDetails,
+    required TResult Function(_OnListenToChanges value) onListenToChanges,
     required TResult Function(_OnUpdateDetails value) onUpdateRoleDetails,
     required TResult Function(_OnSaveDetails value) onSaveDetails,
   }) {
@@ -362,7 +678,9 @@ class _$OnUpdateDetailsImpl implements _OnUpdateDetails {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnStarted value)? onStarted,
     TResult? Function(_OnGetDetails value)? onGetDetails,
+    TResult? Function(_OnListenToChanges value)? onListenToChanges,
     TResult? Function(_OnUpdateDetails value)? onUpdateRoleDetails,
     TResult? Function(_OnSaveDetails value)? onSaveDetails,
   }) {
@@ -372,7 +690,9 @@ class _$OnUpdateDetailsImpl implements _OnUpdateDetails {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnStarted value)? onStarted,
     TResult Function(_OnGetDetails value)? onGetDetails,
+    TResult Function(_OnListenToChanges value)? onListenToChanges,
     TResult Function(_OnUpdateDetails value)? onUpdateRoleDetails,
     TResult Function(_OnSaveDetails value)? onSaveDetails,
     required TResult orElse(),
@@ -468,7 +788,9 @@ class _$OnSaveDetailsImpl implements _OnSaveDetails {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(ProfileInformation profileInformation) onStarted,
     required TResult Function(String id, Role? role) onGetDetails,
+    required TResult Function() onListenToChanges,
     required TResult Function(ProfileInformation profile) onUpdateRoleDetails,
     required TResult Function(ProfileInformation profile) onSaveDetails,
   }) {
@@ -478,7 +800,9 @@ class _$OnSaveDetailsImpl implements _OnSaveDetails {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(ProfileInformation profileInformation)? onStarted,
     TResult? Function(String id, Role? role)? onGetDetails,
+    TResult? Function()? onListenToChanges,
     TResult? Function(ProfileInformation profile)? onUpdateRoleDetails,
     TResult? Function(ProfileInformation profile)? onSaveDetails,
   }) {
@@ -488,7 +812,9 @@ class _$OnSaveDetailsImpl implements _OnSaveDetails {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(ProfileInformation profileInformation)? onStarted,
     TResult Function(String id, Role? role)? onGetDetails,
+    TResult Function()? onListenToChanges,
     TResult Function(ProfileInformation profile)? onUpdateRoleDetails,
     TResult Function(ProfileInformation profile)? onSaveDetails,
     required TResult orElse(),
@@ -502,7 +828,9 @@ class _$OnSaveDetailsImpl implements _OnSaveDetails {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_OnStarted value) onStarted,
     required TResult Function(_OnGetDetails value) onGetDetails,
+    required TResult Function(_OnListenToChanges value) onListenToChanges,
     required TResult Function(_OnUpdateDetails value) onUpdateRoleDetails,
     required TResult Function(_OnSaveDetails value) onSaveDetails,
   }) {
@@ -512,7 +840,9 @@ class _$OnSaveDetailsImpl implements _OnSaveDetails {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnStarted value)? onStarted,
     TResult? Function(_OnGetDetails value)? onGetDetails,
+    TResult? Function(_OnListenToChanges value)? onListenToChanges,
     TResult? Function(_OnUpdateDetails value)? onUpdateRoleDetails,
     TResult? Function(_OnSaveDetails value)? onSaveDetails,
   }) {
@@ -522,7 +852,9 @@ class _$OnSaveDetailsImpl implements _OnSaveDetails {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnStarted value)? onStarted,
     TResult Function(_OnGetDetails value)? onGetDetails,
+    TResult Function(_OnListenToChanges value)? onListenToChanges,
     TResult Function(_OnUpdateDetails value)? onUpdateRoleDetails,
     TResult Function(_OnSaveDetails value)? onSaveDetails,
     required TResult orElse(),

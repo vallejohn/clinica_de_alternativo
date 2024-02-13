@@ -14,6 +14,7 @@ import 'package:clinica_de_alternativo/src/sales_reporting/presentation/blocs/se
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'core/blocs/data_initializer/data_initializer_bloc.dart';
 import 'core/router/app_router.dart';
 
 class ClinicaDeAlternativo extends StatefulWidget {
@@ -71,6 +72,9 @@ class _ClinicaDeAlternativoState extends State<ClinicaDeAlternativo> {
         BlocProvider<SalesReportGeneratorBloc>(
           create: (context) => SalesReportGeneratorBloc(),
         ),
+        BlocProvider<DataInitializerBloc>(
+          create: (context) => DataInitializerBloc(),
+        )
       ],
       child: MultiBlocListener(
         listeners: [

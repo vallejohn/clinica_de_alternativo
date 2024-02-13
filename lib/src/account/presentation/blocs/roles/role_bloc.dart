@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:clinica_de_alternativo/core/extensions.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:clinica_de_alternativo/src/account/domain/account_usecases.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -17,6 +18,7 @@ class RoleBloc extends Bloc<RoleEvent, RoleState> {
   final _onUpdateUseCase = GetIt.instance<OnUpdateRoleUseCase>();
 
   RoleBloc() : super(const RoleState()) {
+    on<_OnStarted>((event, emit) => emit(state.copyWith(roles: event.modules)));
     on<_OnFetch>(_onFetch);
     on<_OnAdd>(_onAdd);
     on<_OnEdit>(_onEdit);
@@ -28,8 +30,9 @@ class RoleBloc extends Bloc<RoleEvent, RoleState> {
     final dataOrError = await _onGetRolesUseCase();
 
     dataOrError.fold((l){
-      emit(state.copyWith(status: RoleStatus.failed, message: l.when(firebase: (error) => error.message!,)));
+      emit(state.copyWith(status: RoleStatus.failed, message: l.getMessage()));
     }, (roles){
+
       emit(state.copyWith(status: RoleStatus.success, message: 'Fetched successfully', roles: roles));
     });
   }
@@ -40,7 +43,7 @@ class RoleBloc extends Bloc<RoleEvent, RoleState> {
     final dataOrError = await _onAddUseCase(event.role);
 
     dataOrError.fold((l){
-      emit(state.copyWith(status: RoleStatus.failed, message: l.when(firebase: (error) => error.message!,)));
+      emit(state.copyWith(status: RoleStatus.failed, message: l.getMessage()));
     }, (role){
       final roles = [...state.roles];
       roles.add(role);
@@ -61,7 +64,7 @@ class RoleBloc extends Bloc<RoleEvent, RoleState> {
     final dataOrError = await _onUpdateUseCase(event.role);
 
     dataOrError.fold((l){
-      emit(state.copyWith(status: RoleStatus.failed, message: l.when(firebase: (error) => error.message!,)));
+      emit(state.copyWith(status: RoleStatus.failed, message: l.getMessage()));
     }, (_){
 
       emit(state.copyWith(status: RoleStatus.success, message: 'Fetched successfully'));

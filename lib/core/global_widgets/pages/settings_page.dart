@@ -46,7 +46,7 @@ class _SettingsPageState extends State<SettingsPage> {
               },
             ),
             SecurityRoleHandler(
-              module: Module.branches,
+              modules: const [SecurityModule.branches],
               child: ListTileItem(
                 title: const Text('Branches'),
                 subtitle: 'View or edit all branches of Clinica',

@@ -1,3 +1,4 @@
+import 'package:clinica_de_alternativo/core/exceptions/duplicate_record_exception.dart';
 import 'package:clinica_de_alternativo/src/account/core/params.dart';
 import 'package:clinica_de_alternativo/src/account/data/models/module.dart';
 import 'package:clinica_de_alternativo/src/account/data/models/role.dart';
@@ -43,6 +44,8 @@ class AccountRepositoryImpl extends AccountRepository {
       return Right(dataState);
     }on FirebaseException catch(e){
       return Left(Failure.firebase(e));
+    }on DuplicateRecordException catch(e){
+      return Left(Failure.documentException(e));
     }
   }
 

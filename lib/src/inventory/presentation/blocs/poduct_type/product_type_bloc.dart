@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:clinica_de_alternativo/core/extensions.dart';
 import 'package:clinica_de_alternativo/src/inventory/domain/product_usecases.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:clinica_de_alternativo/src/account/data/models/product_type.dart';
@@ -17,6 +18,7 @@ class ProductTypeBloc extends Bloc<ProductTypeEvent, ProductTypeState> {
   final _onDeleteUseCase = GetIt.instance<OnDeleteProductTypeUseCase>();
 
   ProductTypeBloc() : super(ProductTypeState()) {
+    on<_OnStarted>((event, emit) => emit(state.copyWith(productTypes: event.types)));
     on<_OnFetch>(_onFetchList);
     on<_OnAdd>(_onAdd);
     on<_OnEdit>(_onEdit);
@@ -29,7 +31,7 @@ class ProductTypeBloc extends Bloc<ProductTypeEvent, ProductTypeState> {
     final dataOrError = await _onFetchListUseCase();
 
     dataOrError.fold((l){
-      emit(state.copyWith(status: ProductTypeStatus.failed, message: l.when(firebase: (error) => error.message!,)));
+      emit(state.copyWith(status: ProductTypeStatus.failed, message: l.getMessage()));
     }, (types){
       emit(state.copyWith(status: ProductTypeStatus.success, message: 'Fetched successfully', productTypes: types));
     });
@@ -41,7 +43,7 @@ class ProductTypeBloc extends Bloc<ProductTypeEvent, ProductTypeState> {
     final dataOrError = await _onAddUseCase(event.type);
 
     dataOrError.fold((l){
-      emit(state.copyWith(status: ProductTypeStatus.failed, message: l.when(firebase: (error) => error.message!,)));
+      emit(state.copyWith(status: ProductTypeStatus.failed, message: l.getMessage()));
     }, (type){
       final types = [...state.productTypes];
       types.add(type);
@@ -56,7 +58,7 @@ class ProductTypeBloc extends Bloc<ProductTypeEvent, ProductTypeState> {
     final dataOrError = await _onEditUseCase(event.type);
 
     dataOrError.fold((l){
-      emit(state.copyWith(status: ProductTypeStatus.failed, message: l.when(firebase: (error) => error.message!,)));
+      emit(state.copyWith(status: ProductTypeStatus.failed, message: l.getMessage()));
     }, (_){
       final types = [...state.productTypes];
       final index = types.indexWhere((element) => element.id == event.type.id);
@@ -71,7 +73,7 @@ class ProductTypeBloc extends Bloc<ProductTypeEvent, ProductTypeState> {
     final dataOrError = await _onDeleteUseCase(event.id);
 
     dataOrError.fold((l){
-      emit(state.copyWith(status: ProductTypeStatus.failed, message: l.when(firebase: (error) => error.message!,)));
+      emit(state.copyWith(status: ProductTypeStatus.failed, message: l.getMessage()));
     }, (_){
       final types = [...state.productTypes];
       types.removeWhere((element) => element.id == event.id);
