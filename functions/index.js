@@ -29,7 +29,8 @@ exports.createUser = functions.region("asia-southeast1")
         _data.profile.uid = record.uid;
 
         const profileInfoRef = await admin.firestore()
-            .collection("profile_information").add(_data.profile)
+            .collection("profile_information").doc(record.uid)
+            .set(_data.profile)
             .catch((error) => {
               throw new Error(error.message);
             });

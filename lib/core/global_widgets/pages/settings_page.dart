@@ -5,6 +5,7 @@ import 'package:clinica_de_alternativo/core/global_widgets/security_role_handler
 import 'package:clinica_de_alternativo/core/router/app_router.dart';
 import 'package:clinica_de_alternativo/src/authentication/presentation/blocs/profile_checker/profile_checker_bloc.dart';
 import 'package:clinica_de_alternativo/src/inventory/presentation/blocs/poduct_type/product_type_bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
@@ -45,17 +46,14 @@ class _SettingsPageState extends State<SettingsPage> {
                 AutoRouter.of(context).push(const AccountRoute());
               },
             ),
-            SecurityRoleHandler(
-              modules: const [SecurityModule.branches],
-              child: ListTileItem(
-                title: const Text('Branches'),
-                subtitle: 'View or edit all branches of Clinica',
-                trailingIcon: const Icon(Ionicons.chevron_forward_outline),
-                leadingIcon: Icon(Ionicons.storefront_outline, color: Theme.of(context).colorScheme.primary,),
-                onPressed: (){
-                  AutoRouter.of(context).push(const BranchesRoute());
-                },
-              ),
+            ListTileItem(
+              title: const Text('Branches'),
+              subtitle: 'View or edit all branches of Clinica',
+              trailingIcon: const Icon(Ionicons.chevron_forward_outline),
+              leadingIcon: Icon(Ionicons.storefront_outline, color: Theme.of(context).colorScheme.primary,),
+              onPressed: (){
+                AutoRouter.of(context).push(const BranchesRoute());
+              },
             ),
             ListTileItem(
               title: const Text('Roles and Modules'),
@@ -236,7 +234,8 @@ class _SettingsPageState extends State<SettingsPage> {
               title: const Text('Logout'),
               subtitle: 'Logout as ${context.read<AccountBloc>().state.profile?.name}',
               leadingIcon: Icon(Ionicons.log_out_outline, color: Theme.of(context).colorScheme.primary,),
-              onPressed: (){
+              onPressed: ()async {
+                await FirebaseAuth.instance.signOut();
               },
             ),
           ],

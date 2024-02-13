@@ -23,7 +23,7 @@ class _SecurityRoleHandlerState extends State<SecurityRoleHandler> {
 
           if(state.profile!.role!.code == 'super_admin') return Container(child: widget.child,);
 
-          for(final module in widget.modules){
+          /*for(final module in widget.modules){
             if(!withPermission){
               switch(module){
                 case SecurityModule.reporting:
@@ -44,7 +44,7 @@ class _SecurityRoleHandlerState extends State<SecurityRoleHandler> {
                   withPermission = state.profile!.role!.modulesAttached.where((element) => element.code == 'employees').isNotEmpty;
               }
             }
-          }
+          }*/
         }else{
           return Container();
         }

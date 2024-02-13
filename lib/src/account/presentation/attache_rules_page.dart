@@ -71,7 +71,7 @@ class _AttachRulesPageState extends State<AttachRulesPage> {
                           ),
                         ],
                       ),
-                      if(selectedRole.modulesAttached.contains(e)) const Divider(),
+                      /*if(selectedRole.modulesAttached.contains(e)) const Divider(),
                       if(selectedRole.modulesAttached.contains(e)) Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -83,7 +83,7 @@ class _AttachRulesPageState extends State<AttachRulesPage> {
                           ),
                           const Text('Allow edit'),
                         ],
-                      ),
+                      ),*/
                     ],
                   ),
                 ),

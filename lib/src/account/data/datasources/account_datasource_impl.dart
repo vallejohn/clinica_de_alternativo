@@ -36,8 +36,15 @@ class AccountDatasourceImpl extends  AccountDatasource{
   @override
   Future<ProfileInformation?> getAccountDetails(String id)async {
     final result = await FirestoreCollection.profileInformation().where('uid', isEqualTo: id).get();
-
-    return ProfileInformation.fromJson(result.docs.first.data());
+    Map<String, dynamic> resultMap = result.docs.first.data();
+    List<dynamic> attachedModules = [];
+    appLogger.w(resultMap['role']['modulesAttached']);
+    (resultMap['role']['modulesAttached'] as Map<String, dynamic>).forEach((key, value) {
+      attachedModules.add({'code': key, 'name': value});
+    });
+    resultMap['role']['modulesAttached'] = attachedModules;
+    ProfileInformation profile = ProfileInformation.fromJson(resultMap);
+    return profile;
   }
 
   @override
@@ -48,6 +55,12 @@ class AccountDatasourceImpl extends  AccountDatasource{
     newMapProfile.remove('role');
     newMapProfile.addAll({'branch' : profile.branch?.toJson()});
     newMapProfile.addAll({'role' : profile.role?.toJson()});
+
+    Map<String, dynamic> modulesAttached = {};
+    for(final modules in profile.role!.modulesAttached){
+      modulesAttached.addAll({modules.code: modules.name});
+    }
+    newMapProfile['role']['modulesAttached'] = modulesAttached;
 
     await FirestoreCollection.profileInformation().doc(profile.id).update(newMapProfile);
     return true;
@@ -62,7 +75,13 @@ class AccountDatasourceImpl extends  AccountDatasource{
     newMapProfile.addAll({'branch' : params.profile.branch?.toJson()});
     newMapProfile.addAll({'role' : params.profile.role?.toJson()});
 
-    HttpsCallable  callable = FirebaseFunctions.instanceFor(region: 'asia-southeast1').httpsCallable('createUser');
+    Map<String, dynamic> modulesAttached = {};
+    for(final modules in params.profile.role!.modulesAttached){
+      modulesAttached.addAll({modules.code: modules.name});
+    }
+    newMapProfile['role']['modulesAttached'] = modulesAttached;
+
+    HttpsCallable callable = FirebaseFunctions.instanceFor(region: 'asia-southeast1').httpsCallable('createUser');
     final result = await callable.call({'email': params.email, 'password': params.password, 'profile': newMapProfile});
 
 
@@ -80,7 +99,16 @@ class AccountDatasourceImpl extends  AccountDatasource{
   Future<List<ProfileInformation>> geAccountList()async {
     final result = await FirestoreCollection.profileInformation().get();
 
-    return result.docs.map((e) => ProfileInformation.fromJson(e.data()).copyWith(id: e.id)).toList();
+    return result.docs.map((e){
+      Map<String, dynamic> resultMap = e.data();
+      List<dynamic> attachedModules = [];
+      appLogger.w(resultMap['role']['modulesAttached']);
+      (resultMap['role']['modulesAttached'] as Map<String, dynamic>).forEach((key, value) {
+        attachedModules.add({'code': key, 'name': value});
+      });
+      resultMap['role']['modulesAttached'] = attachedModules;
+      return ProfileInformation.fromJson(resultMap).copyWith(id: e.id);
+    }).toList();
   }
 
   @override

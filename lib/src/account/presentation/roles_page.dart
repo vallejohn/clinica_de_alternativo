@@ -23,7 +23,7 @@ class _RolesPageState extends State<RolesPage> {
           BlocListener<RoleBloc, RoleState>(
             listenWhen: (prev, cur) => cur.status == RoleStatus.failed,
             listener: (context, state) {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message)));
+              showDialog(context: context, builder: (context) => const PermissionErrorDialog());
             },
           ),
           BlocListener<RoleBloc, RoleState>(
@@ -93,45 +93,42 @@ class _RolesPageState extends State<RolesPage> {
                 ),
               ),
               const SizedBox(height: 10,),
-              SecurityRoleHandler(
-                modules: const [],
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: BlocBuilder<ModuleBloc, ModuleState>(
-                    builder: (context, state) {
-                      return Card(
-                        margin: EdgeInsets.zero,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 12),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 16),
-                                child: Text('Modules', style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).colorScheme.primary),),
-                              ),
-                              const SizedBox(height: 20,),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 16),
-                                child: TextField(
-                                  controller: _moduleNameController,
-                                  decoration: InputDecoration(
-                                    labelText: 'Add module name',
-                                    suffixIcon: IconButton(onPressed: () {
-                                      context.read<ModuleBloc>().add(ModuleEvent.onAdd(Module(name: _moduleNameController.text)));
-                                      _moduleNameController.clear();
-                                    }, icon: const Icon(Ionicons.add)),
-                                  ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: BlocBuilder<ModuleBloc, ModuleState>(
+                  builder: (context, state) {
+                    return Card(
+                      margin: EdgeInsets.zero,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 16),
+                              child: Text('Modules', style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).colorScheme.primary),),
+                            ),
+                            const SizedBox(height: 20,),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 16),
+                              child: TextField(
+                                controller: _moduleNameController,
+                                decoration: InputDecoration(
+                                  labelText: 'Add module name',
+                                  suffixIcon: IconButton(onPressed: () {
+                                    context.read<ModuleBloc>().add(ModuleEvent.onAdd(Module(name: _moduleNameController.text)));
+                                    _moduleNameController.clear();
+                                  }, icon: const Icon(Ionicons.add)),
                                 ),
                               ),
-                              const SizedBox(height: 16,),
-                              ...state.modules.map((e) => ListTileItem(title: Text(e.name), onLongPress: (){},)).toList()
-                            ],
-                          ),
+                            ),
+                            const SizedBox(height: 16,),
+                            ...state.modules.map((e) => ListTileItem(title: Text(e.name), onLongPress: (){},)).toList()
+                          ],
                         ),
-                      );
-                    }
-                  ),
+                      ),
+                    );
+                  }
                 ),
               ),
             ],

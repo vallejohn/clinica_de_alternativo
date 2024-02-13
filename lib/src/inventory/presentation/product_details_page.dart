@@ -25,6 +25,12 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
       child: MultiBlocListener(
         listeners: [
           BlocListener<ProductsBloc, ProductsState>(
+            listenWhen: (prev, cur) => cur.status == ProductStatus.failed,
+            listener: (context, state) {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message), backgroundColor: Colors.red,));
+            },
+          ),
+          BlocListener<ProductsBloc, ProductsState>(
             listenWhen: (prev, cur) => prev.selectedProduct != cur.selectedProduct,
             listener: (context, state) {
               _productNameController.text = state.selectedProduct!.name;
