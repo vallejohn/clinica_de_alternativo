@@ -12,44 +12,29 @@ class EmployeeDetailsPage extends StatefulWidget {
 class _EmployeeDetailsPageState extends State<EmployeeDetailsPage> {
   @override
   Widget build(BuildContext context) {
+
+    final employeeState = context.watch<EmployeesBloc>().state;
+    final employeesLoading = employeeState.status == EmployeeStatus.loading;
+    final selectedEmployee = employeeState.employees.firstWhere((element) => element.uid == widget.profileInformation.uid);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.profileInformation.name),
+        title: Text(selectedEmployee.name),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(vertical: 20),
         physics: const BouncingScrollPhysics(),
-        child: BlocBuilder<AccountBloc, AccountState>(
-          builder: (context, accState) {
-            final permissionFailed = accState.status == AccountStatus.failed && (accState.errorCode != null && accState.errorCode == ErrorCode.permissionDenied);
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                AnimatedSize(duration: const Duration(milliseconds: 200),
-                  child: permissionFailed? Card(
-                    color: permissionFailed? Theme.of(context).colorScheme.errorContainer : null,
-                    elevation: 0,
-                    margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                      child: SizedBox(child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Icon(Ionicons.information_circle_outline, color: Theme.of(context).colorScheme.error,),
-                          const SizedBox(width: 10,),
-                          Expanded(child: Text(accState.message, style: TextStyle(color: Theme.of(context).colorScheme.error),)),
-                        ],
-                      )),
-                    ),
-                  ) : Container(),
-                ),
-                BlocProvider<WidgetHelperCubit<bool>>(
-                  create: (_) => WidgetHelperCubit<bool>(false),
-                  child: BlocBuilder<WidgetHelperCubit<bool>, bool>(
-                    builder: (erContext, editRoleVisible) {
-                      return BlocProvider<WidgetHelperCubit<Role>>(
-                        create: (context) => WidgetHelperCubit<Role>(widget.profileInformation.role!),
-                        child: BlocBuilder<WidgetHelperCubit<Role>, Role>(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if(employeesLoading) const LinearProgressIndicator(),
+            BlocProvider<WidgetHelperCubit<bool>>(
+              create: (_) => WidgetHelperCubit<bool>(false),
+              child: BlocBuilder<WidgetHelperCubit<bool>, bool>(
+                  builder: (erContext, editRoleVisible) {
+                    return BlocProvider<WidgetHelperCubit<Role>>(
+                      create: (context) => WidgetHelperCubit<Role>(context.read<RoleBloc>().state.roles.where((element) => element.code == selectedEmployee.role?.code).first),
+                      child: BlocBuilder<WidgetHelperCubit<Role>, Role>(
                           builder: (rContext, state) {
                             return Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,18 +49,17 @@ class _EmployeeDetailsPageState extends State<EmployeeDetailsPage> {
                                         trailingIcon: Row(
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
-                                            if(editRoleVisible) FilledButton(onPressed: (){
-                                              erContext.read<WidgetHelperCubit<bool>>().onUpdateState(!editRoleVisible);
-                                              context.read<AccountBloc>().add(AccountEvent.onSaveDetails(widget.profileInformation.copyWith(role: state)));
+                                            if(editRoleVisible) FilledButton(onPressed: employeesLoading? null : (){
+                                              context.read<EmployeesBloc>().add(EmployeesEvent.onUpdate(selectedEmployee.copyWith(role: state)));
                                             }, child: const Text('Save')),
                                             const SizedBox(width: 8,),
-                                            TextButton(onPressed: (){
+                                            TextButton(onPressed: employeesLoading? null : (){
                                               erContext.read<WidgetHelperCubit<bool>>().onUpdateState(!editRoleVisible);
                                             }, child: Text(editRoleVisible? 'Cancel' : 'Edit')),
                                           ],
                                         ),
                                         title: Text('Role', style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).colorScheme.primary),),
-                                        subtitle: widget.profileInformation.role == null? 'No assigned role' : widget.profileInformation.role?.name,
+                                        subtitle: selectedEmployee.role == null? 'No assigned role' : selectedEmployee.role?.name,
                                       ),
                                       if(editRoleVisible) const Divider(),
                                       AnimatedSize(
@@ -107,83 +91,80 @@ class _EmployeeDetailsPageState extends State<EmployeeDetailsPage> {
                               ],
                             );
                           }
-                        ),
-                      );
-                    }
-                  ),
-                ),
-                BlocProvider<WidgetHelperCubit<bool>>(
-                  create: (_) => WidgetHelperCubit<bool>(false),
-                  child: BlocBuilder<WidgetHelperCubit<bool>, bool>(
-                      builder: (erContext, editRoleVisible) {
-                        return BlocProvider<WidgetHelperCubit<Branch>>(
-                          create: (context) => WidgetHelperCubit<Branch>(widget.profileInformation.branch!),
-                          child: BlocBuilder<WidgetHelperCubit<Branch>, Branch>(
-                              builder: (rContext, state) {
-                                return Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Card(
-                                      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          ListTileItem(
-                                            leadingIcon: Icon(Ionicons.shield_outline, color: Theme.of(context).colorScheme.primary,),
-                                            trailingIcon: Row(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                if(editRoleVisible) FilledButton(onPressed: (){
-                                                  erContext.read<WidgetHelperCubit<bool>>().onUpdateState(!editRoleVisible);
-                                                  context.read<AccountBloc>().add(AccountEvent.onSaveDetails(widget.profileInformation.copyWith(branch: state)));
-                                                }, child: const Text('Save')),
-                                                const SizedBox(width: 8,),
-                                                TextButton(onPressed: (){
-                                                  erContext.read<WidgetHelperCubit<bool>>().onUpdateState(!editRoleVisible);
-                                                }, child: Text(editRoleVisible? 'Cancel' : 'Edit')),
-                                              ],
-                                            ),
-                                            title: Text('Branch', style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).colorScheme.primary),),
-                                            subtitle: widget.profileInformation.branch == null? 'No assigned branch' : widget.profileInformation.branch?.name,
-                                          ),
-                                          if(editRoleVisible) const Divider(),
-                                          AnimatedSize(
-                                            duration: const Duration(milliseconds: 200),
-                                            child: !editRoleVisible? Container() : Padding(
-                                              padding: const EdgeInsets.symmetric(horizontal: 24),
-                                              child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                children: [
-                                                  ...context.watch<BranchBloc>().state.branches.map((e) => Row(
-                                                    mainAxisSize: MainAxisSize.min,
-                                                    children: [
-                                                      Radio<Branch>(value: e,
-                                                          groupValue: state,
-                                                          onChanged: (value){
-                                                            rContext.read<WidgetHelperCubit<Branch>>().onUpdateState(value!);
-                                                          }),
-                                                      Text('${e.name}/${e.type?.name.toUpperCase()}')
-                                                    ],
-                                                  )).toList(),
-                                                  const SizedBox(height: 24,)
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ],
+                      ),
+                    );
+                  }
+              ),
+            ),
+            BlocProvider<WidgetHelperCubit<bool>>(
+              create: (_) => WidgetHelperCubit<bool>(false),
+              child: BlocBuilder<WidgetHelperCubit<bool>, bool>(
+                  builder: (erContext, editRoleVisible) {
+                    return BlocProvider<WidgetHelperCubit<Branch>>(
+                      create: (context) => WidgetHelperCubit<Branch>(selectedEmployee.branch!),
+                      child: BlocBuilder<WidgetHelperCubit<Branch>, Branch>(
+                          builder: (rContext, state) {
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Card(
+                                  margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      ListTileItem(
+                                        leadingIcon: Icon(Ionicons.shield_outline, color: Theme.of(context).colorScheme.primary,),
+                                        trailingIcon: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            if(editRoleVisible) FilledButton(onPressed: employeesLoading? null : (){
+                                              context.read<EmployeesBloc>().add(EmployeesEvent.onUpdate(selectedEmployee.copyWith(branch: state)));
+                                            }, child: const Text('Save')),
+                                            const SizedBox(width: 8,),
+                                            TextButton(onPressed: employeesLoading? null : (){
+                                              erContext.read<WidgetHelperCubit<bool>>().onUpdateState(!editRoleVisible);
+                                            }, child: Text(editRoleVisible? 'Cancel' : 'Edit')),
+                                          ],
+                                        ),
+                                        title: Text('Branch', style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).colorScheme.primary),),
+                                        subtitle: selectedEmployee.branch == null? 'No assigned branch' : selectedEmployee.branch?.name,
                                       ),
-                                    ),
-                                  ],
-                                );
-                              }
-                          ),
-                        );
-                      }
-                  ),
-                ),
-              ],
-            );
-          }
+                                      if(editRoleVisible) const Divider(),
+                                      AnimatedSize(
+                                        duration: const Duration(milliseconds: 200),
+                                        child: !editRoleVisible? Container() : Padding(
+                                          padding: const EdgeInsets.symmetric(horizontal: 24),
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              ...context.watch<BranchBloc>().state.branches.map((e) => Row(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  Radio<Branch>(value: e,
+                                                      groupValue: state,
+                                                      onChanged: (value){
+                                                        rContext.read<WidgetHelperCubit<Branch>>().onUpdateState(value!);
+                                                      }),
+                                                  Text('${e.name}/${e.type?.name.toUpperCase()}')
+                                                ],
+                                              )).toList(),
+                                              const SizedBox(height: 24,)
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            );
+                          }
+                      ),
+                    );
+                  }
+              ),
+            ),
+          ],
         ),
       ),
     );

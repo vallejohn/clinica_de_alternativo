@@ -26,7 +26,13 @@ class _EmployeesPageState extends State<EmployeesPage> {
         listener: (context, state){
           if(state.status == EmployeeStatus.failed){
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text(state.message),
+              content: Row(
+                children: [
+                  const Icon(Ionicons.warning_outline, color: Colors.white,),
+                  const SizedBox(width: 8,),
+                  Expanded(child: Text(state.message,)),
+                ],
+              ), backgroundColor: Theme.of(context).colorScheme.error,
             ));
           }
         },

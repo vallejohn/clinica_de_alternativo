@@ -58,7 +58,7 @@ class EmployeesBloc extends Bloc<EmployeesEvent, EmployeesState> {
     final dataOrError = await _onUpdateDetailsUseCase(event.profile);
 
     dataOrError.fold((l){
-      emit(state.copyWith(status: EmployeeStatus.failed, message: l.getMessage()));
+      emit(state.copyWith(status: EmployeeStatus.failed, message: l.getMessage(), errorCode: l.getCode()));
     }, (_){
       final profiles = [...state.employees];
       final removedAccountIndex = profiles.indexWhere((element) => element.id == event.profile.id);
