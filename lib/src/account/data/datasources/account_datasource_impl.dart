@@ -82,15 +82,15 @@ class AccountDatasourceImpl extends  AccountDatasource{
     newMapProfile['role']['modulesAttached'] = modulesAttached;
 
     HttpsCallable callable = FirebaseFunctions.instanceFor(region: 'asia-southeast1').httpsCallable('createUser');
-    final result = await callable.call({'email': params.email, 'password': params.password, 'profile': newMapProfile});
+    final idToken = await FirebaseAuth.instance.currentUser?.getIdToken();
+    final result = await callable.call({'idToken': idToken, 'email': params.email, 'password': params.password, 'profile': newMapProfile});
 
+    appLogger.wtf('Created employee::: ${result.data}');
 
     if(result.data['status'] == 'error') {
       appLogger.e(result.data);
-      throw FirebaseFunctionsException(message: result.data['message'],code: '');
+      throw FirebaseFunctionsException(message: result.data['message'],code: result.data['code']);
     }
-
-    appLogger.wtf('Created employee::: ${result.data}');
 
     return params.profile.copyWith(uid: result.data['uid']);
   }
