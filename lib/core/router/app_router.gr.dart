@@ -43,6 +43,16 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const BranchesPage(),
       );
     },
+    EmployeeDetailsRoute.name: (routeData) {
+      final args = routeData.argsAs<EmployeeDetailsRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: EmployeeDetailsPage(
+          key: args.key,
+          profileInformation: args.profileInformation,
+        ),
+      );
+    },
     EmployeesRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -206,6 +216,44 @@ class BranchesRoute extends PageRouteInfo<void> {
   static const String name = 'BranchesRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [EmployeeDetailsPage]
+class EmployeeDetailsRoute extends PageRouteInfo<EmployeeDetailsRouteArgs> {
+  EmployeeDetailsRoute({
+    Key? key,
+    required ProfileInformation profileInformation,
+    List<PageRouteInfo>? children,
+  }) : super(
+          EmployeeDetailsRoute.name,
+          args: EmployeeDetailsRouteArgs(
+            key: key,
+            profileInformation: profileInformation,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'EmployeeDetailsRoute';
+
+  static const PageInfo<EmployeeDetailsRouteArgs> page =
+      PageInfo<EmployeeDetailsRouteArgs>(name);
+}
+
+class EmployeeDetailsRouteArgs {
+  const EmployeeDetailsRouteArgs({
+    this.key,
+    required this.profileInformation,
+  });
+
+  final Key? key;
+
+  final ProfileInformation profileInformation;
+
+  @override
+  String toString() {
+    return 'EmployeeDetailsRouteArgs{key: $key, profileInformation: $profileInformation}';
+  }
 }
 
 /// generated route for

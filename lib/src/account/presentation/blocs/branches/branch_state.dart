@@ -7,6 +7,7 @@ class BranchState with _$BranchState {
   const factory BranchState({
     @Default(BranchStatus.initial) BranchStatus status,
     @Default('') String message,
+    ErrorCode? errorCode,
     @Default([]) List<Branch> branches,
   }) = _BranchState;
 }

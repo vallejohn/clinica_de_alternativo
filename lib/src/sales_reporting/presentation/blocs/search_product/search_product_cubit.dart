@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../../../../core/exceptions/failure.dart';
 import '../../../../inventory/data/model/product.dart';
 import '../../../../inventory/domain/product_usecases.dart';
 

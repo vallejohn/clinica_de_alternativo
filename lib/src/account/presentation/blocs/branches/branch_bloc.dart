@@ -6,6 +6,7 @@ import 'package:clinica_de_alternativo/src/account/domain/account_usecases.dart'
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../../../../core/exceptions/failure.dart';
 import '../../../data/models/branch.dart';
 
 part 'branch_event.dart';

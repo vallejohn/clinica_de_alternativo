@@ -1058,6 +1058,7 @@ abstract class _OnDelete implements RoleEvent {
 mixin _$RoleState {
   RoleStatus get status => throw _privateConstructorUsedError;
   String get message => throw _privateConstructorUsedError;
+  ErrorCode? get errorCode => throw _privateConstructorUsedError;
   List<Role> get roles => throw _privateConstructorUsedError;
   bool get accessible => throw _privateConstructorUsedError;
 
@@ -1072,7 +1073,11 @@ abstract class $RoleStateCopyWith<$Res> {
       _$RoleStateCopyWithImpl<$Res, RoleState>;
   @useResult
   $Res call(
-      {RoleStatus status, String message, List<Role> roles, bool accessible});
+      {RoleStatus status,
+      String message,
+      ErrorCode? errorCode,
+      List<Role> roles,
+      bool accessible});
 }
 
 /// @nodoc
@@ -1090,6 +1095,7 @@ class _$RoleStateCopyWithImpl<$Res, $Val extends RoleState>
   $Res call({
     Object? status = null,
     Object? message = null,
+    Object? errorCode = freezed,
     Object? roles = null,
     Object? accessible = null,
   }) {
@@ -1102,6 +1108,10 @@ class _$RoleStateCopyWithImpl<$Res, $Val extends RoleState>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      errorCode: freezed == errorCode
+          ? _value.errorCode
+          : errorCode // ignore: cast_nullable_to_non_nullable
+              as ErrorCode?,
       roles: null == roles
           ? _value.roles
           : roles // ignore: cast_nullable_to_non_nullable
@@ -1123,7 +1133,11 @@ abstract class _$$RoleStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {RoleStatus status, String message, List<Role> roles, bool accessible});
+      {RoleStatus status,
+      String message,
+      ErrorCode? errorCode,
+      List<Role> roles,
+      bool accessible});
 }
 
 /// @nodoc
@@ -1139,6 +1153,7 @@ class __$$RoleStateImplCopyWithImpl<$Res>
   $Res call({
     Object? status = null,
     Object? message = null,
+    Object? errorCode = freezed,
     Object? roles = null,
     Object? accessible = null,
   }) {
@@ -1151,6 +1166,10 @@ class __$$RoleStateImplCopyWithImpl<$Res>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      errorCode: freezed == errorCode
+          ? _value.errorCode
+          : errorCode // ignore: cast_nullable_to_non_nullable
+              as ErrorCode?,
       roles: null == roles
           ? _value._roles
           : roles // ignore: cast_nullable_to_non_nullable
@@ -1169,6 +1188,7 @@ class _$RoleStateImpl implements _RoleState {
   const _$RoleStateImpl(
       {this.status = RoleStatus.initial,
       this.message = '',
+      this.errorCode,
       final List<Role> roles = const [],
       this.accessible = false})
       : _roles = roles;
@@ -1179,6 +1199,8 @@ class _$RoleStateImpl implements _RoleState {
   @override
   @JsonKey()
   final String message;
+  @override
+  final ErrorCode? errorCode;
   final List<Role> _roles;
   @override
   @JsonKey()
@@ -1194,7 +1216,7 @@ class _$RoleStateImpl implements _RoleState {
 
   @override
   String toString() {
-    return 'RoleState(status: $status, message: $message, roles: $roles, accessible: $accessible)';
+    return 'RoleState(status: $status, message: $message, errorCode: $errorCode, roles: $roles, accessible: $accessible)';
   }
 
   @override
@@ -1204,13 +1226,15 @@ class _$RoleStateImpl implements _RoleState {
             other is _$RoleStateImpl &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.message, message) || other.message == message) &&
+            (identical(other.errorCode, errorCode) ||
+                other.errorCode == errorCode) &&
             const DeepCollectionEquality().equals(other._roles, _roles) &&
             (identical(other.accessible, accessible) ||
                 other.accessible == accessible));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status, message,
+  int get hashCode => Object.hash(runtimeType, status, message, errorCode,
       const DeepCollectionEquality().hash(_roles), accessible);
 
   @JsonKey(ignore: true)
@@ -1224,6 +1248,7 @@ abstract class _RoleState implements RoleState {
   const factory _RoleState(
       {final RoleStatus status,
       final String message,
+      final ErrorCode? errorCode,
       final List<Role> roles,
       final bool accessible}) = _$RoleStateImpl;
 
@@ -1231,6 +1256,8 @@ abstract class _RoleState implements RoleState {
   RoleStatus get status;
   @override
   String get message;
+  @override
+  ErrorCode? get errorCode;
   @override
   List<Role> get roles;
   @override

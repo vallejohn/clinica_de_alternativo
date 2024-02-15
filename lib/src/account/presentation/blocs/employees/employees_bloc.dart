@@ -7,6 +7,7 @@ import 'package:clinica_de_alternativo/src/account/domain/account_usecases.dart'
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../../../../core/exceptions/failure.dart';
 import '../../../../authentication/data/model/profile_information.dart';
 
 part 'employees_event.dart';

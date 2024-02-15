@@ -1393,6 +1393,7 @@ abstract class _OnDeleteSelectedProduct implements ProductsEvent {
 mixin _$ProductsState {
   ProductStatus get status => throw _privateConstructorUsedError;
   String get message => throw _privateConstructorUsedError;
+  ErrorCode? get errorCode => throw _privateConstructorUsedError;
   List<Product> get products => throw _privateConstructorUsedError;
   bool get editing => throw _privateConstructorUsedError;
   Product? get selectedProduct => throw _privateConstructorUsedError;
@@ -1411,6 +1412,7 @@ abstract class $ProductsStateCopyWith<$Res> {
   $Res call(
       {ProductStatus status,
       String message,
+      ErrorCode? errorCode,
       List<Product> products,
       bool editing,
       Product? selectedProduct});
@@ -1433,6 +1435,7 @@ class _$ProductsStateCopyWithImpl<$Res, $Val extends ProductsState>
   $Res call({
     Object? status = null,
     Object? message = null,
+    Object? errorCode = freezed,
     Object? products = null,
     Object? editing = null,
     Object? selectedProduct = freezed,
@@ -1446,6 +1449,10 @@ class _$ProductsStateCopyWithImpl<$Res, $Val extends ProductsState>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      errorCode: freezed == errorCode
+          ? _value.errorCode
+          : errorCode // ignore: cast_nullable_to_non_nullable
+              as ErrorCode?,
       products: null == products
           ? _value.products
           : products // ignore: cast_nullable_to_non_nullable
@@ -1485,6 +1492,7 @@ abstract class _$$ProductsStateImplCopyWith<$Res>
   $Res call(
       {ProductStatus status,
       String message,
+      ErrorCode? errorCode,
       List<Product> products,
       bool editing,
       Product? selectedProduct});
@@ -1506,6 +1514,7 @@ class __$$ProductsStateImplCopyWithImpl<$Res>
   $Res call({
     Object? status = null,
     Object? message = null,
+    Object? errorCode = freezed,
     Object? products = null,
     Object? editing = null,
     Object? selectedProduct = freezed,
@@ -1519,6 +1528,10 @@ class __$$ProductsStateImplCopyWithImpl<$Res>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      errorCode: freezed == errorCode
+          ? _value.errorCode
+          : errorCode // ignore: cast_nullable_to_non_nullable
+              as ErrorCode?,
       products: null == products
           ? _value._products
           : products // ignore: cast_nullable_to_non_nullable
@@ -1541,6 +1554,7 @@ class _$ProductsStateImpl implements _ProductsState {
   _$ProductsStateImpl(
       {this.status = ProductStatus.initial,
       this.message = '',
+      this.errorCode,
       final List<Product> products = const [],
       this.editing = false,
       this.selectedProduct})
@@ -1552,6 +1566,8 @@ class _$ProductsStateImpl implements _ProductsState {
   @override
   @JsonKey()
   final String message;
+  @override
+  final ErrorCode? errorCode;
   final List<Product> _products;
   @override
   @JsonKey()
@@ -1569,7 +1585,7 @@ class _$ProductsStateImpl implements _ProductsState {
 
   @override
   String toString() {
-    return 'ProductsState(status: $status, message: $message, products: $products, editing: $editing, selectedProduct: $selectedProduct)';
+    return 'ProductsState(status: $status, message: $message, errorCode: $errorCode, products: $products, editing: $editing, selectedProduct: $selectedProduct)';
   }
 
   @override
@@ -1579,6 +1595,8 @@ class _$ProductsStateImpl implements _ProductsState {
             other is _$ProductsStateImpl &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.message, message) || other.message == message) &&
+            (identical(other.errorCode, errorCode) ||
+                other.errorCode == errorCode) &&
             const DeepCollectionEquality().equals(other._products, _products) &&
             (identical(other.editing, editing) || other.editing == editing) &&
             (identical(other.selectedProduct, selectedProduct) ||
@@ -1586,7 +1604,7 @@ class _$ProductsStateImpl implements _ProductsState {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status, message,
+  int get hashCode => Object.hash(runtimeType, status, message, errorCode,
       const DeepCollectionEquality().hash(_products), editing, selectedProduct);
 
   @JsonKey(ignore: true)
@@ -1600,6 +1618,7 @@ abstract class _ProductsState implements ProductsState {
   factory _ProductsState(
       {final ProductStatus status,
       final String message,
+      final ErrorCode? errorCode,
       final List<Product> products,
       final bool editing,
       final Product? selectedProduct}) = _$ProductsStateImpl;
@@ -1608,6 +1627,8 @@ abstract class _ProductsState implements ProductsState {
   ProductStatus get status;
   @override
   String get message;
+  @override
+  ErrorCode? get errorCode;
   @override
   List<Product> get products;
   @override

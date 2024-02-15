@@ -13,6 +13,8 @@ import 'package:clinica_de_alternativo/src/sales_reporting/data/model/sales_repo
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../../../../core/exceptions/failure.dart';
+
 part 'sales_reporting_event.dart';
 part 'sales_reporting_state.dart';
 part 'sales_reporting_bloc.freezed.dart';

@@ -46,47 +46,35 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    List<ExampleDestination> destinations = <ExampleDestination>[
-      const ExampleDestination(
-          'Reporting', Icon(Ionicons.reader_outline), Icon(Ionicons.reader)),
-      //if(accountState.profile != null && accountState.profile!.role!.modulesAttached.where((element) => element.code == 'sales').isNotEmpty)
-      const ExampleDestination(
-          'Sales', Icon(Ionicons.bar_chart_outline), Icon(Ionicons.bar_chart)),
-      const ExampleDestination(
-          'Products', Icon(Ionicons.leaf_outline), Icon(Ionicons.leaf)),
-      const ExampleDestination(
-          'Settings', Icon(Ionicons.settings_outline), Icon(Ionicons.settings)),
-    ];
-
     return MultiBlocProvider(
       providers: [
         BlocProvider<HomeNavigatorCubit>(
           create: (context) => HomeNavigatorCubit(),
         ),
-        BlocProvider<DataInitializerBloc>.value(
-          value: BlocProvider.of<DataInitializerBloc>(context)..add(const DataInitializerEvent.onFetchData()),
-        )
       ],
       child: BlocListener<DataInitializerBloc, DataInitializerState>(
         listenWhen: (prev, cur) => prev.status != cur.status,
         listener: (context, state){
           if(state.status == DataInitializerStatus.loading){
             showDialog(context: context, builder: (builder){
-              return SpinKitPulse(color: Theme.of(context).colorScheme.primary,);
+              return const AlertDialog(backgroundColor: Colors.white,content: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Center(
+                      child: SizedBox(width: 50, height: 50, child: Row(
+                        children: [
+                          CircularProgressIndicator(),
+                        ],
+                      )),
+                    ),
+                  ],
+                ),
+              ),);
             });
           }
-          if(state.status == DataInitializerStatus.success){
-            Navigator.pop(context);
-            context.read<AccountBloc>().add(AccountEvent.onStarted(state.profile!));
-            context.read<RoleBloc>().add(RoleEvent.onStarted(state.roles));
-            context.read<ModuleBloc>().add(ModuleEvent.onStarted(state.modules));
-            context.read<ProductsBloc>().add(ProductsEvent.onStarted(state.products));
-            context.read<ProductTypeBloc>().add(ProductTypeEvent.onStarted(state.productTypes));
-            context.read<EmployeesBloc>().add(EmployeesEvent.onStarted(state.employees));
-            context.read<BranchBloc>().add(BranchEvent.onStarted(state.branches));
-          }
-
-          if(state.status == DataInitializerStatus.failed){
+          if(state.status == DataInitializerStatus.failed || state.status == DataInitializerStatus.success){
             Navigator.pop(context);
           }
         },
@@ -96,11 +84,11 @@ class _HomePageState extends State<HomePage> {
               body: PageView(
                 controller: _pageController,
                 onPageChanged: (int index) => navContext.read<HomeNavigatorCubit>().onPageChanged(index),
-                children: [
-                  const SaleReportingPage(),
-                  const SalesSummaryPage(),
-                  const ProductsPage(),
-                  const SettingsPage(),
+                children: const [
+                  SaleReportingPage(),
+                  SalesSummaryPage(),
+                  ProductsPage(),
+                  SettingsPage(),
                 ],
               ),
               bottomNavigationBar: NavigationBar(

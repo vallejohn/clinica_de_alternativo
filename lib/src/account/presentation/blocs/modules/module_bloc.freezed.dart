@@ -856,6 +856,7 @@ abstract class _OnDelete implements ModuleEvent {
 mixin _$ModuleState {
   ModuleStatus get status => throw _privateConstructorUsedError;
   String get message => throw _privateConstructorUsedError;
+  ErrorCode? get errorCode => throw _privateConstructorUsedError;
   List<Module> get modules => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -869,7 +870,11 @@ abstract class $ModuleStateCopyWith<$Res> {
           ModuleState value, $Res Function(ModuleState) then) =
       _$ModuleStateCopyWithImpl<$Res, ModuleState>;
   @useResult
-  $Res call({ModuleStatus status, String message, List<Module> modules});
+  $Res call(
+      {ModuleStatus status,
+      String message,
+      ErrorCode? errorCode,
+      List<Module> modules});
 }
 
 /// @nodoc
@@ -887,6 +892,7 @@ class _$ModuleStateCopyWithImpl<$Res, $Val extends ModuleState>
   $Res call({
     Object? status = null,
     Object? message = null,
+    Object? errorCode = freezed,
     Object? modules = null,
   }) {
     return _then(_value.copyWith(
@@ -898,6 +904,10 @@ class _$ModuleStateCopyWithImpl<$Res, $Val extends ModuleState>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      errorCode: freezed == errorCode
+          ? _value.errorCode
+          : errorCode // ignore: cast_nullable_to_non_nullable
+              as ErrorCode?,
       modules: null == modules
           ? _value.modules
           : modules // ignore: cast_nullable_to_non_nullable
@@ -914,7 +924,11 @@ abstract class _$$ModuleStateImplCopyWith<$Res>
       __$$ModuleStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({ModuleStatus status, String message, List<Module> modules});
+  $Res call(
+      {ModuleStatus status,
+      String message,
+      ErrorCode? errorCode,
+      List<Module> modules});
 }
 
 /// @nodoc
@@ -930,6 +944,7 @@ class __$$ModuleStateImplCopyWithImpl<$Res>
   $Res call({
     Object? status = null,
     Object? message = null,
+    Object? errorCode = freezed,
     Object? modules = null,
   }) {
     return _then(_$ModuleStateImpl(
@@ -941,6 +956,10 @@ class __$$ModuleStateImplCopyWithImpl<$Res>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      errorCode: freezed == errorCode
+          ? _value.errorCode
+          : errorCode // ignore: cast_nullable_to_non_nullable
+              as ErrorCode?,
       modules: null == modules
           ? _value._modules
           : modules // ignore: cast_nullable_to_non_nullable
@@ -955,6 +974,7 @@ class _$ModuleStateImpl implements _ModuleState {
   const _$ModuleStateImpl(
       {this.status = ModuleStatus.initial,
       this.message = '',
+      this.errorCode,
       final List<Module> modules = const []})
       : _modules = modules;
 
@@ -964,6 +984,8 @@ class _$ModuleStateImpl implements _ModuleState {
   @override
   @JsonKey()
   final String message;
+  @override
+  final ErrorCode? errorCode;
   final List<Module> _modules;
   @override
   @JsonKey()
@@ -975,7 +997,7 @@ class _$ModuleStateImpl implements _ModuleState {
 
   @override
   String toString() {
-    return 'ModuleState(status: $status, message: $message, modules: $modules)';
+    return 'ModuleState(status: $status, message: $message, errorCode: $errorCode, modules: $modules)';
   }
 
   @override
@@ -985,11 +1007,13 @@ class _$ModuleStateImpl implements _ModuleState {
             other is _$ModuleStateImpl &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.message, message) || other.message == message) &&
+            (identical(other.errorCode, errorCode) ||
+                other.errorCode == errorCode) &&
             const DeepCollectionEquality().equals(other._modules, _modules));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status, message,
+  int get hashCode => Object.hash(runtimeType, status, message, errorCode,
       const DeepCollectionEquality().hash(_modules));
 
   @JsonKey(ignore: true)
@@ -1003,12 +1027,15 @@ abstract class _ModuleState implements ModuleState {
   const factory _ModuleState(
       {final ModuleStatus status,
       final String message,
+      final ErrorCode? errorCode,
       final List<Module> modules}) = _$ModuleStateImpl;
 
   @override
   ModuleStatus get status;
   @override
   String get message;
+  @override
+  ErrorCode? get errorCode;
   @override
   List<Module> get modules;
   @override

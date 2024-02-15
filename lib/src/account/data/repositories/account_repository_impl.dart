@@ -1,3 +1,4 @@
+import 'package:clinica_de_alternativo/core/core.dart';
 import 'package:clinica_de_alternativo/core/exceptions/duplicate_record_exception.dart';
 import 'package:clinica_de_alternativo/src/account/core/params.dart';
 import 'package:clinica_de_alternativo/src/account/data/models/module.dart';
@@ -65,6 +66,7 @@ class AccountRepositoryImpl extends AccountRepository {
       final dataState = await accountDatasource.getAccountDetails(id);
       return Right(dataState);
     }on FirebaseException catch(e){
+      appLogger.e(e.message);
       return Left(Failure.firebase(e));
     }
   }
@@ -75,6 +77,7 @@ class AccountRepositoryImpl extends AccountRepository {
       final dataState = await accountDatasource.updateAccountDetails(profile);
       return Right(dataState);
     }on FirebaseException catch(e){
+      appLogger.e(e.code);
       return Left(Failure.firebase(e));
     }
   }

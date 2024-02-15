@@ -4,6 +4,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'failure.freezed.dart';
 
+enum ErrorCode {permissionDenied, general}
+
 @freezed
 abstract class Failure with _$Failure{
   const factory Failure.firebase(FirebaseException firebaseException) = _Firebase;

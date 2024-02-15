@@ -2,6 +2,8 @@
 
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:clinica_de_alternativo/core/core.dart';
+import 'package:clinica_de_alternativo/core/exceptions/failure.dart';
 import 'package:clinica_de_alternativo/core/global_widgets/list_tile_item.dart';
 import 'package:clinica_de_alternativo/core/global_widgets/security_role_handler.dart';
 import 'package:clinica_de_alternativo/core/router/app_router.dart';
@@ -28,3 +30,4 @@ part 'roles_page.dart';
 part 'employees_page.dart';
 part 'account_page.dart';
 part 'attache_rules_page.dart';
+part 'employee_details_page.dart';

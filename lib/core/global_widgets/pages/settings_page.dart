@@ -235,7 +235,50 @@ class _SettingsPageState extends State<SettingsPage> {
               subtitle: 'Logout as ${context.read<AccountBloc>().state.profile?.name}',
               leadingIcon: Icon(Ionicons.log_out_outline, color: Theme.of(context).colorScheme.primary,),
               onPressed: ()async {
-                await FirebaseAuth.instance.signOut();
+                showDialog(context: context, builder: (builder){
+                  return Dialog(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        const SizedBox(height: 24,),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 24),
+                          child: Text('Logout account', style: Theme.of(context).textTheme.headlineSmall,),
+                        ),
+                        const SizedBox(height: 16),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 24,),
+                          child: Text('Are you sure you want to logout?', style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant)),
+                        ),
+                        const SizedBox(height: 24),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 24),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text('Cancel'),
+                              ),
+                              TextButton(
+                                onPressed: ()async {
+                                  await FirebaseAuth.instance.signOut();
+                                },
+                                child: const Text('Ok'),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 24,),
+                      ],
+                    ),
+                  );
+                });
               },
             ),
           ],

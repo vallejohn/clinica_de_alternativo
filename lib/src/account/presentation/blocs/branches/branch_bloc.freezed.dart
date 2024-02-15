@@ -856,6 +856,7 @@ abstract class _OnDelete implements BranchEvent {
 mixin _$BranchState {
   BranchStatus get status => throw _privateConstructorUsedError;
   String get message => throw _privateConstructorUsedError;
+  ErrorCode? get errorCode => throw _privateConstructorUsedError;
   List<Branch> get branches => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -869,7 +870,11 @@ abstract class $BranchStateCopyWith<$Res> {
           BranchState value, $Res Function(BranchState) then) =
       _$BranchStateCopyWithImpl<$Res, BranchState>;
   @useResult
-  $Res call({BranchStatus status, String message, List<Branch> branches});
+  $Res call(
+      {BranchStatus status,
+      String message,
+      ErrorCode? errorCode,
+      List<Branch> branches});
 }
 
 /// @nodoc
@@ -887,6 +892,7 @@ class _$BranchStateCopyWithImpl<$Res, $Val extends BranchState>
   $Res call({
     Object? status = null,
     Object? message = null,
+    Object? errorCode = freezed,
     Object? branches = null,
   }) {
     return _then(_value.copyWith(
@@ -898,6 +904,10 @@ class _$BranchStateCopyWithImpl<$Res, $Val extends BranchState>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      errorCode: freezed == errorCode
+          ? _value.errorCode
+          : errorCode // ignore: cast_nullable_to_non_nullable
+              as ErrorCode?,
       branches: null == branches
           ? _value.branches
           : branches // ignore: cast_nullable_to_non_nullable
@@ -914,7 +924,11 @@ abstract class _$$BranchStateImplCopyWith<$Res>
       __$$BranchStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({BranchStatus status, String message, List<Branch> branches});
+  $Res call(
+      {BranchStatus status,
+      String message,
+      ErrorCode? errorCode,
+      List<Branch> branches});
 }
 
 /// @nodoc
@@ -930,6 +944,7 @@ class __$$BranchStateImplCopyWithImpl<$Res>
   $Res call({
     Object? status = null,
     Object? message = null,
+    Object? errorCode = freezed,
     Object? branches = null,
   }) {
     return _then(_$BranchStateImpl(
@@ -941,6 +956,10 @@ class __$$BranchStateImplCopyWithImpl<$Res>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      errorCode: freezed == errorCode
+          ? _value.errorCode
+          : errorCode // ignore: cast_nullable_to_non_nullable
+              as ErrorCode?,
       branches: null == branches
           ? _value._branches
           : branches // ignore: cast_nullable_to_non_nullable
@@ -955,6 +974,7 @@ class _$BranchStateImpl implements _BranchState {
   const _$BranchStateImpl(
       {this.status = BranchStatus.initial,
       this.message = '',
+      this.errorCode,
       final List<Branch> branches = const []})
       : _branches = branches;
 
@@ -964,6 +984,8 @@ class _$BranchStateImpl implements _BranchState {
   @override
   @JsonKey()
   final String message;
+  @override
+  final ErrorCode? errorCode;
   final List<Branch> _branches;
   @override
   @JsonKey()
@@ -975,7 +997,7 @@ class _$BranchStateImpl implements _BranchState {
 
   @override
   String toString() {
-    return 'BranchState(status: $status, message: $message, branches: $branches)';
+    return 'BranchState(status: $status, message: $message, errorCode: $errorCode, branches: $branches)';
   }
 
   @override
@@ -985,11 +1007,13 @@ class _$BranchStateImpl implements _BranchState {
             other is _$BranchStateImpl &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.message, message) || other.message == message) &&
+            (identical(other.errorCode, errorCode) ||
+                other.errorCode == errorCode) &&
             const DeepCollectionEquality().equals(other._branches, _branches));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status, message,
+  int get hashCode => Object.hash(runtimeType, status, message, errorCode,
       const DeepCollectionEquality().hash(_branches));
 
   @JsonKey(ignore: true)
@@ -1003,12 +1027,15 @@ abstract class _BranchState implements BranchState {
   const factory _BranchState(
       {final BranchStatus status,
       final String message,
+      final ErrorCode? errorCode,
       final List<Branch> branches}) = _$BranchStateImpl;
 
   @override
   BranchStatus get status;
   @override
   String get message;
+  @override
+  ErrorCode? get errorCode;
   @override
   List<Branch> get branches;
   @override

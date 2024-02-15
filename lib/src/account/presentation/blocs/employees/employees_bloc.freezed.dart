@@ -658,6 +658,7 @@ abstract class _OnUpdate implements EmployeesEvent {
 mixin _$EmployeesState {
   EmployeeStatus get status => throw _privateConstructorUsedError;
   String get message => throw _privateConstructorUsedError;
+  ErrorCode? get errorCode => throw _privateConstructorUsedError;
   List<ProfileInformation> get employees => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -674,6 +675,7 @@ abstract class $EmployeesStateCopyWith<$Res> {
   $Res call(
       {EmployeeStatus status,
       String message,
+      ErrorCode? errorCode,
       List<ProfileInformation> employees});
 }
 
@@ -692,6 +694,7 @@ class _$EmployeesStateCopyWithImpl<$Res, $Val extends EmployeesState>
   $Res call({
     Object? status = null,
     Object? message = null,
+    Object? errorCode = freezed,
     Object? employees = null,
   }) {
     return _then(_value.copyWith(
@@ -703,6 +706,10 @@ class _$EmployeesStateCopyWithImpl<$Res, $Val extends EmployeesState>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      errorCode: freezed == errorCode
+          ? _value.errorCode
+          : errorCode // ignore: cast_nullable_to_non_nullable
+              as ErrorCode?,
       employees: null == employees
           ? _value.employees
           : employees // ignore: cast_nullable_to_non_nullable
@@ -722,6 +729,7 @@ abstract class _$$EmployeesStateImplCopyWith<$Res>
   $Res call(
       {EmployeeStatus status,
       String message,
+      ErrorCode? errorCode,
       List<ProfileInformation> employees});
 }
 
@@ -738,6 +746,7 @@ class __$$EmployeesStateImplCopyWithImpl<$Res>
   $Res call({
     Object? status = null,
     Object? message = null,
+    Object? errorCode = freezed,
     Object? employees = null,
   }) {
     return _then(_$EmployeesStateImpl(
@@ -749,6 +758,10 @@ class __$$EmployeesStateImplCopyWithImpl<$Res>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      errorCode: freezed == errorCode
+          ? _value.errorCode
+          : errorCode // ignore: cast_nullable_to_non_nullable
+              as ErrorCode?,
       employees: null == employees
           ? _value._employees
           : employees // ignore: cast_nullable_to_non_nullable
@@ -763,6 +776,7 @@ class _$EmployeesStateImpl implements _EmployeesState {
   const _$EmployeesStateImpl(
       {this.status = EmployeeStatus.initial,
       this.message = '',
+      this.errorCode,
       final List<ProfileInformation> employees = const []})
       : _employees = employees;
 
@@ -772,6 +786,8 @@ class _$EmployeesStateImpl implements _EmployeesState {
   @override
   @JsonKey()
   final String message;
+  @override
+  final ErrorCode? errorCode;
   final List<ProfileInformation> _employees;
   @override
   @JsonKey()
@@ -783,7 +799,7 @@ class _$EmployeesStateImpl implements _EmployeesState {
 
   @override
   String toString() {
-    return 'EmployeesState(status: $status, message: $message, employees: $employees)';
+    return 'EmployeesState(status: $status, message: $message, errorCode: $errorCode, employees: $employees)';
   }
 
   @override
@@ -793,12 +809,14 @@ class _$EmployeesStateImpl implements _EmployeesState {
             other is _$EmployeesStateImpl &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.message, message) || other.message == message) &&
+            (identical(other.errorCode, errorCode) ||
+                other.errorCode == errorCode) &&
             const DeepCollectionEquality()
                 .equals(other._employees, _employees));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status, message,
+  int get hashCode => Object.hash(runtimeType, status, message, errorCode,
       const DeepCollectionEquality().hash(_employees));
 
   @JsonKey(ignore: true)
@@ -813,12 +831,15 @@ abstract class _EmployeesState implements EmployeesState {
   const factory _EmployeesState(
       {final EmployeeStatus status,
       final String message,
+      final ErrorCode? errorCode,
       final List<ProfileInformation> employees}) = _$EmployeesStateImpl;
 
   @override
   EmployeeStatus get status;
   @override
   String get message;
+  @override
+  ErrorCode? get errorCode;
   @override
   List<ProfileInformation> get employees;
   @override

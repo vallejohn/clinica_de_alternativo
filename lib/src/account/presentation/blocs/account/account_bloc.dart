@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:clinica_de_alternativo/core/core.dart';
+import 'package:clinica_de_alternativo/core/exceptions/failure.dart';
 import 'package:clinica_de_alternativo/core/extensions.dart';
 import 'package:clinica_de_alternativo/src/account/domain/account_usecases.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,7 +33,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     final dataOrError = await _onGetDetailsUseCase(event.id);
 
     dataOrError.fold((l){
-      emit(state.copyWith(status: AccountStatus.failed, message: l.getMessage()));
+      emit(state.copyWith(status: AccountStatus.failed, message: l.getMessage(), errorCode: l.getCode()));
     }, (profile){
       emit(state.copyWith(status: AccountStatus.success, message: 'Fetched successfully', profile: event.role == null? profile : profile!.copyWith(role: event.role)));
     });
@@ -49,7 +50,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     final dataOrError = await _onUpdateDetailsUseCase(event.profile);
 
     dataOrError.fold((l){
-      emit(state.copyWith(status: AccountStatus.failed, message: l.getMessage()));
+      emit(state.copyWith(status: AccountStatus.failed, message: l.getMessage(), errorCode: l.getCode()));
     }, (_){
       emit(state.copyWith(status: AccountStatus.success, message: 'Fetched successfully', profile: event.profile));
     });

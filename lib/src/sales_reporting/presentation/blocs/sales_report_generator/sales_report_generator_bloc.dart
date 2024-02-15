@@ -7,6 +7,7 @@ import 'package:clinica_de_alternativo/src/sales_reporting/core/params.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../../../../core/exceptions/failure.dart';
 import '../../../data/model/sales_report.dart';
 import '../../../domain/sales_reporting_usecases.dart';
 

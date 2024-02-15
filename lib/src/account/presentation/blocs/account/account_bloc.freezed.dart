@@ -880,6 +880,7 @@ abstract class _OnSaveDetails implements AccountEvent {
 mixin _$AccountState {
   AccountStatus get status => throw _privateConstructorUsedError;
   String get message => throw _privateConstructorUsedError;
+  ErrorCode? get errorCode => throw _privateConstructorUsedError;
   ProfileInformation? get profile => throw _privateConstructorUsedError;
   Role? get role => throw _privateConstructorUsedError;
 
@@ -897,6 +898,7 @@ abstract class $AccountStateCopyWith<$Res> {
   $Res call(
       {AccountStatus status,
       String message,
+      ErrorCode? errorCode,
       ProfileInformation? profile,
       Role? role});
 
@@ -919,6 +921,7 @@ class _$AccountStateCopyWithImpl<$Res, $Val extends AccountState>
   $Res call({
     Object? status = null,
     Object? message = null,
+    Object? errorCode = freezed,
     Object? profile = freezed,
     Object? role = freezed,
   }) {
@@ -931,6 +934,10 @@ class _$AccountStateCopyWithImpl<$Res, $Val extends AccountState>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      errorCode: freezed == errorCode
+          ? _value.errorCode
+          : errorCode // ignore: cast_nullable_to_non_nullable
+              as ErrorCode?,
       profile: freezed == profile
           ? _value.profile
           : profile // ignore: cast_nullable_to_non_nullable
@@ -978,6 +985,7 @@ abstract class _$$AccountStateImplCopyWith<$Res>
   $Res call(
       {AccountStatus status,
       String message,
+      ErrorCode? errorCode,
       ProfileInformation? profile,
       Role? role});
 
@@ -1000,6 +1008,7 @@ class __$$AccountStateImplCopyWithImpl<$Res>
   $Res call({
     Object? status = null,
     Object? message = null,
+    Object? errorCode = freezed,
     Object? profile = freezed,
     Object? role = freezed,
   }) {
@@ -1012,6 +1021,10 @@ class __$$AccountStateImplCopyWithImpl<$Res>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      errorCode: freezed == errorCode
+          ? _value.errorCode
+          : errorCode // ignore: cast_nullable_to_non_nullable
+              as ErrorCode?,
       profile: freezed == profile
           ? _value.profile
           : profile // ignore: cast_nullable_to_non_nullable
@@ -1030,6 +1043,7 @@ class _$AccountStateImpl implements _AccountState {
   const _$AccountStateImpl(
       {this.status = AccountStatus.initial,
       this.message = '',
+      this.errorCode,
       this.profile,
       this.role});
 
@@ -1040,13 +1054,15 @@ class _$AccountStateImpl implements _AccountState {
   @JsonKey()
   final String message;
   @override
+  final ErrorCode? errorCode;
+  @override
   final ProfileInformation? profile;
   @override
   final Role? role;
 
   @override
   String toString() {
-    return 'AccountState(status: $status, message: $message, profile: $profile, role: $role)';
+    return 'AccountState(status: $status, message: $message, errorCode: $errorCode, profile: $profile, role: $role)';
   }
 
   @override
@@ -1056,12 +1072,15 @@ class _$AccountStateImpl implements _AccountState {
             other is _$AccountStateImpl &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.message, message) || other.message == message) &&
+            (identical(other.errorCode, errorCode) ||
+                other.errorCode == errorCode) &&
             (identical(other.profile, profile) || other.profile == profile) &&
             (identical(other.role, role) || other.role == role));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status, message, profile, role);
+  int get hashCode =>
+      Object.hash(runtimeType, status, message, errorCode, profile, role);
 
   @JsonKey(ignore: true)
   @override
@@ -1074,6 +1093,7 @@ abstract class _AccountState implements AccountState {
   const factory _AccountState(
       {final AccountStatus status,
       final String message,
+      final ErrorCode? errorCode,
       final ProfileInformation? profile,
       final Role? role}) = _$AccountStateImpl;
 
@@ -1081,6 +1101,8 @@ abstract class _AccountState implements AccountState {
   AccountStatus get status;
   @override
   String get message;
+  @override
+  ErrorCode? get errorCode;
   @override
   ProfileInformation? get profile;
   @override

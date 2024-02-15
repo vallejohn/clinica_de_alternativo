@@ -23,7 +23,13 @@ class _RolesPageState extends State<RolesPage> {
           BlocListener<RoleBloc, RoleState>(
             listenWhen: (prev, cur) => cur.status == RoleStatus.failed,
             listener: (context, state) {
-              showDialog(context: context, builder: (context) => const PermissionErrorDialog());
+              showDialog(context: context, builder: (context) => PermissionErrorDialog(message: state.message,));
+            },
+          ),
+          BlocListener<ModuleBloc, ModuleState>(
+            listenWhen: (prev, cur) => cur.status == ModuleStatus.failed,
+            listener: (context, state) {
+              showDialog(context: context, builder: (context) => PermissionErrorDialog(message: state.message,));
             },
           ),
           BlocListener<RoleBloc, RoleState>(

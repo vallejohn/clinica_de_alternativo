@@ -38,7 +38,7 @@ class _AddProductPageState extends State<AddProductPage> {
         body: BlocConsumer<ProductsBloc, ProductsState>(
           listener: (context, state){
             if(state.status == ProductStatus.failed){
-              showDialog(context: context, builder: (context) => const PermissionErrorDialog());
+              showDialog(context: context, builder: (context) => PermissionErrorDialog(message: state.message,));
             }
           },
           builder: (prodContext, prodState) {

@@ -8,6 +8,7 @@ class SalesReportGeneratorState with _$SalesReportGeneratorState {
     @Default(SalesGeneratorStatus.initial) SalesGeneratorStatus status,
     SalesReportDocuments? salesReportDocs,
     @Default('') String message,
+    ErrorCode? errorCode,
     @Default(false) bool loadingMoreItems,
   }) = _SalesReportGeneratorState;
 }

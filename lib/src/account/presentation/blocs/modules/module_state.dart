@@ -8,6 +8,7 @@ class ModuleState with _$ModuleState {
   const factory ModuleState({
     @Default(ModuleStatus.initial) ModuleStatus status,
     @Default('') String message,
+    ErrorCode? errorCode,
     @Default([]) List<Module> modules,
   }) = _ModuleState;
 }
