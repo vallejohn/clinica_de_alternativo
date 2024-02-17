@@ -87,7 +87,7 @@ class _ClinicaDeAlternativoState extends State<ClinicaDeAlternativo> {
                 //context.read<RoleBloc>().add(RoleEvent.onStarted(state.roles));
                 //context.read<ModuleBloc>().add(ModuleEvent.onStarted(state.modules));
                 //context.read<ProductsBloc>().add(ProductsEvent.onStarted(state.products));
-                context.read<ProductTypeBloc>().add(ProductTypeEvent.onStarted(state.productTypes));
+                //context.read<ProductTypeBloc>().add(ProductTypeEvent.onStarted(state.productTypes));
                 //context.read<EmployeesBloc>().add(EmployeesEvent.onStarted(state.employees));
                 //context.read<BranchBloc>().add(BranchEvent.onStarted(state.branches));
                 _appRouter.replace(const HomeRoute());

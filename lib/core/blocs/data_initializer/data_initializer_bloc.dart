@@ -37,7 +37,7 @@ class DataInitializerBloc extends Bloc<DataInitializerEvent, DataInitializerStat
         emit(state.copyWith(profile: profile));
       });
 
-      final roleOrError = await _onGetRolesUseCase();
+/*      final roleOrError = await _onGetRolesUseCase();
 
       roleOrError.fold((l){
         //emit(state.copyWith(status: AccountStatus.failed, message: l.when(firebase: (error) => error.message!,)));
@@ -50,47 +50,47 @@ class DataInitializerBloc extends Bloc<DataInitializerEvent, DataInitializerStat
               ? state.profile?.copyWith(role: filteredRoles.first)
               : state.profile,
         ));
-      });
+      });*/
 
-      final branchesOrError = await _onGetBranchUseCase();
+/*      final branchesOrError = await _onGetBranchUseCase();
 
       branchesOrError.fold((l){
         //emit(state.copyWith(status: BranchStatus.failed, message: l.when(firebase: (error) => error.message!,)));
       }, (branches){
         emit(state.copyWith(branches: branches));
-      });
-
+      });*/
+/*
       final moduleOrError = await _onGetModulesUseCase();
 
       moduleOrError.fold((l){
         //emit(state.copyWith(status: ModuleStatus.failed, message: l.when(firebase: (error) => error.message!,)));
       }, (modules){
         emit(state.copyWith(modules: modules));
-      });
+      });*/
 
-      final productsOrError = await _onFetchListUseCase();
+/*      final productsOrError = await _onFetchListUseCase();
 
       productsOrError.fold((l){
         //emit(state.copyWith(status: ProductStatus.failed, message: l.when(firebase: (error) => error.message!,)));
       }, (products){
         emit(state.copyWith(products: products));
-      });
+      });*/
 
-      final typeOrError = await _onFetchProdTypeListUseCase();
+/*      final typeOrError = await _onFetchProdTypeListUseCase();
 
       typeOrError.fold((l){
         //emit(state.copyWith(status: ProductTypeStatus.failed, message: l.when(firebase: (error) => error.message!,)));
       }, (types){
         emit(state.copyWith(productTypes: types));
-      });
+      });*/
 
-      final employeesOrError = await _onGetEmpListUseCase();
+/*      final employeesOrError = await _onGetEmpListUseCase();
 
       employeesOrError.fold((l){
         //emit(state.copyWith(status: EmployeeStatus.failed, message: l.when(firebase: (error) => error.message!,)));
       }, (profiles){
         emit(state.copyWith(employees: profiles));
-      });
+      });*/
 
       emit(state.copyWith(status: DataInitializerStatus.success));
     });
