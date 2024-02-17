@@ -27,10 +27,30 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const AddProductPage(),
       );
     },
+    AttachRulesRoute.name: (routeData) {
+      final args = routeData.argsAs<AttachRulesRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: AttachRulesPage(
+          key: args.key,
+          role: args.role,
+        ),
+      );
+    },
     BranchesRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const BranchesPage(),
+      );
+    },
+    EmployeeDetailsRoute.name: (routeData) {
+      final args = routeData.argsAs<EmployeeDetailsRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: EmployeeDetailsPage(
+          key: args.key,
+          profileInformation: args.profileInformation,
+        ),
       );
     },
     EmployeesRoute.name: (routeData) {
@@ -147,6 +167,44 @@ class AddProductRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [AttachRulesPage]
+class AttachRulesRoute extends PageRouteInfo<AttachRulesRouteArgs> {
+  AttachRulesRoute({
+    Key? key,
+    required Role role,
+    List<PageRouteInfo>? children,
+  }) : super(
+          AttachRulesRoute.name,
+          args: AttachRulesRouteArgs(
+            key: key,
+            role: role,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'AttachRulesRoute';
+
+  static const PageInfo<AttachRulesRouteArgs> page =
+      PageInfo<AttachRulesRouteArgs>(name);
+}
+
+class AttachRulesRouteArgs {
+  const AttachRulesRouteArgs({
+    this.key,
+    required this.role,
+  });
+
+  final Key? key;
+
+  final Role role;
+
+  @override
+  String toString() {
+    return 'AttachRulesRouteArgs{key: $key, role: $role}';
+  }
+}
+
+/// generated route for
 /// [BranchesPage]
 class BranchesRoute extends PageRouteInfo<void> {
   const BranchesRoute({List<PageRouteInfo>? children})
@@ -158,6 +216,44 @@ class BranchesRoute extends PageRouteInfo<void> {
   static const String name = 'BranchesRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [EmployeeDetailsPage]
+class EmployeeDetailsRoute extends PageRouteInfo<EmployeeDetailsRouteArgs> {
+  EmployeeDetailsRoute({
+    Key? key,
+    required ProfileInformation profileInformation,
+    List<PageRouteInfo>? children,
+  }) : super(
+          EmployeeDetailsRoute.name,
+          args: EmployeeDetailsRouteArgs(
+            key: key,
+            profileInformation: profileInformation,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'EmployeeDetailsRoute';
+
+  static const PageInfo<EmployeeDetailsRouteArgs> page =
+      PageInfo<EmployeeDetailsRouteArgs>(name);
+}
+
+class EmployeeDetailsRouteArgs {
+  const EmployeeDetailsRouteArgs({
+    this.key,
+    required this.profileInformation,
+  });
+
+  final Key? key;
+
+  final ProfileInformation profileInformation;
+
+  @override
+  String toString() {
+    return 'EmployeeDetailsRouteArgs{key: $key, profileInformation: $profileInformation}';
+  }
 }
 
 /// generated route for

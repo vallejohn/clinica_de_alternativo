@@ -13,10 +13,18 @@ class AuthenticationDatasourceImpl extends  AuthenticationDatasource{
   @override
   Future<ProfileInformation?> checkAccountInformation(String userId)async {
      final result = await FirestoreCollection.profileInformation().where('uid', isEqualTo: userId).get();
-
      if(result.docs.isEmpty) return null;
 
-     return ProfileInformation.fromJson(result.docs.first.data());
+     Map<String, dynamic> resultMap = result.docs.first.data();
+     List<dynamic> attachedModules = [];
+     appLogger.w(resultMap['role']['modulesAttached']);
+     (resultMap['role']['modulesAttached'] as Map<String, dynamic>).forEach((key, value) {
+       attachedModules.add({'code': key, 'name': value});
+     });
+     resultMap['role']['modulesAttached'] = attachedModules;
+     ProfileInformation profile = ProfileInformation.fromJson(resultMap);
+
+     return profile;
   }
 
   @override

@@ -1,7 +1,9 @@
+import 'package:clinica_de_alternativo/core/extensions.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../../../../core/exceptions/failure.dart';
 import '../../../../inventory/data/model/product.dart';
 import '../../../../inventory/domain/product_usecases.dart';
 
@@ -21,7 +23,7 @@ class SearchProductCubit extends Cubit<SearchProductState> {
     final dataOrError = await _onFetchListUseCase();
 
     dataOrError.fold((l){
-      emit(state.copyWith(status: SearchProductStatus.failed, message: l.when(firebase: (error) => error.message!,)));
+      emit(state.copyWith(status: SearchProductStatus.failed, message: l.getMessage()));
     }, (products){
       originalProducts = products;
       emit(state.copyWith(status: SearchProductStatus.success, message: 'Fetched successfully', products: products));

@@ -23,6 +23,7 @@ mixin _$Role {
   String? get id => throw _privateConstructorUsedError;
   String get code => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  List<Module> get modulesAttached => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +35,8 @@ abstract class $RoleCopyWith<$Res> {
   factory $RoleCopyWith(Role value, $Res Function(Role) then) =
       _$RoleCopyWithImpl<$Res, Role>;
   @useResult
-  $Res call({String? id, String code, String name});
+  $Res call(
+      {String? id, String code, String name, List<Module> modulesAttached});
 }
 
 /// @nodoc
@@ -53,6 +55,7 @@ class _$RoleCopyWithImpl<$Res, $Val extends Role>
     Object? id = freezed,
     Object? code = null,
     Object? name = null,
+    Object? modulesAttached = null,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -67,6 +70,10 @@ class _$RoleCopyWithImpl<$Res, $Val extends Role>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      modulesAttached: null == modulesAttached
+          ? _value.modulesAttached
+          : modulesAttached // ignore: cast_nullable_to_non_nullable
+              as List<Module>,
     ) as $Val);
   }
 }
@@ -78,7 +85,8 @@ abstract class _$$RoleImplCopyWith<$Res> implements $RoleCopyWith<$Res> {
       __$$RoleImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? id, String code, String name});
+  $Res call(
+      {String? id, String code, String name, List<Module> modulesAttached});
 }
 
 /// @nodoc
@@ -94,6 +102,7 @@ class __$$RoleImplCopyWithImpl<$Res>
     Object? id = freezed,
     Object? code = null,
     Object? name = null,
+    Object? modulesAttached = null,
   }) {
     return _then(_$RoleImpl(
       id: freezed == id
@@ -108,6 +117,10 @@ class __$$RoleImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      modulesAttached: null == modulesAttached
+          ? _value._modulesAttached
+          : modulesAttached // ignore: cast_nullable_to_non_nullable
+              as List<Module>,
     ));
   }
 }
@@ -115,7 +128,12 @@ class __$$RoleImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$RoleImpl implements _Role {
-  const _$RoleImpl({this.id, this.code = '', this.name = ''});
+  const _$RoleImpl(
+      {this.id,
+      this.code = '',
+      this.name = '',
+      final List<Module> modulesAttached = const []})
+      : _modulesAttached = modulesAttached;
 
   factory _$RoleImpl.fromJson(Map<String, dynamic> json) =>
       _$$RoleImplFromJson(json);
@@ -128,10 +146,18 @@ class _$RoleImpl implements _Role {
   @override
   @JsonKey()
   final String name;
+  final List<Module> _modulesAttached;
+  @override
+  @JsonKey()
+  List<Module> get modulesAttached {
+    if (_modulesAttached is EqualUnmodifiableListView) return _modulesAttached;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_modulesAttached);
+  }
 
   @override
   String toString() {
-    return 'Role(id: $id, code: $code, name: $name)';
+    return 'Role(id: $id, code: $code, name: $name, modulesAttached: $modulesAttached)';
   }
 
   @override
@@ -141,12 +167,15 @@ class _$RoleImpl implements _Role {
             other is _$RoleImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.code, code) || other.code == code) &&
-            (identical(other.name, name) || other.name == name));
+            (identical(other.name, name) || other.name == name) &&
+            const DeepCollectionEquality()
+                .equals(other._modulesAttached, _modulesAttached));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, code, name);
+  int get hashCode => Object.hash(runtimeType, id, code, name,
+      const DeepCollectionEquality().hash(_modulesAttached));
 
   @JsonKey(ignore: true)
   @override
@@ -164,7 +193,10 @@ class _$RoleImpl implements _Role {
 
 abstract class _Role implements Role {
   const factory _Role(
-      {final String? id, final String code, final String name}) = _$RoleImpl;
+      {final String? id,
+      final String code,
+      final String name,
+      final List<Module> modulesAttached}) = _$RoleImpl;
 
   factory _Role.fromJson(Map<String, dynamic> json) = _$RoleImpl.fromJson;
 
@@ -174,6 +206,8 @@ abstract class _Role implements Role {
   String get code;
   @override
   String get name;
+  @override
+  List<Module> get modulesAttached;
   @override
   @JsonKey(ignore: true)
   _$$RoleImplCopyWith<_$RoleImpl> get copyWith =>

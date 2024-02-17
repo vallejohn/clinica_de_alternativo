@@ -1,10 +1,12 @@
 import 'dart:async';
 
+import 'package:clinica_de_alternativo/core/extensions.dart';
 import 'package:clinica_de_alternativo/src/inventory/domain/product_usecases.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../../../../core/exceptions/failure.dart';
 import '../../../data/model/product.dart';
 
 part 'products_event.dart';
@@ -18,6 +20,7 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
   final _onDeleteUseCase = GetIt.instance<OnDeleteProductUseCase>();
 
   ProductsBloc() : super(ProductsState()) {
+    on<_OnStarted>((event, emit) => emit(state.copyWith(products: event.types)));
     on<_OnFetchList>(_onFetchList);
     on<_OnAdd>(_onAdd);
     on<_OnEdit>(_onEdit);
@@ -33,7 +36,7 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
     final dataOrError = await _onFetchListUseCase();
 
     dataOrError.fold((l){
-      emit(state.copyWith(status: ProductStatus.failed, message: l.when(firebase: (error) => error.message!,)));
+      emit(state.copyWith(status: ProductStatus.failed, message: l.getMessage()));
     }, (products){
       emit(state.copyWith(status: ProductStatus.success, message: 'Fetched successfully', products: products));
     });
@@ -45,7 +48,7 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
     final dataOrError = await _onAddUseCase(event.product);
 
     dataOrError.fold((l){
-      emit(state.copyWith(status: ProductStatus.failed, message: l.when(firebase: (error) => error.message!,)));
+      emit(state.copyWith(status: ProductStatus.failed, message: l.getMessage(), errorCode: l.getCode()));
     }, (product){
       final products = [...state.products];
       products.add(product);
@@ -64,7 +67,7 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
     final dataOrError = await _onUpdateUseCase(event.product);
 
     dataOrError.fold((l){
-      emit(state.copyWith(status: ProductStatus.failed, message: l.when(firebase: (error) => error.message!,)));
+      emit(state.copyWith(status: ProductStatus.failed, message: l.getMessage(), errorCode: l.getCode()));
     }, (_){
       final products = [...state.products];
 
@@ -91,7 +94,7 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
     final dataOrError = await _onDeleteUseCase(state.selectedProduct!.id!);
 
     dataOrError.fold((l){
-      emit(state.copyWith(status: ProductStatus.failed, message: l.when(firebase: (error) => error.message!,)));
+      emit(state.copyWith(status: ProductStatus.failed, message: l.getMessage(), errorCode: l.getCode()));
     }, (_){
       final products = [...state.products];
 
@@ -108,7 +111,6 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
       }else{
         nextAutoSelectedProduct = products[products.length - 1];
       }
-
 
       emit(state.copyWith(status: ProductStatus.success, editing: false, message: 'Product updated', products: products, selectedProduct: nextAutoSelectedProduct));
     });

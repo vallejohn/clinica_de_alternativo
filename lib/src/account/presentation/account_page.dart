@@ -22,7 +22,7 @@ class _AccountPageState extends State<AccountPage> {
         value: BlocProvider.of<AccountBloc>(context),
         child: BlocBuilder<AccountBloc, AccountState>(
           builder: (context, state) {
-            if(state.status == AccountStatus.loading || state.status == AccountStatus.initial){
+            if(state.profile == null){
               return const Center(
                 child: LinearProgressIndicator(),
               );

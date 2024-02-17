@@ -1,4 +1,5 @@
 import 'package:clinica_de_alternativo/core/core.dart';
+import 'package:clinica_de_alternativo/core/extensions.dart';
 import 'package:clinica_de_alternativo/core/models/paginate.dart';
 import 'package:clinica_de_alternativo/src/sales_reporting/data/model/sales_report_documents.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,6 +7,7 @@ import 'package:clinica_de_alternativo/src/sales_reporting/core/params.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../../../../core/exceptions/failure.dart';
 import '../../../data/model/sales_report.dart';
 import '../../../domain/sales_reporting_usecases.dart';
 
@@ -28,7 +30,8 @@ class SalesReportGeneratorBloc extends Bloc<SalesReportGeneratorEvent, SalesRepo
       dataOrError.fold((l){
         emit(state.copyWith(
           status: SalesGeneratorStatus.failed,
-          message: l.when(firebase: (error) => error.message!,),
+          message: l.getMessage(),
+          errorCode: l.getCode(),
           loadingMoreItems: false,
         ));
       }, (doc){

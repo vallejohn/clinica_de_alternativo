@@ -7,6 +7,7 @@ class SearchProductState with _$SearchProductState {
   factory SearchProductState({
     @Default(SearchProductStatus.initial) SearchProductStatus status,
     @Default('') String message,
+    ErrorCode? errorCode,
     @Default([]) List<Product> products,
     Product? selectedProduct,
   }) = _SearchProductState;

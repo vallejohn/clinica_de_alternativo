@@ -1,3 +1,4 @@
+import 'package:clinica_de_alternativo/core/extensions.dart';
 import 'package:clinica_de_alternativo/src/authentication/core/params.dart';
 import 'package:clinica_de_alternativo/src/authentication/domain/authentication_usecases.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,7 +19,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       final dataOrError = await _onLoginUseCase(event.params);
 
       dataOrError.fold((l){
-        emit(LoginState.failed(l.when(firebase: (error) => error.message!,)));
+        emit(LoginState.failed(l.getMessage()));
       }, (products){
         emit(const LoginState.success());
       });

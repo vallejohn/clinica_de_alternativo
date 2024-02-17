@@ -1,4 +1,7 @@
+import 'package:clinica_de_alternativo/core/core.dart';
+import 'package:clinica_de_alternativo/core/exceptions/duplicate_record_exception.dart';
 import 'package:clinica_de_alternativo/src/account/core/params.dart';
+import 'package:clinica_de_alternativo/src/account/data/models/module.dart';
 import 'package:clinica_de_alternativo/src/account/data/models/role.dart';
 import 'package:clinica_de_alternativo/src/authentication/data/model/profile_information.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -42,6 +45,8 @@ class AccountRepositoryImpl extends AccountRepository {
       return Right(dataState);
     }on FirebaseException catch(e){
       return Left(Failure.firebase(e));
+    }on DuplicateRecordException catch(e){
+      return Left(Failure.documentException(e));
     }
   }
 
@@ -61,6 +66,7 @@ class AccountRepositoryImpl extends AccountRepository {
       final dataState = await accountDatasource.getAccountDetails(id);
       return Right(dataState);
     }on FirebaseException catch(e){
+      appLogger.e(e.message);
       return Left(Failure.firebase(e));
     }
   }
@@ -71,6 +77,7 @@ class AccountRepositoryImpl extends AccountRepository {
       final dataState = await accountDatasource.updateAccountDetails(profile);
       return Right(dataState);
     }on FirebaseException catch(e){
+      appLogger.e(e.code);
       return Left(Failure.firebase(e));
     }
   }
@@ -89,6 +96,36 @@ class AccountRepositoryImpl extends AccountRepository {
   Future<Either<Failure, List<ProfileInformation>>> geAccountList()async {
     try{
       final dataState = await accountDatasource.geAccountList();
+      return Right(dataState);
+    }on FirebaseException catch(e){
+      return Left(Failure.firebase(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Module>> addModule(Module module)async {
+    try{
+      final dataState = await accountDatasource.addModule(module);
+      return Right(dataState);
+    }on FirebaseException catch(e){
+      return Left(Failure.firebase(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Module>>> getModuleList()async {
+    try{
+      final dataState = await accountDatasource.getModuleList();
+      return Right(dataState);
+    }on FirebaseException catch(e){
+      return Left(Failure.firebase(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> updateRole(Role role)async {
+    try{
+      final dataState = await accountDatasource.updateRole(role);
       return Right(dataState);
     }on FirebaseException catch(e){
       return Left(Failure.firebase(e));

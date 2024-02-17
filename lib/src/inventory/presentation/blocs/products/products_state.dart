@@ -7,6 +7,7 @@ class ProductsState with _$ProductsState {
   factory ProductsState({
     @Default(ProductStatus.initial) ProductStatus status,
     @Default('') String message,
+    ErrorCode? errorCode,
     @Default([]) List<Product> products,
     @Default(false) bool editing,
     Product? selectedProduct,

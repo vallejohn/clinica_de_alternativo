@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$EmployeesEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(List<ProfileInformation> employees) onStarted,
     required TResult Function() onGetList,
     required TResult Function(AddAccountParams params) onAdd,
     required TResult Function(ProfileInformation profile) onUpdate,
@@ -25,6 +26,7 @@ mixin _$EmployeesEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(List<ProfileInformation> employees)? onStarted,
     TResult? Function()? onGetList,
     TResult? Function(AddAccountParams params)? onAdd,
     TResult? Function(ProfileInformation profile)? onUpdate,
@@ -32,6 +34,7 @@ mixin _$EmployeesEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(List<ProfileInformation> employees)? onStarted,
     TResult Function()? onGetList,
     TResult Function(AddAccountParams params)? onAdd,
     TResult Function(ProfileInformation profile)? onUpdate,
@@ -40,6 +43,7 @@ mixin _$EmployeesEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_OnStarted value) onStarted,
     required TResult Function(_OnGetList value) onGetList,
     required TResult Function(_OnAdd value) onAdd,
     required TResult Function(_OnUpdate value) onUpdate,
@@ -47,6 +51,7 @@ mixin _$EmployeesEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnStarted value)? onStarted,
     TResult? Function(_OnGetList value)? onGetList,
     TResult? Function(_OnAdd value)? onAdd,
     TResult? Function(_OnUpdate value)? onUpdate,
@@ -54,6 +59,7 @@ mixin _$EmployeesEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnStarted value)? onStarted,
     TResult Function(_OnGetList value)? onGetList,
     TResult Function(_OnAdd value)? onAdd,
     TResult Function(_OnUpdate value)? onUpdate,
@@ -78,6 +84,160 @@ class _$EmployeesEventCopyWithImpl<$Res, $Val extends EmployeesEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+}
+
+/// @nodoc
+abstract class _$$OnStartedImplCopyWith<$Res> {
+  factory _$$OnStartedImplCopyWith(
+          _$OnStartedImpl value, $Res Function(_$OnStartedImpl) then) =
+      __$$OnStartedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<ProfileInformation> employees});
+}
+
+/// @nodoc
+class __$$OnStartedImplCopyWithImpl<$Res>
+    extends _$EmployeesEventCopyWithImpl<$Res, _$OnStartedImpl>
+    implements _$$OnStartedImplCopyWith<$Res> {
+  __$$OnStartedImplCopyWithImpl(
+      _$OnStartedImpl _value, $Res Function(_$OnStartedImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? employees = null,
+  }) {
+    return _then(_$OnStartedImpl(
+      null == employees
+          ? _value._employees
+          : employees // ignore: cast_nullable_to_non_nullable
+              as List<ProfileInformation>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$OnStartedImpl implements _OnStarted {
+  const _$OnStartedImpl(final List<ProfileInformation> employees)
+      : _employees = employees;
+
+  final List<ProfileInformation> _employees;
+  @override
+  List<ProfileInformation> get employees {
+    if (_employees is EqualUnmodifiableListView) return _employees;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_employees);
+  }
+
+  @override
+  String toString() {
+    return 'EmployeesEvent.onStarted(employees: $employees)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$OnStartedImpl &&
+            const DeepCollectionEquality()
+                .equals(other._employees, _employees));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_employees));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$OnStartedImplCopyWith<_$OnStartedImpl> get copyWith =>
+      __$$OnStartedImplCopyWithImpl<_$OnStartedImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(List<ProfileInformation> employees) onStarted,
+    required TResult Function() onGetList,
+    required TResult Function(AddAccountParams params) onAdd,
+    required TResult Function(ProfileInformation profile) onUpdate,
+  }) {
+    return onStarted(employees);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(List<ProfileInformation> employees)? onStarted,
+    TResult? Function()? onGetList,
+    TResult? Function(AddAccountParams params)? onAdd,
+    TResult? Function(ProfileInformation profile)? onUpdate,
+  }) {
+    return onStarted?.call(employees);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(List<ProfileInformation> employees)? onStarted,
+    TResult Function()? onGetList,
+    TResult Function(AddAccountParams params)? onAdd,
+    TResult Function(ProfileInformation profile)? onUpdate,
+    required TResult orElse(),
+  }) {
+    if (onStarted != null) {
+      return onStarted(employees);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_OnStarted value) onStarted,
+    required TResult Function(_OnGetList value) onGetList,
+    required TResult Function(_OnAdd value) onAdd,
+    required TResult Function(_OnUpdate value) onUpdate,
+  }) {
+    return onStarted(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnStarted value)? onStarted,
+    TResult? Function(_OnGetList value)? onGetList,
+    TResult? Function(_OnAdd value)? onAdd,
+    TResult? Function(_OnUpdate value)? onUpdate,
+  }) {
+    return onStarted?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnStarted value)? onStarted,
+    TResult Function(_OnGetList value)? onGetList,
+    TResult Function(_OnAdd value)? onAdd,
+    TResult Function(_OnUpdate value)? onUpdate,
+    required TResult orElse(),
+  }) {
+    if (onStarted != null) {
+      return onStarted(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _OnStarted implements EmployeesEvent {
+  const factory _OnStarted(final List<ProfileInformation> employees) =
+      _$OnStartedImpl;
+
+  List<ProfileInformation> get employees;
+  @JsonKey(ignore: true)
+  _$$OnStartedImplCopyWith<_$OnStartedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -118,6 +278,7 @@ class _$OnGetListImpl implements _OnGetList {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(List<ProfileInformation> employees) onStarted,
     required TResult Function() onGetList,
     required TResult Function(AddAccountParams params) onAdd,
     required TResult Function(ProfileInformation profile) onUpdate,
@@ -128,6 +289,7 @@ class _$OnGetListImpl implements _OnGetList {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(List<ProfileInformation> employees)? onStarted,
     TResult? Function()? onGetList,
     TResult? Function(AddAccountParams params)? onAdd,
     TResult? Function(ProfileInformation profile)? onUpdate,
@@ -138,6 +300,7 @@ class _$OnGetListImpl implements _OnGetList {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(List<ProfileInformation> employees)? onStarted,
     TResult Function()? onGetList,
     TResult Function(AddAccountParams params)? onAdd,
     TResult Function(ProfileInformation profile)? onUpdate,
@@ -152,6 +315,7 @@ class _$OnGetListImpl implements _OnGetList {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_OnStarted value) onStarted,
     required TResult Function(_OnGetList value) onGetList,
     required TResult Function(_OnAdd value) onAdd,
     required TResult Function(_OnUpdate value) onUpdate,
@@ -162,6 +326,7 @@ class _$OnGetListImpl implements _OnGetList {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnStarted value)? onStarted,
     TResult? Function(_OnGetList value)? onGetList,
     TResult? Function(_OnAdd value)? onAdd,
     TResult? Function(_OnUpdate value)? onUpdate,
@@ -172,6 +337,7 @@ class _$OnGetListImpl implements _OnGetList {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnStarted value)? onStarted,
     TResult Function(_OnGetList value)? onGetList,
     TResult Function(_OnAdd value)? onAdd,
     TResult Function(_OnUpdate value)? onUpdate,
@@ -252,6 +418,7 @@ class _$OnAddImpl implements _OnAdd {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(List<ProfileInformation> employees) onStarted,
     required TResult Function() onGetList,
     required TResult Function(AddAccountParams params) onAdd,
     required TResult Function(ProfileInformation profile) onUpdate,
@@ -262,6 +429,7 @@ class _$OnAddImpl implements _OnAdd {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(List<ProfileInformation> employees)? onStarted,
     TResult? Function()? onGetList,
     TResult? Function(AddAccountParams params)? onAdd,
     TResult? Function(ProfileInformation profile)? onUpdate,
@@ -272,6 +440,7 @@ class _$OnAddImpl implements _OnAdd {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(List<ProfileInformation> employees)? onStarted,
     TResult Function()? onGetList,
     TResult Function(AddAccountParams params)? onAdd,
     TResult Function(ProfileInformation profile)? onUpdate,
@@ -286,6 +455,7 @@ class _$OnAddImpl implements _OnAdd {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_OnStarted value) onStarted,
     required TResult Function(_OnGetList value) onGetList,
     required TResult Function(_OnAdd value) onAdd,
     required TResult Function(_OnUpdate value) onUpdate,
@@ -296,6 +466,7 @@ class _$OnAddImpl implements _OnAdd {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnStarted value)? onStarted,
     TResult? Function(_OnGetList value)? onGetList,
     TResult? Function(_OnAdd value)? onAdd,
     TResult? Function(_OnUpdate value)? onUpdate,
@@ -306,6 +477,7 @@ class _$OnAddImpl implements _OnAdd {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnStarted value)? onStarted,
     TResult Function(_OnGetList value)? onGetList,
     TResult Function(_OnAdd value)? onAdd,
     TResult Function(_OnUpdate value)? onUpdate,
@@ -401,6 +573,7 @@ class _$OnUpdateImpl implements _OnUpdate {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(List<ProfileInformation> employees) onStarted,
     required TResult Function() onGetList,
     required TResult Function(AddAccountParams params) onAdd,
     required TResult Function(ProfileInformation profile) onUpdate,
@@ -411,6 +584,7 @@ class _$OnUpdateImpl implements _OnUpdate {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(List<ProfileInformation> employees)? onStarted,
     TResult? Function()? onGetList,
     TResult? Function(AddAccountParams params)? onAdd,
     TResult? Function(ProfileInformation profile)? onUpdate,
@@ -421,6 +595,7 @@ class _$OnUpdateImpl implements _OnUpdate {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(List<ProfileInformation> employees)? onStarted,
     TResult Function()? onGetList,
     TResult Function(AddAccountParams params)? onAdd,
     TResult Function(ProfileInformation profile)? onUpdate,
@@ -435,6 +610,7 @@ class _$OnUpdateImpl implements _OnUpdate {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_OnStarted value) onStarted,
     required TResult Function(_OnGetList value) onGetList,
     required TResult Function(_OnAdd value) onAdd,
     required TResult Function(_OnUpdate value) onUpdate,
@@ -445,6 +621,7 @@ class _$OnUpdateImpl implements _OnUpdate {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnStarted value)? onStarted,
     TResult? Function(_OnGetList value)? onGetList,
     TResult? Function(_OnAdd value)? onAdd,
     TResult? Function(_OnUpdate value)? onUpdate,
@@ -455,6 +632,7 @@ class _$OnUpdateImpl implements _OnUpdate {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnStarted value)? onStarted,
     TResult Function(_OnGetList value)? onGetList,
     TResult Function(_OnAdd value)? onAdd,
     TResult Function(_OnUpdate value)? onUpdate,
@@ -480,6 +658,7 @@ abstract class _OnUpdate implements EmployeesEvent {
 mixin _$EmployeesState {
   EmployeeStatus get status => throw _privateConstructorUsedError;
   String get message => throw _privateConstructorUsedError;
+  ErrorCode? get errorCode => throw _privateConstructorUsedError;
   List<ProfileInformation> get employees => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -496,6 +675,7 @@ abstract class $EmployeesStateCopyWith<$Res> {
   $Res call(
       {EmployeeStatus status,
       String message,
+      ErrorCode? errorCode,
       List<ProfileInformation> employees});
 }
 
@@ -514,6 +694,7 @@ class _$EmployeesStateCopyWithImpl<$Res, $Val extends EmployeesState>
   $Res call({
     Object? status = null,
     Object? message = null,
+    Object? errorCode = freezed,
     Object? employees = null,
   }) {
     return _then(_value.copyWith(
@@ -525,6 +706,10 @@ class _$EmployeesStateCopyWithImpl<$Res, $Val extends EmployeesState>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      errorCode: freezed == errorCode
+          ? _value.errorCode
+          : errorCode // ignore: cast_nullable_to_non_nullable
+              as ErrorCode?,
       employees: null == employees
           ? _value.employees
           : employees // ignore: cast_nullable_to_non_nullable
@@ -544,6 +729,7 @@ abstract class _$$EmployeesStateImplCopyWith<$Res>
   $Res call(
       {EmployeeStatus status,
       String message,
+      ErrorCode? errorCode,
       List<ProfileInformation> employees});
 }
 
@@ -560,6 +746,7 @@ class __$$EmployeesStateImplCopyWithImpl<$Res>
   $Res call({
     Object? status = null,
     Object? message = null,
+    Object? errorCode = freezed,
     Object? employees = null,
   }) {
     return _then(_$EmployeesStateImpl(
@@ -571,6 +758,10 @@ class __$$EmployeesStateImplCopyWithImpl<$Res>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      errorCode: freezed == errorCode
+          ? _value.errorCode
+          : errorCode // ignore: cast_nullable_to_non_nullable
+              as ErrorCode?,
       employees: null == employees
           ? _value._employees
           : employees // ignore: cast_nullable_to_non_nullable
@@ -585,6 +776,7 @@ class _$EmployeesStateImpl implements _EmployeesState {
   const _$EmployeesStateImpl(
       {this.status = EmployeeStatus.initial,
       this.message = '',
+      this.errorCode,
       final List<ProfileInformation> employees = const []})
       : _employees = employees;
 
@@ -594,6 +786,8 @@ class _$EmployeesStateImpl implements _EmployeesState {
   @override
   @JsonKey()
   final String message;
+  @override
+  final ErrorCode? errorCode;
   final List<ProfileInformation> _employees;
   @override
   @JsonKey()
@@ -605,7 +799,7 @@ class _$EmployeesStateImpl implements _EmployeesState {
 
   @override
   String toString() {
-    return 'EmployeesState(status: $status, message: $message, employees: $employees)';
+    return 'EmployeesState(status: $status, message: $message, errorCode: $errorCode, employees: $employees)';
   }
 
   @override
@@ -615,12 +809,14 @@ class _$EmployeesStateImpl implements _EmployeesState {
             other is _$EmployeesStateImpl &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.message, message) || other.message == message) &&
+            (identical(other.errorCode, errorCode) ||
+                other.errorCode == errorCode) &&
             const DeepCollectionEquality()
                 .equals(other._employees, _employees));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status, message,
+  int get hashCode => Object.hash(runtimeType, status, message, errorCode,
       const DeepCollectionEquality().hash(_employees));
 
   @JsonKey(ignore: true)
@@ -635,12 +831,15 @@ abstract class _EmployeesState implements EmployeesState {
   const factory _EmployeesState(
       {final EmployeeStatus status,
       final String message,
+      final ErrorCode? errorCode,
       final List<ProfileInformation> employees}) = _$EmployeesStateImpl;
 
   @override
   EmployeeStatus get status;
   @override
   String get message;
+  @override
+  ErrorCode? get errorCode;
   @override
   List<ProfileInformation> get employees;
   @override

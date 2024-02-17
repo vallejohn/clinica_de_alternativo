@@ -403,6 +403,7 @@ abstract class _OnSendReport implements SalesReportingEvent {
 mixin _$SalesReportingState {
   SalesReportingStatus get status => throw _privateConstructorUsedError;
   String get message => throw _privateConstructorUsedError;
+  ErrorCode? get errorCode => throw _privateConstructorUsedError;
   SalesReportDocuments? get salesReportDocs =>
       throw _privateConstructorUsedError;
   bool get loadingMoreItems => throw _privateConstructorUsedError;
@@ -421,6 +422,7 @@ abstract class $SalesReportingStateCopyWith<$Res> {
   $Res call(
       {SalesReportingStatus status,
       String message,
+      ErrorCode? errorCode,
       SalesReportDocuments? salesReportDocs,
       bool loadingMoreItems});
 
@@ -442,6 +444,7 @@ class _$SalesReportingStateCopyWithImpl<$Res, $Val extends SalesReportingState>
   $Res call({
     Object? status = null,
     Object? message = null,
+    Object? errorCode = freezed,
     Object? salesReportDocs = freezed,
     Object? loadingMoreItems = null,
   }) {
@@ -454,6 +457,10 @@ class _$SalesReportingStateCopyWithImpl<$Res, $Val extends SalesReportingState>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      errorCode: freezed == errorCode
+          ? _value.errorCode
+          : errorCode // ignore: cast_nullable_to_non_nullable
+              as ErrorCode?,
       salesReportDocs: freezed == salesReportDocs
           ? _value.salesReportDocs
           : salesReportDocs // ignore: cast_nullable_to_non_nullable
@@ -490,6 +497,7 @@ abstract class _$$SalesReportingStateImplCopyWith<$Res>
   $Res call(
       {SalesReportingStatus status,
       String message,
+      ErrorCode? errorCode,
       SalesReportDocuments? salesReportDocs,
       bool loadingMoreItems});
 
@@ -510,6 +518,7 @@ class __$$SalesReportingStateImplCopyWithImpl<$Res>
   $Res call({
     Object? status = null,
     Object? message = null,
+    Object? errorCode = freezed,
     Object? salesReportDocs = freezed,
     Object? loadingMoreItems = null,
   }) {
@@ -522,6 +531,10 @@ class __$$SalesReportingStateImplCopyWithImpl<$Res>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      errorCode: freezed == errorCode
+          ? _value.errorCode
+          : errorCode // ignore: cast_nullable_to_non_nullable
+              as ErrorCode?,
       salesReportDocs: freezed == salesReportDocs
           ? _value.salesReportDocs
           : salesReportDocs // ignore: cast_nullable_to_non_nullable
@@ -540,6 +553,7 @@ class _$SalesReportingStateImpl implements _SalesReportingState {
   _$SalesReportingStateImpl(
       {this.status = SalesReportingStatus.initial,
       this.message = '',
+      this.errorCode,
       this.salesReportDocs,
       this.loadingMoreItems = false});
 
@@ -550,6 +564,8 @@ class _$SalesReportingStateImpl implements _SalesReportingState {
   @JsonKey()
   final String message;
   @override
+  final ErrorCode? errorCode;
+  @override
   final SalesReportDocuments? salesReportDocs;
   @override
   @JsonKey()
@@ -557,7 +573,7 @@ class _$SalesReportingStateImpl implements _SalesReportingState {
 
   @override
   String toString() {
-    return 'SalesReportingState(status: $status, message: $message, salesReportDocs: $salesReportDocs, loadingMoreItems: $loadingMoreItems)';
+    return 'SalesReportingState(status: $status, message: $message, errorCode: $errorCode, salesReportDocs: $salesReportDocs, loadingMoreItems: $loadingMoreItems)';
   }
 
   @override
@@ -567,6 +583,8 @@ class _$SalesReportingStateImpl implements _SalesReportingState {
             other is _$SalesReportingStateImpl &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.message, message) || other.message == message) &&
+            (identical(other.errorCode, errorCode) ||
+                other.errorCode == errorCode) &&
             (identical(other.salesReportDocs, salesReportDocs) ||
                 other.salesReportDocs == salesReportDocs) &&
             (identical(other.loadingMoreItems, loadingMoreItems) ||
@@ -574,8 +592,8 @@ class _$SalesReportingStateImpl implements _SalesReportingState {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, status, message, salesReportDocs, loadingMoreItems);
+  int get hashCode => Object.hash(runtimeType, status, message, errorCode,
+      salesReportDocs, loadingMoreItems);
 
   @JsonKey(ignore: true)
   @override
@@ -589,6 +607,7 @@ abstract class _SalesReportingState implements SalesReportingState {
   factory _SalesReportingState(
       {final SalesReportingStatus status,
       final String message,
+      final ErrorCode? errorCode,
       final SalesReportDocuments? salesReportDocs,
       final bool loadingMoreItems}) = _$SalesReportingStateImpl;
 
@@ -596,6 +615,8 @@ abstract class _SalesReportingState implements SalesReportingState {
   SalesReportingStatus get status;
   @override
   String get message;
+  @override
+  ErrorCode? get errorCode;
   @override
   SalesReportDocuments? get salesReportDocs;
   @override

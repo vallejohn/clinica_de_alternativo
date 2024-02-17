@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$BranchEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(List<Branch> branch) onStarted,
     required TResult Function() onFetch,
     required TResult Function(Branch branch) onAdd,
     required TResult Function(Branch branch) onEdit,
@@ -26,6 +27,7 @@ mixin _$BranchEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(List<Branch> branch)? onStarted,
     TResult? Function()? onFetch,
     TResult? Function(Branch branch)? onAdd,
     TResult? Function(Branch branch)? onEdit,
@@ -34,6 +36,7 @@ mixin _$BranchEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(List<Branch> branch)? onStarted,
     TResult Function()? onFetch,
     TResult Function(Branch branch)? onAdd,
     TResult Function(Branch branch)? onEdit,
@@ -43,6 +46,7 @@ mixin _$BranchEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_OnStarted value) onStarted,
     required TResult Function(_OnFetch value) onFetch,
     required TResult Function(_OnAdd value) onAdd,
     required TResult Function(_OnEdit value) onEdit,
@@ -51,6 +55,7 @@ mixin _$BranchEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnStarted value)? onStarted,
     TResult? Function(_OnFetch value)? onFetch,
     TResult? Function(_OnAdd value)? onAdd,
     TResult? Function(_OnEdit value)? onEdit,
@@ -59,6 +64,7 @@ mixin _$BranchEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnStarted value)? onStarted,
     TResult Function(_OnFetch value)? onFetch,
     TResult Function(_OnAdd value)? onAdd,
     TResult Function(_OnEdit value)? onEdit,
@@ -84,6 +90,163 @@ class _$BranchEventCopyWithImpl<$Res, $Val extends BranchEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+}
+
+/// @nodoc
+abstract class _$$OnStartedImplCopyWith<$Res> {
+  factory _$$OnStartedImplCopyWith(
+          _$OnStartedImpl value, $Res Function(_$OnStartedImpl) then) =
+      __$$OnStartedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<Branch> branch});
+}
+
+/// @nodoc
+class __$$OnStartedImplCopyWithImpl<$Res>
+    extends _$BranchEventCopyWithImpl<$Res, _$OnStartedImpl>
+    implements _$$OnStartedImplCopyWith<$Res> {
+  __$$OnStartedImplCopyWithImpl(
+      _$OnStartedImpl _value, $Res Function(_$OnStartedImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? branch = null,
+  }) {
+    return _then(_$OnStartedImpl(
+      null == branch
+          ? _value._branch
+          : branch // ignore: cast_nullable_to_non_nullable
+              as List<Branch>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$OnStartedImpl implements _OnStarted {
+  const _$OnStartedImpl(final List<Branch> branch) : _branch = branch;
+
+  final List<Branch> _branch;
+  @override
+  List<Branch> get branch {
+    if (_branch is EqualUnmodifiableListView) return _branch;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_branch);
+  }
+
+  @override
+  String toString() {
+    return 'BranchEvent.onStarted(branch: $branch)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$OnStartedImpl &&
+            const DeepCollectionEquality().equals(other._branch, _branch));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_branch));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$OnStartedImplCopyWith<_$OnStartedImpl> get copyWith =>
+      __$$OnStartedImplCopyWithImpl<_$OnStartedImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(List<Branch> branch) onStarted,
+    required TResult Function() onFetch,
+    required TResult Function(Branch branch) onAdd,
+    required TResult Function(Branch branch) onEdit,
+    required TResult Function(Branch branch) onDelete,
+  }) {
+    return onStarted(branch);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(List<Branch> branch)? onStarted,
+    TResult? Function()? onFetch,
+    TResult? Function(Branch branch)? onAdd,
+    TResult? Function(Branch branch)? onEdit,
+    TResult? Function(Branch branch)? onDelete,
+  }) {
+    return onStarted?.call(branch);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(List<Branch> branch)? onStarted,
+    TResult Function()? onFetch,
+    TResult Function(Branch branch)? onAdd,
+    TResult Function(Branch branch)? onEdit,
+    TResult Function(Branch branch)? onDelete,
+    required TResult orElse(),
+  }) {
+    if (onStarted != null) {
+      return onStarted(branch);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_OnStarted value) onStarted,
+    required TResult Function(_OnFetch value) onFetch,
+    required TResult Function(_OnAdd value) onAdd,
+    required TResult Function(_OnEdit value) onEdit,
+    required TResult Function(_OnDelete value) onDelete,
+  }) {
+    return onStarted(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnStarted value)? onStarted,
+    TResult? Function(_OnFetch value)? onFetch,
+    TResult? Function(_OnAdd value)? onAdd,
+    TResult? Function(_OnEdit value)? onEdit,
+    TResult? Function(_OnDelete value)? onDelete,
+  }) {
+    return onStarted?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnStarted value)? onStarted,
+    TResult Function(_OnFetch value)? onFetch,
+    TResult Function(_OnAdd value)? onAdd,
+    TResult Function(_OnEdit value)? onEdit,
+    TResult Function(_OnDelete value)? onDelete,
+    required TResult orElse(),
+  }) {
+    if (onStarted != null) {
+      return onStarted(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _OnStarted implements BranchEvent {
+  const factory _OnStarted(final List<Branch> branch) = _$OnStartedImpl;
+
+  List<Branch> get branch;
+  @JsonKey(ignore: true)
+  _$$OnStartedImplCopyWith<_$OnStartedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -124,6 +287,7 @@ class _$OnFetchImpl implements _OnFetch {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(List<Branch> branch) onStarted,
     required TResult Function() onFetch,
     required TResult Function(Branch branch) onAdd,
     required TResult Function(Branch branch) onEdit,
@@ -135,6 +299,7 @@ class _$OnFetchImpl implements _OnFetch {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(List<Branch> branch)? onStarted,
     TResult? Function()? onFetch,
     TResult? Function(Branch branch)? onAdd,
     TResult? Function(Branch branch)? onEdit,
@@ -146,6 +311,7 @@ class _$OnFetchImpl implements _OnFetch {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(List<Branch> branch)? onStarted,
     TResult Function()? onFetch,
     TResult Function(Branch branch)? onAdd,
     TResult Function(Branch branch)? onEdit,
@@ -161,6 +327,7 @@ class _$OnFetchImpl implements _OnFetch {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_OnStarted value) onStarted,
     required TResult Function(_OnFetch value) onFetch,
     required TResult Function(_OnAdd value) onAdd,
     required TResult Function(_OnEdit value) onEdit,
@@ -172,6 +339,7 @@ class _$OnFetchImpl implements _OnFetch {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnStarted value)? onStarted,
     TResult? Function(_OnFetch value)? onFetch,
     TResult? Function(_OnAdd value)? onAdd,
     TResult? Function(_OnEdit value)? onEdit,
@@ -183,6 +351,7 @@ class _$OnFetchImpl implements _OnFetch {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnStarted value)? onStarted,
     TResult Function(_OnFetch value)? onFetch,
     TResult Function(_OnAdd value)? onAdd,
     TResult Function(_OnEdit value)? onEdit,
@@ -274,6 +443,7 @@ class _$OnAddImpl implements _OnAdd {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(List<Branch> branch) onStarted,
     required TResult Function() onFetch,
     required TResult Function(Branch branch) onAdd,
     required TResult Function(Branch branch) onEdit,
@@ -285,6 +455,7 @@ class _$OnAddImpl implements _OnAdd {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(List<Branch> branch)? onStarted,
     TResult? Function()? onFetch,
     TResult? Function(Branch branch)? onAdd,
     TResult? Function(Branch branch)? onEdit,
@@ -296,6 +467,7 @@ class _$OnAddImpl implements _OnAdd {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(List<Branch> branch)? onStarted,
     TResult Function()? onFetch,
     TResult Function(Branch branch)? onAdd,
     TResult Function(Branch branch)? onEdit,
@@ -311,6 +483,7 @@ class _$OnAddImpl implements _OnAdd {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_OnStarted value) onStarted,
     required TResult Function(_OnFetch value) onFetch,
     required TResult Function(_OnAdd value) onAdd,
     required TResult Function(_OnEdit value) onEdit,
@@ -322,6 +495,7 @@ class _$OnAddImpl implements _OnAdd {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnStarted value)? onStarted,
     TResult? Function(_OnFetch value)? onFetch,
     TResult? Function(_OnAdd value)? onAdd,
     TResult? Function(_OnEdit value)? onEdit,
@@ -333,6 +507,7 @@ class _$OnAddImpl implements _OnAdd {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnStarted value)? onStarted,
     TResult Function(_OnFetch value)? onFetch,
     TResult Function(_OnAdd value)? onAdd,
     TResult Function(_OnEdit value)? onEdit,
@@ -429,6 +604,7 @@ class _$OnEditImpl implements _OnEdit {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(List<Branch> branch) onStarted,
     required TResult Function() onFetch,
     required TResult Function(Branch branch) onAdd,
     required TResult Function(Branch branch) onEdit,
@@ -440,6 +616,7 @@ class _$OnEditImpl implements _OnEdit {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(List<Branch> branch)? onStarted,
     TResult? Function()? onFetch,
     TResult? Function(Branch branch)? onAdd,
     TResult? Function(Branch branch)? onEdit,
@@ -451,6 +628,7 @@ class _$OnEditImpl implements _OnEdit {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(List<Branch> branch)? onStarted,
     TResult Function()? onFetch,
     TResult Function(Branch branch)? onAdd,
     TResult Function(Branch branch)? onEdit,
@@ -466,6 +644,7 @@ class _$OnEditImpl implements _OnEdit {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_OnStarted value) onStarted,
     required TResult Function(_OnFetch value) onFetch,
     required TResult Function(_OnAdd value) onAdd,
     required TResult Function(_OnEdit value) onEdit,
@@ -477,6 +656,7 @@ class _$OnEditImpl implements _OnEdit {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnStarted value)? onStarted,
     TResult? Function(_OnFetch value)? onFetch,
     TResult? Function(_OnAdd value)? onAdd,
     TResult? Function(_OnEdit value)? onEdit,
@@ -488,6 +668,7 @@ class _$OnEditImpl implements _OnEdit {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnStarted value)? onStarted,
     TResult Function(_OnFetch value)? onFetch,
     TResult Function(_OnAdd value)? onAdd,
     TResult Function(_OnEdit value)? onEdit,
@@ -584,6 +765,7 @@ class _$OnDeleteImpl implements _OnDelete {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(List<Branch> branch) onStarted,
     required TResult Function() onFetch,
     required TResult Function(Branch branch) onAdd,
     required TResult Function(Branch branch) onEdit,
@@ -595,6 +777,7 @@ class _$OnDeleteImpl implements _OnDelete {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(List<Branch> branch)? onStarted,
     TResult? Function()? onFetch,
     TResult? Function(Branch branch)? onAdd,
     TResult? Function(Branch branch)? onEdit,
@@ -606,6 +789,7 @@ class _$OnDeleteImpl implements _OnDelete {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(List<Branch> branch)? onStarted,
     TResult Function()? onFetch,
     TResult Function(Branch branch)? onAdd,
     TResult Function(Branch branch)? onEdit,
@@ -621,6 +805,7 @@ class _$OnDeleteImpl implements _OnDelete {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_OnStarted value) onStarted,
     required TResult Function(_OnFetch value) onFetch,
     required TResult Function(_OnAdd value) onAdd,
     required TResult Function(_OnEdit value) onEdit,
@@ -632,6 +817,7 @@ class _$OnDeleteImpl implements _OnDelete {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnStarted value)? onStarted,
     TResult? Function(_OnFetch value)? onFetch,
     TResult? Function(_OnAdd value)? onAdd,
     TResult? Function(_OnEdit value)? onEdit,
@@ -643,6 +829,7 @@ class _$OnDeleteImpl implements _OnDelete {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnStarted value)? onStarted,
     TResult Function(_OnFetch value)? onFetch,
     TResult Function(_OnAdd value)? onAdd,
     TResult Function(_OnEdit value)? onEdit,
@@ -669,6 +856,7 @@ abstract class _OnDelete implements BranchEvent {
 mixin _$BranchState {
   BranchStatus get status => throw _privateConstructorUsedError;
   String get message => throw _privateConstructorUsedError;
+  ErrorCode? get errorCode => throw _privateConstructorUsedError;
   List<Branch> get branches => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -682,7 +870,11 @@ abstract class $BranchStateCopyWith<$Res> {
           BranchState value, $Res Function(BranchState) then) =
       _$BranchStateCopyWithImpl<$Res, BranchState>;
   @useResult
-  $Res call({BranchStatus status, String message, List<Branch> branches});
+  $Res call(
+      {BranchStatus status,
+      String message,
+      ErrorCode? errorCode,
+      List<Branch> branches});
 }
 
 /// @nodoc
@@ -700,6 +892,7 @@ class _$BranchStateCopyWithImpl<$Res, $Val extends BranchState>
   $Res call({
     Object? status = null,
     Object? message = null,
+    Object? errorCode = freezed,
     Object? branches = null,
   }) {
     return _then(_value.copyWith(
@@ -711,6 +904,10 @@ class _$BranchStateCopyWithImpl<$Res, $Val extends BranchState>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      errorCode: freezed == errorCode
+          ? _value.errorCode
+          : errorCode // ignore: cast_nullable_to_non_nullable
+              as ErrorCode?,
       branches: null == branches
           ? _value.branches
           : branches // ignore: cast_nullable_to_non_nullable
@@ -727,7 +924,11 @@ abstract class _$$BranchStateImplCopyWith<$Res>
       __$$BranchStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({BranchStatus status, String message, List<Branch> branches});
+  $Res call(
+      {BranchStatus status,
+      String message,
+      ErrorCode? errorCode,
+      List<Branch> branches});
 }
 
 /// @nodoc
@@ -743,6 +944,7 @@ class __$$BranchStateImplCopyWithImpl<$Res>
   $Res call({
     Object? status = null,
     Object? message = null,
+    Object? errorCode = freezed,
     Object? branches = null,
   }) {
     return _then(_$BranchStateImpl(
@@ -754,6 +956,10 @@ class __$$BranchStateImplCopyWithImpl<$Res>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      errorCode: freezed == errorCode
+          ? _value.errorCode
+          : errorCode // ignore: cast_nullable_to_non_nullable
+              as ErrorCode?,
       branches: null == branches
           ? _value._branches
           : branches // ignore: cast_nullable_to_non_nullable
@@ -768,6 +974,7 @@ class _$BranchStateImpl implements _BranchState {
   const _$BranchStateImpl(
       {this.status = BranchStatus.initial,
       this.message = '',
+      this.errorCode,
       final List<Branch> branches = const []})
       : _branches = branches;
 
@@ -777,6 +984,8 @@ class _$BranchStateImpl implements _BranchState {
   @override
   @JsonKey()
   final String message;
+  @override
+  final ErrorCode? errorCode;
   final List<Branch> _branches;
   @override
   @JsonKey()
@@ -788,7 +997,7 @@ class _$BranchStateImpl implements _BranchState {
 
   @override
   String toString() {
-    return 'BranchState(status: $status, message: $message, branches: $branches)';
+    return 'BranchState(status: $status, message: $message, errorCode: $errorCode, branches: $branches)';
   }
 
   @override
@@ -798,11 +1007,13 @@ class _$BranchStateImpl implements _BranchState {
             other is _$BranchStateImpl &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.message, message) || other.message == message) &&
+            (identical(other.errorCode, errorCode) ||
+                other.errorCode == errorCode) &&
             const DeepCollectionEquality().equals(other._branches, _branches));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status, message,
+  int get hashCode => Object.hash(runtimeType, status, message, errorCode,
       const DeepCollectionEquality().hash(_branches));
 
   @JsonKey(ignore: true)
@@ -816,12 +1027,15 @@ abstract class _BranchState implements BranchState {
   const factory _BranchState(
       {final BranchStatus status,
       final String message,
+      final ErrorCode? errorCode,
       final List<Branch> branches}) = _$BranchStateImpl;
 
   @override
   BranchStatus get status;
   @override
   String get message;
+  @override
+  ErrorCode? get errorCode;
   @override
   List<Branch> get branches;
   @override

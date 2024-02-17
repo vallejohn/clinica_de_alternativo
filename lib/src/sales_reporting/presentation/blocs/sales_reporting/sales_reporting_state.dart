@@ -7,6 +7,7 @@ class SalesReportingState with _$SalesReportingState {
   factory SalesReportingState({
     @Default(SalesReportingStatus.initial) SalesReportingStatus status,
     @Default('') String message,
+    ErrorCode? errorCode,
     SalesReportDocuments? salesReportDocs,
     @Default(false) bool loadingMoreItems,
   }) = _SalesReportingState;

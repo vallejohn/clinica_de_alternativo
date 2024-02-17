@@ -7,6 +7,8 @@ class RoleState with _$RoleState {
   const factory RoleState({
     @Default(RoleStatus.initial) RoleStatus status,
     @Default('') String message,
+    ErrorCode? errorCode,
     @Default([]) List<Role> roles,
+    @Default(false) bool accessible,
   }) = _RoleState;
 }

@@ -6,5 +6,7 @@ import 'package:clinica_de_alternativo/src/authentication/data/model/profile_inf
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../../../account/data/models/module.dart';
+
 part 'authentication_datasource.dart';
 part 'authentication_datasource_impl.dart';

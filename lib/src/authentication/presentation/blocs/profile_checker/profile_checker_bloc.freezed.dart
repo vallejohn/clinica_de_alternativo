@@ -357,55 +357,12 @@ abstract class _OnUpdateProfile implements ProfileCheckerEvent {
 
 /// @nodoc
 mixin _$ProfileCheckerState {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(ProfileInformation? profile) success,
-    required TResult Function(String message) failed,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(ProfileInformation? profile)? success,
-    TResult? Function(String message)? failed,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(ProfileInformation? profile)? success,
-    TResult Function(String message)? failed,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Sucess value) success,
-    required TResult Function(_Failed value) failed,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Sucess value)? success,
-    TResult? Function(_Failed value)? failed,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Sucess value)? success,
-    TResult Function(_Failed value)? failed,
-    required TResult orElse(),
-  }) =>
+  ProfileCheckStatus get status => throw _privateConstructorUsedError;
+  ProfileInformation? get profile => throw _privateConstructorUsedError;
+  String get message => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $ProfileCheckerStateCopyWith<ProfileCheckerState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -414,6 +371,11 @@ abstract class $ProfileCheckerStateCopyWith<$Res> {
   factory $ProfileCheckerStateCopyWith(
           ProfileCheckerState value, $Res Function(ProfileCheckerState) then) =
       _$ProfileCheckerStateCopyWithImpl<$Res, ProfileCheckerState>;
+  @useResult
+  $Res call(
+      {ProfileCheckStatus status, ProfileInformation? profile, String message});
+
+  $ProfileInformationCopyWith<$Res>? get profile;
 }
 
 /// @nodoc
@@ -425,266 +387,28 @@ class _$ProfileCheckerStateCopyWithImpl<$Res, $Val extends ProfileCheckerState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-}
-
-/// @nodoc
-abstract class _$$InitialImplCopyWith<$Res> {
-  factory _$$InitialImplCopyWith(
-          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
-      __$$InitialImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$InitialImplCopyWithImpl<$Res>
-    extends _$ProfileCheckerStateCopyWithImpl<$Res, _$InitialImpl>
-    implements _$$InitialImplCopyWith<$Res> {
-  __$$InitialImplCopyWithImpl(
-      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$InitialImpl implements _Initial {
-  const _$InitialImpl();
-
-  @override
-  String toString() {
-    return 'ProfileCheckerState.initial()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$InitialImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(ProfileInformation? profile) success,
-    required TResult Function(String message) failed,
-  }) {
-    return initial();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(ProfileInformation? profile)? success,
-    TResult? Function(String message)? failed,
-  }) {
-    return initial?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(ProfileInformation? profile)? success,
-    TResult Function(String message)? failed,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Sucess value) success,
-    required TResult Function(_Failed value) failed,
-  }) {
-    return initial(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Sucess value)? success,
-    TResult? Function(_Failed value)? failed,
-  }) {
-    return initial?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Sucess value)? success,
-    TResult Function(_Failed value)? failed,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Initial implements ProfileCheckerState {
-  const factory _Initial() = _$InitialImpl;
-}
-
-/// @nodoc
-abstract class _$$LoadingImplCopyWith<$Res> {
-  factory _$$LoadingImplCopyWith(
-          _$LoadingImpl value, $Res Function(_$LoadingImpl) then) =
-      __$$LoadingImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$LoadingImplCopyWithImpl<$Res>
-    extends _$ProfileCheckerStateCopyWithImpl<$Res, _$LoadingImpl>
-    implements _$$LoadingImplCopyWith<$Res> {
-  __$$LoadingImplCopyWithImpl(
-      _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$LoadingImpl implements _Loading {
-  const _$LoadingImpl();
-
-  @override
-  String toString() {
-    return 'ProfileCheckerState.loading()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LoadingImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(ProfileInformation? profile) success,
-    required TResult Function(String message) failed,
-  }) {
-    return loading();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(ProfileInformation? profile)? success,
-    TResult? Function(String message)? failed,
-  }) {
-    return loading?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(ProfileInformation? profile)? success,
-    TResult Function(String message)? failed,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Sucess value) success,
-    required TResult Function(_Failed value) failed,
-  }) {
-    return loading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Sucess value)? success,
-    TResult? Function(_Failed value)? failed,
-  }) {
-    return loading?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Sucess value)? success,
-    TResult Function(_Failed value)? failed,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Loading implements ProfileCheckerState {
-  const factory _Loading() = _$LoadingImpl;
-}
-
-/// @nodoc
-abstract class _$$SucessImplCopyWith<$Res> {
-  factory _$$SucessImplCopyWith(
-          _$SucessImpl value, $Res Function(_$SucessImpl) then) =
-      __$$SucessImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({ProfileInformation? profile});
-
-  $ProfileInformationCopyWith<$Res>? get profile;
-}
-
-/// @nodoc
-class __$$SucessImplCopyWithImpl<$Res>
-    extends _$ProfileCheckerStateCopyWithImpl<$Res, _$SucessImpl>
-    implements _$$SucessImplCopyWith<$Res> {
-  __$$SucessImplCopyWithImpl(
-      _$SucessImpl _value, $Res Function(_$SucessImpl) _then)
-      : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? status = null,
     Object? profile = freezed,
+    Object? message = null,
   }) {
-    return _then(_$SucessImpl(
-      freezed == profile
+    return _then(_value.copyWith(
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as ProfileCheckStatus,
+      profile: freezed == profile
           ? _value.profile
           : profile // ignore: cast_nullable_to_non_nullable
               as ProfileInformation?,
-    ));
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
   }
 
   @override
@@ -695,149 +419,51 @@ class __$$SucessImplCopyWithImpl<$Res>
     }
 
     return $ProfileInformationCopyWith<$Res>(_value.profile!, (value) {
-      return _then(_value.copyWith(profile: value));
+      return _then(_value.copyWith(profile: value) as $Val);
     });
   }
 }
 
 /// @nodoc
-
-class _$SucessImpl implements _Sucess {
-  const _$SucessImpl(this.profile);
-
+abstract class _$$ProfileCheckerStateImplCopyWith<$Res>
+    implements $ProfileCheckerStateCopyWith<$Res> {
+  factory _$$ProfileCheckerStateImplCopyWith(_$ProfileCheckerStateImpl value,
+          $Res Function(_$ProfileCheckerStateImpl) then) =
+      __$$ProfileCheckerStateImplCopyWithImpl<$Res>;
   @override
-  final ProfileInformation? profile;
-
-  @override
-  String toString() {
-    return 'ProfileCheckerState.success(profile: $profile)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$SucessImpl &&
-            (identical(other.profile, profile) || other.profile == profile));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, profile);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$SucessImplCopyWith<_$SucessImpl> get copyWith =>
-      __$$SucessImplCopyWithImpl<_$SucessImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(ProfileInformation? profile) success,
-    required TResult Function(String message) failed,
-  }) {
-    return success(profile);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(ProfileInformation? profile)? success,
-    TResult? Function(String message)? failed,
-  }) {
-    return success?.call(profile);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(ProfileInformation? profile)? success,
-    TResult Function(String message)? failed,
-    required TResult orElse(),
-  }) {
-    if (success != null) {
-      return success(profile);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Sucess value) success,
-    required TResult Function(_Failed value) failed,
-  }) {
-    return success(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Sucess value)? success,
-    TResult? Function(_Failed value)? failed,
-  }) {
-    return success?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Sucess value)? success,
-    TResult Function(_Failed value)? failed,
-    required TResult orElse(),
-  }) {
-    if (success != null) {
-      return success(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Sucess implements ProfileCheckerState {
-  const factory _Sucess(final ProfileInformation? profile) = _$SucessImpl;
-
-  ProfileInformation? get profile;
-  @JsonKey(ignore: true)
-  _$$SucessImplCopyWith<_$SucessImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$FailedImplCopyWith<$Res> {
-  factory _$$FailedImplCopyWith(
-          _$FailedImpl value, $Res Function(_$FailedImpl) then) =
-      __$$FailedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String message});
+  $Res call(
+      {ProfileCheckStatus status, ProfileInformation? profile, String message});
+
+  @override
+  $ProfileInformationCopyWith<$Res>? get profile;
 }
 
 /// @nodoc
-class __$$FailedImplCopyWithImpl<$Res>
-    extends _$ProfileCheckerStateCopyWithImpl<$Res, _$FailedImpl>
-    implements _$$FailedImplCopyWith<$Res> {
-  __$$FailedImplCopyWithImpl(
-      _$FailedImpl _value, $Res Function(_$FailedImpl) _then)
+class __$$ProfileCheckerStateImplCopyWithImpl<$Res>
+    extends _$ProfileCheckerStateCopyWithImpl<$Res, _$ProfileCheckerStateImpl>
+    implements _$$ProfileCheckerStateImplCopyWith<$Res> {
+  __$$ProfileCheckerStateImplCopyWithImpl(_$ProfileCheckerStateImpl _value,
+      $Res Function(_$ProfileCheckerStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? status = null,
+    Object? profile = freezed,
     Object? message = null,
   }) {
-    return _then(_$FailedImpl(
-      null == message
+    return _then(_$ProfileCheckerStateImpl(
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as ProfileCheckStatus,
+      profile: freezed == profile
+          ? _value.profile
+          : profile // ignore: cast_nullable_to_non_nullable
+              as ProfileInformation?,
+      message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
@@ -847,114 +473,61 @@ class __$$FailedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$FailedImpl implements _Failed {
-  const _$FailedImpl(this.message);
+class _$ProfileCheckerStateImpl implements _ProfileCheckerState {
+  const _$ProfileCheckerStateImpl(
+      {this.status = ProfileCheckStatus.initial,
+      this.profile,
+      this.message = ''});
 
   @override
+  @JsonKey()
+  final ProfileCheckStatus status;
+  @override
+  final ProfileInformation? profile;
+  @override
+  @JsonKey()
   final String message;
 
   @override
   String toString() {
-    return 'ProfileCheckerState.failed(message: $message)';
+    return 'ProfileCheckerState(status: $status, profile: $profile, message: $message)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FailedImpl &&
+            other is _$ProfileCheckerStateImpl &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.profile, profile) || other.profile == profile) &&
             (identical(other.message, message) || other.message == message));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, message);
+  int get hashCode => Object.hash(runtimeType, status, profile, message);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$FailedImplCopyWith<_$FailedImpl> get copyWith =>
-      __$$FailedImplCopyWithImpl<_$FailedImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(ProfileInformation? profile) success,
-    required TResult Function(String message) failed,
-  }) {
-    return failed(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(ProfileInformation? profile)? success,
-    TResult? Function(String message)? failed,
-  }) {
-    return failed?.call(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(ProfileInformation? profile)? success,
-    TResult Function(String message)? failed,
-    required TResult orElse(),
-  }) {
-    if (failed != null) {
-      return failed(message);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Sucess value) success,
-    required TResult Function(_Failed value) failed,
-  }) {
-    return failed(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Sucess value)? success,
-    TResult? Function(_Failed value)? failed,
-  }) {
-    return failed?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Sucess value)? success,
-    TResult Function(_Failed value)? failed,
-    required TResult orElse(),
-  }) {
-    if (failed != null) {
-      return failed(this);
-    }
-    return orElse();
-  }
+  _$$ProfileCheckerStateImplCopyWith<_$ProfileCheckerStateImpl> get copyWith =>
+      __$$ProfileCheckerStateImplCopyWithImpl<_$ProfileCheckerStateImpl>(
+          this, _$identity);
 }
 
-abstract class _Failed implements ProfileCheckerState {
-  const factory _Failed(final String message) = _$FailedImpl;
+abstract class _ProfileCheckerState implements ProfileCheckerState {
+  const factory _ProfileCheckerState(
+      {final ProfileCheckStatus status,
+      final ProfileInformation? profile,
+      final String message}) = _$ProfileCheckerStateImpl;
 
+  @override
+  ProfileCheckStatus get status;
+  @override
+  ProfileInformation? get profile;
+  @override
   String get message;
+  @override
   @JsonKey(ignore: true)
-  _$$FailedImplCopyWith<_$FailedImpl> get copyWith =>
+  _$$ProfileCheckerStateImplCopyWith<_$ProfileCheckerStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

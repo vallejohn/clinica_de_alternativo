@@ -7,6 +7,7 @@ class EmployeesState with _$EmployeesState {
   const factory EmployeesState({
     @Default(EmployeeStatus.initial) EmployeeStatus status,
     @Default('') String message,
+    ErrorCode? errorCode,
     @Default([]) List<ProfileInformation> employees,
   }) = _EmployeesState;
 }

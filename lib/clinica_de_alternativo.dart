@@ -1,6 +1,8 @@
+import 'package:clinica_de_alternativo/core/core.dart';
 import 'package:clinica_de_alternativo/src/account/presentation/blocs/account/account_bloc.dart';
 import 'package:clinica_de_alternativo/src/account/presentation/blocs/branches/branch_bloc.dart';
 import 'package:clinica_de_alternativo/src/account/presentation/blocs/employees/employees_bloc.dart';
+import 'package:clinica_de_alternativo/src/account/presentation/blocs/modules/module_bloc.dart';
 import 'package:clinica_de_alternativo/src/account/presentation/blocs/roles/role_bloc.dart';
 import 'package:clinica_de_alternativo/src/authentication/presentation/blocs/auth_checker/auth_checker_bloc.dart';
 import 'package:clinica_de_alternativo/src/authentication/presentation/blocs/profile_checker/profile_checker_bloc.dart';
@@ -11,7 +13,9 @@ import 'package:clinica_de_alternativo/src/sales_reporting/presentation/blocs/sa
 import 'package:clinica_de_alternativo/src/sales_reporting/presentation/blocs/search_product/search_product_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
+import 'core/blocs/data_initializer/data_initializer_bloc.dart';
 import 'core/router/app_router.dart';
 
 class ClinicaDeAlternativo extends StatefulWidget {
@@ -57,7 +61,10 @@ class _ClinicaDeAlternativoState extends State<ClinicaDeAlternativo> {
           create: (context) => BranchBloc(),
         ),
         BlocProvider<RoleBloc>(
-          create: (context) => RoleBloc()..add(const RoleEvent.onFetch()),
+          create: (context) => RoleBloc(),
+        ),
+        BlocProvider<ModuleBloc>(
+          create: (context) => ModuleBloc(),
         ),
         BlocProvider<AuthCheckerBloc>(
           create: (context) =>
@@ -66,31 +73,36 @@ class _ClinicaDeAlternativoState extends State<ClinicaDeAlternativo> {
         BlocProvider<SalesReportGeneratorBloc>(
           create: (context) => SalesReportGeneratorBloc(),
         ),
+        BlocProvider<DataInitializerBloc>(
+          create: (context) => DataInitializerBloc(),
+        )
       ],
       child: MultiBlocListener(
         listeners: [
+          BlocListener<DataInitializerBloc, DataInitializerState>(
+            listenWhen: (prev, cur) => prev.status != cur.status,
+            listener: (context, state) {
+              if(state.status == DataInitializerStatus.success){
+                context.read<AccountBloc>().add(AccountEvent.onStarted(state.profile!));
+                context.read<RoleBloc>().add(RoleEvent.onStarted(state.roles));
+                context.read<ModuleBloc>().add(ModuleEvent.onStarted(state.modules));
+                context.read<ProductsBloc>().add(ProductsEvent.onStarted(state.products));
+                context.read<ProductTypeBloc>().add(ProductTypeEvent.onStarted(state.productTypes));
+                context.read<EmployeesBloc>().add(EmployeesEvent.onStarted(state.employees));
+                context.read<BranchBloc>().add(BranchEvent.onStarted(state.branches));
+                _appRouter.replace(const HomeRoute());
+              }
+            },
+          ),
           BlocListener<ProfileCheckerBloc, ProfileCheckerState>(
             listener: (context, state) {
-              state.whenOrNull(
-                loading: (){
-
-                },
-                success: (profile){
-                  if(profile != null){
-                    context.read<ProductTypeBloc>().add(const ProductTypeEvent.onFetch());
-                    context.read<ProductsBloc>().add(const ProductsEvent.onFetchList());
-                    context.read<BranchBloc>().add(const BranchEvent.onFetch());
-                    context.read<SalesReportingBloc>().add(SalesReportingEvent.onFetchReport(branch: profile.branch));
-                    context.read<AccountBloc>().add(AccountEvent.onGetDetails(profile.uid!));
-                    _appRouter.replace(const HomeRoute());
-                  }else{
-                    _appRouter.replace(const ProfileCompletionRoute());
-                  }
-                },
-                failed: (message){
-
-                },
-              );
+              if(state.status == ProfileCheckStatus.success){
+                if(state.profile != null){
+                  context.read<DataInitializerBloc>().add(const DataInitializerEvent.onFetchData());
+                }else{
+                  _appRouter.replace(const ProfileCompletionRoute());
+                }
+              }
             },
           ),
           BlocListener<AuthCheckerBloc, AuthCheckerState>(
@@ -129,13 +141,29 @@ class _ClinicaDeAlternativoState extends State<ClinicaDeAlternativo> {
               color: Colors.white,
               surfaceTintColor: Colors.white
             ),
-              filledButtonTheme: FilledButtonThemeData(
+            filledButtonTheme: FilledButtonThemeData(
+              style: ButtonStyle(
+                shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8)
+                ))
+              )
+            ),
+            textButtonTheme: TextButtonThemeData(
                 style: ButtonStyle(
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8)
-                  ))
+                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8)
+                    ))
                 )
             ),
+            checkboxTheme: CheckboxThemeData(
+              side: BorderSide(color: colorScheme.primary, width: 1.5),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(4),
+              )
+            ),
+            radioTheme: RadioThemeData(
+              fillColor: MaterialStateProperty.all(colorScheme.primary),
+            )
           ),
           routerDelegate: _appRouter.delegate(),
           routeInformationParser: _appRouter.defaultRouteParser(),

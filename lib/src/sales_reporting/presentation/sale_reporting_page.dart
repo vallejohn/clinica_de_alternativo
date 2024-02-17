@@ -27,7 +27,7 @@ class _SaleReportingPageState extends State<SaleReportingPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text('Sales Reporting'),
-             Text('${branchState.profile?.branch?.name} - ${branchState.profile?.branch?.type!.name.toUpperCase()}',
+             Text(branchState.status == AccountStatus.loading || branchState.status == AccountStatus.initial? '...' : '${branchState.profile?.branch?.name} - ${branchState.profile?.branch?.type!.name.toUpperCase()}',
               style: Theme.of(context).textTheme.bodySmall,
             ),
           ],
@@ -53,6 +53,13 @@ class _SaleReportingPageState extends State<SaleReportingPage> {
               _productNameController.text = state.selectedProduct!.name;
             },
           ),
+          BlocListener<SalesReportingBloc, SalesReportingState>(
+            listener: (context, state) {
+              if(state.status == SalesReportingStatus.failed && state.errorCode == ErrorCode.permissionDenied){
+                showDialog(context: context, builder: (context) => PermissionErrorDialog(message: state.message,));
+              }
+            },
+          )
         ],
         child: BlocBuilder<SalesReportingBloc, SalesReportingState>(builder: (srContext, srState) {
           bool loading = srState.status == SalesReportingStatus.loading;
@@ -99,7 +106,13 @@ class _SaleReportingPageState extends State<SaleReportingPage> {
                                 if(value != null){
                                   if(value.isEmpty) return 'Enter date';
                                   if(value.isNotEmpty){
-                                    final parsedDate = DateFormat('M/d/yyyy').tryParse(value);
+                                    DateTime? parsedDate;
+                                    try{
+                                      parsedDate = DateFormat('M/d/yyyy').parse(value);
+                                    }catch(e){
+                                      parsedDate = null;
+                                    }
+
                                     if(parsedDate == null){
                                       return 'Invalid format';
                                     }else{

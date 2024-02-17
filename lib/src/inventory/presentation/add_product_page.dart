@@ -35,8 +35,14 @@ class _AddProductPageState extends State<AddProductPage> {
         appBar: AppBar(
           title: Text('Add product', style: Theme.of(context).textTheme.headlineLarge,),
         ),
-        body: BlocBuilder<ProductsBloc, ProductsState>(
+        body: BlocConsumer<ProductsBloc, ProductsState>(
+          listener: (context, state){
+            if(state.status == ProductStatus.failed && state.errorCode == ErrorCode.permissionDenied){
+              showDialog(context: context, builder: (context) => PermissionErrorDialog(message: state.message,));
+            }
+          },
           builder: (prodContext, prodState) {
+            final loading = prodState.status == ProductStatus.loading;
             return SingleChildScrollView(
               padding: const EdgeInsets.all(20),
               physics: const BouncingScrollPhysics(),
@@ -95,7 +101,7 @@ class _AddProductPageState extends State<AddProductPage> {
                       const SizedBox(width: 10,),
                       Expanded(
                         child: FilledButton(
-                          onPressed: () {
+                          onPressed: loading? null : () {
                             final product = Product(
                               name: _productNameController.text,
                               description: _descriptionController.text,
@@ -103,12 +109,20 @@ class _AddProductPageState extends State<AddProductPage> {
                             );
                             prodContext.read<ProductsBloc>().add(ProductsEvent.onAdd(product));
                           },
-                          child: const Row(
+                          child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Icon(Ionicons.add, size: 17),
-                              SizedBox(width: 15),
-                              Text('Add product'),
+                              if (!loading) const Icon(Icons.send, size: 17),
+                              if (loading)
+                                SizedBox(
+                                    width: 20,
+                                    height: 20,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2,
+                                      color: Theme.of(context).disabledColor,
+                                    )),
+                              const SizedBox(width: 15),
+                              Text(loading ? 'Add product...' : 'Add product'),
                             ],
                           ),
                         ),

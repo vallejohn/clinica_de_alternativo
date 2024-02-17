@@ -23,7 +23,7 @@ class _ProfileCompletionPageState extends State<ProfileCompletionPage> {
       body: BlocBuilder<ProfileCheckerBloc, ProfileCheckerState>(
         builder: (context, state) {
 
-          bool loading = state.maybeWhen(loading: () => true, orElse: () => false);
+          bool loading = state.status == ProfileCheckStatus.loading;
 
           return SafeArea(
             child: SingleChildScrollView(

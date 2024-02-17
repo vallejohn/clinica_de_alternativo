@@ -6,6 +6,8 @@ import 'package:dartz/dartz.dart';
 import '../../../core/core.dart';
 import '../../../core/exceptions/failure.dart';
 import '../data/models/branch.dart';
+import '../data/models/module.dart';
+import '../data/models/role.dart';
 import '../data/models/role.dart';
 
 part 'usecases/on_get_branches_usecase.dart';
@@ -16,3 +18,6 @@ part 'usecases/on_get_account_details_usecase.dart';
 part 'usecases/on_update_account_details_usecase.dart';
 part 'usecases/on_get_accounts_usecase.dart';
 part 'usecases/on_add_account_usecase.dart';
+part 'usecases/on_get_modules_usecase.dart';
+part 'usecases/on_add_module_usecase.dart';
+part 'usecases/on_update_role_usecase.dart';
