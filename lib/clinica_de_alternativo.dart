@@ -83,7 +83,7 @@ class _ClinicaDeAlternativoState extends State<ClinicaDeAlternativo> {
             listenWhen: (prev, cur) => prev.status != cur.status,
             listener: (context, state) {
               if(state.status == DataInitializerStatus.success){
-                context.read<AccountBloc>().add(AccountEvent.onStarted(state.profile!));
+                //context.read<AccountBloc>().add(AccountEvent.onStarted(state.profile!));
                 //context.read<RoleBloc>().add(RoleEvent.onStarted(state.roles));
                 //context.read<ModuleBloc>().add(ModuleEvent.onStarted(state.modules));
                 //context.read<ProductsBloc>().add(ProductsEvent.onStarted(state.products));
@@ -98,7 +98,9 @@ class _ClinicaDeAlternativoState extends State<ClinicaDeAlternativo> {
             listener: (context, state) {
               if(state.status == ProfileCheckStatus.success){
                 if(state.profile != null){
-                  context.read<DataInitializerBloc>().add(const DataInitializerEvent.onFetchData());
+                  context.read<AccountBloc>().add(AccountEvent.onStarted(state.profile!));
+                  //context.read<DataInitializerBloc>().add(const DataInitializerEvent.onFetchData());
+                  _appRouter.replace(const HomeRoute());
                 }else{
                   _appRouter.replace(const ProfileCompletionRoute());
                 }
