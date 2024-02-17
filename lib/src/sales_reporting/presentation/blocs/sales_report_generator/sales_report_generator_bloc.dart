@@ -31,6 +31,7 @@ class SalesReportGeneratorBloc extends Bloc<SalesReportGeneratorEvent, SalesRepo
         emit(state.copyWith(
           status: SalesGeneratorStatus.failed,
           message: l.getMessage(),
+          errorCode: l.getCode(),
           loadingMoreItems: false,
         ));
       }, (doc){

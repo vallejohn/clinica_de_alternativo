@@ -53,6 +53,13 @@ class _SaleReportingPageState extends State<SaleReportingPage> {
               _productNameController.text = state.selectedProduct!.name;
             },
           ),
+          BlocListener<SalesReportingBloc, SalesReportingState>(
+            listener: (context, state) {
+              if(state.status == SalesReportingStatus.failed && state.errorCode == ErrorCode.permissionDenied){
+                showDialog(context: context, builder: (context) => PermissionErrorDialog(message: state.message,));
+              }
+            },
+          )
         ],
         child: BlocBuilder<SalesReportingBloc, SalesReportingState>(builder: (srContext, srState) {
           bool loading = srState.status == SalesReportingStatus.loading;

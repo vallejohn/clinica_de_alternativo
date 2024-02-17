@@ -33,7 +33,7 @@ class ProductTypeBloc extends Bloc<ProductTypeEvent, ProductTypeState> {
     final dataOrError = await _onFetchListUseCase();
 
     dataOrError.fold((l){
-      emit(state.copyWith(status: ProductTypeStatus.failed, message: l.getMessage()));
+      emit(state.copyWith(status: ProductTypeStatus.failed, message: l.getMessage(), errorCode: l.getCode()));
     }, (types){
       emit(state.copyWith(status: ProductTypeStatus.success, message: 'Fetched successfully', productTypes: types));
     });
@@ -45,7 +45,7 @@ class ProductTypeBloc extends Bloc<ProductTypeEvent, ProductTypeState> {
     final dataOrError = await _onAddUseCase(event.type);
 
     dataOrError.fold((l){
-      emit(state.copyWith(status: ProductTypeStatus.failed, message: l.getMessage()));
+      emit(state.copyWith(status: ProductTypeStatus.failed, message: l.getMessage(), errorCode: l.getCode()));
     }, (type){
       final types = [...state.productTypes];
       types.add(type);
@@ -60,7 +60,7 @@ class ProductTypeBloc extends Bloc<ProductTypeEvent, ProductTypeState> {
     final dataOrError = await _onEditUseCase(event.type);
 
     dataOrError.fold((l){
-      emit(state.copyWith(status: ProductTypeStatus.failed, message: l.getMessage()));
+      emit(state.copyWith(status: ProductTypeStatus.failed, message: l.getMessage(), errorCode: l.getCode()));
     }, (_){
       final types = [...state.productTypes];
       final index = types.indexWhere((element) => element.id == event.type.id);
@@ -75,7 +75,7 @@ class ProductTypeBloc extends Bloc<ProductTypeEvent, ProductTypeState> {
     final dataOrError = await _onDeleteUseCase(event.id);
 
     dataOrError.fold((l){
-      emit(state.copyWith(status: ProductTypeStatus.failed, message: l.getMessage()));
+      emit(state.copyWith(status: ProductTypeStatus.failed, message: l.getMessage(), errorCode: l.getCode()));
     }, (_){
       final types = [...state.productTypes];
       types.removeWhere((element) => element.id == event.id);

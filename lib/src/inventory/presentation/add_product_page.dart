@@ -37,7 +37,7 @@ class _AddProductPageState extends State<AddProductPage> {
         ),
         body: BlocConsumer<ProductsBloc, ProductsState>(
           listener: (context, state){
-            if(state.status == ProductStatus.failed){
+            if(state.status == ProductStatus.failed && state.errorCode == ErrorCode.permissionDenied){
               showDialog(context: context, builder: (context) => PermissionErrorDialog(message: state.message,));
             }
           },

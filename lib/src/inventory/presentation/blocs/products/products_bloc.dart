@@ -48,7 +48,7 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
     final dataOrError = await _onAddUseCase(event.product);
 
     dataOrError.fold((l){
-      emit(state.copyWith(status: ProductStatus.failed, message: l.getMessage()));
+      emit(state.copyWith(status: ProductStatus.failed, message: l.getMessage(), errorCode: l.getCode()));
     }, (product){
       final products = [...state.products];
       products.add(product);
@@ -67,7 +67,7 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
     final dataOrError = await _onUpdateUseCase(event.product);
 
     dataOrError.fold((l){
-      emit(state.copyWith(status: ProductStatus.failed, message: l.getMessage()));
+      emit(state.copyWith(status: ProductStatus.failed, message: l.getMessage(), errorCode: l.getCode()));
     }, (_){
       final products = [...state.products];
 
@@ -94,7 +94,7 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
     final dataOrError = await _onDeleteUseCase(state.selectedProduct!.id!);
 
     dataOrError.fold((l){
-      emit(state.copyWith(status: ProductStatus.failed, message: l.getMessage()));
+      emit(state.copyWith(status: ProductStatus.failed, message: l.getMessage(), errorCode: l.getCode()));
     }, (_){
       final products = [...state.products];
 
@@ -111,7 +111,6 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
       }else{
         nextAutoSelectedProduct = products[products.length - 1];
       }
-
 
       emit(state.copyWith(status: ProductStatus.success, editing: false, message: 'Product updated', products: products, selectedProduct: nextAutoSelectedProduct));
     });

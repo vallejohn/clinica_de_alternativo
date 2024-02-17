@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:clinica_de_alternativo/core/blocs/widget_helper_cubit.dart';
+import 'package:clinica_de_alternativo/core/exceptions/failure.dart';
 import 'package:clinica_de_alternativo/core/global_widgets/permission_error_dialog.dart';
 import 'package:clinica_de_alternativo/core/router/app_router.dart';
 import 'package:clinica_de_alternativo/src/account/data/models/product_type.dart';
