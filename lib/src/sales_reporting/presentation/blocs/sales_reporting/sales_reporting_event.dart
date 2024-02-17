@@ -7,4 +7,5 @@ class SalesReportingEvent with _$SalesReportingEvent {
     QueryDocumentSnapshot<Map<String, dynamic>>? paginateFromLastDoc,
   }) = _OnFetchReport;
   const factory SalesReportingEvent.onSendReport(SalesReport salesReport) = _OnSendReport;
+  const factory SalesReportingEvent.onListenToChanges(Branch? branch,) = _OnListenToChanges;
 }

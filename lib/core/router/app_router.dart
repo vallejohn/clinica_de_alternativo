@@ -19,8 +19,8 @@ part 'app_router.gr.dart';
 class AppRouter extends _$AppRouter{
   @override
   List<AutoRoute> get routes => [
-    AutoRoute(page: HomeRoute.page, initial: true),
-    AutoRoute(page: StartupRoute.page),
+    AutoRoute(page: HomeRoute.page),
+    AutoRoute(page: StartupRoute.page, initial: true),
     AutoRoute(page: SettingsRoute.page),
     AutoRoute(page: LoginRoute.page),
     AutoRoute(page: ProfileCompletionRoute.page),

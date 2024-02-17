@@ -84,12 +84,12 @@ class _ClinicaDeAlternativoState extends State<ClinicaDeAlternativo> {
             listener: (context, state) {
               if(state.status == DataInitializerStatus.success){
                 context.read<AccountBloc>().add(AccountEvent.onStarted(state.profile!));
-                context.read<RoleBloc>().add(RoleEvent.onStarted(state.roles));
-                context.read<ModuleBloc>().add(ModuleEvent.onStarted(state.modules));
-                context.read<ProductsBloc>().add(ProductsEvent.onStarted(state.products));
+                //context.read<RoleBloc>().add(RoleEvent.onStarted(state.roles));
+                //context.read<ModuleBloc>().add(ModuleEvent.onStarted(state.modules));
+                //context.read<ProductsBloc>().add(ProductsEvent.onStarted(state.products));
                 context.read<ProductTypeBloc>().add(ProductTypeEvent.onStarted(state.productTypes));
-                context.read<EmployeesBloc>().add(EmployeesEvent.onStarted(state.employees));
-                context.read<BranchBloc>().add(BranchEvent.onStarted(state.branches));
+                //context.read<EmployeesBloc>().add(EmployeesEvent.onStarted(state.employees));
+                //context.read<BranchBloc>().add(BranchEvent.onStarted(state.branches));
                 _appRouter.replace(const HomeRoute());
               }
             },
@@ -163,6 +163,9 @@ class _ClinicaDeAlternativoState extends State<ClinicaDeAlternativo> {
             ),
             radioTheme: RadioThemeData(
               fillColor: MaterialStateProperty.all(colorScheme.primary),
+            ),
+            progressIndicatorTheme: ProgressIndicatorThemeData(
+              linearMinHeight: 2.5
             )
           ),
           routerDelegate: _appRouter.delegate(),

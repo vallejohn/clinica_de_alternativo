@@ -69,21 +69,21 @@ class SalesReportingBloc extends Bloc<SalesReportingEvent, SalesReportingState> 
 
     final dataOrError = await _onFetchReportUseCase(FetchSalesReportsParam(
       salesReportingFilterParam: SalesReportingFilterParam(branch: event.branch),
-      paginate: state.salesReportDocs!.paginate!.copyWith(lastVisibleDocument: event.paginateFromLastDoc),
+      //paginate: state.salesReportDocs!.paginate!.copyWith(lastVisibleDocument: event.paginateFromLastDoc),
     ));
 
     dataOrError.fold((l){
       emit(state.copyWith(status: SalesReportingStatus.failed, message: l.getMessage(), loadingMoreItems: false));
     }, (docs){
       final salesList = [...state.salesReportDocs!.salesReports];
-      salesList.addAll(docs.salesReports);
+      //salesList.addAll(docs.salesReports);
 
       emit(state.copyWith(
         status: SalesReportingStatus.success,
         message: 'Sales report fetched successfully',
         loadingMoreItems: false,
         salesReportDocs: state.salesReportDocs!.copyWith(
-          salesReports: salesList,
+          salesReports: docs.salesReports,
           paginate: docs.paginate,
         ),
       ));
