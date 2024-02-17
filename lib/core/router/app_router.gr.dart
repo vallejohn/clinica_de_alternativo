@@ -87,6 +87,17 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    ProductSummaryRoute.name: (routeData) {
+      final args = routeData.argsAs<ProductSummaryRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: ProductSummaryPage(
+          key: args.key,
+          salesReports: args.salesReports,
+          date: args.date,
+        ),
+      );
+    },
     ProductsRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -347,6 +358,49 @@ class ProductDetailsRouteArgs {
   @override
   String toString() {
     return 'ProductDetailsRouteArgs{key: $key, product: $product}';
+  }
+}
+
+/// generated route for
+/// [ProductSummaryPage]
+class ProductSummaryRoute extends PageRouteInfo<ProductSummaryRouteArgs> {
+  ProductSummaryRoute({
+    Key? key,
+    required List<SalesReport> salesReports,
+    required String date,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ProductSummaryRoute.name,
+          args: ProductSummaryRouteArgs(
+            key: key,
+            salesReports: salesReports,
+            date: date,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'ProductSummaryRoute';
+
+  static const PageInfo<ProductSummaryRouteArgs> page =
+      PageInfo<ProductSummaryRouteArgs>(name);
+}
+
+class ProductSummaryRouteArgs {
+  const ProductSummaryRouteArgs({
+    this.key,
+    required this.salesReports,
+    required this.date,
+  });
+
+  final Key? key;
+
+  final List<SalesReport> salesReports;
+
+  final String date;
+
+  @override
+  String toString() {
+    return 'ProductSummaryRouteArgs{key: $key, salesReports: $salesReports, date: $date}';
   }
 }
 

@@ -8,7 +8,7 @@ class SalesSummaryPage extends StatefulWidget {
   State<SalesSummaryPage> createState() => _SalesSummaryPageState();
 }
 
-class _SalesSummaryPageState extends State<SalesSummaryPage> {
+class _SalesSummaryPageState extends State<SalesSummaryPage> with AutomaticKeepAliveClientMixin{
   final TextEditingController _dateController = TextEditingController(text: DateFormat.yMd().format(DateTime.now()));
 
   final _productListCubit = WidgetHelperCubit<List<Product>>([]);
@@ -17,17 +17,32 @@ class _SalesSummaryPageState extends State<SalesSummaryPage> {
   final _dateTimeRangeCubit = WidgetHelperCubit<DateTimeRange?>(DateTimeRange(start: DateTime.now(), end: DateTime.now()));
 
   @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Sales',
-          style: Theme.of(context).textTheme.headlineLarge,
+    super.build(context);
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<SalesReportGeneratorBloc>.value(
+          value: BlocProvider.of<SalesReportGeneratorBloc>(context),
         ),
-      ),
-      body: BlocProvider<SalesReportGeneratorBloc>.value(
-        value: BlocProvider.of<SalesReportGeneratorBloc>(context),
-        child: BlocBuilder<SalesReportGeneratorBloc, SalesReportGeneratorState>(
+        BlocProvider<ProductTypeBloc>.value(
+          value: BlocProvider.of<ProductTypeBloc>(context)..add(const ProductTypeEvent.onFetch()),
+        ),
+        BlocProvider<BranchBloc>.value(
+          value: BlocProvider.of<BranchBloc>(context)..add(const BranchEvent.onFetch()),
+        ),
+      ],
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            'Sales',
+            style: Theme.of(context).textTheme.headlineLarge,
+          ),
+        ),
+        body: BlocBuilder<SalesReportGeneratorBloc, SalesReportGeneratorState>(
           builder: (genContext, genState) {
 
             final loading = genState.status == SalesGeneratorStatus.loading;
@@ -344,6 +359,9 @@ class _SalesSummaryPageState extends State<SalesSummaryPage> {
                         ],
                       ),),
                     ),
+                    const SizedBox(height: 10,),
+                    TextButton(onPressed: genState.salesReportDocs!.salesReports.isEmpty? null : () => AutoRouter.of(context).push(ProductSummaryRoute(date: _dateController.text, salesReports: genState.salesReportDocs!.salesReports
+                    )), child: const Text('View product breakdown summary')),
                     const SizedBox(height: 20,),
                     SizedBox(
                       width: MediaQuery.of(context).size.width,

@@ -17,6 +17,7 @@ import 'package:clinica_de_alternativo/src/sales_reporting/presentation/blocs/sa
 import 'package:clinica_de_alternativo/src/sales_reporting/presentation/blocs/sales_reporting/sales_reporting_bloc.dart';
 import 'package:clinica_de_alternativo/src/sales_reporting/presentation/blocs/search_product/search_product_cubit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -30,3 +31,4 @@ import '../../../core/global_widgets/permission_error_dialog.dart';
 part 'sale_reporting_page.dart';
 part 'search_products_page.dart';
 part 'sales_summary_page.dart';
+part 'product_summary_page.dart';

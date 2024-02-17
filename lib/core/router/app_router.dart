@@ -9,6 +9,7 @@ import '../../src/home_page.dart';
 import '../../src/inventory/data/model/product.dart';
 import '../../src/inventory/presentation/pages.dart';
 import '../../src/modules_page.dart';
+import '../../src/sales_reporting/data/model/sales_report.dart';
 import '../../src/sales_reporting/presentation/pages.dart';
 import '../global_widgets/pages/settings_page.dart';
 
@@ -36,5 +37,6 @@ class AppRouter extends _$AppRouter{
     AutoRoute(page: AccountRoute.page),
     AutoRoute(page: AttachRulesRoute.page),
     AutoRoute(page: EmployeeDetailsRoute.page),
+    AutoRoute(page: ProductSummaryRoute.page),
   ];
 }

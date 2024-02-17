@@ -141,7 +141,7 @@ Future<QuerySnapshot<Map<String, dynamic>>> _getInitialList(String queryObj, Lis
       .where('transactionDate', isLessThanOrEqualTo: Timestamp.fromDate(to))
       .where(queryObj, whereIn: finalFilter)
       .orderBy('transactionDate')
-      .limit(param.paginate.limit)
+      //.limit(param.paginate.limit)
       .get();
 }
 
