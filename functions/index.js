@@ -65,3 +65,35 @@ exports.createUser = functions.region("asia-southeast1")
         return {status: "error", message: err.message};
       }
     });
+
+exports.createProfileInformation = functions.auth.user()
+    .onCreate(async (user) => {
+      if (user.email == "valjohn.teruel@gmail.com") {
+        const superAdminData = {
+          code: "super_admin",
+          id: "super_admin",
+          modulesAttached: [],
+          name: "Super Admin",
+        };
+
+        await admin.firestore().collection("roles")
+            .doc("super_admin").set(superAdminData);
+
+        const superAdminDataProfile = {
+          code: "super_admin",
+          id: "super_admin",
+          modulesAttached: {},
+          name: "Super Admin",
+        };
+
+        await admin.firestore()
+            .collection("profile_information").doc(user.uid)
+            .set({
+              uid: user.uid,
+              profileUrl: "",
+              name: "Valle John Teruel",
+              firstTimePasswordReset: false,
+              role: superAdminDataProfile,
+            });
+      }
+    });

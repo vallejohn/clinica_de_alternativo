@@ -101,9 +101,9 @@ class _EmployeeDetailsPageState extends State<EmployeeDetailsPage> {
               create: (_) => WidgetHelperCubit<bool>(false),
               child: BlocBuilder<WidgetHelperCubit<bool>, bool>(
                   builder: (erContext, editRoleVisible) {
-                    return BlocProvider<WidgetHelperCubit<Branch>>(
-                      create: (context) => WidgetHelperCubit<Branch>(selectedEmployee.branch!),
-                      child: BlocBuilder<WidgetHelperCubit<Branch>, Branch>(
+                    return BlocProvider<WidgetHelperCubit<Branch?>>(
+                      create: (context) => WidgetHelperCubit<Branch?>(selectedEmployee.branch),
+                      child: BlocBuilder<WidgetHelperCubit<Branch?>, Branch?>(
                           builder: (rContext, state) {
                             return Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -144,7 +144,7 @@ class _EmployeeDetailsPageState extends State<EmployeeDetailsPage> {
                                                   Radio<Branch>(value: e,
                                                       groupValue: state,
                                                       onChanged: (value){
-                                                        rContext.read<WidgetHelperCubit<Branch>>().onUpdateState(value!);
+                                                        rContext.read<WidgetHelperCubit<Branch?>>().onUpdateState(value!);
                                                       }),
                                                   Text('${e.name}/${e.type?.name.toUpperCase()}')
                                                 ],
