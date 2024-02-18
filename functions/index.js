@@ -30,7 +30,8 @@ exports.createUser = functions.region("asia-southeast1")
               throw new Error(error.message);
             });
 
-        if ("employees" in result.data().role.modulesAttached) {
+        if ("employees" in result.data().role.modulesAttached ||
+          result.data().role.code == "super_admin") {
           const record = await admin.auth().createUser({
             email: _data.email,
             password: _data.password,
