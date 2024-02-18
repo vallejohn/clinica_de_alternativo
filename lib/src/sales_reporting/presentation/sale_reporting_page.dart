@@ -141,14 +141,7 @@ class _SaleReportingPageState extends State<SaleReportingPage> with AutomaticKee
                             decoration: InputDecoration(
                               labelText: '$productLabelType Product',
                             ),
-                            validator: (value){
-                              if(value != null){
-                                if(value.isEmpty) return 'Enter product name';
-                                return null;
-                              }else{
-                                return 'Enter product name';
-                              }
-                            },
+                            validator: (value) => EmptyFieldValidator.dirty(value, errorMessage: 'Enter product name').error,
                           );
                         },
                       ),
@@ -165,14 +158,7 @@ class _SaleReportingPageState extends State<SaleReportingPage> with AutomaticKee
                               decoration: const InputDecoration(
                                 labelText: 'Quantity Sold (pcs.)',
                               ),
-                              validator: (value){
-                                if(value != null){
-                                  if(value.isEmpty) return 'Enter quantity';
-                                  return null;
-                                }else{
-                                  return 'Enter quantity';
-                                }
-                              },
+                              validator: (value) => EmptyFieldValidator.dirty(value, errorMessage: 'Enter quantity sold').error,
                             ),
                           ),
                           const SizedBox(width: 10,),
@@ -183,17 +169,7 @@ class _SaleReportingPageState extends State<SaleReportingPage> with AutomaticKee
                               decoration: const InputDecoration(
                                 labelText: 'Price per piece',
                               ),
-                              validator: (value){
-                                if(value != null){
-                                  if(value.isEmpty) return 'Enter price';
-                                  if(double.parse(value.toString()) == 0){
-                                    return 'Enter price above zero';
-                                  }
-                                  return null;
-                                }else{
-                                  return 'Enter quantity';
-                                }
-                              },
+                              validator: (value) => NumberFieldValidator.dirty(value, errorMessage: 'Enter quantity sold').error,
                             ),
                           ),
                         ],
@@ -220,7 +196,7 @@ class _SaleReportingPageState extends State<SaleReportingPage> with AutomaticKee
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              if (!loading) const Icon(Icons.send, size: 17),
+                              if (!loading) const Icon(Ionicons.send_outline, size: 17),
                               if (loading)
                                 SizedBox(
                                     width: 20,

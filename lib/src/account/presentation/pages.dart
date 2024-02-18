@@ -17,6 +17,7 @@ import 'package:ionicons/ionicons.dart';
 
 import '../../../core/blocs/widget_helper_cubit.dart';
 import '../../../core/global_widgets/permission_error_dialog.dart';
+import '../../../core/helpers/validators.dart';
 import '../core/params.dart';
 import '../data/models/branch.dart';
 import '../data/models/module.dart';

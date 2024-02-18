@@ -7,6 +7,7 @@ import 'package:ionicons/ionicons.dart';
 
 import '../../../../core/blocs/widget_helper_cubit.dart';
 import '../../../../core/global_widgets/list_tile_item.dart';
+import '../../../../core/helpers/validators.dart';
 import '../../../account/data/models/product_type.dart';
 
 
@@ -42,6 +43,7 @@ class ProductTypeSelectionDialog extends StatelessWidget {
                     child: TextFormField(
                       key: _productTypeFieldKey,
                       controller: _addProductTypeController,
+                      validator: (value) => EmptyFieldValidator.dirty(value, errorMessage: 'Enter product type').error,
                       decoration: InputDecoration(
                           labelText: 'Add product type',
                           suffixIcon: IconButton(
@@ -54,14 +56,6 @@ class ProductTypeSelectionDialog extends StatelessWidget {
                               }
                             }, icon: const Icon(Ionicons.add),)
                       ),
-                      validator: (value){
-                        if(value != null){
-                          if(value.isEmpty) return 'Enter product type';
-                          return null;
-                        }else{
-                          return 'Enter product type';
-                        }
-                      },
                     ),
                   ),
                   if(!typeSelState.editing)  ListTileItem(

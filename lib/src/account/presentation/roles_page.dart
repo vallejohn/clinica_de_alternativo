@@ -12,6 +12,9 @@ class _RolesPageState extends State<RolesPage> {
   final _roleNameController = TextEditingController();
   final _moduleNameController = TextEditingController();
 
+  final _roleNameFieldState = GlobalKey<FormFieldState>();
+  final _moduleNameFieldState = GlobalKey<FormFieldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,19 +82,16 @@ class _RolesPageState extends State<RolesPage> {
                                 Padding(
                                   padding: const EdgeInsets.symmetric(horizontal: 16),
                                   child: TextFormField(
+                                    key: _roleNameFieldState,
                                     controller: _roleNameController,
-                                    validator: (value){
-                                      if(value != null){
-                                        if(value.isEmpty) return 'Enter role name';
-                                        return null;
-                                      }
-                                      return 'Enter role name';
-                                    },
+                                    validator: (value) => EmptyFieldValidator.dirty(value, errorMessage: 'Enter role name').error,
                                     decoration: InputDecoration(
                                       labelText: 'Add role name',
                                       suffixIcon: IconButton(onPressed: () {
-                                        context.read<RoleBloc>().add(RoleEvent.onAdd(Role(name: _roleNameController.text)));
-                                        _roleNameController.clear();
+                                        if(_roleNameFieldState.currentState!.validate()){
+                                          context.read<RoleBloc>().add(RoleEvent.onAdd(Role(name: _roleNameController.text)));
+                                          _roleNameController.clear();
+                                        }
                                       }, icon: const Icon(Ionicons.add)),
                                     ),
                                   ),
@@ -126,13 +126,17 @@ class _RolesPageState extends State<RolesPage> {
                               const SizedBox(height: 20,),
                               Padding(
                                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                                child: TextField(
+                                child: TextFormField(
+                                  key:  _moduleNameFieldState,
                                   controller: _moduleNameController,
+                                  validator: (value) => EmptyFieldValidator.dirty(value, errorMessage: 'Enter module name').error,
                                   decoration: InputDecoration(
                                     labelText: 'Add module name',
                                     suffixIcon: IconButton(onPressed: () {
-                                      context.read<ModuleBloc>().add(ModuleEvent.onAdd(Module(name: _moduleNameController.text)));
-                                      _moduleNameController.clear();
+                                      if(_moduleNameFieldState.currentState!.validate()){
+                                        context.read<ModuleBloc>().add(ModuleEvent.onAdd(Module(name: _moduleNameController.text)));
+                                        _moduleNameController.clear();
+                                      }
                                     }, icon: const Icon(Ionicons.add)),
                                   ),
                                 ),

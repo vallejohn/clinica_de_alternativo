@@ -18,6 +18,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
   final _addProductTypeController = TextEditingController();
   final _descriptionController = TextEditingController();
 
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ProductsBloc>.value(
@@ -49,70 +51,75 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
               child: SingleChildScrollView(
                 padding: const EdgeInsets.all(20),
                 physics: const BouncingScrollPhysics(),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    if (editing)
-                      TextField(
-                        controller: _productNameController,
-                        decoration: const InputDecoration(
-                          labelText: 'Local Products',
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (editing)
+                        TextFormField(
+                          controller: _productNameController,
+                          validator: (value) => EmptyFieldValidator.dirty(value, errorMessage: 'Enter product name').error,
+                          decoration: InputDecoration(
+                            labelText: '${widget.product.type!.name} Products',
+                          ),
                         ),
-                      ),
-                    if (!editing && selectedProduct != null)
-                      Text(
-                       prodState.selectedProduct!.name,
-                        style: Theme.of(context).textTheme.displayMedium,
-                      ),
-
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    if (editing)
-                      TextField(
-                        controller: _productTypeController,
-                        focusNode: FocusNode(),
-                        enableInteractiveSelection: false,
-                        onTap: ()async {
-                          final prodType = await showDialog<ProductType>(
-                              context: context,
-                              builder: (BuildContext context) => const ProductTypeSelectionDialog()
-                          );
-                         if(prodContext.mounted) {
-                           prodContext.read<ProductsBloc>()
-                              .add(ProductsEvent.onSetSelectedProduct(
-                              selectedProduct!.copyWith(
-                                type: prodType,
-                              )));
-                         }
-                        },
-                        decoration: const InputDecoration(
-                          labelText: 'Type',
-                        ),
-                      ),
-                    if (!editing && selectedProduct != null)
-                      if(selectedProduct.type != null)
+                      if (!editing && selectedProduct != null)
                         Text(
-                          selectedProduct.type!.name,
-                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Colors.grey),
+                         prodState.selectedProduct!.name,
+                          style: Theme.of(context).textTheme.displayMedium,
                         ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    if (editing)
-                      TextField(
-                        maxLines: 8,
-                        controller: _descriptionController,
-                        decoration: const InputDecoration(
-                          labelText: 'Description',
+
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      if (editing)
+                        TextFormField(
+                          controller: _productTypeController,
+                          focusNode: FocusNode(),
+                          validator: (value) => EmptyFieldValidator.dirty(value, errorMessage: 'Select product type').error,
+                          enableInteractiveSelection: false,
+                          onTap: ()async {
+                            final prodType = await showDialog<ProductType>(
+                                context: context,
+                                builder: (BuildContext context) => const ProductTypeSelectionDialog()
+                            );
+                           if(prodContext.mounted) {
+                             prodContext.read<ProductsBloc>()
+                                .add(ProductsEvent.onSetSelectedProduct(
+                                selectedProduct!.copyWith(
+                                  type: prodType,
+                                )));
+                           }
+                          },
+                          decoration: const InputDecoration(
+                            labelText: 'Type',
+                          ),
                         ),
+                      if (!editing && selectedProduct != null)
+                        if(selectedProduct.type != null)
+                          Text(
+                            selectedProduct.type!.name,
+                            style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Colors.grey),
+                          ),
+                      const SizedBox(
+                        height: 20,
                       ),
-                    if (!editing && selectedProduct != null)
-                      Text(
-                        prodState.selectedProduct!.description,
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                  ],
+                      if (editing)
+                        TextFormField(
+                          maxLines: 8,
+                          controller: _descriptionController,
+                          decoration: const InputDecoration(
+                            labelText: 'Description',
+                          ),
+                        ),
+                      if (!editing && selectedProduct != null)
+                        Text(
+                          prodState.selectedProduct!.description,
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -151,10 +158,12 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                       icon: Icon(editing ? Ionicons.checkmark : Ionicons.create_outline),
                       onPressed: () {
                         if (editing) {
-                          prodContext.read<ProductsBloc>().add(ProductsEvent.onDoneEditing(prodState.selectedProduct!.copyWith(
-                                name: _productNameController.text,
-                                description: _descriptionController.text,
-                              )));
+                          if(_formKey.currentState!.validate()){
+                            prodContext.read<ProductsBloc>().add(ProductsEvent.onDoneEditing(prodState.selectedProduct!.copyWith(
+                              name: _productNameController.text,
+                              description: _descriptionController.text,
+                            )));
+                          }
                         } else {
                           prodContext.read<ProductsBloc>().add(const ProductsEvent.onEdit());
                         }
