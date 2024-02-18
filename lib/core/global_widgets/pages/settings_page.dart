@@ -13,6 +13,7 @@ import 'package:ionicons/ionicons.dart';
 import '../../../src/account/data/models/product_type.dart';
 import '../../../src/account/presentation/blocs/account/account_bloc.dart';
 import '../../exceptions/failure.dart';
+import '../../helpers/validators.dart';
 import '../permission_error_dialog.dart';
 
 
@@ -115,14 +116,7 @@ class _SettingsPageState extends State<SettingsPage> with AutomaticKeepAliveClie
                                                     key: formFieldKey,
                                                     textInputAction: TextInputAction.done,
                                                     controller: controller,
-                                                    validator: (value){
-                                                      if(value != null){
-                                                        if(value.isEmpty) return 'Please enter type name';
-                                                        return null;
-                                                      }else{
-                                                        return 'Please enter type name';
-                                                      }
-                                                    },
+                                                    validator: (value) => EmptyFieldValidator.dirty(value, errorMessage: 'Enter product type').error,
                                                     onFieldSubmitted: (value){
                                                       editingTypeContext.read<WidgetHelperCubit<bool>>().onUpdateState(!editingType);
                                                       if(formFieldKey.currentState!.validate()){
@@ -172,6 +166,7 @@ class _SettingsPageState extends State<SettingsPage> with AutomaticKeepAliveClie
                                       ),
                                     );
                                   }).toList(),
+                                  const Divider(),
                                   Align(
                                     alignment: Alignment.centerRight,
                                     child: BlocProvider<WidgetHelperCubit<bool>>(
@@ -183,16 +178,6 @@ class _SettingsPageState extends State<SettingsPage> with AutomaticKeepAliveClie
                                               child: Column(
                                                 crossAxisAlignment: CrossAxisAlignment.end,
                                                 children: [
-                                                  FilledButton(onPressed: (){
-                                                    addTypeContext.read<WidgetHelperCubit<bool>>().onUpdateState(!addingType);
-                                                  }, child: Row(
-                                                    mainAxisSize: MainAxisSize.min,
-                                                    children: [
-                                                      Icon(!addingType? Ionicons.add : Ionicons.close_outline, size: 18,),
-                                                      const SizedBox(width: 8,),
-                                                      Text(!addingType? 'Add' : 'Cancel'),
-                                                    ],
-                                                  )),
                                                   if(addingType) TextFormField(
                                                     key: _productFormFieldState,
                                                     controller: _productTypeController,
@@ -208,15 +193,19 @@ class _SettingsPageState extends State<SettingsPage> with AutomaticKeepAliveClie
                                                             }
                                                           }, icon: const Icon(Ionicons.add),)
                                                     ),
-                                                    validator: (value){
-                                                      if(value != null){
-                                                        if(value.isEmpty) return 'Please enter type name';
-                                                        return null;
-                                                      }else{
-                                                        return 'Please enter type name';
-                                                      }
-                                                    },
+                                                    validator: (value) => EmptyFieldValidator.dirty(value, errorMessage: 'Enter product type').error,
                                                   ),
+                                                  if(addingType) const SizedBox(height: 10,),
+                                                  FilledButton(onPressed: (){
+                                                    addTypeContext.read<WidgetHelperCubit<bool>>().onUpdateState(!addingType);
+                                                  }, child: Row(
+                                                    mainAxisSize: MainAxisSize.min,
+                                                    children: [
+                                                      Icon(!addingType? Ionicons.add : Ionicons.close_outline, size: 18,),
+                                                      const SizedBox(width: 8,),
+                                                      Text(!addingType? 'Add' : 'Cancel'),
+                                                    ],
+                                                  )),
                                                 ],
                                               ),
                                             );

@@ -27,6 +27,7 @@ import 'package:lazy_load_scrollview/lazy_load_scrollview.dart' as lazy_scroll;
 import '../../../core/exceptions/failure.dart';
 import '../../../core/global_widgets/list_tile_item.dart';
 import '../../../core/global_widgets/permission_error_dialog.dart';
+import '../../../core/helpers/validators.dart';
 
 part 'sale_reporting_page.dart';
 part 'search_products_page.dart';
