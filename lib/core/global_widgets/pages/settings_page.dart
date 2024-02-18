@@ -50,7 +50,7 @@ class _SettingsPageState extends State<SettingsPage> with AutomaticKeepAliveClie
           )
         ],
         child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
           child: Column(
             children: [
               ListTileItem(

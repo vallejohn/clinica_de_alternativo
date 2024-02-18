@@ -17,7 +17,7 @@ class _StartupPageState extends State<StartupPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Expanded(child: SizedBox(height: 200, width: 200, child: Image.asset('assets/images/clinica-logo.png'))),
+            Expanded(child: SizedBox(height: 200, width: 200, child: Image.asset('assets/images/clinica_logo.png'))),
             const SizedBox(height: 10,),
             const SizedBox(width: 100, child: LinearProgressIndicator()),
             const SizedBox(height: 10,),

@@ -50,6 +50,7 @@ abstract class _$AppRouter extends RootStackRouter {
         child: EmployeeDetailsPage(
           key: args.key,
           profileInformation: args.profileInformation,
+          roles: args.roles,
         ),
       );
     },
@@ -235,12 +236,14 @@ class EmployeeDetailsRoute extends PageRouteInfo<EmployeeDetailsRouteArgs> {
   EmployeeDetailsRoute({
     Key? key,
     required ProfileInformation profileInformation,
+    required List<Role> roles,
     List<PageRouteInfo>? children,
   }) : super(
           EmployeeDetailsRoute.name,
           args: EmployeeDetailsRouteArgs(
             key: key,
             profileInformation: profileInformation,
+            roles: roles,
           ),
           initialChildren: children,
         );
@@ -255,15 +258,18 @@ class EmployeeDetailsRouteArgs {
   const EmployeeDetailsRouteArgs({
     this.key,
     required this.profileInformation,
+    required this.roles,
   });
 
   final Key? key;
 
   final ProfileInformation profileInformation;
 
+  final List<Role> roles;
+
   @override
   String toString() {
-    return 'EmployeeDetailsRouteArgs{key: $key, profileInformation: $profileInformation}';
+    return 'EmployeeDetailsRouteArgs{key: $key, profileInformation: $profileInformation, roles: $roles}';
   }
 }
 

@@ -26,6 +26,9 @@ class _EmployeesPageState extends State<EmployeesPage> {
         providers: [
           BlocProvider<EmployeesBloc>.value(
             value: BlocProvider.of<EmployeesBloc>(context)..add(const EmployeesEvent.onGetList()),
+          ),
+          BlocProvider<RoleBloc>.value(
+            value: BlocProvider.of<RoleBloc>(context)..add(RoleEvent.onFetch()),
           )
         ],
         child: BlocConsumer<EmployeesBloc, EmployeesState>(
@@ -157,14 +160,23 @@ class _EmployeesPageState extends State<EmployeesPage> {
                       }
                     ),
                   ),
-                  ...state.employees.map((e) => ListTileItem(
-                    leadingIcon: CircleAvatar(child: Text(e.name[0], style: TextStyle(color: Theme.of(context).colorScheme.primary),),),
-                    title: Text(e.name),
-                    subtitle: '${e.role == null? 'No role assigned' : e.role!.name} / ${e.branch == null? 'No branch assigned' : e.branch!.name}',
-                    onPressed: (){
-                      AutoRouter.of(context).push(EmployeeDetailsRoute(profileInformation: e));
-                    },
-                  )).toList()
+                  BlocBuilder<RoleBloc, RoleState>(
+                    builder: (roleContext, roleState) {
+                      final loading  = roleState.status == RoleStatus.loading;
+                      return Column(
+                        children: [
+                          ...state.employees.map((e) => ListTileItem(
+                            leadingIcon: CircleAvatar(child: Text(e.name[0], style: TextStyle(color: Theme.of(context).colorScheme.primary),),),
+                            title: Text(e.name),
+                            subtitle: '${e.role == null? 'No role assigned' : e.role!.name} / ${e.branch == null? 'No branch assigned' : e.branch!.name}',
+                            onPressed: loading? null : (){
+                              AutoRouter.of(context).push(EmployeeDetailsRoute(profileInformation: e, roles: roleState.roles));
+                            },
+                          )).toList()
+                        ],
+                      );
+                    }
+                  ),
                 ],
               ),
             );
