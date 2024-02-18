@@ -22,6 +22,7 @@ mixin _$SalesReportingEvent {
             QueryDocumentSnapshot<Map<String, dynamic>>? paginateFromLastDoc)
         onFetchReport,
     required TResult Function(SalesReport salesReport) onSendReport,
+    required TResult Function(Branch? branch) onListenToChanges,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +31,7 @@ mixin _$SalesReportingEvent {
             QueryDocumentSnapshot<Map<String, dynamic>>? paginateFromLastDoc)?
         onFetchReport,
     TResult? Function(SalesReport salesReport)? onSendReport,
+    TResult? Function(Branch? branch)? onListenToChanges,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +40,7 @@ mixin _$SalesReportingEvent {
             QueryDocumentSnapshot<Map<String, dynamic>>? paginateFromLastDoc)?
         onFetchReport,
     TResult Function(SalesReport salesReport)? onSendReport,
+    TResult Function(Branch? branch)? onListenToChanges,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -45,18 +48,21 @@ mixin _$SalesReportingEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_OnFetchReport value) onFetchReport,
     required TResult Function(_OnSendReport value) onSendReport,
+    required TResult Function(_OnListenToChanges value) onListenToChanges,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_OnFetchReport value)? onFetchReport,
     TResult? Function(_OnSendReport value)? onSendReport,
+    TResult? Function(_OnListenToChanges value)? onListenToChanges,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_OnFetchReport value)? onFetchReport,
     TResult Function(_OnSendReport value)? onSendReport,
+    TResult Function(_OnListenToChanges value)? onListenToChanges,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -173,6 +179,7 @@ class _$OnFetchReportImpl implements _OnFetchReport {
             QueryDocumentSnapshot<Map<String, dynamic>>? paginateFromLastDoc)
         onFetchReport,
     required TResult Function(SalesReport salesReport) onSendReport,
+    required TResult Function(Branch? branch) onListenToChanges,
   }) {
     return onFetchReport(branch, paginateFromLastDoc);
   }
@@ -184,6 +191,7 @@ class _$OnFetchReportImpl implements _OnFetchReport {
             QueryDocumentSnapshot<Map<String, dynamic>>? paginateFromLastDoc)?
         onFetchReport,
     TResult? Function(SalesReport salesReport)? onSendReport,
+    TResult? Function(Branch? branch)? onListenToChanges,
   }) {
     return onFetchReport?.call(branch, paginateFromLastDoc);
   }
@@ -195,6 +203,7 @@ class _$OnFetchReportImpl implements _OnFetchReport {
             QueryDocumentSnapshot<Map<String, dynamic>>? paginateFromLastDoc)?
         onFetchReport,
     TResult Function(SalesReport salesReport)? onSendReport,
+    TResult Function(Branch? branch)? onListenToChanges,
     required TResult orElse(),
   }) {
     if (onFetchReport != null) {
@@ -208,6 +217,7 @@ class _$OnFetchReportImpl implements _OnFetchReport {
   TResult map<TResult extends Object?>({
     required TResult Function(_OnFetchReport value) onFetchReport,
     required TResult Function(_OnSendReport value) onSendReport,
+    required TResult Function(_OnListenToChanges value) onListenToChanges,
   }) {
     return onFetchReport(this);
   }
@@ -217,6 +227,7 @@ class _$OnFetchReportImpl implements _OnFetchReport {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_OnFetchReport value)? onFetchReport,
     TResult? Function(_OnSendReport value)? onSendReport,
+    TResult? Function(_OnListenToChanges value)? onListenToChanges,
   }) {
     return onFetchReport?.call(this);
   }
@@ -226,6 +237,7 @@ class _$OnFetchReportImpl implements _OnFetchReport {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_OnFetchReport value)? onFetchReport,
     TResult Function(_OnSendReport value)? onSendReport,
+    TResult Function(_OnListenToChanges value)? onListenToChanges,
     required TResult orElse(),
   }) {
     if (onFetchReport != null) {
@@ -327,6 +339,7 @@ class _$OnSendReportImpl implements _OnSendReport {
             QueryDocumentSnapshot<Map<String, dynamic>>? paginateFromLastDoc)
         onFetchReport,
     required TResult Function(SalesReport salesReport) onSendReport,
+    required TResult Function(Branch? branch) onListenToChanges,
   }) {
     return onSendReport(salesReport);
   }
@@ -338,6 +351,7 @@ class _$OnSendReportImpl implements _OnSendReport {
             QueryDocumentSnapshot<Map<String, dynamic>>? paginateFromLastDoc)?
         onFetchReport,
     TResult? Function(SalesReport salesReport)? onSendReport,
+    TResult? Function(Branch? branch)? onListenToChanges,
   }) {
     return onSendReport?.call(salesReport);
   }
@@ -349,6 +363,7 @@ class _$OnSendReportImpl implements _OnSendReport {
             QueryDocumentSnapshot<Map<String, dynamic>>? paginateFromLastDoc)?
         onFetchReport,
     TResult Function(SalesReport salesReport)? onSendReport,
+    TResult Function(Branch? branch)? onListenToChanges,
     required TResult orElse(),
   }) {
     if (onSendReport != null) {
@@ -362,6 +377,7 @@ class _$OnSendReportImpl implements _OnSendReport {
   TResult map<TResult extends Object?>({
     required TResult Function(_OnFetchReport value) onFetchReport,
     required TResult Function(_OnSendReport value) onSendReport,
+    required TResult Function(_OnListenToChanges value) onListenToChanges,
   }) {
     return onSendReport(this);
   }
@@ -371,6 +387,7 @@ class _$OnSendReportImpl implements _OnSendReport {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_OnFetchReport value)? onFetchReport,
     TResult? Function(_OnSendReport value)? onSendReport,
+    TResult? Function(_OnListenToChanges value)? onListenToChanges,
   }) {
     return onSendReport?.call(this);
   }
@@ -380,6 +397,7 @@ class _$OnSendReportImpl implements _OnSendReport {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_OnFetchReport value)? onFetchReport,
     TResult Function(_OnSendReport value)? onSendReport,
+    TResult Function(_OnListenToChanges value)? onListenToChanges,
     required TResult orElse(),
   }) {
     if (onSendReport != null) {
@@ -396,6 +414,167 @@ abstract class _OnSendReport implements SalesReportingEvent {
   SalesReport get salesReport;
   @JsonKey(ignore: true)
   _$$OnSendReportImplCopyWith<_$OnSendReportImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$OnListenToChangesImplCopyWith<$Res> {
+  factory _$$OnListenToChangesImplCopyWith(_$OnListenToChangesImpl value,
+          $Res Function(_$OnListenToChangesImpl) then) =
+      __$$OnListenToChangesImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Branch? branch});
+
+  $BranchCopyWith<$Res>? get branch;
+}
+
+/// @nodoc
+class __$$OnListenToChangesImplCopyWithImpl<$Res>
+    extends _$SalesReportingEventCopyWithImpl<$Res, _$OnListenToChangesImpl>
+    implements _$$OnListenToChangesImplCopyWith<$Res> {
+  __$$OnListenToChangesImplCopyWithImpl(_$OnListenToChangesImpl _value,
+      $Res Function(_$OnListenToChangesImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? branch = freezed,
+  }) {
+    return _then(_$OnListenToChangesImpl(
+      freezed == branch
+          ? _value.branch
+          : branch // ignore: cast_nullable_to_non_nullable
+              as Branch?,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $BranchCopyWith<$Res>? get branch {
+    if (_value.branch == null) {
+      return null;
+    }
+
+    return $BranchCopyWith<$Res>(_value.branch!, (value) {
+      return _then(_value.copyWith(branch: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$OnListenToChangesImpl implements _OnListenToChanges {
+  const _$OnListenToChangesImpl(this.branch);
+
+  @override
+  final Branch? branch;
+
+  @override
+  String toString() {
+    return 'SalesReportingEvent.onListenToChanges(branch: $branch)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$OnListenToChangesImpl &&
+            (identical(other.branch, branch) || other.branch == branch));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, branch);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$OnListenToChangesImplCopyWith<_$OnListenToChangesImpl> get copyWith =>
+      __$$OnListenToChangesImplCopyWithImpl<_$OnListenToChangesImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(Branch? branch,
+            QueryDocumentSnapshot<Map<String, dynamic>>? paginateFromLastDoc)
+        onFetchReport,
+    required TResult Function(SalesReport salesReport) onSendReport,
+    required TResult Function(Branch? branch) onListenToChanges,
+  }) {
+    return onListenToChanges(branch);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(Branch? branch,
+            QueryDocumentSnapshot<Map<String, dynamic>>? paginateFromLastDoc)?
+        onFetchReport,
+    TResult? Function(SalesReport salesReport)? onSendReport,
+    TResult? Function(Branch? branch)? onListenToChanges,
+  }) {
+    return onListenToChanges?.call(branch);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Branch? branch,
+            QueryDocumentSnapshot<Map<String, dynamic>>? paginateFromLastDoc)?
+        onFetchReport,
+    TResult Function(SalesReport salesReport)? onSendReport,
+    TResult Function(Branch? branch)? onListenToChanges,
+    required TResult orElse(),
+  }) {
+    if (onListenToChanges != null) {
+      return onListenToChanges(branch);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_OnFetchReport value) onFetchReport,
+    required TResult Function(_OnSendReport value) onSendReport,
+    required TResult Function(_OnListenToChanges value) onListenToChanges,
+  }) {
+    return onListenToChanges(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnFetchReport value)? onFetchReport,
+    TResult? Function(_OnSendReport value)? onSendReport,
+    TResult? Function(_OnListenToChanges value)? onListenToChanges,
+  }) {
+    return onListenToChanges?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnFetchReport value)? onFetchReport,
+    TResult Function(_OnSendReport value)? onSendReport,
+    TResult Function(_OnListenToChanges value)? onListenToChanges,
+    required TResult orElse(),
+  }) {
+    if (onListenToChanges != null) {
+      return onListenToChanges(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _OnListenToChanges implements SalesReportingEvent {
+  const factory _OnListenToChanges(final Branch? branch) =
+      _$OnListenToChangesImpl;
+
+  Branch? get branch;
+  @JsonKey(ignore: true)
+  _$$OnListenToChangesImplCopyWith<_$OnListenToChangesImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

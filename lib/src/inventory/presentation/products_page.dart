@@ -8,17 +8,21 @@ class ProductsPage extends StatefulWidget {
   State<ProductsPage> createState() => _ProductsPageState();
 }
 
-class _ProductsPageState extends State<ProductsPage> {
+class _ProductsPageState extends State<ProductsPage> with AutomaticKeepAliveClientMixin{
   final TextEditingController _productNameController = TextEditingController();
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Products', style: Theme.of(context).textTheme.headlineLarge,),
       ),
       body: BlocProvider<ProductsBloc>.value(
-        value: BlocProvider.of<ProductsBloc>(context),
+        value: BlocProvider.of<ProductsBloc>(context)..add(const ProductsEvent.onFetchList()),
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: BlocBuilder<ProductsBloc, ProductsState>(

@@ -90,7 +90,8 @@ class SaleReportingDatasourceImpl extends SalesReportingDatasource{
       appLogger.wtf(result.docs.length);
     }else{
       if(param.salesReportingFilterParam?.branch != null){
-        result = await _getInitialDailySalesByBranchList(from, to, param);
+        ///Query for daily reporting no pagination by default
+        result = await _getAllDailySalesByBranchList(from, to, param);
       }else{
         result = await _getInitialList(queryObj, finalFilter, from, to, param);
       }
@@ -140,7 +141,7 @@ Future<QuerySnapshot<Map<String, dynamic>>> _getInitialList(String queryObj, Lis
       .where('transactionDate', isLessThanOrEqualTo: Timestamp.fromDate(to))
       .where(queryObj, whereIn: finalFilter)
       .orderBy('transactionDate')
-      .limit(param.paginate.limit)
+      //.limit(param.paginate.limit)
       .get();
 }
 
@@ -152,6 +153,16 @@ Future<QuerySnapshot<Map<String, dynamic>>> _getInitialDailySalesByBranchList(Da
       .where('reportedBy.branch.id', isEqualTo: param.salesReportingFilterParam?.branch?.id)
       .orderBy('transactionDate')
       .limit(param.paginate.limit)
+      .get();
+}
+
+Future<QuerySnapshot<Map<String, dynamic>>> _getAllDailySalesByBranchList(DateTime from, DateTime to, FetchSalesReportsParam param)async {
+  appLogger.d('_getAllDailySalesByBranchList');
+  return await FirestoreCollection.salesReports()
+      .where('transactionDate', isGreaterThanOrEqualTo: Timestamp.fromDate(from))
+      .where('transactionDate', isLessThanOrEqualTo: Timestamp.fromDate(to))
+      .where('reportedBy.branch.id', isEqualTo: param.salesReportingFilterParam?.branch?.id)
+      .orderBy('transactionDate')
       .get();
 }
 

@@ -24,13 +24,17 @@ class SettingsPage extends StatefulWidget {
   State<SettingsPage> createState() => _SettingsPageState();
 }
 
-class _SettingsPageState extends State<SettingsPage> {
+class _SettingsPageState extends State<SettingsPage> with AutomaticKeepAliveClientMixin{
 
   final _productTypeController = TextEditingController();
   final _productFormFieldState = GlobalKey<FormFieldState>();
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Settings', style: Theme.of(context).textTheme.headlineLarge,),
@@ -46,7 +50,7 @@ class _SettingsPageState extends State<SettingsPage> {
           )
         ],
         child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
           child: Column(
             children: [
               ListTileItem(

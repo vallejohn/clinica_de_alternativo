@@ -3,7 +3,8 @@ part of 'pages.dart';
 @RoutePage()
 class EmployeeDetailsPage extends StatefulWidget {
   final ProfileInformation profileInformation;
-  const EmployeeDetailsPage({super.key, required this.profileInformation});
+  final List<Role> roles;
+  const EmployeeDetailsPage({super.key, required this.profileInformation, required this.roles});
 
   @override
   State<EmployeeDetailsPage> createState() => _EmployeeDetailsPageState();
@@ -33,7 +34,7 @@ class _EmployeeDetailsPageState extends State<EmployeeDetailsPage> {
               child: BlocBuilder<WidgetHelperCubit<bool>, bool>(
                   builder: (erContext, editRoleVisible) {
                     return BlocProvider<WidgetHelperCubit<Role>>(
-                      create: (context) => WidgetHelperCubit<Role>(context.read<RoleBloc>().state.roles.where((element) => element.code == selectedEmployee.role?.code).first),
+                      create: (context) => WidgetHelperCubit<Role>(widget.roles.where((element) => element.code == selectedEmployee.role?.code).first),
                       child: BlocBuilder<WidgetHelperCubit<Role>, Role>(
                           builder: (rContext, state) {
                             return Column(

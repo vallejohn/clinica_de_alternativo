@@ -11,9 +11,18 @@ class StartupPage extends StatefulWidget {
 class _StartupPageState extends State<StartupPage> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
-        child: Text('Initializing...'),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Expanded(child: SizedBox(height: 200, width: 200, child: Image.asset('assets/images/clinica_logo.png'))),
+            const SizedBox(height: 10,),
+            const SizedBox(width: 100, child: LinearProgressIndicator()),
+            const SizedBox(height: 10,),
+          ],
+        ),
       ),
     );
   }

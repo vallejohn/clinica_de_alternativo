@@ -8,11 +8,15 @@ class SearchProductsPage extends StatefulWidget {
   State<SearchProductsPage> createState() => _SearchProductsPageState();
 }
 
-class _SearchProductsPageState extends State<SearchProductsPage> {
+class _SearchProductsPageState extends State<SearchProductsPage> with AutomaticKeepAliveClientMixin{
   final TextEditingController _searchProductController = TextEditingController();
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return BlocProvider<SearchProductCubit>.value(
       value: BlocProvider.of<SearchProductCubit>(context)..onFetchList(),
       child: BlocBuilder<SearchProductCubit, SearchProductState>(

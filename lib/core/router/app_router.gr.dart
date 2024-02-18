@@ -50,6 +50,7 @@ abstract class _$AppRouter extends RootStackRouter {
         child: EmployeeDetailsPage(
           key: args.key,
           profileInformation: args.profileInformation,
+          roles: args.roles,
         ),
       );
     },
@@ -84,6 +85,17 @@ abstract class _$AppRouter extends RootStackRouter {
         child: ProductDetailsPage(
           key: args.key,
           product: args.product,
+        ),
+      );
+    },
+    ProductSummaryRoute.name: (routeData) {
+      final args = routeData.argsAs<ProductSummaryRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: ProductSummaryPage(
+          key: args.key,
+          salesReports: args.salesReports,
+          date: args.date,
         ),
       );
     },
@@ -224,12 +236,14 @@ class EmployeeDetailsRoute extends PageRouteInfo<EmployeeDetailsRouteArgs> {
   EmployeeDetailsRoute({
     Key? key,
     required ProfileInformation profileInformation,
+    required List<Role> roles,
     List<PageRouteInfo>? children,
   }) : super(
           EmployeeDetailsRoute.name,
           args: EmployeeDetailsRouteArgs(
             key: key,
             profileInformation: profileInformation,
+            roles: roles,
           ),
           initialChildren: children,
         );
@@ -244,15 +258,18 @@ class EmployeeDetailsRouteArgs {
   const EmployeeDetailsRouteArgs({
     this.key,
     required this.profileInformation,
+    required this.roles,
   });
 
   final Key? key;
 
   final ProfileInformation profileInformation;
 
+  final List<Role> roles;
+
   @override
   String toString() {
-    return 'EmployeeDetailsRouteArgs{key: $key, profileInformation: $profileInformation}';
+    return 'EmployeeDetailsRouteArgs{key: $key, profileInformation: $profileInformation, roles: $roles}';
   }
 }
 
@@ -347,6 +364,49 @@ class ProductDetailsRouteArgs {
   @override
   String toString() {
     return 'ProductDetailsRouteArgs{key: $key, product: $product}';
+  }
+}
+
+/// generated route for
+/// [ProductSummaryPage]
+class ProductSummaryRoute extends PageRouteInfo<ProductSummaryRouteArgs> {
+  ProductSummaryRoute({
+    Key? key,
+    required List<SalesReport> salesReports,
+    required String date,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ProductSummaryRoute.name,
+          args: ProductSummaryRouteArgs(
+            key: key,
+            salesReports: salesReports,
+            date: date,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'ProductSummaryRoute';
+
+  static const PageInfo<ProductSummaryRouteArgs> page =
+      PageInfo<ProductSummaryRouteArgs>(name);
+}
+
+class ProductSummaryRouteArgs {
+  const ProductSummaryRouteArgs({
+    this.key,
+    required this.salesReports,
+    required this.date,
+  });
+
+  final Key? key;
+
+  final List<SalesReport> salesReports;
+
+  final String date;
+
+  @override
+  String toString() {
+    return 'ProductSummaryRouteArgs{key: $key, salesReports: $salesReports, date: $date}';
   }
 }
 

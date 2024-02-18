@@ -22,147 +22,166 @@ class _EmployeesPageState extends State<EmployeesPage> {
             .textTheme
             .headlineLarge,),
       ),
-      body: BlocConsumer<EmployeesBloc, EmployeesState>(
-        listener: (context, state){
-          if(state.status == EmployeeStatus.failed){
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Row(
+      body: MultiBlocProvider(
+        providers: [
+          BlocProvider<EmployeesBloc>.value(
+            value: BlocProvider.of<EmployeesBloc>(context)..add(const EmployeesEvent.onGetList()),
+          ),
+          BlocProvider<RoleBloc>.value(
+            value: BlocProvider.of<RoleBloc>(context)..add(RoleEvent.onFetch()),
+          )
+        ],
+        child: BlocConsumer<EmployeesBloc, EmployeesState>(
+          listener: (context, state){
+            if(state.status == EmployeeStatus.failed){
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Row(
+                  children: [
+                    const Icon(Ionicons.warning_outline, color: Colors.white,),
+                    const SizedBox(width: 8,),
+                    Expanded(child: Text(state.message,)),
+                  ],
+                ), backgroundColor: Theme.of(context).colorScheme.error,
+              ));
+            }
+          },
+          builder: (context, state) {
+            final loading = state.status == EmployeeStatus.loading;
+            return SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Column(
                 children: [
-                  const Icon(Ionicons.warning_outline, color: Colors.white,),
-                  const SizedBox(width: 8,),
-                  Expanded(child: Text(state.message,)),
-                ],
-              ), backgroundColor: Theme.of(context).colorScheme.error,
-            ));
-          }
-        },
-        builder: (context, state) {
-          final loading = state.status == EmployeeStatus.loading;
-          return SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: Column(
-              children: [
-                BlocProvider<WidgetHelperCubit<AddEmployeeState>>(
-                  create: (context) => WidgetHelperCubit<AddEmployeeState>(const AddEmployeeState()),
-                  child: BlocBuilder<WidgetHelperCubit<AddEmployeeState>, AddEmployeeState>(
-                    builder: (visContext, visState) {
-                      final cubit = visContext.read<WidgetHelperCubit<AddEmployeeState>>();
-                      final branches = context.read<BranchBloc>().state.branches;
-                      final roles = context.read<RoleBloc>().state.roles;
+                  BlocProvider<WidgetHelperCubit<AddEmployeeState>>(
+                    create: (context) => WidgetHelperCubit<AddEmployeeState>(const AddEmployeeState()),
+                    child: BlocBuilder<WidgetHelperCubit<AddEmployeeState>, AddEmployeeState>(
+                      builder: (visContext, visState) {
+                        final cubit = visContext.read<WidgetHelperCubit<AddEmployeeState>>();
+                        final branches = context.read<BranchBloc>().state.branches;
+                        final roles = context.read<RoleBloc>().state.roles;
+                        return Column(
+                          children: [
+                            ListTileItem(
+                              leadingIcon: const CircleAvatar(backgroundColor: Colors.transparent,child: Icon(Ionicons.add,),),
+                              title: const Text('Add'),
+                              onPressed: (){
+                                cubit.onUpdateState(visState.copyWith(addingEmployee: !visState.addingEmployee));
+                              },
+                            ),
+                            if(visState.addingEmployee)
+                              Padding(
+                                padding: const EdgeInsets.all(20),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    TextField(
+                                      controller: _emailController,
+                                      decoration: const InputDecoration(
+                                        labelText: 'Email',
+                                      ),
+                                    ),
+                                    const SizedBox(height: 10,),
+                                    TextField(
+                                      controller: _nameController,
+                                      decoration: const InputDecoration(
+                                        labelText: 'Name',
+                                      ),
+                                    ),
+                                    const SizedBox(height: 10,),
+                                    TextField(
+                                      controller: _passwordController,
+                                      obscureText: true,
+                                      decoration: const InputDecoration(
+                                        labelText: 'Password',
+                                      ),
+                                    ),
+                                    const SizedBox(height: 10,),
+                                    DropdownMenu<Branch>(
+                                      initialSelection: cubit.state.selectedBranch,
+                                      onSelected: (Branch? value) {
+                                        cubit.onUpdateState(visState.copyWith(selectedBranch: value));
+                                      },
+                                      dropdownMenuEntries: branches.map<DropdownMenuEntry<Branch>>((Branch value) {
+                                        return DropdownMenuEntry<Branch>(value: value, label: value.name);
+                                      }).toList(),
+                                    ),
+                                    const SizedBox(height: 10,),
+                                    DropdownMenu<Role>(
+                                      initialSelection: cubit.state.selectedRole,
+                                      onSelected: (Role? value) {
+                                        cubit.onUpdateState(visState.copyWith(selectedRole: value));
+                                      },
+                                      dropdownMenuEntries: roles.map<DropdownMenuEntry<Role>>((Role value) {
+                                        return DropdownMenuEntry<Role>(value: value, label: value.name);
+                                      }).toList(),
+                                    ),
+                                    const SizedBox(height: 10,),
+                                    Row(
+                                      children: [
+                                        Expanded(child: FilledButton(onPressed: loading? null : (){
+                                          context.read<EmployeesBloc>().add(EmployeesEvent.onAdd(AddAccountParams(
+                                              email: _emailController.text, password: _passwordController.text,
+                                              profile: ProfileInformation(
+                                                name: _nameController.text,
+                                                branch: visState.selectedBranch,
+                                                role: visState.selectedRole,
+                                          )
+                                          )));
+                                        }, child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            if (!loading) const Icon(Ionicons.add, size: 17),
+                                            if (loading)
+                                              SizedBox(
+                                                  width: 20,
+                                                  height: 20,
+                                                  child: CircularProgressIndicator(
+                                                    strokeWidth: 2,
+                                                    color: Theme.of(context).disabledColor,
+                                                  )),
+                                            const SizedBox(width: 15),
+                                            Text(loading ? 'Adding...' : 'Add'),
+                                          ],
+                                        ),)),
+                                        const SizedBox(width: 10,),
+                                        Expanded(child: FilledButton.tonal(
+                                          onPressed: loading? null : (){
+                                            cubit.onUpdateState(visState.copyWith(addingEmployee: !visState.addingEmployee));
+                                          },
+                                          child: const Text('Cancel'),
+                                        ))
+                                      ],
+                                    ),
+                                    const SizedBox(height: 40,),
+                                  ],
+                                ),
+                              ),
+                          ],
+                        );
+                      }
+                    ),
+                  ),
+                  BlocBuilder<RoleBloc, RoleState>(
+                    builder: (roleContext, roleState) {
+                      final loading  = roleState.status == RoleStatus.loading;
                       return Column(
                         children: [
-                          ListTileItem(
-                            leadingIcon: const CircleAvatar(backgroundColor: Colors.transparent,child: Icon(Ionicons.add,),),
-                            title: const Text('Add'),
-                            onPressed: (){
-                              cubit.onUpdateState(visState.copyWith(addingEmployee: !visState.addingEmployee));
+                          ...state.employees.map((e) => ListTileItem(
+                            leadingIcon: CircleAvatar(child: Text(e.name[0], style: TextStyle(color: Theme.of(context).colorScheme.primary),),),
+                            title: Text(e.name),
+                            subtitle: '${e.role == null? 'No role assigned' : e.role!.name} / ${e.branch == null? 'No branch assigned' : e.branch!.name}',
+                            onPressed: loading? null : (){
+                              AutoRouter.of(context).push(EmployeeDetailsRoute(profileInformation: e, roles: roleState.roles));
                             },
-                          ),
-                          if(visState.addingEmployee)
-                            Padding(
-                              padding: const EdgeInsets.all(20),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  TextField(
-                                    controller: _emailController,
-                                    decoration: const InputDecoration(
-                                      labelText: 'Email',
-                                    ),
-                                  ),
-                                  const SizedBox(height: 10,),
-                                  TextField(
-                                    controller: _nameController,
-                                    decoration: const InputDecoration(
-                                      labelText: 'Name',
-                                    ),
-                                  ),
-                                  const SizedBox(height: 10,),
-                                  TextField(
-                                    controller: _passwordController,
-                                    obscureText: true,
-                                    decoration: const InputDecoration(
-                                      labelText: 'Password',
-                                    ),
-                                  ),
-                                  const SizedBox(height: 10,),
-                                  DropdownMenu<Branch>(
-                                    initialSelection: cubit.state.selectedBranch,
-                                    onSelected: (Branch? value) {
-                                      cubit.onUpdateState(visState.copyWith(selectedBranch: value));
-                                    },
-                                    dropdownMenuEntries: branches.map<DropdownMenuEntry<Branch>>((Branch value) {
-                                      return DropdownMenuEntry<Branch>(value: value, label: value.name);
-                                    }).toList(),
-                                  ),
-                                  const SizedBox(height: 10,),
-                                  DropdownMenu<Role>(
-                                    initialSelection: cubit.state.selectedRole,
-                                    onSelected: (Role? value) {
-                                      cubit.onUpdateState(visState.copyWith(selectedRole: value));
-                                    },
-                                    dropdownMenuEntries: roles.map<DropdownMenuEntry<Role>>((Role value) {
-                                      return DropdownMenuEntry<Role>(value: value, label: value.name);
-                                    }).toList(),
-                                  ),
-                                  const SizedBox(height: 10,),
-                                  Row(
-                                    children: [
-                                      Expanded(child: FilledButton(onPressed: loading? null : (){
-                                        context.read<EmployeesBloc>().add(EmployeesEvent.onAdd(AddAccountParams(
-                                            email: _emailController.text, password: _passwordController.text,
-                                            profile: ProfileInformation(
-                                              name: _nameController.text,
-                                              branch: visState.selectedBranch,
-                                              role: visState.selectedRole,
-                                        )
-                                        )));
-                                      }, child: Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          if (!loading) const Icon(Ionicons.add, size: 17),
-                                          if (loading)
-                                            SizedBox(
-                                                width: 20,
-                                                height: 20,
-                                                child: CircularProgressIndicator(
-                                                  strokeWidth: 2,
-                                                  color: Theme.of(context).disabledColor,
-                                                )),
-                                          const SizedBox(width: 15),
-                                          Text(loading ? 'Adding...' : 'Add'),
-                                        ],
-                                      ),)),
-                                      const SizedBox(width: 10,),
-                                      Expanded(child: FilledButton.tonal(
-                                        onPressed: loading? null : (){
-                                          cubit.onUpdateState(visState.copyWith(addingEmployee: !visState.addingEmployee));
-                                        },
-                                        child: const Text('Cancel'),
-                                      ))
-                                    ],
-                                  ),
-                                  const SizedBox(height: 40,),
-                                ],
-                              ),
-                            ),
+                          )).toList()
                         ],
                       );
                     }
                   ),
-                ),
-                ...state.employees.map((e) => ListTileItem(
-                  leadingIcon: CircleAvatar(child: Text(e.name[0], style: TextStyle(color: Theme.of(context).colorScheme.primary),),),
-                  title: Text(e.name),
-                  subtitle: '${e.role == null? 'No role assigned' : e.role!.name} / ${e.branch == null? 'No branch assigned' : e.branch!.name}',
-                  onPressed: (){
-                    AutoRouter.of(context).push(EmployeeDetailsRoute(profileInformation: e));
-                  },
-                )).toList()
-              ],
-            ),
-          );
-        },
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }
