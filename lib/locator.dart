@@ -83,4 +83,5 @@ void _setupAccount(){
   getIt.registerLazySingleton(() => OnGetModulesUseCase(getIt()));
   getIt.registerLazySingleton(() => OnAddModuleUseCase(getIt()));
   getIt.registerLazySingleton(() => OnUpdateRoleUseCase(getIt()));
+  getIt.registerLazySingleton(() => OnDeleteRoleUseCase(getIt()));
 }

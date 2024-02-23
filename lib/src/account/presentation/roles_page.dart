@@ -33,8 +33,15 @@ class _RolesPageState extends State<RolesPage> {
         child: MultiBlocListener(
           listeners: [
             BlocListener<RoleBloc, RoleState>(
+              listenWhen: (prev, cur) => cur.status == RoleStatus.success,
+              listener: (context, state) => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message))),
+            ),
+            BlocListener<RoleBloc, RoleState>(
               listenWhen: (prev, cur) => cur.status == RoleStatus.failed,
               listener: (context, state) {
+                if(state.status == RoleStatus.success){
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message)));
+                }
                 if(state.errorCode == ErrorCode.permissionDenied){
                   showDialog(context: context, builder: (context) => PermissionErrorDialog(message: state.message,));
                 }else{
@@ -117,7 +124,41 @@ class _RolesPageState extends State<RolesPage> {
                                   ),
                                 ),
                                 const SizedBox(height: 16,),
-                                ...roles.map((e) => ListTileItem(title: Text(e.name), onPressed: (){
+                                ...roles.map((e) => ListTileItem(title: Text(e.name),
+                                  onLongPress: (){
+                                    showDialog(
+                                      context: context,
+                                      builder: (builder){
+                                        return Dialog(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(24),
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Text("Delete '${e.name}' role", style: Theme.of(context).textTheme.headlineSmall,),
+                                                const SizedBox(height: 16,),
+                                                Text('Are you sure you want to delete this role? You cannot undo this operation.', style: Theme.of(context).textTheme.bodyMedium,),
+                                                const SizedBox(height: 24,),
+                                                Row(children: [
+                                                  const Spacer(),
+                                                  TextButton(onPressed: (){
+                                                    Navigator.pop(context);
+                                                  }, child: const Text('Cancel')),
+                                                  const SizedBox(width: 8,),
+                                                  FilledButton(onPressed: (){
+                                                    context.read<RoleBloc>().add(RoleEvent.onDelete(e));
+                                                    Navigator.pop(context);
+                                                  }, child: const Text('Delete'))
+                                                ],)
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  },
+                                  onPressed: (){
                                   AutoRouter.of(context).push(AttachRulesRoute(role: e));
                                 }, subtitle: _getListOfModules(e),),).toList()
                               ],

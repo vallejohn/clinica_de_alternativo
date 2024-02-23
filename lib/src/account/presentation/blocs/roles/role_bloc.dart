@@ -17,6 +17,7 @@ class RoleBloc extends Bloc<RoleEvent, RoleState> {
   final _onGetRolesUseCase = GetIt.instance<OnGetRolesUseCase>();
   final _onAddUseCase = GetIt.instance<OnAddRoleUseCase>();
   final _onUpdateUseCase = GetIt.instance<OnUpdateRoleUseCase>();
+  final _onDeleteUseCase = GetIt.instance<OnDeleteRoleUseCase>();
 
   RoleBloc() : super(const RoleState()) {
     on<_OnStarted>((event, emit) => emit(state.copyWith(roles: event.modules)));
@@ -24,6 +25,7 @@ class RoleBloc extends Bloc<RoleEvent, RoleState> {
     on<_OnAdd>(_onAdd);
     on<_OnEdit>(_onEdit);
     on<_OnUpdate>(_onUpdate);
+    on<_OnDelete>(_onDelete);
   }
   FutureOr<void> _onFetch(_OnFetch event, Emitter<RoleState> emit)async {
     emit(state.copyWith(status: RoleStatus.loading));
@@ -48,7 +50,7 @@ class RoleBloc extends Bloc<RoleEvent, RoleState> {
     }, (role){
       final roles = [...state.roles];
       roles.add(role);
-      emit(state.copyWith(status: RoleStatus.success, message: 'Fetched successfully', roles: roles));
+      emit(state.copyWith(status: RoleStatus.success, message: 'Role added successfully', roles: roles));
     });
   }
 
@@ -69,6 +71,26 @@ class RoleBloc extends Bloc<RoleEvent, RoleState> {
     }, (_){
 
       emit(state.copyWith(status: RoleStatus.success, message: 'Fetched successfully'));
+    });
+  }
+
+  FutureOr<void> _onDelete(_OnDelete event, Emitter<RoleState> emit)async {
+    emit(state.copyWith(status: RoleStatus.loading));
+
+    final dataOrError = await _onDeleteUseCase(event.role);
+
+    dataOrError.fold((l){
+      emit(state.copyWith(status: RoleStatus.failed, message: l.getMessage(), errorCode: l.getCode()));
+    }, (_){
+      final roles = [...state.roles];
+
+      final deletedProdIndex =  roles.indexWhere((element) => element.id == event.role.id);
+
+      //Remove and replace old product on list with updated
+      roles.removeAt(deletedProdIndex);
+      //-----------------------------------------
+
+      emit(state.copyWith(status: RoleStatus.success, message: 'Role deleted', roles: roles,));
     });
   }
 }

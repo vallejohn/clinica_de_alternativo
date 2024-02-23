@@ -27,6 +27,13 @@ class AccountDatasourceImpl extends  AccountDatasource{
     return modifiedRole.copyWith(id: modifiedRole.code);
   }
 
+
+  @override
+  Future<bool> deleteRole(Role role)async {
+    await FirestoreCollection.roles().doc(role.id).delete();
+    return true;
+  }
+
   @override
   Future<List<Role>> getRoleList()async {
     final result = await FirestoreCollection.roles().get();

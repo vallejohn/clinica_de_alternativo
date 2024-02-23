@@ -40,6 +40,11 @@ class _AddProductPageState extends State<AddProductPage> {
             if(state.status == ProductStatus.failed && state.errorCode == ErrorCode.permissionDenied){
               showDialog(context: context, builder: (context) => PermissionErrorDialog(message: state.message,));
             }
+
+            if(state.status == ProductStatus.success){
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message)));
+              Navigator.pop(context);
+            }
           },
           builder: (prodContext, prodState) {
             final loading = prodState.status == ProductStatus.loading;

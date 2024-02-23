@@ -133,4 +133,15 @@ class AccountRepositoryImpl extends AccountRepository {
       return Left(Failure.firebase(e));
     }
   }
+
+
+  @override
+  Future<Either<Failure, bool>> deleteRole(Role role)async {
+    try{
+      final dataState = await accountDatasource.deleteRole(role);
+      return Right(dataState);
+    }on FirebaseException catch(e){
+      return Left(Failure.firebase(e));
+    }
+  }
 }
