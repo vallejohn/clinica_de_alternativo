@@ -18,6 +18,7 @@ abstract class AccountRepository{
   Future<Either<Failure, List<Role>>> getRoleList();
   Future<Either<Failure, Role>> addRole(Role role);
   Future<Either<Failure, bool>> updateRole(Role role);
+  Future<Either<Failure, bool>> deleteRole(Role role);
 
   Future<Either<Failure, ProfileInformation?>> getAccountDetails(String id);
   Future<Either<Failure, bool>> updateAccountDetails(ProfileInformation profile);

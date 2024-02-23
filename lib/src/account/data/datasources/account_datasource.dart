@@ -15,6 +15,7 @@ abstract class AccountDatasource{
   Future<List<Role>> getRoleList();
   Future<Role> addRole(Role role);
   Future<bool> updateRole(Role role);
+  Future<bool> deleteRole(Role role);
 
   Future<List<Module>> getModuleList();
   Future<Module> addModule(Module module);
