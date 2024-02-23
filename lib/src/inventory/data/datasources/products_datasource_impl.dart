@@ -37,10 +37,9 @@ class ProductDatasourceImpl extends ProductDatasource{
 
   @override
   Future<ProductType> addProductType(ProductType param)async {
-    final type = param.copyWith(code: const Uuid().v1());
-    final result = await FirestoreCollection.productTypes().add(type.toJson());
-
-    return type.copyWith(id: result.id);
+    final type = param.copyWith(code: param.name.replaceAll(' ', '_').toLowerCase());
+    await FirestoreCollection.productTypes().doc(type.code).set(type.toJson());
+    return type.copyWith(id: type.code);
   }
 
   @override

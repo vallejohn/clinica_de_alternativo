@@ -30,7 +30,8 @@ exports.createUser = functions.region("asia-southeast1")
               throw new Error(error.message);
             });
 
-        if ("employees" in result.data().role.modulesAttached) {
+        if ("employees" in result.data().role.modulesAttached ||
+          result.data().role.code == "super_admin") {
           const record = await admin.auth().createUser({
             email: _data.email,
             password: _data.password,
@@ -63,5 +64,37 @@ exports.createUser = functions.region("asia-southeast1")
         }
       } catch (err) {
         return {status: "error", message: err.message};
+      }
+    });
+
+exports.createProfileInformation = functions.auth.user()
+    .onCreate(async (user) => {
+      if (user.email == "valjohn.teruel@gmail.com") {
+        const superAdminData = {
+          code: "super_admin",
+          id: "super_admin",
+          modulesAttached: [],
+          name: "Super Admin",
+        };
+
+        await admin.firestore().collection("roles")
+            .doc("super_admin").set(superAdminData);
+
+        const superAdminDataProfile = {
+          code: "super_admin",
+          id: "super_admin",
+          modulesAttached: {},
+          name: "Super Admin",
+        };
+
+        await admin.firestore()
+            .collection("profile_information").doc(user.uid)
+            .set({
+              uid: user.uid,
+              profileUrl: "",
+              name: "Valle John Teruel",
+              firstTimePasswordReset: false,
+              role: superAdminDataProfile,
+            });
       }
     });

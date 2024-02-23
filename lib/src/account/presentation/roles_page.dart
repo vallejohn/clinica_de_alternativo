@@ -35,13 +35,33 @@ class _RolesPageState extends State<RolesPage> {
             BlocListener<RoleBloc, RoleState>(
               listenWhen: (prev, cur) => cur.status == RoleStatus.failed,
               listener: (context, state) {
-                showDialog(context: context, builder: (context) => PermissionErrorDialog(message: state.message,));
+                if(state.errorCode == ErrorCode.permissionDenied){
+                  showDialog(context: context, builder: (context) => PermissionErrorDialog(message: state.message,));
+                }else{
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Row(
+                    children: [
+                      Icon(Ionicons.warning_outline, color: Colors.white,),
+                      const SizedBox(width: 8,),
+                      Text(state.message),
+                    ],
+                  ), backgroundColor: Theme.of(context).colorScheme.error,));
+                }
               },
             ),
             BlocListener<ModuleBloc, ModuleState>(
               listenWhen: (prev, cur) => cur.status == ModuleStatus.failed,
               listener: (context, state) {
-                showDialog(context: context, builder: (context) => PermissionErrorDialog(message: state.message,));
+                if(state.errorCode == ErrorCode.permissionDenied){
+                  showDialog(context: context, builder: (context) => PermissionErrorDialog(message: state.message,));
+                }else{
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Row(
+                    children: [
+                      Icon(Ionicons.warning_outline, color: Colors.white,),
+                      const SizedBox(width: 8,),
+                      Text(state.message),
+                    ],
+                  ), backgroundColor: Theme.of(context).colorScheme.error,));
+                }
               },
             ),
             BlocListener<RoleBloc, RoleState>(

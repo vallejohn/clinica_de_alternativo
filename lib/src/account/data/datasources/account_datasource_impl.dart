@@ -10,21 +10,21 @@ class AccountDatasourceImpl extends  AccountDatasource{
 
   @override
   Future<Branch> addBranch(Branch branch)async {
-    final result = await FirestoreCollection.branch().add(branch.toJson());
-    return branch.copyWith(id: result.id);
+    final branchDocId = '${branch.name.replaceAll(' ', '_').toLowerCase()}_${branch.type!.name.toLowerCase()}';
+    await FirestoreCollection.branch().doc(branchDocId).set(branch.toJson());
+    return branch.copyWith(id: branchDocId);
   }
 
   @override
   Future<Role> addRole(Role role)async {
     final modifiedRole = role.copyWith(code: role.name.replaceAll(' ', '_').toLowerCase());
-    
-    final roleSnapshot = await FirestoreCollection.roles().where('code', isEqualTo: modifiedRole.code).get();
-    if(roleSnapshot.docs.isNotEmpty){
-      throw DuplicateRecordException();
-    }
-    
-    final result = await FirestoreCollection.roles().add(modifiedRole.toJson());
-    return modifiedRole.copyWith(id: result.id);
+
+    final reference = FirestoreCollection.roles().doc(modifiedRole.code);
+    final doc = await reference.get();
+    if(doc.exists) throw DuplicateRecordException();
+    if(!doc.exists) await FirestoreCollection.roles().doc(modifiedRole.code).set(modifiedRole.toJson());
+
+    return modifiedRole.copyWith(id: modifiedRole.code);
   }
 
   @override
@@ -114,8 +114,12 @@ class AccountDatasourceImpl extends  AccountDatasource{
   @override
   Future<Module> addModule(Module module)async {
     final modifiedModule = module.copyWith(code: module.name.replaceAll(' ', '_').toLowerCase());
-    final result = await FirestoreCollection.modules().add(modifiedModule.toJson());
-    return modifiedModule.copyWith(id: result.id);
+
+    final reference = FirestoreCollection.modules().doc(modifiedModule.code);
+    final doc = await reference.get();
+    if(doc.exists)  throw DuplicateRecordException();
+    if(!doc.exists) await FirestoreCollection.modules().doc(modifiedModule.code).set(modifiedModule.toJson());
+    return modifiedModule.copyWith(id: modifiedModule.code);
   }
 
   @override
