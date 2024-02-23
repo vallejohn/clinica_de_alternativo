@@ -18,7 +18,12 @@ class AccountDatasourceImpl extends  AccountDatasource{
   @override
   Future<Role> addRole(Role role)async {
     final modifiedRole = role.copyWith(code: role.name.replaceAll(' ', '_').toLowerCase());
-    await FirestoreCollection.roles().doc(modifiedRole.code).set(modifiedRole.toJson());
+
+    final reference = FirestoreCollection.roles().doc(modifiedRole.code);
+    final doc = await reference.get();
+    if(doc.exists) throw DuplicateRecordException();
+    if(!doc.exists) await FirestoreCollection.roles().doc(modifiedRole.code).set(modifiedRole.toJson());
+
     return modifiedRole.copyWith(id: modifiedRole.code);
   }
 
@@ -109,7 +114,11 @@ class AccountDatasourceImpl extends  AccountDatasource{
   @override
   Future<Module> addModule(Module module)async {
     final modifiedModule = module.copyWith(code: module.name.replaceAll(' ', '_').toLowerCase());
-    await FirestoreCollection.modules().doc(modifiedModule.code).set(modifiedModule.toJson());
+
+    final reference = FirestoreCollection.modules().doc(modifiedModule.code);
+    final doc = await reference.get();
+    if(doc.exists)  throw DuplicateRecordException();
+    if(!doc.exists) await FirestoreCollection.modules().doc(modifiedModule.code).set(modifiedModule.toJson());
     return modifiedModule.copyWith(id: modifiedModule.code);
   }
 

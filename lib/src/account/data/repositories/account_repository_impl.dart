@@ -109,6 +109,8 @@ class AccountRepositoryImpl extends AccountRepository {
       return Right(dataState);
     }on FirebaseException catch(e){
       return Left(Failure.firebase(e));
+    }on DuplicateRecordException catch(e){
+      return Left(Failure.documentException(e));
     }
   }
 
