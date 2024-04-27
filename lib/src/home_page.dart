@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:clinica_de_alternativo/core/blocs/home_navigator_cubit.dart';
 import 'package:clinica_de_alternativo/core/core.dart';
 import 'package:clinica_de_alternativo/core/global_widgets/pages/settings_page.dart';
+import 'package:clinica_de_alternativo/core/global_widgets/security_role_handler.dart';
 import 'package:clinica_de_alternativo/src/account/data/models/role.dart';
 import 'package:clinica_de_alternativo/src/account/presentation/blocs/account/account_bloc.dart';
 import 'package:clinica_de_alternativo/src/account/presentation/blocs/employees/employees_bloc.dart';
@@ -80,48 +81,52 @@ class _HomePageState extends State<HomePage> {
         },
         child: BlocBuilder<HomeNavigatorCubit, int>(
           builder: (navContext, navState) {
-            return Scaffold(
-              body: PageView(
-                controller: _pageController,
-                onPageChanged: (int index) => navContext.read<HomeNavigatorCubit>().onPageChanged(index),
-                children: const [
-                  SaleReportingPage(),
-                  SalesSummaryPage(),
-                  ProductsPage(),
-                  SettingsPage(),
-                ],
-              ),
-              bottomNavigationBar: NavigationBar(
-                selectedIndex: navState,
-                onDestinationSelected: (int index) {
-                  navContext.read<HomeNavigatorCubit>().onPageChanged(index);
-                  _pageController.animateToPage(
-                    index,
-                    duration: const Duration(milliseconds: 400),
-                    curve: Curves.easeInOut,
-                  );
-                },
-                destinations: [
-                  const ExampleDestination(
-                      'Reporting', Icon(Ionicons.reader_outline), Icon(Ionicons.reader)),
-                  //if(accountState.profile != null && accountState.profile!.role!.modulesAttached.where((element) => element.code == 'sales').isNotEmpty)
-                  const ExampleDestination(
-                      'Sales', Icon(Ionicons.bar_chart_outline), Icon(Ionicons.bar_chart)),
-                  const ExampleDestination(
-                      'Products', Icon(Ionicons.leaf_outline), Icon(Ionicons.leaf)),
-                  const ExampleDestination(
-                      'Settings', Icon(Ionicons.settings_outline), Icon(Ionicons.settings)),
-                ].map(
-                      (ExampleDestination destination) {
-                    return NavigationDestination(
-                      label: destination.label,
-                      icon: destination.icon,
-                      selectedIcon: destination.selectedIcon,
-                      tooltip: destination.label,
-                    );
-                  },
-                ).toList(),
-              ),
+            return SecurityRoleHandler(
+              builder: (hasPermission) {
+                return Scaffold(
+                  body: PageView(
+                    controller: _pageController,
+                    onPageChanged: (int index) => navContext.read<HomeNavigatorCubit>().onPageChanged(index),
+                    children: [
+                      SaleReportingPage(),
+                      if(hasPermission([SecurityModule.generateSales])) SalesSummaryPage(),
+                      ProductsPage(),
+                      SettingsPage(),
+                    ],
+                  ),
+                  bottomNavigationBar: NavigationBar(
+                    selectedIndex: navState,
+                    onDestinationSelected: (int index) {
+                      navContext.read<HomeNavigatorCubit>().onPageChanged(index);
+                      _pageController.animateToPage(
+                        index,
+                        duration: const Duration(milliseconds: 400),
+                        curve: Curves.easeInOut,
+                      );
+                    },
+                    destinations: [
+                      const ExampleDestination(
+                          'Reporting', Icon(Ionicons.reader_outline), Icon(Ionicons.reader)),
+                      //if(accountState.profile != null && accountState.profile!.role!.modulesAttached.where((element) => element.code == 'sales').isNotEmpty)
+                      if(hasPermission([SecurityModule.generateSales])) const ExampleDestination(
+                          'Sales', Icon(Ionicons.bar_chart_outline), Icon(Ionicons.bar_chart)),
+                      const ExampleDestination(
+                          'Products', Icon(Ionicons.leaf_outline), Icon(Ionicons.leaf)),
+                      const ExampleDestination(
+                          'Settings', Icon(Ionicons.settings_outline), Icon(Ionicons.settings)),
+                    ].map(
+                          (ExampleDestination destination) {
+                        return NavigationDestination(
+                          label: destination.label,
+                          icon: destination.icon,
+                          selectedIcon: destination.selectedIcon,
+                          tooltip: destination.label,
+                        );
+                      },
+                    ).toList(),
+                  ),
+                );
+              }
             );
           },
         ),

@@ -63,23 +63,29 @@ class _SettingsPageState extends State<SettingsPage> with AutomaticKeepAliveClie
                   AutoRouter.of(context).push(const AccountRoute());
                 },
               ),
-              ListTileItem(
-                title: const Text('Branches'),
-                subtitle: 'View or edit all branches of Clinica',
-                trailingIcon: const Icon(Ionicons.chevron_forward_outline),
-                leadingIcon: Icon(Ionicons.storefront_outline, color: Theme.of(context).colorScheme.primary,),
-                onPressed: (){
-                  AutoRouter.of(context).push(const BranchesRoute());
-                },
+              SecurityRoleHandler(
+                modules: [SecurityModule.branches],
+                child: ListTileItem(
+                  title: const Text('Branches'),
+                  subtitle: 'View or edit all branches of Clinica',
+                  trailingIcon: const Icon(Ionicons.chevron_forward_outline),
+                  leadingIcon: Icon(Ionicons.storefront_outline, color: Theme.of(context).colorScheme.primary,),
+                  onPressed: (){
+                    AutoRouter.of(context).push(const BranchesRoute());
+                  },
+                ),
               ),
-              ListTileItem(
-                title: const Text('Roles and Modules'),
-                subtitle: 'Add or edit user roles and modules',
-                trailingIcon: const Icon(Ionicons.chevron_forward_outline),
-                leadingIcon: Icon(Ionicons.shield_outline, color: Theme.of(context).colorScheme.primary,),
-                onPressed: (){
-                  AutoRouter.of(context).push(const RolesRoute());
-                },
+              SecurityRoleHandler(
+                modules: [SecurityModule.roles, SecurityModule.module],
+                child: ListTileItem(
+                  title: const Text('Roles and Modules'),
+                  subtitle: 'Add or edit user roles and modules',
+                  trailingIcon: const Icon(Ionicons.chevron_forward_outline),
+                  leadingIcon: Icon(Ionicons.shield_outline, color: Theme.of(context).colorScheme.primary,),
+                  onPressed: (){
+                    AutoRouter.of(context).push(const RolesRoute());
+                  },
+                ),
               ),
               BlocProvider<WidgetHelperCubit<bool>>(
                 create: (_) => WidgetHelperCubit<bool>(false),
@@ -87,14 +93,17 @@ class _SettingsPageState extends State<SettingsPage> with AutomaticKeepAliveClie
                   builder: (prodTypeCon, hidden) {
                     return Column(
                       children: [
-                        ListTileItem(
-                          title: const Text('Product types'),
-                          subtitle: 'Manage product types',
-                          trailingIcon: Icon(!hidden? Ionicons.chevron_forward_outline : Ionicons.chevron_down_outline),
-                          leadingIcon: Icon(Ionicons.leaf_outline, color: Theme.of(context).colorScheme.primary,),
-                          onPressed: (){
-                            prodTypeCon.read<WidgetHelperCubit<bool>>().onUpdateState(!hidden);
-                          },
+                        SecurityRoleHandler(
+                          modules: [SecurityModule.productTypes],
+                          child: ListTileItem(
+                            title: const Text('Product types'),
+                            subtitle: 'Manage product types',
+                            trailingIcon: Icon(!hidden? Ionicons.chevron_forward_outline : Ionicons.chevron_down_outline),
+                            leadingIcon: Icon(Ionicons.leaf_outline, color: Theme.of(context).colorScheme.primary,),
+                            onPressed: (){
+                              prodTypeCon.read<WidgetHelperCubit<bool>>().onUpdateState(!hidden);
+                            },
+                          ),
                         ),
                         AnimatedSize(
                           duration: const Duration(milliseconds: 200),
@@ -223,14 +232,17 @@ class _SettingsPageState extends State<SettingsPage> with AutomaticKeepAliveClie
                   }
                 ),
               ),
-              ListTileItem(
-                title: const Text('Employees'),
-                subtitle: 'Add or manage your employees information',
-                trailingIcon: const Icon(Ionicons.chevron_forward_outline),
-                leadingIcon: Icon(Ionicons.people_outline, color: Theme.of(context).colorScheme.primary,),
-                onPressed: (){
-                  AutoRouter.of(context).push(const EmployeesRoute());
-                },
+              SecurityRoleHandler(
+                modules: [SecurityModule.employees],
+                child: ListTileItem(
+                  title: const Text('Employees'),
+                  subtitle: 'Add or manage your employees information',
+                  trailingIcon: const Icon(Ionicons.chevron_forward_outline),
+                  leadingIcon: Icon(Ionicons.people_outline, color: Theme.of(context).colorScheme.primary,),
+                  onPressed: (){
+                    AutoRouter.of(context).push(const EmployeesRoute());
+                  },
+                ),
               ),
               const Divider(
                 height: 0,
